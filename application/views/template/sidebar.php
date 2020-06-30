@@ -40,6 +40,7 @@
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Data Jenis Pembayaran </a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Data Jenis Barang </a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Data Satuan </a></li>
+            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Data Gudang </a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Data Barang </a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Data Customer </a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Data Suplier </a></li>
