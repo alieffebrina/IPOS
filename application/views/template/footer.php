@@ -327,5 +327,41 @@
     }
      
 </script>
+
+<script type='text/javascript'>
+    var error = 1; // nilai default untuk error 1
+ 
+    function cek_gudang(){
+        $("#pesan").hide();
+ 
+        var gudang = $("#gudang").val();
+ 
+        if(gudang != ""){
+            $.ajax({
+                url: "<?php echo site_url() . '/C_Gudang/cek_gudang'; ?>", //arahkan pada proses_tambah di controller member
+                data: 'gudang='+gudang,
+                type: "POST",
+                success: function(msg){
+                    if(msg==1){
+                        $("#pesan").css("color","#fc5d32");
+                        $("#gudang").css("border-color","#fc5d32");
+                        $("#pesan").html("Gudang sudah digunakan !");
+ 
+                        error = 1;
+                    }else{
+                        $("#pesan").css("color","#59c113");
+                        $("#gudang").css("border-color","#59c113");
+                        $("#pesan").html("");
+                        error = 0;
+                    }
+ 
+                    $("#pesan").fadeIn(1000);
+                }
+            });
+        }       
+         
+    }
+     
+</script>
 </body>
 </html>
