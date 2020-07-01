@@ -237,5 +237,95 @@
 <script src="<?php echo base_url() ?>assets/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
+
+<!-- DataTables -->
+<script src="<?php echo base_url() ?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url() ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="<?php echo base_url() ?>assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+<script>
+  $(document).ready(function(){ // Ketika halaman sudah siap (sudah selesai di load)
+    // Kita sembunyikan dulu untuk loadingnya
+    $("#prov").change(function(){ // Ketika user mengganti atau memilih data provinsi
+    
+      $.ajax({
+        type: "POST", // Method pengiriman data bisa dengan GET atau POST
+        url: "<?php echo base_url("index.php/C_Provinsi/get_kota"); ?>", // Isi dengan url/path file php yang dituju
+        data: {id_provinsi : $("#prov").val()}, // data yang akan dikirim ke file yang dituju
+        dataType: "json",
+        beforeSend: function(e) {
+          if(e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response){ // Ketika proses pengiriman berhasil
+          // set isi dari combobox kota
+          // lalu munculkan kembali combobox kotanya
+          $("#kota").html(response.list_kota).show();
+        },
+        error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
+        }
+      });
+    });
+  });
+  </script>
+  <script type="text/javascript">
+  function Angkasaja(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+    return false;
+    return true;
+  }
+</script>
+<script type='text/javascript'>
+    var error = 1; // nilai default untuk error 1
+ 
+    function cek_username(){
+        $("#pesan").hide();
+ 
+        var username = $("#username").val();
+ 
+        if(username != ""){
+            $.ajax({
+                url: "<?php echo site_url() . '/C_User/cek_user'; ?>", //arahkan pada proses_tambah di controller member
+                data: 'user='+username,
+                type: "POST",
+                success: function(msg){
+                    if(msg==1){
+                        $("#pesan").css("color","#fc5d32");
+                        $("#username").css("border-color","#fc5d32");
+                        $("#pesan").html("Username sudah digunakan !");
+ 
+                        error = 1;
+                    }else{
+                        $("#pesan").css("color","#59c113");
+                        $("#username").css("border-color","#59c113");
+                        $("#pesan").html("");
+                        error = 0;
+                    }
+ 
+                    $("#pesan").fadeIn(1000);
+                }
+            });
+        }       
+         
+    }
+     
+</script>
 </body>
 </html>
