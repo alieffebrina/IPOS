@@ -1,43 +1,49 @@
-<?php 
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class C_Login extends CI_Controller{
-
-	function __construct(){
-		parent::__construct();		
-		$this->load->model('m_login');
-
+class C_Login extends CI_Controller {
+	function __construct()
+	{
+		parent::__construct();
+		
+		$this->load->model('M_login');
+		$this->load->library('session');
 	}
 
-	function index(){
+	function index()
+	{
 		$this->load->view('v_login');
+		
 	}
 
-	function aksi_login(){
+	function cek_login(){
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		$where = array(
-			'username' => $username,
-			'password' => $password
-			);
-		$cek = $this->m_login->cek_login("tb_user",$where)->num_rows();
-		if($cek > 0){
+		//echo $nip.$password;
+		$user = $this->M_login->get($username);
 
-			$data_session = array(
-				'username' => $username,
-				'nik' => $nik
-				);
+		if(empty($user)){
+			$this->session->set_flashdata('pesan','salah');
+			$this->load->view('v_login');
+		} else {
+		    if($password == $user->password){ // Jika password yang diinput sama dengan password yang didatabase
+        		$session = array(
+		          'authenticated'=>true, // Buat session authenticated dengan value true
+		          'username'=>$user->username,  // Buat session nip
+		          'namauser'=>$user->nama // Buat session authenticated
+		          
+		        );
+		        $this->session->set_userdata($session); // Buat session sesuai $session
+		        redirect('Welcome'); // Redirect ke halaman welcome
+		    }else{
+		        $this->session->set_flashdata('message', 'Password salah'); // Buat session flashdata
+		        redirect('C_Login'); // Redirect ke halaman login
+		    }
+   		}
+   	}
 
-			$this->session->set_userdata($data_session);
-
-			redirect(base_url("C_Admin"));
-
-		}else{
-			echo "Username dan password salah !";
-		}
-	}
-
-	function logout(){
-		$this->session->sess_destroy();
-		redirect(base_url('C_Login'));
+	public function logout(){
+    $this->session->sess_destroy(); // Hapus semua session
+    redirect('C_Login'); // Redirect ke halaman login
 	}
 }

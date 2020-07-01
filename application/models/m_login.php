@@ -1,9 +1,12 @@
-<?php 
- 
-class M_login extends CI_Model{	
-	function cek_login($table,$where){		
-		return $this->db->get_where($table,$where);
-	}	
-}
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
+class M_login extends CI_Model{
+  public function get($username){
+  	$this->db->where('username',$username);
+  	$result = $this->db->get('tb_user')->row();
+
+  	return $result;
+  }
+}
 ?>
