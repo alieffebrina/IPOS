@@ -10,6 +10,13 @@ class M_User extends CI_Model {
     	return $query->result();
     }
 
+    function getnama($ida){
+        $where = array(
+            'id_user' => $ida
+        );
+        return $this->db->get_where('tb_user',$where)->result();
+    }
+
     function cek_user($kode){
         $this->db->select('*');
         $where = array(
@@ -31,6 +38,23 @@ class M_User extends CI_Model {
         );
         
         $this->db->insert('tb_user', $user);
+    }
+
+    function cekkodeuser(){
+        $this->db->select_max('id_user');
+        $iduser = $this->db->get('tb_user');
+        return $iduser->row();
+    }
+
+    function tambahakses($id){
+        $total = $this->db->count_all_results('tb_submenu');
+
+        for($i=0; $i<$total; $i++){
+            $fungsi = array('id_submenu' => $i+1 , 
+                'id_user' => $id);
+
+            $this->db->insert('tb_akses', $fungsi);            
+        }
     }
 
     function getspek($id){

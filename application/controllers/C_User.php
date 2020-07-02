@@ -12,7 +12,9 @@ class C_User extends CI_Controller{
     function index()
     {
         $this->load->view('template/header');
-        $this->load->view('template/sidebar');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
         $data['user'] = $this->M_User->getuser();
         $this->load->view('master/user/v_user',$data); 
         $this->load->view('template/footer');
@@ -21,8 +23,10 @@ class C_User extends CI_Controller{
     function add()
     {
         $this->load->view('template/header');
-        $this->load->view('template/sidebar');
-        $data['provinsi'] = $this->C_Setting->getprovinsi();
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['provinsi'] = $this->M_Setting->getprovinsi();
         $this->load->view('master/user/v_adduser', $data); 
         $this->load->view('template/footer');
     }
@@ -50,6 +54,11 @@ class C_User extends CI_Controller{
     public function tambah()
     {   
         $this->M_User->tambahdata();
+        $data = $this->M_User->cekkodeuser();
+        foreach ($data as $id) {
+            $id =$id;
+            $this->M_User->tambahakses($id);
+        }
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
         redirect('C_User');
     }
@@ -57,7 +66,9 @@ class C_User extends CI_Controller{
     function view($id)
     {
         $this->load->view('template/header');
-        $this->load->view('template/sidebar');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
         $data['user'] = $this->M_User->getspek($id);
         $this->load->view('master/user/v_vuser',$data); 
         $this->load->view('template/footer');
@@ -66,7 +77,9 @@ class C_User extends CI_Controller{
     function edit($id)
     {
         $this->load->view('template/header');
-        $this->load->view('template/sidebar');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
         $data['provinsi'] = $this->C_Setting->getprovinsi();
         $data['user'] = $this->M_User->getspek($id);
         $this->load->view('master/user/v_euser',$data); 
@@ -82,7 +95,7 @@ class C_User extends CI_Controller{
 
     function hapus($id){
         $where = array('id_user' => $id);
-        $this->C_Setting->delete($where,'tb_user');
+        $this->M_Setting->delete($where,'tb_user');
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
         redirect('C_User');
     }

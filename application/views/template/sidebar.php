@@ -9,7 +9,8 @@
         </div>
         <p>
         <div class="pull-left info">
-          <p><?php echo $this->session->userdata('nama') ?></p>
+          <p><?php echo $this->session->userdata('nama');
+          $id = $this->session->userdata('id_user') ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div></p>
       </div>
@@ -28,7 +29,8 @@
         <!-- <li class="header">MAIN NAVIGATION</li> -->
         <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Dashboard</span></a></li>
         <?php foreach ($menu as $menu) { 
-          $a = $menu->id_menu; ?>
+          $a = $menu->id_menu; 
+          ?>
           <li class="treeview">
             <a href="#">
               <i class="<?php echo $menu->icon; ?>"></i> <span><?php echo $menu->menu; ?></span>
@@ -37,9 +39,9 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <?php $submenus = $this->db->query("select * from tb_submenu where id_menus = '$a'"); 
+              <?php $submenus = $this->db->query("select * from tb_akses INNER JOIN tb_submenu on tb_submenu.id_submenu = tb_akses.id_submenu where tb_submenu.id_menus = '$a' and tb_akses.view = '1' and tb_akses.id_user = $id "); 
               foreach ($submenus->result() as $submenu) { ?>
-              <li><a href="<?php echo site_url('<?php echo $submenu->linksubmenu; ?>'); ?>"><i class="fa fa-circle-o"></i> <?php echo $submenu->submenu; ?></a></li>    
+              <li><a href="<?php echo site_url($submenu->linksubmenu); ?>"><i class="fa fa-circle-o"></i> <?php echo $submenu->submenu; ?></a></li>    
               <?php } ?>    
             </ul>
           </li>

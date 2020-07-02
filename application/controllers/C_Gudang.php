@@ -12,7 +12,9 @@ class C_Gudang extends CI_Controller{
     function index()
     {
         $this->load->view('template/header');
-        $this->load->view('template/sidebar');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
         $data['gudang'] = $this->M_Gudang->getgudang();
         $this->load->view('master/gudang/v_gudang',$data); 
         $this->load->view('template/footer');
@@ -21,7 +23,9 @@ class C_Gudang extends CI_Controller{
     function add()
     {
         $this->load->view('template/header');
-        $this->load->view('template/sidebar');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
         $this->load->view('master/gudang/v_addgudang'); 
         $this->load->view('template/footer');
     }
@@ -56,7 +60,9 @@ class C_Gudang extends CI_Controller{
     function view($id)
     {
         $this->load->view('template/header');
-        $this->load->view('template/sidebar');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
         $data['gudang'] = $this->M_Gudang->getspek($id);
         $this->load->view('master/gudang/v_vgudang',$data); 
         $this->load->view('template/footer');
@@ -65,7 +71,9 @@ class C_Gudang extends CI_Controller{
     function edit($id)
     {
         $this->load->view('template/header');
-        $this->load->view('template/sidebar');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
         $data['gudang'] = $this->M_Gudang->getspek($id);
         $this->load->view('master/gudang/v_egudang',$data); 
         $this->load->view('template/footer');
