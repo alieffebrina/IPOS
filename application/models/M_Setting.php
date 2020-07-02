@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class M_Provinsi extends CI_Model {
+class M_Setting extends CI_Model {
 
 	function getprovinsi(){
 		$this->db->select('*');

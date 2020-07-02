@@ -29,7 +29,7 @@
         <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Dashboard</span></a></li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Data Master</span>
+            <i class="fa fa-dashboard"></i> <span>Data Master</span>1
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -48,7 +48,7 @@
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-files-o"></i> <span>Penjualan</span>
+            <i class="fa fa-files-o"></i> <span>Penjualan</span>2
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -62,7 +62,7 @@
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-th"></i> <span>Pembelian</span>
+            <i class="fa fa-th"></i> <span>Pembelian</span>3
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -74,7 +74,7 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
-            <span>Nota Pembayaran</span>
+            <span>Nota Pembayaran</span>4
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -86,7 +86,7 @@
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-edit"></i> <span>Gudang</span>
+            <i class="fa fa-edit"></i> <span>Gudang</span>5
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -99,7 +99,7 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>
-            <span>Accounting</span>
+            <span>Accounting</span>6
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -113,7 +113,7 @@
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-table"></i> <span>Setting</span>
+            <i class="fa fa-table"></i> <span>Setting</span>7
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

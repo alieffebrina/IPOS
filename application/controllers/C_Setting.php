@@ -1,18 +1,18 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class C_Provinsi extends CI_Controller{
+class C_Setting extends CI_Controller{
     
     public function __construct(){
         parent::__construct();
         $this->load->helper(array('form','url'));
         $this->load->library('session');
-        $this->load->model('M_Provinsi');
+        $this->load->model('M_Setting');
     }
 
     public function get_kota(){
             // Ambil data ID Provinsi yang dikirim via ajax post
             $id = $this->input->post('id_provinsi');
             
-            $kota = $this->M_Provinsi->getkota($id);
+            $kota = $this->M_Setting->getkota($id);
             
             // Buat variabel untuk menampung tag-tag option nya
             // Set defaultnya dengan tag option Pilih
