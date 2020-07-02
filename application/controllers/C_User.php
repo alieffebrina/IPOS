@@ -6,7 +6,7 @@ class C_User extends CI_Controller{
         $this->load->helper(array('form','url'));
         $this->load->library('session');
         $this->load->model('M_User');
-        $this->load->model('M_Provinsi');
+        $this->load->model('M_Setting');
     }
 
     function index()
@@ -22,7 +22,7 @@ class C_User extends CI_Controller{
     {
         $this->load->view('template/header');
         $this->load->view('template/sidebar');
-        $data['provinsi'] = $this->M_Provinsi->getprovinsi();
+        $data['provinsi'] = $this->C_Setting->getprovinsi();
         $this->load->view('master/user/v_adduser', $data); 
         $this->load->view('template/footer');
     }
@@ -67,7 +67,7 @@ class C_User extends CI_Controller{
     {
         $this->load->view('template/header');
         $this->load->view('template/sidebar');
-        $data['provinsi'] = $this->M_Provinsi->getprovinsi();
+        $data['provinsi'] = $this->C_Setting->getprovinsi();
         $data['user'] = $this->M_User->getspek($id);
         $this->load->view('master/user/v_euser',$data); 
         $this->load->view('template/footer');
@@ -82,7 +82,7 @@ class C_User extends CI_Controller{
 
     function hapus($id){
         $where = array('id_user' => $id);
-        $this->M_Provinsi->delete($where,'tb_user');
+        $this->C_Setting->delete($where,'tb_user');
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
         redirect('C_User');
     }

@@ -264,7 +264,7 @@
     
       $.ajax({
         type: "POST", // Method pengiriman data bisa dengan GET atau POST
-        url: "<?php echo base_url("index.php/C_Provinsi/get_kota"); ?>", // Isi dengan url/path file php yang dituju
+        url: "<?php echo base_url("index.php/C_Setting/get_kota"); ?>", // Isi dengan url/path file php yang dituju
         data: {id_provinsi : $("#prov").val()}, // data yang akan dikirim ke file yang dituju
         dataType: "json",
         beforeSend: function(e) {

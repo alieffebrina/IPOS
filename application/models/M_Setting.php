@@ -9,6 +9,15 @@ class M_Setting extends CI_Model {
     	return $query->result();
     }
 
+    function getmenu(){
+        return $this->db->get('tb_menu')->result();
+    }
+
+
+    function getsubmenu(){
+        return $this->db->get('tb_submenu')->result();
+    }
+
     function getkota($id){
 		$this->db->select('*');
 		$where = array(

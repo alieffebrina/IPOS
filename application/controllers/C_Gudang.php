@@ -6,7 +6,7 @@ class C_Gudang extends CI_Controller{
         $this->load->helper(array('form','url'));
         $this->load->library('session');
         $this->load->model('M_Gudang');
-        $this->load->model('M_Provinsi');
+        $this->load->model('M_Setting');
     }
 
     function index()
@@ -80,7 +80,7 @@ class C_Gudang extends CI_Controller{
 
     function hapus($id){
         $where = array('id_gudang' => $id);
-        $this->M_Provinsi->delete($where,'tb_gudang');
+        $this->M_Setting->delete($where,'tb_gudang');
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
         redirect('C_Gudang');
     }
