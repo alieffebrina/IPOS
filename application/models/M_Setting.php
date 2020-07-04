@@ -80,7 +80,78 @@ class M_Setting extends CI_Model {
         return $query->result();
     }
 
-    function edit(){
+    function editv($iduser,$submenu,$view){
+        // $user = array(
+        //     // 'view' => '0',
+        //     'add' => '0',
+        //     'edit' => '0',
+        //     'delete' => '0'
+        // );
+
+        // $where = array(
+        //     'id_user' =>  $this->input->post('id'),
+        // );
+        
+        // $this->db->where($where);
+        // $this->db->update('tb_akses',$user)
+
+            $where = array(
+                'id_user' =>  $iduser,
+                'id_submenu' => $view
+            );
+
+            $view = array(
+                'view' =>  '1'
+            );
+
+            $this->db->where($where);
+            $this->db->update('tb_akses',$view);         
+        }
+
+    function edita($iduser,$submenu,$add){
+        $where = array(
+            'id_user' =>  $iduser,
+            'id_submenu' => $add
+        );
+
+        $add = array(
+            'add' =>  '1'
+        );
+
+        $this->db->where($where);
+        $this->db->update('tb_akses',$add);         
+    }
+
+    function edite($iduser,$submenu,$edit){
+        $where = array(
+            'id_user' =>  $iduser,
+            'id_submenu' => $edit
+        );
+
+        $edit = array(
+            'edit' =>  '1'
+        );
+
+        $this->db->where($where);
+        $this->db->update('tb_akses',$edit);         
+    }
+
+
+    function editd($iduser,$submenu,$delete){
+        $where = array(
+            'id_user' =>  $iduser,
+            'id_submenu' => $delete
+        );
+
+        $delete = array(
+            'delete' =>  '1'
+        );
+
+        $this->db->where($where);
+        $this->db->update('tb_akses',$delete);         
+    }
+
+    function refresh($iduser){
         $user = array(
             'view' => '0',
             'add' => '0',
@@ -89,29 +160,13 @@ class M_Setting extends CI_Model {
         );
 
         $where = array(
-            'id_user' =>  $this->input->post('id'),
+            'id_user' =>  $iduser
         );
-        
-        $this->db->where($where);
-        $this->db->update('tb_akses',$user);
 
-        for($i=0; $i<$total; $i++){
-            $fungsi = array(
-                'view' => $this->input->post('view[$i]'),
-                'add' => $this->input->post('add[$i]'),
-                'edit' => $this->input->post('edit[$i]'),
-                'delete' => $this->input->post('delete[$i]')
-                );
-
-            $where = array(
-                'id_user' =>  $this->input->post('id'),
-                'id_submenu' => $this->input->post('submenu')
-            );
-
-            $this->db->where($where);
-            $this->db->update('tb_akses',$fungsi);         
-        }
+        $this->db->where($where);                                                            
+        $this->db->update('tb_akses',$user);       
     }
+
 
     function delete($where,$table){
     $this->db->where($where);

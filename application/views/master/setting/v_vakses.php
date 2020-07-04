@@ -47,18 +47,17 @@
                 <tr>
                   <td>
                   <input type="hidden" name="id" value="<?php echo $akses->id_user ?>">
-                  <input type="hidden" name="submenu" value="<?php echo $akses->submenu ?>">
+                  <input type="hidden" name="submenu[]" value="<?php echo $akses->id_submenu ?>">
                   <?php echo $akses->submenu; ?></td>
-                  <!-- <td><input type="checkbox" onClick='all(this)'></td> -->
-                  <td><input type="checkbox" class="icheckbox_flat-green" id="cek" name="view[]" value="1" <?php if($akses->view == '1'){ echo "checked"; } ?>></td>
-                  <td><input type="checkbox" class="icheckbox_flat-green" id="cek" name="add[]" value="1" <?php if($akses->add == '1'){ echo "checked"; } ?> ></td>
-                  <td><input type="checkbox" class="icheckbox_flat-green" id="cek" name="edit[]" value="1" <?php if($akses->edit == '1'){ echo "checked"; } ?> ></td>
-                  <td><input type="checkbox" class="icheckbox_flat-green" id="cek" name="delete[]" value="1" <?php if($akses->delete == '1'){ echo "checked"; } ?> ></td>
+                  <td><input type="checkbox" class="icheckbox_flat-green" name="view[]" value="<?php echo $akses->id_submenu ?>" <?php if($akses->view == '1'){ echo "checked"; } ?>> </td>
+                  <td><input type="checkbox" class="icheckbox_flat-green" name="add[]" value="<?php echo $akses->id_submenu ?>" <?php if($akses->add == '1'){ echo "checked"; } ?> ></td>
+                  <td><input type="checkbox" class="icheckbox_flat-green"  name="edit[]" value="<?php echo $akses->id_submenu ?>" <?php if($akses->edit == '1'){ echo "checked"; } ?> ></td>
+                  <td><input type="checkbox" class="icheckbox_flat-green" name="delete[]" value="<?php echo $akses->id_submenu ?>" <?php if($akses->delete == '1'){ echo "checked"; } ?> ></td>
                 </tr>
                   <?php } ?>
                 </tbody>
               </table>
-              <button type="submit" class="btn btn-warning" >Simpan</button>
+              <button type="submit" class="btn btn-warning" name="save" >Simpan</button>
             </div>
                 </form>
             <!-- /.box-body -->
@@ -70,3 +69,6 @@
     </section>
     <!-- /.content -->
   </div>
+
+  <!-- <?php echo $akses->id_user.'/'.$akses->id_submenu ; ?> -->
+  <!-- <?php echo $akses->id_submenu ?> -->

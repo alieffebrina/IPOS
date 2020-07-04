@@ -51,10 +51,47 @@ class C_Setting extends CI_Controller{
         $this->load->view('template/footer');
     }
 
+    public function edit()
+    { 
+        if(isset($_POST['save']))
+        {
 
-    function edit(){
-        $this->M_Setting->edit();
-        redirect('C_Setting');
+            $iduser= $this->input->post('id');
+            $this->M_Setting->refresh($iduser);//Call the modal
+        
+            $submenu = $this->input->post('submenu');//Pass the userid here
+            $checkbox = $this->input->post('view'); 
+            for($i=0;$i<count($checkbox);$i++){
+                $sub = $submenu[$i];
+                $view = $checkbox[$i];
+                $this->M_Setting->editv($iduser,$sub,$view);//Call the modal
+                
+            }
 
+            $addbox = $this->input->post('add'); 
+            for($i=0;$i<count($addbox);$i++){
+                $sub = $submenu[$i];
+                $add = $addbox[$i];
+                $this->M_Setting->edita($iduser,$sub,$add);//Call the modal
+                
+            }
+
+            $editbox = $this->input->post('edit'); 
+            for($i=0;$i<count($editbox);$i++){
+                $sub = $submenu[$i];
+                $edit = $editbox[$i];
+                $this->M_Setting->edite($iduser,$sub,$edit);//Call the modal
+                
+            }
+
+            $deletebox = $this->input->post('delete'); 
+            for($i=0;$i<count($deletebox);$i++){
+                $sub = $submenu[$i];
+                $delete = $deletebox[$i];
+                $this->M_Setting->editd($iduser,$sub,$delete);//Call the modal
+                
+            }
+            redirect('C_Setting');
+        }
     }
 }
