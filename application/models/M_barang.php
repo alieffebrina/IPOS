@@ -17,21 +17,33 @@ class M_barang extends CI_Model {
         return $this->db->get_where('tb_barang',$where)->result();
     }
 
-    function tambahdata(){
+    function tambahdata($kode){
+        $now = date('Y-m-d');
+
         $barang = array(
-            'nama' => $this->input->post('nama'),
+            'barang' => $this->input->post('nama'),
             'id_satuan' => $this->input->post('satuan'),
             'id_jenisbarang' => $this->input->post('jenisbarang'),
             'merk' => $this->input->post('merk'),
+            'id_barang' => $kode,
+            'tgl' => $now
         );
         
         $this->db->insert('tb_barang', $barang);
     }
 
     function cekkodebarang(){
-        $this->db->select_max('id_barang');
+        $this->db->select_max('nourut');
         $idbarang = $this->db->get('tb_barang');
         return $idbarang->row();
+    }
+
+    function cekbarangtgl(){
+        $now = date('Y-m-d');
+        $where = array(
+            'tgl' => $now
+        );
+        return $this->db->get_where('tb_barang',$where)->result();
     }
 
     //function tambahakses($id){
@@ -58,7 +70,7 @@ class M_barang extends CI_Model {
 
     function edit(){
         $barang = array(
-            'nama' => $this->input->post('nama'),
+            'barang' => $this->input->post('nama'),
             'id_satuan' => $this->input->post('satuan'),
             'id_jenisbarang' => $this->input->post('jenisbarang'),
             'merk' => $this->input->post('merk')

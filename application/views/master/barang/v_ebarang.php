@@ -8,7 +8,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Data Master</a></li>
-        <li><a href="<?php echo site_url('C_barang'); ?>">Data Barang</a></li>>
+        <li><a href="<?php echo site_url('C_barang'); ?>">Data Barang</a></li>
         <li class="active">Lihat Data Barang</li>
       </ol>
     </section>
@@ -28,11 +28,17 @@
             <form class="form-horizontal" method="POST" action="<?php echo site_url('C_barang/editbarang')?>">
               <div class="box-body">
                 <?php foreach ($barang as $barang) { ?>
+
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">ID Barang</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="id" name="id" value="<?php echo $barang->id_barang ?>" readonly>
+                  </div>
+                </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Nama Barang</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="nama" name="nama" value="<?php echo $barang->barang ?>">
-                    <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $barang->id_barang ?>">
                   </div>
                 </div>
                 <div class="form-group">
@@ -50,9 +56,13 @@
                   <label for="inputPassword3" class="col-sm-2 control-label">Jenis Barang</label>
                   <div class="col-sm-9">
                   <select class="form-control select2" id="jenisbarang" name="jenisbarang" style="width: 100%;">
-                      <option value="<?php echo $barang->id_jenisbarang ?>"><?php echo $jenisbarang->jenisbarang ?></option>
+                      <option value="<?php echo $barang->id_jenisbarang ?>"><?php echo $barang->jenisbarang ?></option>
+                      <?php foreach ($jenisbarang as $jenisbarang) { ?>
+                      <option value="<?php echo $jenisbarang->id_jenisbarang ?>"><?php echo $jenisbarang->jenisbarang ?></option>
+                      <?php } ?>
                     </select>
                 </div>
+              </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Merk Barang</label>
                   <div class="col-sm-9">

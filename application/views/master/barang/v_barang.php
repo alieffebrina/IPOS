@@ -36,8 +36,11 @@
                 <thead>
                 <tr>
                   <th>No</th>
+                  <th>Kode Barang</th>
                   <th>Nama Barang</th>
                   <th>Merk</th>
+                  <th>Satuan</th>
+                  <th>Jenis Barang</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -47,7 +50,11 @@
                   foreach ($barang as $barang) { ?>
                 <tr>
                   <td><?php echo $no++; ?></td>
-                  <td><?php echo $barang->nama; ?></td>
+                  <td><?php echo $barang->id_barang; ?></td>
+                  <td><?php echo $barang->barang; ?></td>
+                  <td><?php echo $barang->merk; ?></td>
+                  <td><?php echo $barang->satuan; ?></td>
+                  <td><?php echo $barang->jenisbarang; ?></td>
                   <td>
                     <div class="btn-group">
                       <a href="<?php echo site_url('C_barang/view/'.$barang->id_barang); ?>"><button type="button" class="btn btn-success">Lihat</button></a>

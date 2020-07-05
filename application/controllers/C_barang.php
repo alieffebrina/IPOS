@@ -66,9 +66,31 @@ class C_barang extends CI_Controller{
 
     public function tambah()
     {   
-        $this->M_barang->tambahdata();
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
-        redirect('C_barang');
+        $modul = 'barang';
+        $kode = $this->M_Setting->cekkode($modul);
+        foreach ($kode as $modul) {
+            $a = $modul->kodefinal;
+            if (strpos($a, 'ggal') != false) {
+                date_default_timezone_set('Asia/Jakarta');
+                $tgl = date('Y-m-d');
+                $a = str_replace("tanggal", $tgl, $a);
+                $data = $this->M_barang->cekbarangtgl();
+                $no = count($data) + 1;
+                $kode2 = str_replace("no", $no, $a);
+            } else {
+                $data = $this->M_barang->cekkodebarang();
+                foreach ($data as $id) {
+                    $id = $id+1;
+                    $kode2 = str_replace("no", $id, $a);
+                }
+            }
+
+            $kode = $kode2;
+            $this->M_barang->tambahdata($kode);
+            $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+            redirect('C_barang');
+
+        }
     }
 
     function view($id)
@@ -88,13 +110,15 @@ class C_barang extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['provinsi'] = $this->C_Setting->getprovinsi();
+        $data['provinsi'] = $this->M_Setting->getprovinsi();
         $data['barang'] = $this->M_barang->getspek($idbarang);
+        $data['satuan'] = $this->M_Setting->getsatuan();
+        $data['jenisbarang'] = $this->M_Setting->getjenisbarang();
         $this->load->view('master/barang/v_ebarang',$data); 
         $this->load->view('template/footer');
     }
 
-    function editbarangr()
+    function editbarang()
     {   
         $this->M_barang->edit();
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");

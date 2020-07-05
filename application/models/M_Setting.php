@@ -175,4 +175,13 @@ class M_Setting extends CI_Model {
         
         $this->db->insert('tb_kode', $kode);
     }
+
+    function cekkode($modul){        
+        $this->db->select('kodefinal');
+        $where = array(
+            'modultransaksi' => $modul
+        );
+        $query = $this->db->get_where('tb_kode', $where);
+        return $query->result();
+    }
  }

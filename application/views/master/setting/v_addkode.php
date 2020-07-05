@@ -102,7 +102,6 @@
                     <select class="form-control select2" id="penghubung" name="penghubung" style="width: 100%;">
                       <option value=''>Pilih</option>
                       <option value='-'>-</option>
-                      <option value='/'>/</option>
                       <option value='.'>.</option>
                       <option value=''>Tanpa Penghubung</option>
                     </select>
