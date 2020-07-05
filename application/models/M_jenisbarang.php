@@ -25,10 +25,10 @@ class M_jenisbarang extends CI_Model {
         $this->db->insert('tb_jenisbarang', $jenisbarang);
     }
 
-    function getspek($id){
+    function getspek($idjenisbarang){
 		$this->db->select('*');
         $where = array(
-            'id_jenisbarang' => $id
+            'id_jenisbarang' => $idjenisbarang
         );
         $query = $this->db->get_where('tb_jenisbarang', $where);
     	return $query->result();

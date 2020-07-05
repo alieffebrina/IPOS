@@ -68,13 +68,13 @@ class C_Gudang extends CI_Controller{
         $this->load->view('template/footer');
     }
 
-    function edit($id)
+    function edit($idgudang)
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['gudang'] = $this->M_Gudang->getspek($id);
+        $data['gudang'] = $this->M_Gudang->getspek($idgudang);
         $this->load->view('master/gudang/v_egudang',$data); 
         $this->load->view('template/footer');
     }

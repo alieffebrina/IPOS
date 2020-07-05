@@ -82,14 +82,14 @@ class C_barang extends CI_Controller{
         $this->load->view('template/footer');
     }
 
-    function edit($id)
+    function edit($idbarang)
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
         $data['provinsi'] = $this->C_Setting->getprovinsi();
-        $data['barang'] = $this->M_barang->getspek($id);
+        $data['barang'] = $this->M_barang->getspek($idbarang);
         $this->load->view('master/barang/v_ebarang',$data); 
         $this->load->view('template/footer');
     }

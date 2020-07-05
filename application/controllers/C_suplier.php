@@ -74,14 +74,14 @@ class C_suplier extends CI_Controller{
         $this->load->view('template/footer');
     }
 
-    function edit($id)
+    function edit($iduser)
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_suplier');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
         $data['provinsi'] = $this->C_Setting->getprovinsi();
-        $data['suplier'] = $this->M_suplier->getspek($id);
+        $data['suplier'] = $this->M_suplier->getspek($iduser);
         $this->load->view('master/suplier/v_esuplier',$data); 
         $this->load->view('template/footer');
     }

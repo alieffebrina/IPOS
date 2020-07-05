@@ -68,13 +68,13 @@ class C_jenisbarang extends CI_Controller{
         $this->load->view('template/footer');
     }
 
-    function edit($id)
+    function edit($idjenisbarang)
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['jenisbarang'] = $this->M_jenisbarang->getspek($id);
+        $data['jenisbarang'] = $this->M_jenisbarang->getspek($idjenisbarang);
         $this->load->view('master/jenisbarang/v_ejenisbarang',$data); 
         $this->load->view('template/footer');
     }

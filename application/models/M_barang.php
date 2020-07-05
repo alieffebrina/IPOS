@@ -45,12 +45,12 @@ class M_barang extends CI_Model {
     //    }
     //}
 
-    function getspek($id){
+    function getspek($idbarang){
 		$this->db->select('*');
         $this->db->join('tb_satuan', 'tb_satuan.id_satuan = tb_barang.id_satuan');
         $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang'); 
         $where = array(
-            'id_barang' => $id
+            'id_barang' => $idbarang
         );
         $query = $this->db->get_where('tb_barang', $where);
     	return $query->result();

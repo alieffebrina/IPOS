@@ -25,10 +25,10 @@ class M_gudang extends CI_Model {
         $this->db->insert('tb_gudang', $gudang);
     }
 
-    function getspek($id){
+    function getspek($idgudang){
 		$this->db->select('*');
         $where = array(
-            'id_gudang' => $id
+            'id_gudang' => $idgudang
         );
         $query = $this->db->get_where('tb_gudang', $where);
     	return $query->result();
