@@ -71,6 +71,7 @@ class M_Setting extends CI_Model {
     function getmenu1($id){
         $this->db->distinct();
         $this->db->select('id_menu, menu, icon');
+        $this->db->order_by('id_menu', 'ASC');
         $this->db->join('tb_submenu', 'tb_submenu.id_menus = tb_menu.id_menu');
         $this->db->join('tb_akses', 'tb_akses.id_submenu = tb_submenu.id_submenu');
         $where = array(
@@ -81,20 +82,6 @@ class M_Setting extends CI_Model {
     }
 
     function editv($iduser,$submenu,$view){
-        // $user = array(
-        //     // 'view' => '0',
-        //     'add' => '0',
-        //     'edit' => '0',
-        //     'delete' => '0'
-        // );
-
-        // $where = array(
-        //     'id_user' =>  $this->input->post('id'),
-        // );
-        
-        // $this->db->where($where);
-        // $this->db->update('tb_akses',$user)
-
             $where = array(
                 'id_user' =>  $iduser,
                 'id_submenu' => $view
@@ -171,5 +158,21 @@ class M_Setting extends CI_Model {
     function delete($where,$table){
     $this->db->where($where);
     $this->db->delete($table);
+    }
+
+     function getkode(){
+        $this->db->select('*');
+        $this->db->from('tb_kode');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function tambahdata(){
+        $kode = array(
+            'modultransaksi' => $this->input->post('modultransaksi'),
+            'kodefinal' => $this->input->post('final')
+        );
+        
+        $this->db->insert('tb_kode', $kode);
     }
  }

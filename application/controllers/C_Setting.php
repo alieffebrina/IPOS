@@ -91,7 +91,44 @@ class C_Setting extends CI_Controller{
                 $this->M_Setting->editd($iduser,$sub,$delete);//Call the modal
                 
             }
+            $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
             redirect('C_Setting');
         }
+    }
+
+    function vkode()
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['kode'] = $this->M_Setting->getkode();
+        $this->load->view('master/setting/v_kode',$data); 
+        $this->load->view('template/footer');
+    }
+
+    function addkode()
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['kode'] = $this->M_Setting->getkode();
+        $this->load->view('master/setting/v_addkode',$data); 
+        $this->load->view('template/footer');
+    }
+
+    function tambahkode()
+    {
+        $this->M_Setting->tambahdata();
+        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        redirect('C_Setting/vkode');
+    } 
+
+    function hapuskode($id){
+        $where = array('id_kode' => $id);
+        $this->M_Setting->delete($where,'tb_kode');
+        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        redirect('C_Setting/vkode');
     }
 }

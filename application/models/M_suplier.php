@@ -19,7 +19,7 @@ class M_suplier extends CI_Model {
 
     function tambahdata(){
         $suplier = array(
-            'nama' => $this->input->post('nama'),
+            'nama_suplier' => $this->input->post('nama_suplier'),
             'alamat' => $this->input->post('alamat'),
             'id_kota' => $this->input->post('kota'),
             'id_provinsi' => $this->input->post('prov'),
