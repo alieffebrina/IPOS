@@ -74,14 +74,14 @@ class C_User extends CI_Controller{
         $this->load->view('template/footer');
     }
 
-    function edit($id)
+    function edit($iduser)
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['provinsi'] = $this->C_Setting->getprovinsi();
-        $data['user'] = $this->M_User->getspek($id);
+        $data['provinsi'] = $this->M_Setting->getprovinsi();
+        $data['user'] = $this->M_User->getspek($iduser);
         $this->load->view('master/user/v_euser',$data); 
         $this->load->view('template/footer');
     }
