@@ -39,7 +39,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <?php $submenus = $this->db->query("select * from tb_akses INNER JOIN tb_submenu on tb_submenu.id_submenu = tb_akses.id_submenu where tb_submenu.id_menus = '$a' and tb_akses.view = '1' and tb_akses.id_user = $id "); 
+              <?php $submenus = $this->db->query("select * from tb_akses INNER JOIN tb_submenu on tb_submenu.id_submenu = tb_akses.id_submenu where tb_submenu.id_menus = '$a' and tb_akses.view = '1' and tb_akses.id_user = $id and tb_submenu.statusmenu = 'aktif' "); 
               foreach ($submenus->result() as $submenu) { ?>
               <li><a href="<?php echo site_url($submenu->linksubmenu); ?>"><i class="fa fa-circle-o"></i> <?php echo $submenu->submenu; ?></a></li>    
               <?php } ?>    
