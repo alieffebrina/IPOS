@@ -1,11 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class C_suplier extends CI_Controller{
+class C_Pelanggan extends CI_Controller{
     
     public function __construct(){
         parent::__construct();
         $this->load->helper(array('form','url'));
         $this->load->library('session');
-        $this->load->model('M_suplier');
+        $this->load->model('M_pelanggan');
         $this->load->model('M_Setting');
     }
 
@@ -15,8 +15,8 @@ class C_suplier extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['suplier'] = $this->M_suplier->getsuplier();
-        $this->load->view('master/suplier/v_suplier',$data); 
+        $data['pelanggan'] = $this->M_pelanggan->getpelanggan();
+        $this->load->view('master/pelanggan/v_pelanggan',$data); 
         $this->load->view('template/footer');
     }
 
@@ -27,16 +27,16 @@ class C_suplier extends CI_Controller{
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
         $data['provinsi'] = $this->M_Setting->getprovinsi();
-        $this->load->view('master/suplier/v_addsuplier', $data); 
+        $this->load->view('master/pelanggan/v_addpelanggan', $data); 
         $this->load->view('template/footer');
     }
 
-    function cek_suplier(){
+    function cek_pelanggan(){
         # ambil Kualifikasiname dari form
         
-        $kode = $this->input->post('suplier');
+        $kode = $this->input->post('pelanggan');
                 # select ke model member Kualifikasiname yang diinput Kualifikasi
-        $hasil_kode = $this->M_suplier->cek_suplier($kode);
+        $hasil_kode = $this->M_pelanggan->cek_pelanggan($kode);
          
                 # pengecekan value $hasil_Kualifikasiname
         if(count($hasil_kode)!=0){
@@ -55,14 +55,14 @@ class C_suplier extends CI_Controller{
     {   
 
         $id = $this->session->userdata('id_user');
-        $this->M_suplier->tambahdata($id);
-        // $data = $this->M_suplier->cekkodesuplier();
+        $this->M_pelanggan->tambahdata($id);
+        // $data = $this->M_pelanggan->cekkodepelanggan();
         // foreach ($data as $id) {
         //     $id =$id;
-        //     $this->M_suplier->tambahakses($id);
+        //     $this->M_pelanggan->tambahakses($id);
         // }
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
-        redirect('C_suplier');
+        redirect('C_pelanggan');
     }
 
     function view($ida)
@@ -71,8 +71,8 @@ class C_suplier extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['suplier'] = $this->M_suplier->getspek($ida);
-        $this->load->view('master/suplier/v_vsuplier',$data); 
+        $data['pelanggan'] = $this->M_pelanggan->getspek($ida);
+        $this->load->view('master/pelanggan/v_vpelanggan',$data); 
         $this->load->view('template/footer');
     }
 
@@ -83,25 +83,25 @@ class C_suplier extends CI_Controller{
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
         $data['provinsi'] = $this->M_Setting->getprovinsi();
-        $data['suplier'] = $this->M_suplier->getspek($iduser);
-        $this->load->view('master/suplier/v_esuplier',$data); 
+        $data['pelanggan'] = $this->M_pelanggan->getspek($iduser);
+        $this->load->view('master/pelanggan/v_epelanggan',$data); 
         $this->load->view('template/footer');
     }
 
-    function editsuplier()
+    function editpelanggan()
     {   
 
         $id = $this->session->userdata('id_user');
-        $this->M_suplier->edit($id);
+        $this->M_pelanggan->edit($id);
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
-        redirect('C_suplier');
+        redirect('C_pelanggan');
     }
 
     function hapus($id){
-        $where = array('id_suplier' => $id);
-        $this->M_Setting->delete($where,'tb_suplier');
+        $where = array('id_pelanggan' => $id);
+        $this->M_Setting->delete($where,'tb_pelanggan');
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
-        redirect('C_suplier');
+        redirect('C_pelanggan');
     }
 
 }

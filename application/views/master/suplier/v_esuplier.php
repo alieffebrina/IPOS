@@ -29,10 +29,16 @@
               <div class="box-body">
                 <?php foreach ($suplier as $suplier) { ?>
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Nama</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Nama Toko</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="nama_toko" name="nama_toko" value="<?php echo $suplier->nama_toko ?>">
+                    <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $suplier->id_suplier ?>">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Nama Suplier</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="nama_suplier" name="nama_suplier" value="<?php echo $suplier->nama_suplier ?>">
-                    <input type="hidden" class="form-control" id="id" name="id" value="<?php _echo $suplier->id_suplier ?>">
                   </div>
                 </div>
                 <div class="form-group">
@@ -40,13 +46,6 @@
                   <div class="col-sm-9">
                     <textarea class="form-control" rows="3" id="alamat" name="alamat"><?php echo $suplier->alamat ?></textarea>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Kota/Kabupaten</label>
-                  <div class="col-sm-9">
-                  <select class="form-control select2" id="kota" name="kota" style="width: 100%;">
-                      <option value="<?php echo $suplier->id_kota ?>"><?php echo $suplier->name_kota ?></option>
-                    </select>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Provinsi</label>
@@ -60,43 +59,23 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Kota/Kabupaten</label>
+                  <div class="col-sm-9">
+                  <select class="form-control select2" id="kota" name="kota" style="width: 100%;">
+                      <option value="<?php echo $suplier->id_kota ?>"><?php echo $suplier->name_kota ?></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Telepon</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="tlp" name="tlp" placeholder="Telepon"  maxlength="12" minlength="12" value="<?php echo $suplier->tlp ?>">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Limit</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="email" name="email" value="<?php echo $suplier->email ?>">
-                    <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $suplier->id_suplier ?>">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Website</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="website" name="website" value="<?php echo $suplier->website ?>">
-                    <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $suplier->id_suplier ?>">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">No. Rekening</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="norek" name="norek" placeholder="No. Rekening"  maxlength="20" minlength="20" value="<?php echo $suplier->norek ?>">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Bank</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="bank" name="bank" value="<?php echo $suplier->bank ?>">
-                    <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $suplier->id_suplier ?>">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">A.N Rekening</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="anrek" name="anrek" value="<?php echo $suplier->anrek ?>">
-                    <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $suplier->id_suplier ?>">
+                    <input type="text" class="form-control" id="rupiah" name="rupiah" value=" Rp. <?php echo number_format($suplier->limit,0,",","."); ?>">
                   </div>
                 </div>
               </div>

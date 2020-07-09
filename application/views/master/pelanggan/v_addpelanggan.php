@@ -3,13 +3,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Suplier
+        Data Pelanggan
         <small>Tambah</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Data Master</a></li>
-        <li><a href="<?php echo site_url('C_suplier'); ?>">Data Suplier</a></li>>
-        <li class="active">Tambah Data Suplier</li>
+        <li><a href="<?php echo site_url('C_Pelanggan'); ?>">Data Pelanggan</a></li>>
+        <li class="active">Tambah Data Pelanggan</li>
       </ol>
     </section>
 
@@ -21,22 +21,16 @@
           <!-- Horizontal Form -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Tambah Data Suplier</h3>
+              <h3 class="box-title">Tambah Data Pelanggan</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" method="POST" action="<?php echo site_url('C_suplier/tambah')?>">
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('C_Pelanggan/tambah')?>">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Nama Toko</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Nama</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nama_toko" name="nama_toko" placeholder="Nama Toko">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Nama Suplier</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nama_suplier" name="nama_suplier" placeholder="Nama Suplier">
+                    <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" placeholder="Nama Pelanggan">
                   </div>
                 </div>
                 <div class="form-group">

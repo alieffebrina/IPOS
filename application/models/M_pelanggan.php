@@ -1,47 +1,45 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class M_suplier extends CI_Model {
+class M_pelanggan extends CI_Model {
 
-	function getsuplier(){
-		$this->db->select('*');
-        $this->db->join('tb_provinsi', 'tb_provinsi.id_provinsi = tb_suplier.id_provinsi');
-        $this->db->join('tb_kota', 'tb_kota.id_kota = tb_suplier.id_kota');
-        $query = $this->db->get('tb_suplier');
-    	return $query->result();
+    function getpelanggan(){
+        $this->db->select('*');
+        $this->db->join('tb_provinsi', 'tb_provinsi.id_provinsi = tb_pelanggan.id_provinsi');
+        $this->db->join('tb_kota', 'tb_kota.id_kota = tb_pelanggan.id_kota');
+        $query = $this->db->get('tb_pelanggan');
+        return $query->result();
     }
 
     function getnama($ida){
         $where = array(
-            'id_suplier' => $ida
+            'id_pelanggan' => $ida
         );
-        return $this->db->get_where('tb_suplier',$where)->result();
+        return $this->db->get_where('tb_pelanggan',$where)->result();
     }
 
     function tambahdata($id){
         $harga = $this->input->post('rupiah');
         $harga_str = preg_replace("/[^0-9]/", "", $harga);
 
-        $suplier = array(
+        $pelanggan = array(
             'id_user' => $id,
-            'nama_suplier' => $this->input->post('nama_suplier'),
+            'nama' => $this->input->post('nama_pelanggan'),
             'alamat' => $this->input->post('alamat'),
             'id_kota' => $this->input->post('kota'),
             'id_provinsi' => $this->input->post('prov'),
             'tlp' => $this->input->post('tlp'),
-            'nama_toko' => $this->input->post('nama_toko'),
             'limit' => $harga_str,
-            'id_user' => $id,
             'tgl_update' => date('Y-m-d')
         );
         
-        $this->db->insert('tb_suplier', $suplier);
+        $this->db->insert('tb_pelanggan', $pelanggan);
     }
 
-    function cekkodesuplier(){
-        $this->db->select_max('id_suplier');
-        $idsuplier = $this->db->get('tb_suplier');
-        return $idsuplier->row();
-    }
+    // function cekkodepelanggan(){
+    //     $this->db->select_max('id_pelanggan');
+    //     $idpelanggan = $this->db->get('tb_pelanggan');
+    //     return $idpelanggan->row();
+    // }
 
     //function tambahakses($id){
     //    $total = $this->db->count_all_results('tb_submenu');
@@ -55,38 +53,37 @@ class M_suplier extends CI_Model {
     //}
 
     function getspek($iduser){
-		$this->db->select('*');
-        $this->db->join('tb_provinsi', 'tb_provinsi.id_provinsi = tb_suplier.id_provinsi');
-        $this->db->join('tb_kota', 'tb_kota.id_kota = tb_suplier.id_kota'); 
+        $this->db->select('*');
+        $this->db->join('tb_provinsi', 'tb_provinsi.id_provinsi = tb_pelanggan.id_provinsi');
+        $this->db->join('tb_kota', 'tb_kota.id_kota = tb_pelanggan.id_kota'); 
         $where = array(
-            'id_suplier' => $iduser
+            'id_pelanggan' => $iduser
         );
-        $query = $this->db->get_where('tb_suplier', $where);
-    	return $query->result();
+        $query = $this->db->get_where('tb_pelanggan', $where);
+        return $query->result();
     }
 
     function edit($id){
         $harga = $this->input->post('rupiah');
         $harga_str = preg_replace("/[^0-9]/", "", $harga);
-        $suplier = array(
+        $pelanggan = array(
 
-            'nama_suplier' => $this->input->post('nama_suplier'),
+            'id_user' => $id,
+            'nama' => $this->input->post('nama_pelanggan'),
             'alamat' => $this->input->post('alamat'),
             'id_kota' => $this->input->post('kota'),
             'id_provinsi' => $this->input->post('prov'),
             'tlp' => $this->input->post('tlp'),
-            'nama_toko' => $this->input->post('nama_toko'),
             'limit' => $harga_str,
-            'id_user' => $id,
             'tgl_update' => date('Y-m-d')
         );
 
         $where = array(
-            'id_suplier' =>  $this->input->post('id'),
+            'id_pelanggan' =>  $this->input->post('id'),
         );
         
         $this->db->where($where);
-        $this->db->update('tb_suplier',$suplier);
+        $this->db->update('tb_pelanggan',$pelanggan);
     }
 
     
