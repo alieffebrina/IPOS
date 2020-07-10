@@ -10,12 +10,12 @@ class M_suplier extends CI_Model {
     	return $query->result();
     }
 
-    function getnama($ida){
-        $where = array(
-            'id_suplier' => $ida
-        );
-        return $this->db->get_where('tb_suplier',$where)->result();
-    }
+    // function getnama($ida){
+    //     $where = array(
+    //         'id_suplier' => $ida
+    //     );
+    //     return $this->db->get_where('tb_suplier',$where)->result();
+    // }
 
     function tambahdata($id){
         $harga = $this->input->post('rupiah');

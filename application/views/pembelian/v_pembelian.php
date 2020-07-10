@@ -29,47 +29,52 @@
                   <label for="inputEmail3" class="col-sm-1 control-label">No Nota</label>
 
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    <input type="text" class="form-control" id="nonota" name="nonota" value="<?php echo $kode; ?>" readonly>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">Tanggal</label>
 
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    <input type="text" class="form-control" id="tgl" name="tgl" value="<?php echo date('d-m-Y')?>" readonly>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">Nama Toko</label>
 
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    <select class="form-control select2" id="nama_toko" name="nama_toko" style="width: 100%;">
+                      <option value="">--Pilih--</option>
+                      <?php foreach ($suplier as $suplier) { ?>
+                      <option value="<?php echo $suplier->id_suplier ?>"><?php echo $suplier->nama_toko ?></option>
+                      <?php } ?>
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">Nama Suplier</label>
-
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                  <div class="col-sm-10" id="nama_suplier">
+                    <input type="text" class="form-control" name="nama_suplier">
+                    <!-- <span id="nama_suplier"></span> -->
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Alamat</label>
                   <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    <textarea name="alamat" class="form-control" id="alamat" readonly></textarea>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Type Pembayaran</label>
                   <div class="col-sm-10">
-                  <input type="radio" name="gender" value="male"> Cash
-                  <input type="radio" name="gender" value="female"> Kredit
+                  <input type="radio" id="cash" name="pembayaran" value="cash"> Cash
+                  <input type="radio" id="kredit" name="pembayaran" value="kredit"> Kredit
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Tanggal Jatuh Tempo</label>
                   <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    <input type="date" class="form-control" id="tgljatuhtempo" name="tgljatuhtempo" disabled="disabled">
                   </div>
                 </div>
               </div>
@@ -89,42 +94,30 @@
                     <th>No</th>
                     <th>Barang</th>
                     <th>Qtt</th>
+                    <th>Satuan</th>
+                    <th>Harga</th>
                     <th>Diskon</th>
+                    <th>Sub Total</th>
                     <th>action</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
                     <td>1</td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <th>Tambah</th>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <th>Tambah</th>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <th>Tambah</th>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <td><input type="text" class="form-control"  name=""></td>
-                    <th>Tambah</th>
+                    <td>
+                      <select class="form-control select2" id="nama_barang" name="nama_barang" style="width: 100%;">
+                        <option value="">--Pilih--</option>
+                        <?php foreach ($barang as $barang) { ?>
+                        <option value="<?php echo $barang->id_barang ?>"><?php echo $barang->barang ?></option>
+                        <?php } ?>
+                      </select>
+                    </td>
+                    <td><input type="text" class="form-control" id="qtt" name="qtt"  onfocus="startCalculate()" onblur="stopCalc()" ></td>
+                    <td><span id="satuan"></span></td>
+                    <td id="tampilharga"></td>
+                    <td><input type="text" class="form-control" id="diskon" name="diskon" onfocus="startCalculate()" onblur="stopCalc()" ></td>
+                    <td><input type="text" class="form-control" name="subtotal" id="subtotal" readonly></td>
+                    <th>Tambah | Hapus</th>
                   </tr>
                   </tbody>
                 </table>
@@ -165,7 +158,7 @@
                   <label for="inputEmail3" class="col-sm-3 control-label">Sub Total</label>
 
                   <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" value="Rp. 1.000.000,-" readonly>
+                    <input type="text" class="form-control"  name="subtotalbawah" id="subtotalbawah" readonly>
                   </div>
                 </div>
                 <div class="form-group">

@@ -32,23 +32,25 @@ class C_suplier extends CI_Controller{
     }
 
     function cek_suplier(){
-        # ambil Kualifikasiname dari form
-        
-        $kode = $this->input->post('suplier');
-                # select ke model member Kualifikasiname yang diinput Kualifikasi
-        $hasil_kode = $this->M_suplier->cek_suplier($kode);
-         
-                # pengecekan value $hasil_Kualifikasiname
-        if(count($hasil_kode)!=0){
-          # kalu value $hasil_Kualifikasiname tidak 0
-                  # echo 1 untuk pertanda Kualifikasiname sudah ada pada db    
-                       echo '1';
-        }else{
-                  # kalu value $hasil_Kualifikasiname = 0
-                  # echo 2 untuk pertanda Kualifikasiname belum ada pada db
-            echo '2';
-        }
-         
+            // Ambil data ID Provinsi yang dikirim via ajax post
+            $iduser = $this->input->post('id_suplier');
+            
+            $hasil_kode = $this->M_suplier->getspek($iduser);
+            
+            // Buat variabel untuk menampung tag-tag option nya
+            // Set defaultnya dengan tag option Pilih
+            // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' readonly>";
+            
+            foreach($hasil_kode as $data){
+              $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$data->nama_suplier."' readonly>"; // Tambahkan tag option ke variabel $lists
+              $ala = $data->alamat;
+              // $lists = "ok";
+            }
+            
+            // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$hasil_kode."' readonly>";
+
+            $callback = array('list_suplier'=>$lists, 'list_alamat'=>$ala); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+            echo json_encode($callback); // konversi varibael $callback menjadi JSON
     }
 
     public function tambah()

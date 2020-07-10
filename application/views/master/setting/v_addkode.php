@@ -33,12 +33,12 @@
                     <select class="form-control select2" id="modultransaksi" name="modultransaksi" style="width: 100%;">
                       <option value=''>Pilih</option>
                       <option value='barang'>Barang</option>
-                      <option value='salesorder'>Sales Order</option>
-                      <option value='deliveryorder'>Delivery Order</option>
-                      <option value='purchaseorder'>Purchase Order</option>
-                      <option value='invoice'>Invoice</option>
+                      <option value='penjualan'>Penjualan</option>
+                      <!-- <option value='suratjalan'>Delivery Order</option> -->
+                      <option value='pembelian'>Pembelian</option>
+                      <!-- <option value='invoice'>Invoice</option>
                       <option value='notapembayaranpo'>Nota Pembayaran Purchase Order</option>
-                      <option value='notapembayaranso'>Nota Pembayaran Sales Order</option>
+                      <option value='notapembayaranso'>Nota Pembayaran Sales Order</option> -->
                     </select>
                   </div>
                 </div>

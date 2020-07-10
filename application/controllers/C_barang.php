@@ -52,6 +52,29 @@ class C_barang extends CI_Controller{
          
     }
 
+    function ceksatuan(){
+            // Ambil data ID Provinsi yang dikirim via ajax post
+            $idbarang = $this->input->post('id_barang');
+            
+            $hasil_kode = $this->M_barang->getspek($idbarang);
+            
+            // Buat variabel untuk menampung tag-tag option nya
+            // Set defaultnya dengan tag option Pilih
+            // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' readonly>";
+            
+            foreach($hasil_kode as $data){
+              // $lists .= " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$data->satuan."' readonly>"; // Tambahkan tag option ke variabel $lists
+              // $ala = $data->alamat;
+                $harga = "<input type='text' class='form-control' onfocus='startCalculate()' onblur='stopCalc()' name='harga' id='harga' value='".$data->hargabeli."'>";
+                $lists = $data->satuan;
+            }
+            
+            // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$hasil_kode."' readonly>";
+
+            $callback = array('list_satuan'=>$lists, 'list_harga'=>$harga); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+            echo json_encode($callback); // konversi varibael $callback menjadi JSON
+    }
+
     //public function tambah()
     //{   
         //$this->M_barang->tambahdata();

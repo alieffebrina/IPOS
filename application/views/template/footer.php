@@ -103,6 +103,81 @@
     });
   });
   </script>
+  <script>
+  $(document).ready(function(){ // Ketika halaman sudah siap (sudah selesai di load)
+    // Kita sembunyikan dulu untuk loadingnya
+    $("#nama_toko").change(function(){ // Ketika user mengganti atau memilih data provinsi
+    
+      $.ajax({
+        type: "POST", // Method pengiriman data bisa dengan GET atau POST
+        url: "<?php echo base_url("index.php/C_suplier/cek_suplier"); ?>", // Isi dengan url/path file php yang dituju
+        data: {id_suplier : $("#nama_toko").val()}, // data yang akan dikirim ke file yang dituju
+        dataType: "json",
+        beforeSend: function(e) {
+          if(e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response){ // Ketika proses pengiriman berhasil
+          // set isi dari combobox kota
+          // lalu munculkan kembali combobox kotanya
+          // $("#nama_suplier").html("aaaa");
+          $("#nama_suplier").html(response.list_suplier).show();
+          $("#alamat").html(response.list_alamat).show();
+        },
+        error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
+        }
+      });
+    });
+  });
+  </script>
+  <script>
+  $(document).ready(function(){ // Ketika halaman sudah siap (sudah selesai di load)
+    // Kita sembunyikan dulu untuk loadingnya
+    $("#nama_barang").change(function(){ // Ketika user mengganti atau memilih data provinsi
+    
+      $.ajax({
+        type: "POST", // Method pengiriman data bisa dengan GET atau POST
+        url: "<?php echo base_url("index.php/C_barang/ceksatuan"); ?>", // Isi dengan url/path file php yang dituju
+        data: {id_barang : $("#nama_barang").val()}, // data yang akan dikirim ke file yang dituju
+        dataType: "json",
+        beforeSend: function(e) {
+          if(e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response){ // Ketika proses pengiriman berhasil
+          // set isi dari combobox kota
+          // lalu munculkan kembali combobox kotanya
+          $("#tampilharga").html(response.list_harga).show();
+          $("#satuan").html(response.list_satuan).show();
+        },
+        error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
+        }
+      });
+    });
+  });
+  </script>
+<script type="text/javascript">
+  function startCalculate(){
+    interval=setInterval("Calculate()",10);
+
+  }
+
+  function Calculate(){
+      var a = document.getElementById('harga').value;
+      var b = document.getElementById('qtt').value;
+      var c = document.getElementById('diskon').value;
+      document.getElementById('subtotal').value = (a*b)-c;
+      document.getElementById('subtotalbawah').value = (a*b)-c;
+  }
+
+  function stopCalc(){
+    clearInterval(interval);
+  }
+</script>
   <script type="text/javascript">
   function Angkasaja(evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode
@@ -192,29 +267,16 @@ function toggle(source) {
     }
 }
 </script>
-<!-- 
-<script>
- $(document).ready(function() {
-    // Kondisi saat Form di-load
-    if ($("#format1").val() == "huruf") {
-        $('#texthuruf').removeAttr('disabled');
-    } else {
-        $('#texthuruf').attr('disabled','disabled'); 
-    }
-
-    // Kondisi saat ComboBox (Select Option) dipilih nilainya
-    $("#format1").change(function() {
-        if (this.value != "huruf") {
-            $('#texthuruf').attr('disabled','disabled'); 
-            $('#texthuruf').val('');
-        } else {
-            $('#texthuruf').removeAttr('disabled');
-            $('#texthuruf').focus();
-        } 
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#kredit").click(function () {
+        $('#tgljatuhtempo').removeAttr('disabled');
     });
-});
-  </script> -->
-
+    $("#cash").click(function () {
+        $('#tgljatuhtempo').attr('disabled','disabled'); 
+    });
+  });
+</script>
 <script>
  $(document).ready(function() {
     // Kondisi saat Form di-load
