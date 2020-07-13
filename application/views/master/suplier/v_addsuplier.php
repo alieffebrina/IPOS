@@ -30,7 +30,7 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Nama Toko</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nama_toko" name="nama_toko" placeholder="Nama Toko">
+                    <input type="text" class="form-control" id="nama_toko1" name="nama_toko" placeholder="Nama Toko">
                   </div>
                 </div>
                 <div class="form-group">

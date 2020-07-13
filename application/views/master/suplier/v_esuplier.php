@@ -31,7 +31,7 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Nama Toko</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nama_toko" name="nama_toko" value="<?php echo $suplier->nama_toko ?>">
+                    <input type="text" class="form-control" id="1nama_toko" name="nama_toko" value="<?php echo $suplier->nama_toko ?>">
                     <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $suplier->id_suplier ?>">
                   </div>
                 </div>
