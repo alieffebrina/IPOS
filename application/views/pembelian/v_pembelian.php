@@ -178,12 +178,9 @@
           <div class="box box-danger">
             <div class="col-xs-12">
               <p class="lead" style="text-align: center;"><b>Total :</b></p>
-                  <div class="bg-maroon disable color-palette"><h1 style="text-align: center;">Rp. 1000.000</h1></div></br >
+                  <div class="bg-maroon disable color-palette" ><h1 style="text-align: center;" id="totalfix"></h1></div></br >
               <p class="lead">Terbilang :</p>
-              <p class="text-muted well well-sm no-shadow">
-                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
-                dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra. :</p>
-
+              <h3 class="text-muted well well-sm no-shadow" id="terbilang" style="text-align: center;"></h3>
                 <button type="submit" class="btn btn-default pull-right">Cancel</button>
                 <button type="submit" class="btn btn-info pull-right">Simpan</button>
             </div>
@@ -210,14 +207,14 @@
                   <label for="inputEmail3" class="col-sm-3 control-label">Diskon</label>
 
                   <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" value="Rp. 1.000.000,-">
+                    <input type="text" class="form-control" id="diskonbawah" name="diskonbawah" value=""  onfocus="startCalculate()" onblur="stopCalc()">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-3 control-label">Biaya Lain Lain</label>
 
                   <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" value="Rp. 1.000.000,-">
+                    <input type="text" class="form-control" id="biayalain" name="biayalain" value=""  onfocus="startCalculate()" onblur="stopCalc()" >
                   </div>
                 </div>
               </div>

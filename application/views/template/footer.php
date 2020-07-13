@@ -57,6 +57,9 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
 
+<script src="<?php echo base_url() ?>assets/dist/js/jquery-1.11.2.min"></script>
+<script src="<?php echo base_url() ?>assets/dist/js/jquery.mask.min.js"></script>
+<script src="<?php echo base_url() ?>assets/dist/js/terbilang.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -189,6 +192,7 @@
       document.getElementById('subtotal').value = formatRupiah(rupiah) ;
       document.getElementById('subtotalrupiah').value = bilangan ;
 
+
       var d = document.getElementById('diskonbawah').value;
       var e = parseInt(document.getElementById('biayalain').value);
       var f = document.getElementById('subtotalbawah').value;
@@ -203,13 +207,24 @@
         rupiah += separator + ribuan.join('.');
       }
       document.getElementById('totalfix').innerHTML = formatRupiah(rupiah);
-     
+      var input = document.getElementById('totalfix').innerHTML.replace(/\./g, "");
+      //terbilang
+      document.getElementById("terbilang").innerHTML = terbilang(input);
+           
   }
 
   function stopCalc(){
     clearInterval(interval);
   }
+ // function inputTerbilang() {
+ //    //membuat inputan otomatis jadi mata uang
 
+ //    //mengambil data uang yang akan dirubah jadi terbilang
+ //     var input = document.getElementById("totalfix").innerHTML.replace(/\./g, "");
+
+ //     //menampilkan hasil dari terbilang
+ //     document.getElementById("terbilang").value = terbilang(hitungtotal).replace(/  +/g, ' ');
+ //  } 
 
   
 </script>
