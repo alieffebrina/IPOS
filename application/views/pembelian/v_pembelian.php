@@ -23,7 +23,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal">
+            <div class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">No Nota</label>
@@ -80,15 +80,77 @@
               </div>
               <!-- /.box-body -->
               <!-- /.box-footer -->
-            </form>
+            </div>
+          </div>
+
+
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Tambah Barang</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <div class="form-horizontal">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-1 control-label">Nama Barang</label>
+
+                  <div class="col-sm-10">
+                    <select class="form-control select2" id="nama_barang" name="nama_barang" style="width: 100%;">
+                      <option value="">--Pilih--</option>
+                      <?php foreach ($barang as $barang) { ?>
+                      <option value="<?php echo $barang->id_barang ?>"><?php echo $barang->barang ?></option>
+                      <?php } ?>
+                    </select>
+                  </div><div id="namashow"></div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-1 control-label">Qtt</label>
+
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="qtt" name="qtt" value="" required="required" onfocus="startCalculate()" onblur="stopCalc()">
+                      <span class="input-group-addon" id="tampilsatuan"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-1 control-label">Harga</label>
+
+                  <div class="col-sm-10" id = "tampilharga">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-1 control-label">Diskon</label>
+                  <div class="col-sm-10" id="nama_suplier">
+                    <input type="text" class="form-control" name="diskon" id="diskon" onfocus="startCalculate()" onblur="stopCalc()">
+                    <!-- <span id="nama_suplier"></span> -->
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-1 control-label">Sub Total</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="subtotal" id="subtotal">
+                    <input type="hidden" class="form-control" name="subtotalrupiah" id="subtotalrupiah">
+                  </div>
+                  <!-- <a class=""> -->
+                  <input type="submit" name="send" class="btn btn-primary" value="add data" id="butsend">
+                </div>
+              </div>
+              <!-- /.box-body -->
+              <!-- /.box-footer -->
+            </div>
           </div>
           <!-- /.box -->
 
           <!-- Form Element sizes -->
           <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">List Barang</h3>
+            </div>
             <div class="row">
               <div class="col-xs-12 table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped" id="tabelku">
                   <thead>
                   <tr>
                     <th>No</th>
@@ -102,23 +164,6 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>
-                      <select class="form-control select2" id="nama_barang" name="nama_barang" style="width: 100%;">
-                        <option value="">--Pilih--</option>
-                        <?php foreach ($barang as $barang) { ?>
-                        <option value="<?php echo $barang->id_barang ?>"><?php echo $barang->barang ?></option>
-                        <?php } ?>
-                      </select>
-                    </td>
-                    <td><input type="text" class="form-control" id="qtt" name="qtt"  onfocus="startCalculate()" onblur="stopCalc()" ></td>
-                    <td><span id="satuan"></span></td>
-                    <td id="tampilharga"></td>
-                    <td><input type="text" class="form-control" id="diskon" name="diskon" onfocus="startCalculate()" onblur="stopCalc()" ></td>
-                    <td><input type="text" class="form-control" name="subtotal" id="subtotal" readonly></td>
-                    <th>Tambah | Hapus</th>
-                  </tr>
                   </tbody>
                 </table>
               </div>

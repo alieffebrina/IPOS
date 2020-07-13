@@ -56,7 +56,6 @@
 <script src="<?php echo base_url() ?>assets/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
-<script src="<?php echo base_url() ?>assets/dist/js/terbilang.js"></script>
 
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -137,7 +136,10 @@
   $(document).ready(function(){ // Ketika halaman sudah siap (sudah selesai di load)
     // Kita sembunyikan dulu untuk loadingnya
     $("#nama_barang").change(function(){ // Ketika user mengganti atau memilih data provinsi
-    
+    // var lastRowId = $('#tabelku tr:last').attr("id");
+    // var barang = new Array();
+    // var jumlah = parseInt($("#jumlahform").val());
+    // for (var i = 1; i <=lastRowId ; i++) {
       $.ajax({
         type: "POST", // Method pengiriman data bisa dengan GET atau POST
         url: "<?php echo base_url("index.php/C_barang/ceksatuan"); ?>", // Isi dengan url/path file php yang dituju
@@ -152,12 +154,14 @@
           // set isi dari combobox kota
           // lalu munculkan kembali combobox kotanya
           $("#tampilharga").html(response.list_harga).show();
-          $("#satuan").html(response.list_satuan).show();
+          $("#tampilsatuan").html(response.list_satuan).show();
+          $("#namashow").html(response.list_namabarang).show();
         },
         error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
           alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
         }
       });
+    // }
     });
   });
   </script>
@@ -171,13 +175,108 @@
       var a = document.getElementById('harga').value;
       var b = document.getElementById('qtt').value;
       var c = document.getElementById('diskon').value;
-      document.getElementById('subtotal').value = (a*b)-c;
-      document.getElementById('subtotalbawah').value = (a*b)-c;
+      var bilangan = (a*b)-c;
+      var number_string = bilangan.toString(),
+        sisa  = number_string.length % 3,
+        rupiah  = number_string.substr(0, sisa),
+        ribuan  = number_string.substr(sisa).match(/\d{3}/g);
+          
+      if (ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+      }
+
+      document.getElementById('subtotal').value = formatRupiah(rupiah) ;
+      document.getElementById('subtotalrupiah').value = bilangan ;
+
+      var d = document.getElementById('diskonbawah').value;
+      var e = parseInt(document.getElementById('biayalain').value);
+      var f = document.getElementById('subtotalbawah').value;
+      var hitungtotal = f-d+e;
+      var numbertotal = hitungtotal.toString(),
+        sisa  = numbertotal.length % 3,
+        rupiah  = numbertotal.substr(0, sisa),
+        ribuan  = numbertotal.substr(sisa).match(/\d{3}/g);
+          
+      if (ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+      }
+      document.getElementById('totalfix').innerHTML = formatRupiah(rupiah);
+     
   }
 
   function stopCalc(){
     clearInterval(interval);
   }
+
+
+  
+</script>
+<script>
+  $(document).ready(function() {
+    var id = 1; 
+    var sumHsl = 0;
+    $("#butsend").click(function() {
+      var newid = id++; 
+      var st = parseInt($("#subtotalrupiah").val());
+      $("#tabelku").append('<tr valign="top" id="'+newid+'">\n\
+        <td width="100px" >' + newid + '</td>\n\
+        <td width="100px" class="barang'+newid+'">' + $("#namabarangshow").val() + '</td>\n\
+        <td width="100px" class="qtt'+newid+'">' + $("#qtt").val() + '</td>\n\
+        <td width="100px" class="satuan'+newid+'">' + $("#satuan").val() + '</td>\n\
+        <td width="100px" class="harga'+newid+'">' + $("#hargashow").val() + '</td>\n\
+        <td width="100px" class="diskon'+newid+'">' + $("#diskon").val() + '</td>\n\
+        <td width="100px" class="subtotal'+newid+'">' + $("#subtotal").val() + '</td>\n\
+        <td width="100px"><a href="javascript:void(0);" class="remCF" data-id="'+st+'" ><input type="text" id="suba" value="'+st+'" class="aatd'+newid+'">Remove</a></td>\n\ </tr>');
+      // var sumHsl = 0;
+      // for (t=0; t<newid; t++){
+        sumHsl = sumHsl+ st-1+1;
+      // }
+      document.getElementById('subtotalbawah').value = sumHsl;
+      document.getElementById('subtotalrupiah').value = '';
+      document.getElementById('nama_barang').value = '';
+      document.getElementById('qtt').value = '';
+      document.getElementById('diskon').value = '';
+      document.getElementById('subtotal').value = '';
+      document.getElementById('hargashow').value = '';
+      document.getElementById('tampilsatuan').value = '';
+      });
+      // $("#tabelku").on('click', '.remCF', function() {
+      //   // var rowid = $(this).attr('id');;
+      //   // var sta = parseInt($("#subtotalrupiah").val());
+      //   $(this).parent().parent().remove();
+      //   var sumHasl =  document.getElementById('subtotalbawah').value;
+      //   // sumHasl = sumHasl-Number(sta);
+      //   // $("#suba'+i+'")
+      //   document.getElementById('subtotalbawah').value = sumHasl - ;
+      // });
+
+     
+      // $("#butsave").click(function() {
+      //   var lastRowId = $('#table1 tr:last').attr("id"); /*finds id of the last row inside table*/
+      //   var name = new Array(); 
+      //   var email = new Array();
+      //   for ( var i = 1; i <= lastRowId; i++) {
+      //     name.push($("#"+i+" .name"+i).html()); /*pushing all the names listed in the table*/
+      //     email.push($("#"+i+" .email"+i).html()); pushing all the emails listed in the table
+      //   }
+      //   var sendName = JSON.stringify(name); 
+      //   var sendEmail = JSON.stringify(email);
+      //   $.ajax({
+      //     url: "save.php",
+      //     type: "post",
+      //     data: {name : sendName , email : sendEmail},
+      //     success : function(data){
+      //       alert(data); /* alerts the response from php.*/
+      //     }
+      //   });
+      // });
+      /*crating new click event for save button*/ 
+
+      var sum = document.getElementById('subtotalbawah').value;
+      sumHsl = sum;
+  });
 </script>
   <script type="text/javascript">
   function Angkasaja(evt) {

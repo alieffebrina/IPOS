@@ -65,13 +65,14 @@ class C_barang extends CI_Controller{
             foreach($hasil_kode as $data){
               // $lists .= " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$data->satuan."' readonly>"; // Tambahkan tag option ke variabel $lists
               // $ala = $data->alamat;
-                $harga = "<input type='text' class='form-control' onfocus='startCalculate()' onblur='stopCalc()' name='harga' id='harga' value='".$data->hargabeli."'>";
-                $lists = $data->satuan;
+                $harga = "<input type='hidden' class='form-control' onfocus='startCalculate()' onblur='stopCalc()' name='harga' id='harga' value='".$data->hargabeli."'><input type='text' class='form-control' onfocus='startCalculate()' onblur='stopCalc()' name='hargashow' id='hargashow' value='".number_format($data->hargabeli)."'>";
+                $lists = "<input type='hidden' class='form-control' name='satuan' id='satuan' value='".$data->satuan."'>".$data->satuan;
+                $list_namabarang = "<input type='hidden' class='form-control' name='namabarangshow' id='namabarangshow' value='".$data->barang."'>";
             }
             
             // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$hasil_kode."' readonly>";
 
-            $callback = array('list_satuan'=>$lists, 'list_harga'=>$harga); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+            $callback = array('list_satuan'=>$lists, 'list_harga'=>$harga, 'list_namabarang' =>$list_namabarang); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
             echo json_encode($callback); // konversi varibael $callback menjadi JSON
     }
 
