@@ -128,7 +128,7 @@ class C_Setting extends CI_Controller{
     function hapuskode($id){
         $where = array('id_kode' => $id);
         $this->M_Setting->delete($where,'tb_kode');
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        $this->session->set_flashdata('SUCCESS', "Record Deleted Successfully!!");
         redirect('C_Setting/vkode');
     }
 }

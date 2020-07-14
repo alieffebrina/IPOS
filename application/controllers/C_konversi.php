@@ -1,11 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class C_jenisbarang extends CI_Controller{
+class C_konversi extends CI_Controller{
     
     public function __construct(){
         parent::__construct();
         $this->load->helper(array('form','url'));
         $this->load->library('session');
-        $this->load->model('M_jenisbarang');
+        $this->load->model('M_konversi');
         $this->load->model('M_Setting');
     }
 
@@ -15,8 +15,8 @@ class C_jenisbarang extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['jenisbarang'] = $this->M_jenisbarang->getjenisbarang();
-        $this->load->view('master/jenisbarang/v_jenisbarang',$data); 
+        $data['konversi'] = $this->M_konversi->getkonversisatuan();
+        $this->load->view('master/konversi/v_konversi',$data); 
         $this->load->view('template/footer');
     }
 
@@ -26,17 +26,17 @@ class C_jenisbarang extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['jenisbarang'] = $this->M_Setting->getjenisbarang();
-        $this->load->view('master/jenisbarang/v_addjenisbarang', $data); 
+        $data['satuan'] = $this->M_Setting->getsatuan();
+        $this->load->view('master/konversi/v_addkonversi', $data); 
         $this->load->view('template/footer');
     }
 
-    function cek_jenisbarang(){
+    function cek_konversi(){
         # ambil Kualifikasiname dari form
         
-        $kode = $this->input->post('jenisbarang');
+        $kode = $this->input->post('konversi');
                 # select ke model member Kualifikasiname yang diinput Kualifikasi
-        $hasil_kode = $this->M_jenisbarang->cek_jenisbarang($kode);
+        $hasil_kode = $this->M_konversi->cek_konversi($kode);
          
                 # pengecekan value $hasil_Kualifikasiname
         if(count($hasil_kode)!=0){
@@ -55,14 +55,14 @@ class C_jenisbarang extends CI_Controller{
     {   
 
         $id = $this->session->userdata('id_user');
-        $this->M_jenisbarang->tambahdata($id);
-        // $data = $this->M_jenisbarang->cekkodejenisbarang();
+        $this->M_konversi->tambahdata($id);
+        // $data = $this->M_pelanggan->cekkodepelanggan();
         // foreach ($data as $id) {
         //     $id =$id;
-        //     $this->M_jenisbarang->tambahakses($id);
+        //     $this->M_pelanggan->tambahakses($id);
         // }
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
-        redirect('C_jenisbarang');
+        redirect('C_konversi');
     }
 
     function view($ida)
@@ -71,8 +71,8 @@ class C_jenisbarang extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['jenisbarang'] = $this->M_jenisbarang->getspek($ida);
-        $this->load->view('master/jenisbarang/v_vjenisbarang',$data); 
+        $data['konversi'] = $this->M_konversi->getspek($ida);
+        $this->load->view('master/konversi/v_vkonversi',$data); 
         $this->load->view('template/footer');
     }
 
@@ -82,26 +82,26 @@ class C_jenisbarang extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        //$data['provinsi'] = $this->M_Setting->getprovinsi();
-        $data['jenisbarang'] = $this->M_jenisbarang->getspek($iduser);
-        $this->load->view('master/jenisbarang/v_ejenisbarang',$data); 
+        $data['satuan'] = $this->M_Setting->getsatuan();
+        $data['konversi'] = $this->M_konversi->getspek($iduser);
+        $this->load->view('master/konversi/v_ekonversi',$data); 
         $this->load->view('template/footer');
     }
 
-    function editjenisbarang()
+    function editkonversi()
     {   
 
         $id = $this->session->userdata('id_user');
-        $this->M_jenisbarang->edit($id);
+        $this->M_konversi->edit($id);
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
-        redirect('C_jenisbarang');
+        redirect('C_konversi');
     }
 
     function hapus($id){
-        $where = array('id_jenisbarang' => $id);
-        $this->M_Setting->delete($where,'tb_jenisbarang');
+        $where = array('id_konversi' => $id);
+        $this->M_Setting->delete($where,'tb_konversi');
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
-        redirect('C_jenisbarang');
+        redirect('C_konversi');
     }
 
 }

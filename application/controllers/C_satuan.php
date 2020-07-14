@@ -26,7 +26,8 @@ class C_satuan extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $this->load->view('master/satuan/v_addsatuan'); 
+        //$data['provinsi'] = $this->M_Setting->getprovinsi();
+        $this->load->view('master/satuan/v_addsatuan', $data); 
         $this->load->view('template/footer');
     }
 
@@ -52,36 +53,46 @@ class C_satuan extends CI_Controller{
 
     public function tambah()
     {   
-        $this->M_satuan->tambahdata();
+
+        $id = $this->session->userdata('id_user');
+        $this->M_satuan->tambahdata($id);
+        // $data = $this->M_satuan->cekkodesatuan();
+        // foreach ($data as $id) {
+        //     $id =$id;
+        //     $this->M_satuan->tambahakses($id);
+        // }
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
         redirect('C_satuan');
     }
 
-    function view($id)
+    function view($ida)
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['satuan'] = $this->M_satuan->getspek($id);
+        $data['satuan'] = $this->M_satuan->getspek($ida);
         $this->load->view('master/satuan/v_vsatuan',$data); 
         $this->load->view('template/footer');
     }
 
-    function edit($id)
+    function edit($iduser)
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['satuan'] = $this->M_satuan->getspek($id);
+        //$data['provinsi'] = $this->M_Setting->getprovinsi();
+        $data['satuan'] = $this->M_satuan->getspek($iduser);
         $this->load->view('master/satuan/v_esatuan',$data); 
         $this->load->view('template/footer');
     }
 
     function editsatuan()
     {   
-        $this->M_satuan->edit();
+
+        $id = $this->session->userdata('id_user');
+        $this->M_satuan->edit($id);
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
         redirect('C_satuan');
     }
