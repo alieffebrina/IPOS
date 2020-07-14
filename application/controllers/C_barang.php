@@ -67,7 +67,7 @@ class C_barang extends CI_Controller{
               // $ala = $data->alamat;
                 $harga = "<input type='hidden' class='form-control' onfocus='startCalculate()' onblur='stopCalc()' name='harga' id='harga' value='".$data->hargabeli."'><input type='text' class='form-control' onfocus='startCalculate()' onblur='stopCalc()' name='hargashow' id='hargashow' value='".number_format($data->hargabeli)."'>";
                 $lists = "<input type='hidden' class='form-control' name='satuan' id='satuan' value='".$data->satuan."'>".$data->satuan;
-                $list_namabarang = "<input type='hidden' class='form-control' name='namabarangshow' id='namabarangshow' value='".$data->barang."'>";
+                $list_namabarang = "<input type='hidden' class='form-control' name='namabarangshow' id='namabarangshow' value='".$data->barang."/".$data->jenisbarang."'>";
             }
             
             // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$hasil_kode."' readonly>";

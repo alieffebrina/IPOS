@@ -134,7 +134,7 @@
                     <input type="hidden" class="form-control" name="subtotalrupiah" id="subtotalrupiah">
                   </div>
                   <!-- <a class=""> -->
-                  <input type="submit" name="send" class="btn btn-primary" value="add data" id="butsend">
+                  <input type="submit" name="send" class="btn btn-primary" value="Tambah data" id="butsend">
                 </div>
               </div>
               <!-- /.box-body -->

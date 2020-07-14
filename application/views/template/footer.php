@@ -243,7 +243,7 @@
         <td width="100px" class="harga'+newid+'">' + $("#hargashow").val() + '</td>\n\
         <td width="100px" class="diskon'+newid+'">' + $("#diskon").val() + '</td>\n\
         <td width="100px" class="subtotal'+newid+'">' + $("#subtotal").val() + '</td>\n\
-        <td width="100px"><a href="javascript:void(0);" class="remCF" data-id="'+st+'" ><input type="text" id="suba" value="'+st+'" class="aatd'+newid+'">Remove</a></td>\n\ </tr>');
+        <td width="100px"><a href="javascript:void(0);" class="remCF" data-id="'+st+'" ><input type="hidden" id="suba" value="'+st+'" class="aatd'+newid+'">Hapus</a></td>\n\ </tr>');
       // var sumHsl = 0;
       // for (t=0; t<newid; t++){
         sumHsl = sumHsl+ st-1+1;
