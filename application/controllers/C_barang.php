@@ -16,6 +16,7 @@ class C_barang extends CI_Controller{
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
         $data['barang'] = $this->M_barang->getbarang();
+        // echo '<pre>';print_r( $data['barang']);exit;
         $this->load->view('master/barang/v_barang',$data); 
         $this->load->view('template/footer');
     }
@@ -27,6 +28,7 @@ class C_barang extends CI_Controller{
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
         $data['satuan'] = $this->M_Setting->getsatuan();
+        $data['konversi'] = $this->M_Setting->getkonversisatuan();
         $data['jenisbarang'] = $this->M_Setting->getjenisbarang();
         $this->load->view('master/barang/v_addbarang', $data); 
         $this->load->view('template/footer');
@@ -61,13 +63,13 @@ class C_barang extends CI_Controller{
             // Buat variabel untuk menampung tag-tag option nya
             // Set defaultnya dengan tag option Pilih
             // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' readonly>";
-            
+            $lists=$list_namabarang=$harga='';
             foreach($hasil_kode as $data){
               // $lists .= " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$data->satuan."' readonly>"; // Tambahkan tag option ke variabel $lists
               // $ala = $data->alamat;
                 $harga = "<input type='hidden' class='form-control' onfocus='startCalculate()' onblur='stopCalc()' name='harga' id='harga' value='".$data->hargabeli."'><input type='text' class='form-control' onfocus='startCalculate()' onblur='stopCalc()' name='hargashow' id='hargashow' value='".number_format($data->hargabeli)."'>";
-                $lists = "<input type='hidden' class='form-control' name='satuan' id='satuan' value='".$data->satuan."'>".$data->satuan;
-                $list_namabarang = "<input type='hidden' class='form-control' name='namabarangshow' id='namabarangshow' value='".$data->barang."/".$data->jenisbarang."'>";
+                $lists = "<input type='hidden' class='form-control' name='satuan' id='satuan' value='".$data->nama_satuan."'>".$data->nama_satuan;
+                $list_namabarang = "<input type='hidden' class='form-control' name='namabarangshow' id='namabarangshow' value='".$data->barang."'>";
             }
             
             // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$hasil_kode."' readonly>";
@@ -98,7 +100,7 @@ class C_barang extends CI_Controller{
                 date_default_timezone_set('Asia/Jakarta');
                 $tgl = date('Y-m-d');
                 $a = str_replace("tanggal", $tgl, $a);
-                $data = $this->M_barang->cekbarangtgl();
+                $data = $this->M_barang->cekkodebarang();
                 $no = count($data) + 1;
                 $kode2 = str_replace("no", $no, $a);
             } else {
@@ -110,7 +112,8 @@ class C_barang extends CI_Controller{
             }
 
             $kode = $kode2;
-            $this->M_barang->tambahdata($kode);
+            $id = $this->session->userdata('id_user');
+            $this->M_barang->tambahdata($id,$kode);
             $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
             redirect('C_barang');
 
@@ -137,6 +140,7 @@ class C_barang extends CI_Controller{
         $data['provinsi'] = $this->M_Setting->getprovinsi();
         $data['barang'] = $this->M_barang->getspek($idbarang);
         $data['satuan'] = $this->M_Setting->getsatuan();
+        $data['konversi'] = $this->M_Setting->getkonversisatuan();
         $data['jenisbarang'] = $this->M_Setting->getjenisbarang();
         $this->load->view('master/barang/v_ebarang',$data); 
         $this->load->view('template/footer');
@@ -144,7 +148,8 @@ class C_barang extends CI_Controller{
 
     function editbarang()
     {   
-        $this->M_barang->edit();
+        $id = $this->session->userdata('id_user');
+        $this->M_barang->edit($id);
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
         redirect('C_barang');
     }
