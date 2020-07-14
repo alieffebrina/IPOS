@@ -8,7 +8,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo site_url('C_barang'); ?>">Data Barang</a></li>
+        <li><a href="<?php echo site_url('C_barang'); ?>">Data Master</a></li>
         <li class="active">Data Barang</li>
       </ol>
     </section>
@@ -36,11 +36,15 @@
                 <thead>
                 <tr>
                   <th>No</th>
-                  <th>Kode Barang</th>
                   <th>Nama Barang</th>
-                  <th>Merk</th>
                   <th>Satuan</th>
                   <th>Jenis Barang</th>
+                  <!--<th>No. Urut/th>-->
+                  <th>Stok</th>
+                  <th>Stok Min.</th>
+                  <th>Harga Beli</th>
+                  <th>Konversi</th>
+                  <th>Hasil Konversi</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -50,11 +54,16 @@
                   foreach ($barang as $barang) { ?>
                 <tr>
                   <td><?php echo $no++; ?></td>
-                  <td><?php echo $barang->id_barang; ?></td>
                   <td><?php echo $barang->barang; ?></td>
-                  <td><?php echo $barang->merk; ?></td>
-                  <td><?php echo $barang->satuan; ?></td>
-                  <td><?php echo $barang->jenisbarang; ?></td>
+                  <td><?php echo $barang->nama_satuan;?></td>
+                  <td><?php echo $barang->jenisbarang;?></td>
+                  <!-- <td><?php echo $barang->nourut;?></td> -->
+                  <td><?php echo $barang->stok;?></td>
+                  <td><?php echo $barang->stokmin;?></td>
+                  <td>Rp. <?php echo number_format($barang->hargabeli,0,",","."); ?></td>
+                  <td><?php echo $barang->satuan_konversi;?></td>
+                  <td><?php echo $barang->hasil_konversi;?></td>
+                  
                   <td>
                     <div class="btn-group">
                       <a href="<?php echo site_url('C_barang/view/'.$barang->id_barang); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
