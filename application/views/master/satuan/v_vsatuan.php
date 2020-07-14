@@ -1,15 +1,15 @@
- <!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Satuan Barang
+        Data Satuan
         <small>Lihat</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Data Master</a></li>
-        <li><a href="<?php echo site_url('C_satuan'); ?>">Data Satuan Barang</a></li>
-        <li class="active">Lihat Data Satuan Barang</li>
+        <li><a href="<?php echo site_url('C_satuan'); ?>">Data Satuan</a></li>>
+        <li class="active">Lihat Data Satuan</li>
       </ol>
     </section>
 
@@ -21,7 +21,7 @@
           <!-- Horizontal Form -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Lihat Data Satuan Barang</h3>
+              <h3 class="box-title">Lihat Data Satuan</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -29,11 +29,10 @@
               <div class="box-body">
                 <?php foreach ($satuan as $satuan) { ?>
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Nama Satuan Barang</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Nama</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="satuan" name="satuan" value="<?php echo $satuan->satuan ?>" readonly>
                   </div>
-                  <span id="pesan"></span>
                 </div>
               </div>
               <?php } ?>
