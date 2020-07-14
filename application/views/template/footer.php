@@ -57,7 +57,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
 
-<script src="<?php echo base_url() ?>assets/dist/js/jquery-1.11.2.min"></script>
+<script src="<?php echo base_url() ?>assets/dist/js/jquery-1.11.2.min.js"></script>
 <script src="<?php echo base_url() ?>assets/dist/js/jquery.mask.min.js"></script>
 <script src="<?php echo base_url() ?>assets/dist/js/terbilang.js"></script>
 <!-- DataTables -->
@@ -135,6 +135,37 @@
     });
   });
   </script>
+
+  <script>
+  $(document).ready(function(){ // Ketika halaman sudah siap (sudah selesai di load)
+    // Kita sembunyikan dulu untuk loadingnya
+    $("#nama").change(function(){ // Ketika user mengganti atau memilih data provinsi
+    
+      $.ajax({
+        type: "POST", // Method pengiriman data bisa dengan GET atau POST
+        url: "<?php echo base_url("index.php/C_pelanggan/cek_pelanggan"); ?>", // Isi dengan url/path file php yang dituju
+        data: {id_pelanggan : $("#nama").val()}, // data yang akan dikirim ke file yang dituju
+        dataType: "json",
+        beforeSend: function(e) {
+          if(e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response){ // Ketika proses pengiriman berhasil
+          // set isi dari combobox kota
+          // lalu munculkan kembali combobox kotanya
+          // $("#nama_pelanggan").html("aaaa");
+          // $("#nama").html(response.list_nama).show();
+          $("#alamat").html(response.list_alamat).show();
+        },
+        error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
+        }
+      });
+    });
+  });
+  </script>
+
   <script>
   $(document).ready(function(){ // Ketika halaman sudah siap (sudah selesai di load)
     // Kita sembunyikan dulu untuk loadingnya
@@ -169,10 +200,10 @@
   });
   </script>
 <script type="text/javascript">
-  function startCalculate(){
-    interval=setInterval("Calculate()",10);
+  // function startCalculate(){
+  //   interval=setInterval("Calculate()",10);
 
-  }
+  // }
 
   function Calculate(){
       var a = document.getElementById('harga').value;
@@ -190,12 +221,12 @@
       }
 
       document.getElementById('subtotal').value = formatRupiah(rupiah) ;
-      document.getElementById('subtotalrupiah').value = bilangan ;
-
-
-      var d = document.getElementById('diskonbawah').value;
-      var e = parseInt(document.getElementById('biayalain').value);
-      var f = document.getElementById('subtotalbawah').value;
+      document.getElementById('subtotalrupiah').value = bilangan ;   
+  }
+  function Calculate_total(){
+      var d = (document.getElementById('diskonbawah').value==''?0:parseInt(document.getElementById('diskonbawah').value));
+      var e = (document.getElementById('biayalain').value==''?0:parseInt(document.getElementById('biayalain').value));
+      var f = (document.getElementById('subtotalbawah').value==''?0:parseInt(document.getElementById('subtotalbawah').value));
       var hitungtotal = f-d+e;
       var numbertotal = hitungtotal.toString(),
         sisa  = numbertotal.length % 3,
@@ -210,12 +241,11 @@
       var input = document.getElementById('totalfix').innerHTML.replace(/\./g, "");
       //terbilang
       document.getElementById("terbilang").innerHTML = terbilang(input);
-           
   }
 
-  function stopCalc(){
-    clearInterval(interval);
-  }
+  // function stopCalc(){
+  //   clearInterval(interval);
+  // }
  // function inputTerbilang() {
  //    //membuat inputan otomatis jadi mata uang
 
@@ -233,39 +263,53 @@
     var id = 1; 
     var sumHsl = 0;
     $("#butsend").click(function() {
-      var newid = id++; 
-      var st = parseInt($("#subtotalrupiah").val());
-      $("#tabelku").append('<tr valign="top" id="'+newid+'">\n\
-        <td width="100px" >' + newid + '</td>\n\
-        <td width="100px" class="barang'+newid+'">' + $("#namabarangshow").val() + '</td>\n\
-        <td width="100px" class="qtt'+newid+'">' + $("#qtt").val() + '</td>\n\
-        <td width="100px" class="satuan'+newid+'">' + $("#satuan").val() + '</td>\n\
-        <td width="100px" class="harga'+newid+'">' + $("#hargashow").val() + '</td>\n\
-        <td width="100px" class="diskon'+newid+'">' + $("#diskon").val() + '</td>\n\
-        <td width="100px" class="subtotal'+newid+'">' + $("#subtotal").val() + '</td>\n\
-        <td width="100px"><a href="javascript:void(0);" class="remCF" data-id="'+st+'" ><input type="hidden" id="suba" value="'+st+'" class="aatd'+newid+'">Hapus</a></td>\n\ </tr>');
-      // var sumHsl = 0;
-      // for (t=0; t<newid; t++){
-        sumHsl = sumHsl+ st-1+1;
-      // }
-      document.getElementById('subtotalbawah').value = sumHsl;
-      document.getElementById('subtotalrupiah').value = '';
-      document.getElementById('nama_barang').value = '';
-      document.getElementById('qtt').value = '';
-      document.getElementById('diskon').value = '';
-      document.getElementById('subtotal').value = '';
-      document.getElementById('hargashow').value = '';
-      document.getElementById('tampilsatuan').value = '';
+      if($("#subtotal").val()!=''){
+        var newid = id++; 
+        var st = parseInt($("#subtotalrupiah").val());
+        if(document.getElementById('subtotalbawah').value!=''){
+          sumHsl=document.getElementById('subtotalbawah').value;
+        }else{
+          sumHsl=0;
+        };
+        $("#tabelku").append('<tr valign="top" id="'+newid+'">\n\
+          <td width="100px" >' + newid + '</td>\n\
+          <td width="100px" class="barang'+newid+'">' + $("#namabarangshow").val() + '</td>\n\
+          <td width="100px" class="qtt'+newid+'">' + $("#qtt").val() + '</td>\n\
+          <td width="100px" class="satuan'+newid+'">' + $("#satuan").val() + '</td>\n\
+          <td width="100px" class="harga'+newid+'">' + $("#hargashow").val() + '</td>\n\
+          <td width="100px" class="diskon'+newid+'">' + $("#diskon").val() + '</td>\n\
+          <td width="100px" class="subtotal'+newid+'">' + $("#subtotal").val() + '</td>\n\
+          <td width="100px"><a href="javascript:void(0);" class="remCF" data-id="'+st+'" ><input type="hidden" id="suba" value="'+st+'" class="aatd'+newid+'">Remove</a></td>\n\ </tr>');
+        // var sumHsl = 0;
+        // for (t=0; t<newid; t++){
+          sumHsl = sumHsl+ st-1+1;
+        // }
+          document.getElementById('subtotalbawah').value = sumHsl;
+          document.getElementById('subtotalrupiah').value = '';
+          document.getElementById('nama_barang').value = '';
+          document.getElementById('qtt').value = '';
+          document.getElementById('diskon').value = '';
+          document.getElementById('subtotal').value = '';
+          document.getElementById('hargashow').value = '';
+          document.getElementById('tampilsatuan').value = '';
+          Calculate_total();
+          return false;
+        }else{
+          alert('harga dan qty harus diisi');
+        }
       });
-      // $("#tabelku").on('click', '.remCF', function() {
-      //   // var rowid = $(this).attr('id');;
-      //   // var sta = parseInt($("#subtotalrupiah").val());
-      //   $(this).parent().parent().remove();
-      //   var sumHasl =  document.getElementById('subtotalbawah').value;
-      //   // sumHasl = sumHasl-Number(sta);
-      //   // $("#suba'+i+'")
-      //   document.getElementById('subtotalbawah').value = sumHasl - ;
-      // });
+      $("#tabelku").on('click', '.remCF', function() {
+        // var rowid = $(this).attr('id');;
+        // var sta = parseInt($("#subtotalrupiah").val());
+        $(this).parent().parent().remove();
+        sumHasl =  document.getElementById('subtotalbawah').value;
+        var suba= $(this).parent().find('#suba').val();
+        sumHasl=sumHasl-suba;
+        // sumHasl = sumHasl-Number(sta);
+        // $("#suba'+i+'")
+        document.getElementById('subtotalbawah').value =sumHasl ;
+        Calculate_total();
+      });
 
      
       // $("#butsave").click(function() {
@@ -396,9 +440,9 @@ function toggle(source) {
  $(document).ready(function() {
     // Kondisi saat Form di-load
       
-      document.getElementById('texthuruf1').style.visibility='hidden';
-      document.getElementById('texthuruf2').style.visibility='hidden';
-      document.getElementById('texthuruf3').style.visibility='hidden';
+      // document.getElementById('texthuruf1').style.visibility='hidden';
+      // document.getElementById('texthuruf2').style.visibility='hidden';
+      // document.getElementById('texthuruf3').style.visibility='hidden';
     // Kondisi saat ComboBox (Select Option) dipilih nilainya
     $("#format1").change(function() {
         if (this.value != "huruf") {
@@ -455,12 +499,12 @@ function toggle(source) {
   
 <script type="text/javascript">
     
-    var rupiah = document.getElementById('rupiah');
-    rupiah.addEventListener('keyup', function(e){
-      // tambahkan 'Rp.' pada saat form di ketik
-      // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-      rupiah.value = formatRupiah(this.value, 'Rp. ');
-    });
+    // var rupiah = document.getElementById('rupiah');
+    // rupiah.addEventListener('keyup', function(e){
+    //   // tambahkan 'Rp.' pada saat form di ketik
+    //   // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+    //   rupiah.value = formatRupiah(this.value, 'Rp. ');
+    // });
  
     /* Fungsi formatRupiah */
     function formatRupiah(angka, prefix){
