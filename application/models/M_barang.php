@@ -2,12 +2,14 @@
 
 class M_barang extends CI_Model {
 
-	function getbarang(){
-		$this->db->select('*');
+    function getbarang(){
+        $this->db->select('tb_jenisbarang.jenisbarang,ts2.satuan satuan_konversi,ts1.satuan nama_satuan,tb_barang.*');
+        $this->db->join('tb_satuan ts1', 'ts1.id_satuan = tb_barang.id_satuan');
         $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
-        $this->db->join('tb_satuan', 'tb_satuan.id_satuan = tb_barang.id_satuan');
+        $this->db->join('tb_konversi', 'tb_konversi.id_konversi = tb_barang.id_konversi');
+        $this->db->join('tb_satuan ts2', 'tb_konversi.satuan = ts2.id_satuan');
         $query = $this->db->get('tb_barang');
-    	return $query->result();
+        return $query->result();
     }
 
     function getnama($ida){
@@ -17,23 +19,39 @@ class M_barang extends CI_Model {
         return $this->db->get_where('tb_barang',$where)->result();
     }
 
-    function tambahdata($kode){
-        $now = date('Y-m-d');
+    function tambahdata($id,$kode){
+        $harga = $this->input->post('rupiah');
+        $harga_str = preg_replace("/[^0-9]/", "", $harga);
+
+        //$qttkonversi = $this->input->post('qttkonversi'),
+        //$qttstok = $this->input->post('stok'),
+        //$total = $qttkonversi * $qttstok;
 
         $barang = array(
-            'barang' => $this->input->post('nama'),
+            'id_user' => $id,
+            'id_barang' => $kode,
+            'barang' => $this->input->post('barang'),
             'id_satuan' => $this->input->post('satuan'),
             'id_jenisbarang' => $this->input->post('jenisbarang'),
             // 'merk' => $this->input->post('merk'),
             'id_barang' => $kode,
-            'tgl_update' => $now
+            'tgl_update' => $now,
+            // 'nourut' => $this->input->post('nourut'),
+            'stok' => $this->input->post('stok'),
+            'stokmin' => $this->input->post('stokmin'),
+            'hargabeli' => $harga_str,
+            'id_konversi' => $this->input->post('qttkonversi'),
+            'stok' => $this->input->post('stok'),
+            'hasil_konversi' => $this->input->post('hasil_konversi'),
+            //'id_konversi' => $total,
+            'tgl_update' => date('Y-m-d')
         );
         
         $this->db->insert('tb_barang', $barang);
     }
 
     function cekkodebarang(){
-        $this->db->select_max('nourut');
+        $this->db->select_max('no_urut');
         $idbarang = $this->db->get('tb_barang');
         return $idbarang->row();
     }
@@ -57,23 +75,35 @@ class M_barang extends CI_Model {
     //    }
     //}
 
-    function getspek($idbarang){
-		$this->db->select('*');
-        $this->db->join('tb_satuan', 'tb_satuan.id_satuan = tb_barang.id_satuan');
-        $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang'); 
+    function getspek($iduser){
+        $this->db->select('tb_jenisbarang.jenisbarang,ts2.satuan satuan_konversi,ts1.satuan nama_satuan,tb_barang.*');
+        $this->db->join('tb_satuan ts1', 'ts1.id_satuan = tb_barang.id_satuan');
+        $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
+        $this->db->join('tb_konversi', 'tb_konversi.id_konversi = tb_barang.id_konversi');
+        $this->db->join('tb_satuan ts2', 'tb_konversi.satuan = ts2.id_satuan');
         $where = array(
-            'id_barang' => $idbarang
+            'id_barang' => $iduser
         );
         $query = $this->db->get_where('tb_barang', $where);
-    	return $query->result();
+        return $query->result();
     }
 
-    function edit(){
+    function edit($id){
+        $harga = $this->input->post('rupiah');
+        $harga_str = preg_replace("/[^0-9]/", "", $harga);
         $barang = array(
-            'barang' => $this->input->post('nama'),
+
+            'id_user' => $id,
+            'barang' => $this->input->post('barang'),
             'id_satuan' => $this->input->post('satuan'),
             'id_jenisbarang' => $this->input->post('jenisbarang'),
-            'merk' => $this->input->post('merk')
+            // 'nourut' => $this->input->post('nourut'),
+            'stok' => $this->input->post('stok'),
+            'stokmin' => $this->input->post('stokmin'),
+            'hargabeli' => $harga_str,
+            'id_konversi' => $this->input->post('qttkonversi'),
+            //'id_konversi' => $total,
+            'tgl_update' => date('Y-m-d')
         );
 
         $where = array(

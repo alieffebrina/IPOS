@@ -1,4 +1,4 @@
- <!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -8,7 +8,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Data Master</a></li>
-        <li><a href="<?php echo site_url('C_jenisbarang'); ?>">Data Jenis Barang</a></li>
+        <li><a href="<?php echo site_url('C_jenisbarang'); ?>">Data Jenis Barang</a></li>>
         <li class="active">Tambah Data Jenis Barang</li>
       </ol>
     </section>
@@ -28,18 +28,18 @@
             <form class="form-horizontal" method="POST" action="<?php echo site_url('C_jenisbarang/tambah')?>">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Nama Jenis Barang</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Nama</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="jenisbarang" name="jenisbarang" placeholder="Jenis Barang">
-                  <span id="pesan"></span>
+                    <input type="text" class="form-control" id="jenisbarang" name="jenisbarang" placeholder="Nama Jenis Barang">
                   </div>
                 </div>
               </div>
+
               <!-- /.box-body -->
               <div class="box-footer">
                   <div class="col-sm-10">
-                    <button type="reset" class="btn btn-default">Cancel</button>
-                    <button type="submit" class="btn btn-info">Tambah Data</button>
+                    <button type="reset" class="btn btn-default">Batal</button>
+                    <button type="submit" class="btn btn-info">Simpan Data</button>
                   </div>
               </div>
               <!-- /.box-footer -->

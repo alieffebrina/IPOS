@@ -36,7 +36,7 @@
                 <thead>
                 <tr>
                   <th>No</th>
-                  <th>Nama Jenis Barang</th>
+                  <th>Nama</th>
                   <th>Action</th>
                 </tr>
                 </thead>

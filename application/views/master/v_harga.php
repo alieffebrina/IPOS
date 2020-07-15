@@ -3,13 +3,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Barang
+        Data Harga
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo site_url('C_barang'); ?>">Data Master</a></li>
-        <li class="active">Data Barang</li>
+        <li><a href="<?php echo site_url('C_harga'); ?>">Data Master</a></li>
+        <li class="active">Data Harga</li>
       </ol>
     </section>
     <div class="box-body">
@@ -27,7 +27,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Barang</h3>
+              <h3 class="box-title">Data Harga</h3>
             </div>
             <!-- /.box-header -->
 
@@ -37,46 +37,33 @@
                 <tr>
                   <th>No</th>
                   <th>Nama Barang</th>
-                  <th>Satuan</th>
-                  <th>Jenis Barang</th>
-                  <!--<th>No. Urut/th>-->
-                  <th>Stok</th>
-                  <th>Stok Min.</th>
-                  <th>Harga Beli</th>
-                  <th>Konversi</th>
-                  <th>Hasil Konversi</th>
+                  <th>Harga</th>
+                  <th>Min. Quantity</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                   <?php 
                   $no=1;
-                  foreach ($barang as $barang) { ?>
+                  foreach ($harga as $harga) { ?>
                 <tr>
                   <td><?php echo $no++; ?></td>
-                  <td><?php echo $barang->barang; ?></td>
-                  <td><?php echo $barang->satuan; ?></td>
-                  <td><?php echo $barang->jenisbarang; ?></td>
-                  <!-- <td><?php echo $barang->nama_satuan;?></td> -->
-                  <!-- <td><?php echo $barang->nourut;?></td> -->
-                  <td><?php echo $barang->stok;?></td>
-                  <td><?php echo $barang->stokmin;?></td>
-                  <td>Rp. <?php echo number_format($barang->hargabeli,0,",","."); ?></td>
-                  <td><?php echo $barang->satuan_konversi;?></td>
-                  <td><?php echo $barang->hasil_konversi;?></td>
+                  <td><?php echo $harga->barang; ?></td>
+                  <td>Rp. <?php echo number_format($harga->harga,0,",","."); ?></td>
+                  <td><?php echo $harga->minqtt;?></td>
                   
                   <td>
                     <div class="btn-group">
-                      <a href="<?php echo site_url('C_barang/view/'.$barang->id_barang); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
-                      <a href="<?php echo site_url('C_barang/edit/'.$barang->id_barang); ?>"><button type="button" class="btn btn-info">Edit</button></a>
-                      <a href="<?php echo site_url('C_barang/hapus/'.$barang->id_barang); ?>"><button type="button" class="btn btn-danger">Hapus</button></a>
+                      <a href="<?php echo site_url('C_harga/view/'.$harga->id_harga); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
+                      <a href="<?php echo site_url('C_harga/edit/'.$harga->id_harga); ?>"><button type="button" class="btn btn-info">Edit</button></a>
+                      <a href="<?php echo site_url('C_harga/hapus/'.$harga->id_harga); ?>"><button type="button" class="btn btn-danger">Hapus</button></a>
                     </div>
                   </td>
                 </tr>
                   <?php } ?>
                 </tbody>
               </table>
-              <a href="<?php echo site_url('C_barang/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
+              <a href="<?php echo site_url('C_harga/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
             </div>
             <!-- /.box-body -->
           </div>

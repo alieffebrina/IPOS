@@ -1,4 +1,4 @@
- <!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -8,7 +8,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Data Master</a></li>
-        <li><a href="<?php echo site_url('C_barang'); ?>">Data Barang</a></li>
+        <li><a href="<?php echo site_url('C_barang'); ?>">Data Barang</a></li>>
         <li class="active">Lihat Data Barang</li>
       </ol>
     </section>
@@ -31,7 +31,7 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Nama Barang</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nama" name="nama" value="<?php echo $barang->barang ?>" readonly>
+                    <input type="text" class="form-control" id="barang" name="barang" value="<?php echo $barang->barang ?>" readonly>
                   </div>
                 </div>
                 <div class="form-group">
@@ -46,11 +46,47 @@
                     <input type="text" class="form-control" id="jenisbarang" name="jenisbarang" value="<?php echo $barang->jenisbarang ?>" readonly>
                   </div>
                 </div>
+<!-- <<<<<<< HEAD -->
                  <!-- <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Merk Barang</label>
+=======
+                
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">No. Urut</label>
+>>>>>>> 93dd99ee040d4ed82c3f7e3a8cdacb3515bfbd98
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="merk" name="merk" placeholder="Merk Barang" value="<?php echo $barang->merk ?>" readonly>
-                  <span id="pesan"></span>
+                    <textarea class="form-control" rows="3" id="nourut" name="nourut" readonly><?php echo $barang->nourut ?></textarea>
+                  </div> -->
+                
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Stok</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="stok" name="stok" value="<?php echo $barang->stok ?>" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Stok Min.</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="stokmin" name="stokmin" value="<?php echo $barang->stokmin ?>" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Harga Beli</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="rupiah" name="rupiah" value=" Rp. <?php echo number_format($barang->hargabeli,0,",","."); ?>" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Konversi</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="qttkonversi" name="qttkonversi" value="<?php echo $barang->qttkonversi ?>" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Konversi</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="hasil_konversi" name="hasil_konversi" value="<?php echo $barang->qttkonversi ?>" readonly>
                   </div>
                 </div> -->
               </div>
