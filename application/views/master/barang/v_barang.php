@@ -38,7 +38,7 @@
                   <th>No</th>
                   <th>Kode Barang</th>
                   <th>Nama Barang</th>
-                  <th>Merk</th>
+                  <!-- <th>Merk</th> -->
                   <th>Satuan</th>
                   <th>Jenis Barang</th>
                   <th>Action</th>
@@ -52,7 +52,7 @@
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $barang->id_barang; ?></td>
                   <td><?php echo $barang->barang; ?></td>
-                  <td><?php echo $barang->merk; ?></td>
+                  <!-- <td><?php // echo $barang->merk; ?></td> -->
                   <td><?php echo $barang->satuan; ?></td>
                   <td><?php echo $barang->jenisbarang; ?></td>
                   <td>

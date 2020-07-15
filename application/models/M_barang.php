@@ -24,9 +24,9 @@ class M_barang extends CI_Model {
             'barang' => $this->input->post('nama'),
             'id_satuan' => $this->input->post('satuan'),
             'id_jenisbarang' => $this->input->post('jenisbarang'),
-            'merk' => $this->input->post('merk'),
+            // 'merk' => $this->input->post('merk'),
             'id_barang' => $kode,
-            'tgl' => $now
+            'tgl_update' => $now
         );
         
         $this->db->insert('tb_barang', $barang);
@@ -41,7 +41,7 @@ class M_barang extends CI_Model {
     function cekbarangtgl(){
         $now = date('Y-m-d');
         $where = array(
-            'tgl' => $now
+            'tgl_update' => $now
         );
         return $this->db->get_where('tb_barang',$where)->result();
     }

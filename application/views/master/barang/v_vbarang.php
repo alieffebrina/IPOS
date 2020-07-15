@@ -46,13 +46,13 @@
                     <input type="text" class="form-control" id="jenisbarang" name="jenisbarang" value="<?php echo $barang->jenisbarang ?>" readonly>
                   </div>
                 </div>
-                 <div class="form-group">
+                 <!-- <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Merk Barang</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="merk" name="merk" placeholder="Merk Barang" value="<?php echo $barang->merk ?>" readonly>
                   <span id="pesan"></span>
                   </div>
-                </div>
+                </div> -->
               </div>
               <?php } ?>
               <!-- /.box-body -->
