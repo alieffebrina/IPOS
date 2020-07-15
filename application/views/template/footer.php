@@ -333,8 +333,8 @@
       // });
       /*crating new click event for save button*/ 
 
-      var sum = document.getElementById('subtotalbawah').value;
-      sumHsl = sum;
+      // var sum = document.getElementById('subtotalbawah').value;
+      // sumHsl = sum;
   });
 </script>
   <script type="text/javascript">
@@ -436,53 +436,45 @@ function toggle(source) {
     });
   });
 </script>
-<script>
- $(document).ready(function() {
-    // Kondisi saat Form di-load
-      
-      // document.getElementById('texthuruf1').style.visibility='hidden';
-      // document.getElementById('texthuruf2').style.visibility='hidden';
-      // document.getElementById('texthuruf3').style.visibility='hidden';
-    // Kondisi saat ComboBox (Select Option) dipilih nilainya
-    $("#format1").change(function() {
-        if (this.value != "huruf") {
-            document.getElementById('texthuruf1').style.visibility='hidden';
-            $('#texthuruf1').val('');
-        } else {
-            document.getElementById('texthuruf1').style.visibility='visible';
-            $('#texthuruf1').focus();
-        } 
-    });
-    $("#format2").change(function() {
-        if (this.value != "huruf") {
-            document.getElementById('texthuruf2').style.visibility='hidden';
-            $('#texthuruf2').val('');
-        } else {
-            document.getElementById('texthuruf2').style.visibility='visible';
-            $('#texthuruf2').focus();
-        } 
-    });
-    $("#format3").change(function() {
-        if (this.value != "huruf") {
-            document.getElementById('texthuruf3').style.visibility='hidden';
-            $('#texthuruf3').val('');
-        } else {
-            document.getElementById('texthuruf3').style.visibility='visible';
-            $('#texthuruf2').focus();
-        } 
-    });
+<script type="text/javascript">
+  function embuh(){
+    var embuha = document.getElementById('kodeformat1').value;
+    if(embuha=='huruf'){
+    document.getElementById('texthuruf1').style.visibility='visible';
+    // document.getElementById('texthuruf1').value = embuha;
+    } else {
+    document.getElementById('texthuruf1').style.visibility='hidden';
 
-    $("#penghubung").change(function() {
-       // var format1 = $("#format1").value();
-       // document.getElementById('final').value = format1;
-      var a = document.getElementById('format1').value;
+    }
+  }
+
+  function embuhb(){
+    var embuhtext = document.getElementById('format2').value;
+    if(embuhtext=='huruf'){
+    document.getElementById('texthuruf2').style.visibility='visible';
+    } else {
+    document.getElementById('texthuruf2').style.visibility='hidden';
+
+    }
+  }
+
+  function embuhc(){
+    var embuhtext3 = document.getElementById('format3').value;
+    if(embuhtext3=='huruf'){
+    document.getElementById('texthuruf3').style.visibility='visible';  
+    } else {
+    document.getElementById('texthuruf3').style.visibility='hidden';   
+    }
+    // document.getElementById('texthuruf3').value=embuhtext3;
+  }
+  function embuhhub(){
+      var a = document.getElementById('kodeformat1').value;
       var b = document.getElementById('format2').value;
       var c = document.getElementById('format3').value;
       var d = document.getElementById('penghubung').value;
       var e = document.getElementById('texthuruf1').value;
       var f = document.getElementById('texthuruf2').value;
       var g = document.getElementById('texthuruf2').value;
-      // document.getElementById('kodefinal').innerHTML = a;
       if (a == "huruf"){
         var a = e;
       } 
@@ -493,18 +485,79 @@ function toggle(source) {
         var c = g;
       }
       document.getElementById('final').value = a+d+b+d+c;
-    });
-});
-  </script>
+    // var embuhhuba = document.getElementById('penghubung').value;
+  // document.getElementById('final').value= a+b;
+  }
+</script>
+<script type="text/javascript">
+//  $(document).ready(function() {
+//     // Kondisi saat Form di-load
+//             // $('#texthuruf1').hide();
+      
+//       document.getElementById('texthuruf1').style.visibility='hidden';
+//       document.getElementById('texthuruf2').style.visibility='hidden';
+//       document.getElementById('texthuruf3').style.visibility='hidden';
+    
+//     $("#format1").change(function() {
+//       if (this.value != "huruf") {
+//             document.getElementById('texthuruf2').style.visibility='hidden';
+//             $('#texthuruf2').val('');
+//       else 
+//             document.getElementById('texthuruf2').style.visibility='visible';
+//             $('#texthuruf2').focus();
+//     }
+//     $("#format2").change(function() {
+//         if (this.value != "huruf") {
+//             document.getElementById('texthuruf2').style.visibility='hidden';
+//             $('#texthuruf2').val('');
+//         } else {
+//             document.getElementById('texthuruf2').style.visibility='visible';
+//             $('#texthuruf2').focus();
+//         } 
+//     });
+//     $("#format3").change(function() {
+//         if (this.value != "huruf") {
+//             document.getElementById('texthuruf3').style.visibility='hidden';
+//             $('#texthuruf3').val('');
+//         } else {
+//             document.getElementById('texthuruf3').style.visibility='visible';
+//             $('#texthuruf2').focus();
+//         } 
+//     });
+
+//     $("#penghubung").change(function() {
+//        var format1 = $("#format1").value();
+//        document.getElementById('final').value = format1;
+//       var a = document.getElementById('format1').value;
+//       var b = document.getElementById('format2').value;
+//       var c = document.getElementById('format3').value;
+//       var d = document.getElementById('penghubung').value;
+//       var e = document.getElementById('texthuruf1').value;
+//       var f = document.getElementById('texthuruf2').value;
+//       var g = document.getElementById('texthuruf2').value;
+//       document.getElementById('kodefinal').innerHTML = a;
+//       if (a == "huruf"){
+//         var a = e;
+//       } 
+//       if (b == "huruf"){
+//         var b = f;
+//       } 
+//       if(c == "huruf"){
+//         var c = g;
+//       }
+//       document.getElementById('final').value = a+d+b+d+c;
+//     });
+// });
+</script>
   
 <script type="text/javascript">
     
-    // var rupiah = document.getElementById('rupiah');
-    // rupiah.addEventListener('keyup', function(e){
+    var rupiah = document.getElementById('rupiah');
+    rupiah.addEventListener('keyup', function(e){
     //   // tambahkan 'Rp.' pada saat form di ketik
     //   // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-    //   rupiah.value = formatRupiah(this.value, 'Rp. ');
-    // });
+      rupiah.value = formatRupiah(this.value, 'Rp. ');
+    });
  
     /* Fungsi formatRupiah */
     function formatRupiah(angka, prefix){

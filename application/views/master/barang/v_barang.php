@@ -55,7 +55,8 @@
                 <tr>
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $barang->barang; ?></td>
-                  <td><?php echo $barang->satuan; ?></td>
+                  <td><?php echo $barang->nama_satuan;?></td>
+                  <!-- <td><?php echo $barang->satuan; ?></td> -->
                   <td><?php echo $barang->jenisbarang; ?></td>
                   <!-- <td><?php echo $barang->nama_satuan;?></td> -->
                   <!-- <td><?php echo $barang->nourut;?></td> -->

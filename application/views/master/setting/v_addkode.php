@@ -34,8 +34,10 @@
                       <option value=''>Pilih</option>
                       <option value='barang'>Barang</option>
                       <option value='penjualan'>Penjualan</option>
-                      <!-- <option value='suratjalan'>Delivery Order</option> -->
+                      <option value='Surat Jalan'>Surat Jalan</option>
+                      <option value='Retur Penjualan'>Retur Penjualan</option>
                       <option value='pembelian'>Pembelian</option>
+                      <option value='Retur Pembelian'>Retur Pembelian</option>
                       <!-- <option value='invoice'>Invoice</option>
                       <option value='notapembayaranpo'>Nota Pembayaran Purchase Order</option>
                       <option value='notapembayaranso'>Nota Pembayaran Sales Order</option> -->
@@ -47,7 +49,7 @@
                   <div class="col-sm-9">
                   <div class="input-group">
                     <div class="input-group-btn">
-                      <select class="form-control select2" id="format1" name="format1" class="btn btn-warning dropdown-toggle">
+                      <select class="form-control select2" id="kodeformat1" name="format1" class="btn btn-warning dropdown-toggle" onchange="embuh()">
                       <option value=''>Pilih</option>
                         <option value='huruf'>Huruf</option>
                         <option value='tanggal'>Tanggal</option>
@@ -65,7 +67,7 @@
                   <div class="col-sm-9">
                   <div class="input-group">
                     <div class="input-group-btn">
-                      <select class="form-control select2" id="format2" name="kota" class="btn btn-warning dropdown-toggle">
+                      <select class="form-control select2" id="format2" name="kota" class="btn btn-warning dropdown-toggle" onchange="embuhb()">
                       <option value=''>Pilih</option>
                         <option value='huruf'>Huruf</option>
                         <option value='tanggal'>Tanggal</option>
@@ -83,7 +85,7 @@
                   <div class="col-sm-9">
                   <div class="input-group">
                     <div class="input-group-btn">
-                      <select class="form-control select2" id="format3" name="kota" class="btn btn-warning dropdown-toggle">
+                      <select class="form-control select2" id="format3" name="kota" class="btn btn-warning dropdown-toggle"  onchange="embuhc()">
                       <option value=''>Pilih</option>
                         <option value='huruf'>Huruf</option>
                         <option value='tanggal'>Tanggal</option>
@@ -99,7 +101,7 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Penghubung</label>
                   <div class="col-sm-9">
-                    <select class="form-control select2" id="penghubung" name="penghubung" style="width: 100%;">
+                    <select class="form-control select2" id="penghubung" name="penghubung" style="width: 100%;" onchange="embuhhub()">
                       <option value=''>Pilih</option>
                       <option value='-'>-</option>
                       <option value='.'>.</option>

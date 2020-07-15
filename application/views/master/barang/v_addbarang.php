@@ -99,6 +99,7 @@
                       <option value="<?php echo $konversi->id_konversi ?>" data-idsatuan="<?php echo $konversi->id_satuan ?>" data-qttkonversi="<?php echo $konversi->qttkonversi ?>"><?php echo $konversi->satuan_konversi ?></option>
                       <?php } ?>
                     </select>
+                    <input type="hidden" class="form-control" id="hasil_konversi" name="hasil_konversi" >
                   </div>
                 </div>
               </div>

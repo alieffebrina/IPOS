@@ -100,7 +100,7 @@ class C_barang extends CI_Controller{
                 date_default_timezone_set('Asia/Jakarta');
                 $tgl = date('Y-m-d');
                 $a = str_replace("tanggal", $tgl, $a);
-                $data = $this->M_barang->cekkodebarang();
+                $data = $this->M_barang->cekbarangtgl();
                 $no = count($data) + 1;
                 $kode2 = str_replace("no", $no, $a);
             } else {
