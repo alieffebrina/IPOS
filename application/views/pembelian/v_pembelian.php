@@ -18,6 +18,7 @@
         <div class="col-md-12">
           <!-- general form elements -->
           <div class="box box-info">
+            <form method="POST" action="<?php echo site_url('C_Pembelian/tambah')?>">
             <div class="box-header with-border">
               <h3 class="box-title">Identitas Suplier</h3>
             </div>
@@ -96,7 +97,7 @@
                   <label for="inputEmail3" class="col-sm-1 control-label">Nama Barang</label>
 
                   <div class="col-sm-10">
-                    <select class="form-control select2" id="nama_barang" name="nama_barang" style="width: 100%;">
+                    <select class="form-control select2" id="nama_barang" style="width: 100%;">
                       <option value="">--Pilih--</option>
                       <?php foreach ($barang as $barang) { ?>
                       <option value="<?php echo $barang->id_barang ?>"><?php echo $barang->barang ?></option>
@@ -109,7 +110,7 @@
 
                   <div class="col-sm-10">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="qtt" name="qtt" value="" required="required" onfocus="startCalculate()" onblur="stopCalc()">
+                      <input type="text" class="form-control" id="qtt" value="" onfocus="startCalculate()" onblur="stopCalc()">
                       <span class="input-group-addon" id="tampilsatuan"></span>
                     </div>
                   </div>
@@ -123,15 +124,15 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">Diskon</label>
                   <div class="col-sm-10" id="nama_suplier">
-                    <input type="text" class="form-control" name="diskon" id="diskon" onfocus="startCalculate()" onblur="stopCalc()">
+                    <input type="text" class="form-control" id="diskon" onfocus="startCalculate()" onblur="stopCalc()">
                     <!-- <span id="nama_suplier"></span> -->
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Sub Total</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="subtotal" id="subtotal">
-                    <input type="hidden" class="form-control" name="subtotalrupiah" id="subtotalrupiah">
+                    <input type="text" class="form-control" id="subtotal">
+                    <input type="hidden" class="form-control" id="subtotalrupiah">
                   </div>
                   <!-- <a class=""> -->
                   <input type="submit" name="send" class="btn btn-primary" value="Tambah data" id="butsend">
@@ -179,11 +180,11 @@
             <div class="col-xs-12">
               <p class="lead" style="text-align: center;"><b>Total :</b></p>
                   <div class="bg-maroon disable color-palette" ><h1 style="text-align: center;" id="totalfix"></h1></div></br >
-                  <input type="hidden" id="totalfixruppiah">
+                  <input type="hidden" id="totalfixruppiah" name="total">
               <p class="lead">Terbilang :</p>
               <h3 class="text-muted well well-sm no-shadow" id="terbilang" style="text-align: center;"></h3>
                 <!-- <button type="reset" class="btn btn-default pull-right">Cancel</button> -->
-                <input type="submit" name="save" class="btn btn-primary pull-right" value="Simpan data" id="butsave">
+                <input type="submit" name="save" class="btn btn-primary pull-right" id="butsave" value="Simpan data">
             </div>
 
             <!-- /.box-body -->
@@ -225,6 +226,7 @@
         </div>
 
         <!--/.col (right) -->
+      </form>
       </div>
       <!-- /.row -->
     </section>

@@ -88,6 +88,15 @@ class M_barang extends CI_Model {
         return $query->result();
     }
 
+    function cekkode($kodeno){
+        $this->db->select('*');
+        $where = array(
+            'id_barang' => $kodeno
+        );
+        $query = $this->db->get_where('tb_barang', $where);
+        return $query->result();
+    }
+
     function edit($id){
         $harga = $this->input->post('rupiah');
         $harga_str = preg_replace("/[^0-9]/", "", $harga);

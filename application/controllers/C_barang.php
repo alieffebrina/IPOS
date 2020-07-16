@@ -103,6 +103,7 @@ class C_barang extends CI_Controller{
                 $data = $this->M_barang->cekbarangtgl();
                 $no = count($data) + 1;
                 $kode2 = str_replace("no", $no, $a);
+                // $b = $this->M_barang->cekkode($kodeno);
             } else {
                 $data = $this->M_barang->cekkodebarang();
                 foreach ($data as $id) {
