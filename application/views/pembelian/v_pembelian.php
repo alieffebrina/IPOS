@@ -179,10 +179,11 @@
             <div class="col-xs-12">
               <p class="lead" style="text-align: center;"><b>Total :</b></p>
                   <div class="bg-maroon disable color-palette" ><h1 style="text-align: center;" id="totalfix"></h1></div></br >
+                  <input type="hidden" id="totalfixruppiah">
               <p class="lead">Terbilang :</p>
               <h3 class="text-muted well well-sm no-shadow" id="terbilang" style="text-align: center;"></h3>
-                <button type="submit" class="btn btn-default pull-right">Cancel</button>
-                <button type="submit" class="btn btn-info pull-right">Simpan</button>
+                <!-- <button type="reset" class="btn btn-default pull-right">Cancel</button> -->
+                <input type="submit" name="save" class="btn btn-primary pull-right" value="Simpan data" id="butsave">
             </div>
 
             <!-- /.box-body -->
@@ -207,14 +208,14 @@
                   <label for="inputEmail3" class="col-sm-3 control-label">Diskon</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="diskonbawah" name="diskonbawah" value=""  onfocus="startCalculate()" onblur="stopCalc()">
+                    <input type="text" class="form-control" id="diskonbawah" name="diskonbawah" value=""  onfocus="Calculate_total()" onblur="stopCalc()">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-3 control-label">Biaya Lain Lain</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="biayalain" name="biayalain" value=""  onfocus="startCalculate()" onblur="stopCalc()" >
+                    <input type="text" class="form-control" id="biayalain" name="biayalain" value=""  onchange ="Calculate_total()" >
                   </div>
                 </div>
               </div>

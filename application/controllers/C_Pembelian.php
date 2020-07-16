@@ -45,4 +45,34 @@ class C_Pembelian extends CI_Controller{
         $this->load->view('template/footer');
     }
 
+    function tambah(){
+        # ambil Kualifikasiname dari form
+        $id_pembelian = $this->input->post('user');
+            $id_suplier $this->input->post('user');
+            tglnotapembelian $this->input->post('user');
+            total $this->input->post('user');
+            jenispembayaran : jenispembayaran,
+            tgljatuhtempo : tgljatuhtempo,
+            biayalain : biayalain,
+            diskonbawah :diskonbawah,
+            id_barang :id_barang,
+            qtt : qtt,
+            diskon : diskon,
+            harga : harga , 
+        $kode = $this->input->post('user');
+                # select ke model member Kualifikasiname yang diinput Kualifikasi
+        $hasil_kode = $this->M_User->tambah($kode);
+         
+                # pengecekan value $hasil_Kualifikasiname
+        if(count($hasil_kode)!=0){
+          # kalu value $hasil_Kualifikasiname tidak 0
+                  # echo 1 untuk pertanda Kualifikasiname sudah ada pada db    
+                       echo '1';
+        }else{
+                  # kalu value $hasil_Kualifikasiname = 0
+                  # echo 2 untuk pertanda Kualifikasiname belum ada pada db
+            echo '2';
+        }
+         
+    }
 }
