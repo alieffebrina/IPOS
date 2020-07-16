@@ -3,13 +3,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Pembelian
+        Data Stok
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo site_url('C_Pembelian'); ?>">Data Pembelian</a></li>
-        <li class="active">Lihat Data</li>
+        <li><a href="<?php echo site_url('C_Stok'); ?>">Data Stok</a></li>
+        <li class="active">Lihat Stok</li>
       </ol>
     </section>
     <div class="box-body">
@@ -27,7 +27,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Pembelian</h3>
+              <h3 class="box-title">Data Stok</h3>
             </div>
             <!-- /.box-header -->
 
@@ -36,42 +36,35 @@
                 <thead>
                 <tr>
                   <th>No</th>
-                  <th>No Nota Pembelian</th>
-                  <th>Tgl Nota</th>
-                  <th>Suplier</th>
-                  <th>Jenis Pembayaran</th>
-                  <th>Biaya Lain</th>
-                  <th>Diskon</th>
-                  <th>Total Harga</th>
+                  <th>Id Barang</th>
+                  <th>Nama Barang</th>
+                  <th>Jenis Barang</th>
+                  <th>Stok</th>
+                  <th>Satuan</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                   <?php 
                   $no=1;
-                  foreach ($pembelian as $pembelian) { ?>
+                  foreach ($barang as $barang) { ?>
                 <tr>
                   <td><?php echo $no++; ?></td>
-                  <td><?php echo $pembelian->id_pembelian; ?></td>
-                  <td><?php echo $pembelian->tglnotapembelian;?></td>
-                  <td><?php echo $pembelian->nama_toko;?></td>
-                  <td><?php echo $pembelian->jenispembayaran; ?></td>
-                   <td>Rp. <?php echo number_format($pembelian->biayalain,0,",","."); ?></td> 
-                   <td>Rp. <?php echo number_format($pembelian->diskon,0,",","."); ?></td>
-                  <td>Rp. <?php echo number_format($pembelian->total,0,",","."); ?></td>
-                  
+                  <td><?php echo $barang->id_barang; ?></td>
+                  <td><?php echo $barang->barang;?></td>
+                  <td><?php echo $barang->jenisbarang;?></td>
+                  <td><?php echo $barang->stok; ?></td>
+                  <td><?php echo $barang->nama_satuan; ?></td>
                   <td>
                     <div class="btn-group">
-                      <a href="<?php echo site_url('C_Pembelian/view/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
-                      <a href="<?php echo site_url('C_Pembelian/edit/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
-                      <a href="<?php echo site_url('C_Pembelian/hapus/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-danger">Retur</button></a>
+                      <a href="<?php echo site_url('C_Stok/addso/'.$barang->id_barang); ?>"><button type="button" class="btn btn-success">Stock Opname</button></a>
                     </div>
                   </td>
                 </tr>
                   <?php } ?>
                 </tbody>
               </table>
-              <a href="<?php echo site_url('C_Pembelian/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
+              <a href="<?php echo site_url('C_barang/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Barang</button></a>
             </div>
             <!-- /.box-body -->
           </div>

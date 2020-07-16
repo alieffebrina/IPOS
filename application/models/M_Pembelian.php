@@ -12,7 +12,7 @@ class M_Pembelian extends CI_Model {
     function getall(){
         $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
         // $this->db->order_by('id_pembelian', 'ASC');
-        return $this->db->get('tb_pembelian',$where)->result();
+        return $this->db->get('tb_pembelian')->result();
     }
 
     function cekkodepembelian(){
