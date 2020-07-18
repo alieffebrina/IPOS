@@ -265,6 +265,7 @@
   $(document).ready(function() {
     var id = 1; 
     var sumHsl = 0;
+    var barangall=0;
       $("#butsend").click(function() {
         if($("#subtotal").val()!=''){
         var newid = id++; 
@@ -275,8 +276,8 @@
           sumHsl=0;
         };
         $("#tabelku").append('<tr valign="top" id="'+newid+'">\n\
-          <td width="100px" ><input type="hidden" name="tr[]" value="'+newid+'"><input type="hidden" name="no[]" value="'+$("#nonota").val()+'">' + newid + '</td>\n\
-          <td width="100px" class="barang'+newid+'"><input type="hidden" name="nama_barang[]" class"idbara'+newid+'" value="'+$("#nama_barang").val()+'">' + $("#namabarangshow").val() + '</td>\n\
+          <td width="100px" ><input type="hidden" name="tr" value="'+newid+'"><input type="hidden" name="no[]" value="'+$("#nonota").val()+'">' + newid + '</td>\n\
+          <td width="100px" class="barang'+newid+'"><input type="hidden" name="namabara[]" value="'+$("#nama_barang").val()+'">' + $("#namabarangshow").val() + '</td>\n\
           <td width="100px" class="qtt'+newid+'"><input type="hidden" name="qtt[]" value="'+$("#qtt").val()+'">' + $("#qtt").val() + '</td>\n\
           <td width="100px" class="satuan'+newid+'">' + $("#satuan").val() + '</td>\n\
           <td width="100px" class="harga'+newid+'"><input type="hidden" name="harga[]" value="'+$("#harga").val()+'">' + $("#hargashow").val() + '</td>\n\
@@ -286,6 +287,9 @@
         // var sumHsl = 0;
         // for (t=0; t<newid; t++){
           sumHsl = (sumHsl*1)+(st*1);
+          // var barangall = "";
+          barangall = barangall+" "+$("#nama_barang").val()+"/"+$("#qtt").val()+"/"+$("#diskon").val()+"/"+$("#harga").val();
+          document.getElementById('barangall').value = barangall;
         // }
           document.getElementById('subtotalbawah').value = sumHsl;
           document.getElementById('subtotalrupiah').value = '';
@@ -313,62 +317,7 @@
         document.getElementById('subtotalbawah').value =sumHasl ;
         Calculate_total();
       });
-
-     
-      // $("#butsave").click(function() {
-      //   var lastRowId = $('#table1 tr:last').attr("id"); /*finds id of the last row inside table*/
-      //   var idbara = new Array(); 
-      //   var qtt = new Array();
-      //   var diskon = new Array();
-      //   var aatd = new Array();
-      //   for ( var i = 1; i <= lastRowId; i++) {
-      //     idbara.push($("#"+i+" .idbara"+i).html()); /*pushing all the names listed in the table*/
-      //     qtt.push($("#"+i+" .qtt"+i).html()); 
-      //     diskon.push($("#"+i+" .diskon"+i).html()); 
-      //     aatd.push($("#"+i+" .aatd"+i).html()); 
-      //   }
-
-      //   // var id_pembelian = document.getElementById('#nonota').value;
-      //   // var id_suplier = document.getElementById('#nama_toko').value;
-      //   // var tglnotapembelian = document.getElementById('#tgl').value;
-      //   // var total = document.getElementById('#totalfixruppiah').value;
-      //   // var jenispembayaran = 'kredit';
-      //   // // var jenispembayaran = document.getElementByName('pembayaran').value;
-      //   // var tgljatuhtempo = document.getElementById('#tgljatuhtempo').value;
-      //   // if(tgljatuhtempo == ""){
-      //   //   tgljatuhtempo = ''
-      //   //    jenispembayaran = 'cash';
-      //   // }
-      //   // var biayalain = document.getElementById('biayalain').value;
-      //   // var diskonbawah = document.getElementById('diskonbawah').value;
-      //   var id_barang = JSON.stringify(idbara); 
-      //   var qtt = JSON.stringify(qtt);
-      //   var diskon = JSON.stringify(diskon); 
-      //   var harga = JSON.stringify(aatd);
-      //   $.ajax({
-      //     url: "<?php echo site_url() . '/C_Pembelian/tambah'; ?>",
-      //     type: "post",
-      //     data: {
-      //       // id_pembelian : id_pembelian,
-      //       // id_suplier : id_suplier,
-      //       // tglnotapembelian : tglnotapembelian,
-      //       // total : total,
-      //       // jenispembayaran : jenispembayaran,
-      //       // tgljatuhtempo : tgljatuhtempo,
-      //       // biayalain : biayalain,
-      //       // diskonbawah :diskonbawah,
-      //       id_barang :id_barang,
-      //       qtt : qtt,
-      //       diskon : diskon,
-      //       harga : harga , 
-      //     },
-      //     success : function(data){
-      //       alert(data); /* alerts the response from php.*/
-      //     }
-      //   });
-      // });
-      /*crating new click event for save button*/ 
-
+        
   });
 </script>
   <script type="text/javascript">

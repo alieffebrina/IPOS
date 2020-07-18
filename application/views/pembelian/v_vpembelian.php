@@ -40,25 +40,32 @@
                   <th>Tgl Nota</th>
                   <th>Suplier</th>
                   <th>Jenis Pembayaran</th>
-                  <th>Biaya Lain</th>
-                  <th>Diskon</th>
+                  <th>Tgl Jatuh Tempo</th>
                   <th>Total Harga</th>
+                  <th>Status Pembayaran</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                   <?php 
                   $no=1;
-                  foreach ($pembelian as $pembelian) { ?>
-                <tr>
+                  foreach ($pembelian as $pembelian) { 
+                    if($pembelian->status == "belum"){ ?>
+
+                <tr style="color: red">
+
+                    <?php } else { ?>
+                      <tr>
+                    <?php }
+                    ?>
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $pembelian->id_pembelian; ?></td>
-                  <td><?php echo $pembelian->tglnotapembelian;?></td>
+                  <td><?php echo date('d-m-Y', strtotime($pembelian->tglnotapembelian));?></td>
                   <td><?php echo $pembelian->nama_toko;?></td>
                   <td><?php echo $pembelian->jenispembayaran; ?></td>
-                   <td>Rp. <?php echo number_format($pembelian->biayalain,0,",","."); ?></td> 
-                   <td>Rp. <?php echo number_format($pembelian->diskon,0,",","."); ?></td>
+                  <td><?php echo date('d-m-Y', strtotime($pembelian->tgljatuhtempo)); ?></td>
                   <td>Rp. <?php echo number_format($pembelian->total,0,",","."); ?></td>
+                  <td><?php echo $pembelian->status; ?></td>
                   
                   <td>
                     <div class="btn-group">

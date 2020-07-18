@@ -18,7 +18,7 @@
         <div class="col-md-12">
           <!-- general form elements -->
           <div class="box box-info">
-            <form method="POST" action="<?php echo site_url('C_Pembelian/tambah')?>">
+            <?php echo form_open("C_Pembelian/tambah", array('enctype'=>'multipart/form-data')); ?>
             <div class="box-header with-border">
               <h3 class="box-title">Identitas Suplier</h3>
             </div>
@@ -68,7 +68,7 @@
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Type Pembayaran</label>
                   <div class="col-sm-10">
-                  <input type="radio" id="cash" name="pembayaran" value="cash"> Cash
+                  <input type="radio" id="cash" name="pembayaran" value="cash" required="required"> Cash
                   <input type="radio" id="kredit" name="pembayaran" value="kredit"> Kredit
                   </div>
                 </div>
@@ -91,6 +91,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
+          <form class="form-horizontal" method="POST" action="<?php echo site_url('C_Pembelian/tambah')?>">
             <div class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
@@ -135,12 +136,14 @@
                     <input type="hidden" class="form-control" id="subtotalrupiah">
                   </div>
                   <!-- <a class=""> -->
+                    <!-- <input type="submit" class="btn btn-primary"> -->
                   <input type="submit" name="send" class="btn btn-primary" value="Tambah data" id="butsend">
                 </div>
               </div>
               <!-- /.box-body -->
               <!-- /.box-footer -->
             </div>
+            <!-- </form> -->
           </div>
           <!-- /.box -->
 
@@ -165,6 +168,7 @@
                   </tr>
                   </thead>
                   <tbody>
+                    
                   </tbody>
                 </table>
               </div>
@@ -183,8 +187,8 @@
                   <input type="hidden" id="totalfixruppiah" name="total">
               <p class="lead">Terbilang :</p>
               <h3 class="text-muted well well-sm no-shadow" id="terbilang" style="text-align: center;"></h3>
-                <!-- <button type="reset" class="btn btn-default pull-right">Cancel</button> -->
-                <input type="submit" name="save" class="btn btn-primary pull-right" id="butsave" value="Simpan data">
+                    <input type="submit" class="btn btn-primary">
+                <!-- <input type="submit" name="save" class="btn btn-primary pull-right" id="butsave" value="Simpan data"> -->
             </div>
 
             <!-- /.box-body -->
@@ -201,6 +205,7 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-3 control-label">Sub Total</label>
 
+                    <input type="hidden" class="form-control"  name="barangall" id="barangall" readonly>
                   <div class="col-sm-9">
                     <input type="text" class="form-control"  name="subtotalbawah" id="subtotalbawah" readonly>
                   </div>
@@ -226,7 +231,7 @@
         </div>
 
         <!--/.col (right) -->
-      </form>
+      <?php echo form_close(); ?>
       </div>
       <!-- /.row -->
     </section>
