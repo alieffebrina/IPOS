@@ -13,7 +13,7 @@ class M_barang extends CI_Model {
     }
 
     function getnama($ida){
-        $this->db->select('tb_jenisbarang.jenisbarang,ts2.satuan satuan_konversi,ts1.satuan nama_satuan, ts1.id_satuan satuanawal, ts2.id_satuan satuankon, tb_barang.*');
+        $this->db->select('tb_jenisbarang.jenisbarang,ts2.satuan satuan_konversi,ts1.satuan nama_satuan, ts1.id_satuan satuanawal, ts2.id_satuan satuankon, tb_barang.*,tb_konversi.*');
         $this->db->join('tb_satuan ts1', 'ts1.id_satuan = tb_barang.id_satuan');
         $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
         $this->db->join('tb_konversi', 'tb_konversi.id_konversi = tb_barang.id_konversi');

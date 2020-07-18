@@ -75,4 +75,15 @@ class C_Pembelian extends CI_Controller{
         $this->load->view('pembelian/v_viewpembelian',$data); 
         $this->load->view('template/footer');
     }
+
+    function retur()
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['pembelian'] = $this->M_Pembelian->getretur();
+        $this->load->view('pembelian/v_retur',$data); 
+        $this->load->view('template/footer');
+    }
 }

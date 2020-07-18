@@ -51,13 +51,13 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Stok Awal</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="stok" name="stok" value="<?php echo $barang->stok ?>" readonly>
+                    <input type="text" class="form-control" id="stok" name="stok" value="<?php echo $barang->stok.'/'.$barang->nama_satuan ?>" readonly>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Satuan</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Stok Konversi</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="satuan" name="satuan" value="<?php echo $barang->nama_satuan ?>" readonly>
+                    <input type="text" class="form-control" id="stokkonversi" name="stokkonversi" value="<?php echo $barang->stok*$barang->qttkonversi.'/'.$barang->satuan_konversi ?>" readonly>
                   </div>
                 </div>
                 <div class="form-group">
@@ -66,15 +66,15 @@
                     <input type="text" class="form-control" id="stokskrg" name="stokskrg" >
                   </div>
                 </div>
-               <!--  <div class="form-group">
+                <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Satuan</label>
                   <div class="col-sm-9">
-                    <select name="satuan" class="form-control">
+                    <select name="satuan_konversi" class="form-control">
                       <option value="<?php echo $barang->satuanawal ?>"><?php echo $barang->nama_satuan ?></option>
                       <option value="<?php echo $barang->satuankon ?>"><?php echo $barang->satuan_konversi ?></option>
                     </select>
                   </div>
-                </div> -->
+                </div>
               <?php } ?>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Keterangan</label>

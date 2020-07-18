@@ -33,15 +33,22 @@
 
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
-                <thead>
+                <thead >
                 <tr>
-                  <th>No</th>
-                  <th>Id Barang</th>
-                  <th>Nama Barang</th>
-                  <th>Jenis Barang</th>
-                  <th>Stok</th>
-                  <th>Satuan</th>
-                  <th>Action</th>
+                  <th rowspan="2" style="text-align: center;">No</th>
+                  <th rowspan="2" style="text-align: center;">Id Barang</th>
+                  <th rowspan="2" style="text-align: center;">Nama Barang</th>
+                  <th rowspan="2" style="text-align: center;">Jenis Barang</th>
+                  <th colspan="2" style="text-align: center;">Stok</th>
+                  <th colspan="2" style="text-align: center;">Konversi</th>
+                  <th rowspan="2" style="text-align: center;">Action</th>
+                </tr>
+                <tr>
+
+                  <th style="text-align: center;">Stok</th>
+                  <th style="text-align: center;">Satuan</th>
+                  <th style="text-align: center;">Stok</th>
+                  <th style="text-align: center;">Satuan</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -55,6 +62,8 @@
                   <td><?php echo $barang->jenisbarang;?></td>
                   <td><?php echo $barang->stok; ?></td>
                   <td><?php echo $barang->nama_satuan; ?></td>
+                  <td><?php echo number_format($barang->stok*$barang->qttkonversi); ?></td>
+                  <td><?php echo $barang->satuan_konversi; ?></td>
                   <td>
                     <div class="btn-group">
                       <a href="<?php echo site_url('C_Stok/addso/'.$barang->id_barang); ?>"><button type="button" class="btn btn-success">Stock Opname</button></a>

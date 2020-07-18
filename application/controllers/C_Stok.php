@@ -16,7 +16,7 @@ class C_Stok extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['barang'] = $this->M_barang->getbarang();
+        $data['barang'] = $this->M_stok->getstok();
         $this->load->view('stok/v_stok',$data); 
         $this->load->view('template/footer');
     }
