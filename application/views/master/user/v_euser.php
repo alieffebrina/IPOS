@@ -48,7 +48,7 @@
                     <input type="text" class="form-control" id="password" name="password" value="<?php echo $user->password ?>">
                   </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">NIK</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK"  maxlength="16" minlength="16" value="<?php echo $user->nik ?>">
@@ -77,7 +77,7 @@
                   <select class="form-control select2" id="kota" name="kota" style="width: 100%;">
                       <option value="<?php echo $user->id_kota ?>"><?php echo $user->name_kota ?></option>
                     </select>
-                </div>
+                </div> -->
               </div>
               <?php } ?>
               <!-- /.box-body -->

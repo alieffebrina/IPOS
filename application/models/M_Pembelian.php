@@ -15,6 +15,24 @@ class M_Pembelian extends CI_Model {
         return $this->db->get('tb_pembelian')->result();
     }
 
+    function getdetail($ida){
+        $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
+        $where = array(
+            'tb_pembelian.id_pembelian' => $ida
+        );
+        return $this->db->get_where('tb_pembelian', $where)->result();
+    }
+
+    function getdetailpembelian($ida){
+        $this->db->join('tb_barang', 'tb_barang.id_barang = tb_detailpembelian.id_barang');
+        $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
+        $this->db->join('tb_satuan', 'tb_satuan.id_satuan = tb_barang.id_satuan');
+        $where = array(
+            'tb_detailpembelian.id_pembelian' => $ida
+        );
+        return $this->db->get_where('tb_detailpembelian', $where)->result();
+    }
+
     function cekkodepembelian(){
         $this->db->select_max('nourut');
         $idbarang = $this->db->get('tb_pembelian');

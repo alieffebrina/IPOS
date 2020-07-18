@@ -202,15 +202,25 @@
 <script type="text/javascript">
   function startCalculate(){
     interval=setInterval("Calculate()",10);
-    intervala=setInterval("Calculate_total()",10);
 
   }
 
+  function startCalculatetotal(){
+
+    interval=setInterval("Calculate_total()",10);
+  }
   function Calculate(){
       var a = document.getElementById('harga').value;
       var b = document.getElementById('qtt').value;
       var c = document.getElementById('diskon').value;
+
       var bilangan = (a*b)-c;
+      if (c>bilangan){
+        $("#nilaidiskon").css("color","#fc5d32");
+        $("#diskon").css("border-color","#fc5d32");
+        $("#nilaidiskon").html("diskon melebihi total penjualan");
+        $("#diskon").val("");
+      }
       var number_string = bilangan.toString(),
         sisa  = number_string.length % 3,
         rupiah  = number_string.substr(0, sisa),
@@ -229,6 +239,12 @@
       var e = (document.getElementById('biayalain').value==''?0:parseInt(document.getElementById('biayalain').value));
       var f = (document.getElementById('subtotalbawah').value==''?0:parseInt(document.getElementById('subtotalbawah').value));
       var hitungtotal = f-d+e+1-1;
+      if (d>f){
+        $("#nilaidiskonbawah").css("color","#fc5d32");
+        $("#diskonbawah").css("border-color","#fc5d32");
+        $("#nilaidiskonbawah").html("diskon melebihi total penjualan");
+        $("#diskonbawah").val("");
+      }
       var numbertotal = hitungtotal.toString(),
         sisa  = numbertotal.length % 3,
         rupiah  = numbertotal.substr(0, sisa),
@@ -247,7 +263,7 @@
 
   function stopCalc(){
     clearInterval(interval);
-    clearInterval(intervala);
+    // clearInterval(intervala);
   }
  // function inputTerbilang() {
  //    //membuat inputan otomatis jadi mata uang
@@ -299,6 +315,9 @@
           document.getElementById('subtotal').value = '';
           document.getElementById('hargashow').value = '';
           document.getElementById('tampilsatuan').value = '';
+          document.getElementById('nilaidiskon').innerHTML = '';
+          document.getElementById('nilaidiskon').color = '';
+          $("#diskon").css("border-color","");
           Calculate_total();
           return false;
         }else{

@@ -36,10 +36,10 @@
                 <thead>
                 <tr>
                   <th>No</th>
-                  <th>NIK</th>
+                  <!-- <th>NIK</th> -->
                   <th>Nama</th>
                   <th>Username</th>
-                  <th>Alamat</th>
+                  <th>Password</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -49,10 +49,10 @@
                   foreach ($user as $user) { ?>
                 <tr>
                   <td><?php echo $no++; ?></td>
-                  <td><?php echo $user->nik; ?></td>
+                  <!-- <td><?php echo $user->nik; ?></td> -->
                   <td><?php echo $user->nama; ?></td>
                   <td><?php echo $user->username; ?></td>
-                  <td><?php echo $user->alamat; ?></td>
+                  <td><?php echo $user->password; ?></td>
                   <td>
                     <div class="btn-group">
                       <a href="<?php echo site_url('C_User/view/'.$user->id_user); ?>"><button type="button" class="btn btn-success">Lihat</button></a>

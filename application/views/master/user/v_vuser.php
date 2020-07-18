@@ -46,7 +46,7 @@
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="password" name="password" value="<?php echo $user->password ?>" readonly>
                   </div>
-                </div>
+                </div><!-- 
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">NIK</label>
                   <div class="col-sm-9">
@@ -70,7 +70,7 @@
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="kota" name="kota" value="<?php echo $user->name_kota ?>" readonly>
                   </div>
-                </div>
+                </div> -->
               </div>
               <?php } ?>
               <!-- /.box-body -->

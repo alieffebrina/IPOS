@@ -91,7 +91,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-          <form class="form-horizontal" method="POST" action="<?php echo site_url('C_Pembelian/tambah')?>">
+          
             <div class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
@@ -111,7 +111,7 @@
 
                   <div class="col-sm-10">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="qtt" value="" onfocus="startCalculate()" onblur="stopCalc()">
+                      <input type="number" class="form-control" id="qtt" value="" onfocus="startCalculate()" onblur="stopCalc()">
                       <span class="input-group-addon" id="tampilsatuan"></span>
                     </div>
                   </div>
@@ -126,13 +126,13 @@
                   <label for="inputEmail3" class="col-sm-1 control-label">Diskon</label>
                   <div class="col-sm-10" id="nama_suplier">
                     <input type="text" class="form-control" id="diskon" onfocus="startCalculate()" onblur="stopCalc()">
-                    <!-- <span id="nama_suplier"></span> -->
+                    <span id="nilaidiskon"></span>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Sub Total</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="subtotal">
+                    <input type="text" class="form-control" id="subtotal" readonly>
                     <input type="hidden" class="form-control" id="subtotalrupiah">
                   </div>
                   <!-- <a class=""> -->
@@ -214,14 +214,15 @@
                   <label for="inputEmail3" class="col-sm-3 control-label">Diskon</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="diskonbawah" name="diskonbawah" value=""  onfocus="Calculate_total()" onblur="stopCalc()">
+                    <input type="text" class="form-control" id="diskonbawah" name="diskonbawah" value=""  onfocus="startCalculatetotal()" onblur="stopCalc()">
+                    <span id="nilaidiskonbawah"></span>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-3 control-label">Biaya Lain Lain</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="biayalain" name="biayalain" value=""  onchange ="Calculate_total()" >
+                    <input type="text" class="form-control" id="biayalain" name="biayalain" value=""  onchange ="startCalculatetotal()" >
                   </div>
                 </div>
               </div>

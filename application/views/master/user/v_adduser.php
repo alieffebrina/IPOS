@@ -46,13 +46,13 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                   </div>
                 </div>
-                <div class="form-group">
+               <!--  <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">NIK</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK"  maxlength="16" minlength="16" onkeypress="return Angkasaja(event)">
                   </div>
-                </div>
-                <div class="form-group">
+                </div> -->
+               <!--  <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
                   <div class="col-sm-9">
                     <textarea class="form-control" rows="3" id="alamat" name="alamat"></textarea>
@@ -76,7 +76,7 @@
                       <option value=''>Pilih</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
