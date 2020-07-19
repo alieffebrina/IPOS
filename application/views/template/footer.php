@@ -304,7 +304,7 @@
         // for (t=0; t<newid; t++){
           sumHsl = (sumHsl*1)+(st*1);
           // var barangall = "";
-          barangall = barangall+" "+$("#nama_barang").val()+"/"+$("#qtt").val()+"/"+$("#diskon").val()+"/"+$("#harga").val();
+          barangall = barangall+" "+$("#nama_barang").val()+"/"+$("#qtt").val()+"/"+$("#diskon").val()+"/"+$("#harga").val()+"/"+$("#stokaw").val()+"/"+$("#kodesatuan").val()+"/"+$("#qttkonversi").val();
           document.getElementById('barangall').value = barangall;
         // }
           document.getElementById('subtotalbawah').value = sumHsl;

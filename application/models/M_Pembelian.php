@@ -40,7 +40,7 @@ class M_Pembelian extends CI_Model {
     }
     
     function tambah($id){
-        $pembayaran = $$this->input->post('pembayaran');
+        $pembayaran = $this->input->post('pembayaran');
         if ($pembayaran == 'cash'){
             $status = 'lunas';
         } else {
@@ -70,21 +70,38 @@ class M_Pembelian extends CI_Model {
             $barangb = explode("/", $key);
             // echo "1.";
                 // $no = 1;
-                $id = $barangb[0];
+                $idbar = $barangb[0];
                 $qtt = $barangb[1];
                 $diskon = $barangb[2];
                 $harga = $barangb[3];
+                $stokaw = $barangb[4]; // hasil_konversi
+                $idsatuan = $barangb[5];
+                $qttkonversi = $barangb[6];
+                $t = $stokaw/$qttkonversi;
+                $st = ($t*1)+($qtt*1);
+                $konv = $st*$qttkonversi;
+
 
                 // print_r($arrayName);
                 $data = array('id_pembelian' => $this->input->post('nonota'),
-                'id_barang' => $id,
+                'id_barang' => $idbar,
                 'qtt' => $qtt,
                 'diskon' => $diskon,
                 'harga' =>$harga );
 
                 $this->db->insert('tb_detailpembelian', $data);
 
+                $stok = array(
+                    'hasil_konversi' => $konv,
+                    'stok' => $st,
+                );
+
+                $where = array(
+                    'id_barang' =>  $idbar,
+                );
                 
+                $this->db->where($where);
+                $this->db->update('tb_barang',$stok);
             }
         }
         

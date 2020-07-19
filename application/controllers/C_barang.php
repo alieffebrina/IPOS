@@ -67,9 +67,11 @@ class C_barang extends CI_Controller{
             foreach($hasil_kode as $data){
               // $lists .= " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$data->satuan."' readonly>"; // Tambahkan tag option ke variabel $lists
               // $ala = $data->alamat;
-                $harga = "<input type='hidden' class='form-control' onfocus='startCalculate()' onblur='stopCalc()' name='harga' id='harga' value='".$data->hargabeli."'><input type='text' class='form-control' onfocus='startCalculate()' onblur='stopCalc()' name='hargashow' id='hargashow' value='".number_format($data->hargabeli)."'>";
-                $lists = "<input type='hidden' class='form-control' name='satuan' id='satuan' value='".$data->nama_satuan."'>".$data->nama_satuan;
-                $list_namabarang = "<input type='hidden' class='form-control' name='namabarangshow' id='namabarangshow' value='".$data->barang."'>";
+                $harga = "<input type='hidden' class='form-control' onfocus='startCalculate()' onblur='stopCalc()' name='harga' id='harga' value='".$data->hargabeli."'>
+                    <input type='text' class='form-control' onfocus='startCalculate()' onblur='stopCalc()' name='hargashow' id='hargashow' value='".number_format($data->hargabeli)."'>";
+                $lists = "<input type='hidden' class='form-control' name='satuan' id='satuan' value='".$data->nama_satuan."'><input type='hidden' class='form-control' name='kodesatuan' id='kodesatuan' value='".$data->id_satuan."'><input type='hidden' class='form-control' name='qttkonversi' id='qttkonversi' value='".$data->qttkonversi."'>".$data->nama_satuan;
+                $list_namabarang = "<input type='hidden' class='form-control' name='namabarangshow' id='namabarangshow' value='".$data->barang."'>
+                <input type='hidden' class='form-control' name='stokaw' id='stokaw' value='".$data->hasil_konversi."'>";
             }
             
             // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$hasil_kode."' readonly>";
