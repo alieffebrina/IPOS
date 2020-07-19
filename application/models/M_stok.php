@@ -4,24 +4,26 @@ class M_stok extends CI_Model {
 
     function tambahdata($id){
         $stokawal = $this->input->post('stok');
-        $satuanawal = explode('/', $stokawal);
+        $satuanawal = explode(' ', $stokawal);
         $stokkonversi = $this->input->post('stokkonversi');
-        $skonversi = explode('/', $stokkonversi);
+        $skonversi = explode(' ', $stokkonversi);
         $satuan_konversi = $this->input->post('satuan_konversi');
         $stokskrga = $this->input->post('stokskrg');
-        if ($satuan_konversi == $satuanawal[1]){
+        if ($satuan_konversi == $skonversi[1]){
             $stokskrg = $stokskrga;
         } else {
-            $stokskrg = ($stokskrga/($skonversi[0]/$satuanawal[0]));
+            $stokskrg = ($stokskrga*($skonversi[0]/$satuanawal[0]));
         }
         $harga = array(
             'id_barang' => $this->input->post('idbarang'),
             'id_user' => $id,
-            'stokawal' => $this->input->post('stok'),
+            'stokawal' => $skonversi[0],
             'stokskrg' => round($stokskrg,2),
             'status' => '0',
             'tgl_stokopname' => date('Y-m-d'),
             'ket' => $this->input->post('ket'),
+            'stokreturopname' => $this->input->post('stokrusak'),
+            'satuanreturopname' => $this->input->post('satuan_rusak'),
         );
         
         $this->db->insert('tb_stokopname', $harga);
@@ -49,27 +51,39 @@ class M_stok extends CI_Model {
         return $query->result();
     }
 
-    function aprove($id,$idso,$barang,$stok){
+    function aprove($id){
          $so = array(
             'status' => '1',
         );
 
         $where = array(
-            'id_stokopname' =>$idso
+            'id_stokopname' =>$this->input->post('idso')
         );
         
         $this->db->where($where);
         $this->db->update('tb_stokopname',$so);
-
+        
+        $stokrusak = $this->input->post('stokreturopname');
+        $satuanrusak = $this->input->post('satuanreturopname');
+        $satuankonversi = $this->input->post('satuankonversi');
+        $qttkonversi = $this->input->post('qttkonversi');
+        $hasilkonversi = $this->input->post('hasilkonversi');
+        
+        if ($satuanrusak != $satuankonversi){
+            $stokrusaka = $stokrusak/$qttkonversi;
+        } else {
+            $stokrusaka = $stokrusak;
+        }
         $baranga = array(
-            'stok' => $stok,
+            'hasil_konversi' => $this->input->post('hasilkonversi'),
             'id_user' => $id,
-            'tgl_update' => date('Y-m-d')
+            'tgl_update' => date('Y-m-d'),
+            'stok' => $hasilkonversi/$qttkonversi,
+            'stokretur' => $stokrusaka,
         );
 
         $where = array(
-            'id_barang' => $barang
-            // 'id_stokopane' =>$idso
+            'id_barang' => $this->input->post('barang'),
         );
         
         $this->db->where($where);

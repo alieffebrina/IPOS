@@ -32,45 +32,66 @@
             <!-- /.box-header -->
 
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="example1" class="table table-bordered table-striped" style="border: 3">
                 <thead>
                 <tr>
-                  <th>No</th>
-                  <th>Tanggal Stok Opname</th>
-                  <th>Id Barang</th>
-                  <th>Nama Barang</th>
-                  <th>Jenis Barang</th>
-                  <th>Stok Awal</th>
-                  <th>Satuan</th>
-                  <th>Stok Opname</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th rowspan="2" style="text-align: center;">No</th>
+                  <th rowspan="2" style="text-align: center;">Tanggal</th>
+                  <th rowspan="2" style="text-align: center;">Id Barang</th>
+                  <th rowspan="2" style="text-align: center;">Nama Barang</th>
+                  <th rowspan="2" style="text-align: center;">Jenis Barang</th>
+                  <th colspan="3" style="text-align: center;">Barang Bagus</th>
+                  <th colspan="2" style="text-align: center;">Barang Rusak</th>
+                  <th rowspan="2" style="text-align: center;">Status</th>
+                  <th rowspan="2" style="text-align: center;">Action</th>
+                </tr>
+                <tr>
+                  <th style="text-align: center;">Stok Awal</th>
+                  <th style="text-align: center;">Stok Opname</th>
+                  <th style="text-align: center;">Satuan</th>
+                  <th style="text-align: center;">Stok Retur</th>
+                  <th style="text-align: center;">Satuan</th>
                 </tr>
                 </thead>
                 <tbody>
                   <?php 
                   $no=1;
-                  foreach ($barang as $barang) { ?>
+                  foreach ($barang as $barang) {  ?>
                 <tr>
+
+                <form class="form-horizontal" method="POST" action="<?php echo site_url('C_Stok/aproveso')?>">
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $barang->tgl_stokopname; ?></td>
                   <td><?php echo $barang->id_barang;?></td>
                   <td><?php echo $barang->barang;?></td>
                   <td><?php echo $barang->jenisbarang;?></td>
-                  <td><?php echo $barang->stok; ?></td>
-                  <td><?php echo $barang->nama_satuan; ?></td>
+                  <td><?php echo $barang->stokawal; ?></td>
                   <td><?php echo $barang->stokskrg; ?></td>
+                  <td><?php echo $barang->satuan_konversi; ?></td>
+                  <td><?php echo $barang->stokreturopname; ?></td>
+                  <td><?php echo $barang->satuanreturopname; ?></td>
                   <td><?php if($barang->status == '1'){ echo "aprove";} else {echo "pending"; }?></td>
-                  <td>
+                  <td><input type="hidden" name="qttkonversi" value="<?php echo $barang->qttkonversi; ?>">
+                    <input type="hidden" name="idso" value="<?php echo $barang->id_stokopname ?>">
+                    <input type="hidden" name="stokasli" value="<?php echo $barang->stok ?>">
+                    <input type="hidden" name="barang" value="<?php echo $barang->id_barang ?>">
+                    <input type="hidden" name="hasilkonversi" value="<?php echo $barang->stokskrg; ?>">
+                    <input type="hidden" name="stokreturopname" value="<?php echo $barang->stokreturopname; ?>">
+                    <input type="text" name="satuanreturopname" value="<?php echo $barang->satuanreturopname; ?>">
+                    <input type="hidden" name="satuankonversi" value="<?php echo $barang->satuan_konversi; ?>">
                     <div class="btn-group">
-                      <a href="<?php echo site_url('C_Stok/aproveso/'.$barang->id_stokopname.'/'.$barang->id_barang.'/'.$barang->stokskrg); ?>"><button type="button" class="btn btn-success">Aprove</button></a>
+                      <?php if($barang->status != "1"){?> 
+                      <button type="submit" class="btn btn-success">Aprove</button>
+                      <a href="<?php echo site_url('C_Stok/hapusso/'.$barang->id_stokopname)?>"><button type="button" class="btn btn-success">Hapus</button>
+                    <?php } ?>
                     </div>
                   </td>
+                </form>
                 </tr>
                   <?php } ?>
                 </tbody>
               </table>
-              <a href="<?php echo site_url('C_barang/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Barang</button></a>
+              
             </div>
             <!-- /.box-body -->
           </div>

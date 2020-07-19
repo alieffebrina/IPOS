@@ -83,6 +83,8 @@ class M_Pembelian extends CI_Model {
                 'harga' =>$harga );
 
                 $this->db->insert('tb_detailpembelian', $data);
+
+                
             }
         }
         

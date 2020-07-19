@@ -21,6 +21,17 @@ class C_Stok extends CI_Controller{
         $this->load->view('template/footer');
     }
 
+    function retur()
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['barang'] = $this->M_stok->getstok();
+        $this->load->view('stok/v_retur',$data); 
+        $this->load->view('template/footer');
+    }
+
     function so()
     {
         $this->load->view('template/header');
@@ -45,28 +56,24 @@ class C_Stok extends CI_Controller{
 
     function tambahso()
     {   
-
         $id = $this->session->userdata('id_user');
         $this->M_stok->tambahdata($id);
-        // $data = $this->M_pelanggan->cekkodepelanggan();
-        // foreach ($data as $id) {
-        //     $id =$id;
-        //     $this->M_pelanggan->tambahakses($id);
-        // }
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
         redirect('C_Stok/so');
     }
 
-    function aproveso($idso,$barang,$stok)
+    function aproveso()
     {   
 
         $id = $this->session->userdata('id_user');
-        $this->M_stok->aprove($id,$idso,$barang,$stok);
-        // $data = $this->M_pelanggan->cekkodepelanggan();
-        // foreach ($data as $id) {
-        //     $id =$id;
-        //     $this->M_pelanggan->tambahakses($id);
-        // }
+        $this->M_stok->aprove($id);
+        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        redirect('C_Stok/so');
+    }
+
+     function hapusso($id){
+        $where = array('id_stokopname' => $id);
+        $this->M_Setting->delete($where,'tb_stokopname');
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
         redirect('C_Stok/so');
     }
