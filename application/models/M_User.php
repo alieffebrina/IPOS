@@ -4,8 +4,6 @@ class M_User extends CI_Model {
 
 	function getuser(){
 		$this->db->select('*');
-        $this->db->join('tb_provinsi', 'tb_provinsi.id_provinsi = tb_user.id_provinsi');
-        $this->db->join('tb_kota', 'tb_kota.id_kota = tb_user.id_kota');
         $query = $this->db->get('tb_user');
     	return $query->result();
     }
@@ -28,12 +26,12 @@ class M_User extends CI_Model {
 
     function tambahdata(){
         $user = array(
-            'nik' => $this->input->post('nik'),
+            // 'nik' => $this->input->post('nik'),
             'username' => $this->input->post('username'),
             'nama' => $this->input->post('nama'),
-            'alamat' => $this->input->post('alamat'),
-            'id_kota' => $this->input->post('kota'),
-            'id_provinsi' => $this->input->post('prov'),
+            // 'alamat' => $this->input->post('alamat'),
+            // 'id_kota' => $this->input->post('kota'),
+            // 'id_provinsi' => $this->input->post('prov'),
             'password' => $this->input->post('password'),
         );
         

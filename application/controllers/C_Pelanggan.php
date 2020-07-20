@@ -34,7 +34,7 @@ class C_Pelanggan extends CI_Controller{
     function cek_pelanggan(){
         # ambil Kualifikasiname dari form
         
-        $kode = $this->input->post('pelanggan');
+        $kode = $this->input->post('id_pelanggan');
                 # select ke model member Kualifikasiname yang diinput Kualifikasi
         $hasil_kode = $this->M_pelanggan->cek_pelanggan($kode);
          

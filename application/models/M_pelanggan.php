@@ -35,12 +35,12 @@ class M_pelanggan extends CI_Model {
         $this->db->insert('tb_pelanggan', $pelanggan);
     }
 
-    // function cekkodepelanggan(){
-    //     $this->db->select_max('id_pelanggan');
-    //     $idpelanggan = $this->db->get('tb_pelanggan');
-    //     return $idpelanggan->row();
-    // }
 
+    function cekkodepelanggan(){
+        $this->db->select_max('id_pelanggan');
+        $idpelanggan = $this->db->get('tb_pelanggan');
+        return $idpelanggan->row();
+    }
     //function tambahakses($id){
     //    $total = $this->db->count_all_results('tb_submenu');
 
