@@ -3,13 +3,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Jenis Barang
+        Data Retur Penjualan
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo site_url('C_jenisbarang'); ?>">Data Master</a></li>
-        <li class="active">Data Jenis Barang</li>
+        <li><a href="<?php echo site_url('C_returpenjualan'); ?>">Data Retur Penjualan</a></li>
+        <li class="active">Lihat Data Retur Penjualan</li>
       </ol>
     </section>
     <div class="box-body">
@@ -27,7 +27,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Jenis Barang</h3>
+              <h3 class="box-title">Data Retur Penjualan</h3>
             </div>
             <!-- /.box-header -->
 
@@ -36,30 +36,45 @@
                 <thead>
                 <tr>
                   <th>No</th>
-                  <th>Nama</th>
+                  <th>Tanggal Retur</th>
+                  <th>Nota Penjualan</th>
+                  <th>Id Barang</th>
+                  <th>Nama Barang</th>
+                  <th>Quantity</th>
+                  <th>Quantity Retur</th>
+                  <th>Harga</th>
+                  <th>Total</th>
+                  <th>Keterangan/th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                   <?php 
                   $no=1;
-                  foreach ($jenisbarang as $jenisbarang) { ?>
+                  foreach ($returpenjualan as $returpenjualan) { ?>
                 <tr>
                   <td><?php echo $no++; ?></td>
-                  <td><?php echo $jenisbarang->jenisbarang; ?></td>
+                  <td><?php echo $returpenjualan->tanggal; ?></td>
+                  <td><?php echo $returpenjualan->id_penjualan;?></td>
+                  <td><?php echo $returpenjualan->id_barang;?></td>
+                  <td><?php echo $returpenjualan->barang; ?></td>
+                  <td><?php echo $returpenjualan->qtt; ?></td>
+                  <td><?php echo $returpenjualan->qttretur; ?></td>
+                  <td><?php echo $returpenjualan->harga; ?></td>
+                  <td><?php echo $returpenjualan->total; ?></td>
+                  <td><?php echo $returpenjualan->Keterangan; ?></td>
+                  <td><?php if($preturpenjualan->status == '1'){ echo "Retur";} else {echo "Pending"; }?></td>
                   <td>
                     <div class="btn-group">
-                      <!--<a href="<?php echo site_url('C_jenisbarang/view/'.$jenisbarang->id_jenisbarang); ?>"><button type="button" class="btn btn-success">Lihat</button></a>-->
-                      <a href="<?php echo site_url('C_jenisbarang/edit/'.$jenisbarang->id_jenisbarang); ?>"><button type="button" class="btn btn-info">Edit</button></a>
-                      <a href="<?php echo site_url('C_jenisbarang/hapus/'.$jenisbarang->id_jenisbarang); ?>"><button type="button" class="btn btn-danger">Hapus</button></a>
+                      <a href="<?php echo site_url('C_returpenjualan/addreturpenjualan/'.$barang->id_barang); ?>"><button type="button" class="btn btn-success">Retur</button></a>
                     </div>
                   </td>
                 </tr>
                   <?php } ?>
                 </tbody>
               </table>
-              <a href="<?php echo site_url('C_barang/view'); ?>"><button type="submit" class="btn btn-default">Kembali</button></a>
-              <!--<a href="<?php echo site_url('C_jenisbarang/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>-->
+              <a href="<?php echo site_url('C_returpenjualan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Transaksi Penjualan</button></a>
             </div>
             <!-- /.box-body -->
           </div>

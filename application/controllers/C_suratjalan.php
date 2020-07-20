@@ -5,12 +5,46 @@ class C_suratjalan extends CI_Controller{
         parent::__construct();
         $this->load->helper(array('form','url'));
         $this->load->library('session');
-        $this->load->model('M_penjualan');
         $this->load->model('M_suratjalan');
         $this->load->model('M_Setting');
+        $this->load->model('M_penjualan');
+        $this->load->model('M_barang');
     }
 
     function index()
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['suratjalan'] = $this->M_suratjalan->getall();
+        $this->load->view('penjualan/v_vsuratjalan',$data); 
+        $this->load->view('template/footer');
+    }
+
+    // public function tambah()
+    // {   
+
+    //     $id = $this->session->userdata('id_user');
+    //     $this->M_penjualan->tambahdata($id);
+    //     // $data = $this->M_pelanggan->cekkodepelanggan();
+    //     // foreach ($data as $id) {
+    //     //     $id =$id;
+    //     //     $this->M_pelanggan->tambahakses($id);
+    //     // }
+    //     $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+    //     redirect('C_penjualan');
+    // }
+
+    function tambah(){
+        $id = $this->session->userdata('id_user');
+        $hasil_kode = $this->M_suratjalan->tambahdata($id);
+        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        redirect('C_suratjalan');
+
+    }
+
+    function add()
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
@@ -39,8 +73,36 @@ class C_suratjalan extends CI_Controller{
 
         $data['kode'] = $kode2;
         $data['penjualan'] = $this->M_penjualan->getpenjualan();
+        $data['barang'] = $this->M_barang->getbarang();
         $this->load->view('penjualan/v_suratjalan',$data); 
         $this->load->view('template/footer');
     }
+
+    function view($ida)
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['suratjalan'] = $this->M_suratjalan->getsuratjalan($ida);
+        $data['dtlpenjualan'] = $this->M_penjualan->getdetailpenjualan($data['suratjalan'][0]->id_penjualan);
+
+        //$data['penjualan'] = $this->M_penjualan->getretur($ida);
+        //$data['returpenjualan'] = $this->M_penjualan->getreturpenjualan($ida);
+
+        $this->load->view('penjualan/v_viewsuratjalan',$data); 
+        $this->load->view('template/footer');
+    }
+
+    // function retur()
+    // {
+    //     $this->load->view('template/header');
+    //     $id = $this->session->userdata('id_user');
+    //     $data['menu'] = $this->M_Setting->getmenu1($id);
+    //     $this->load->view('template/sidebar.php', $data);
+    //     $data['penjualan'] = $this->M_penjualan->getreturpenjualan();
+    //     $this->load->view('penjualan/v_retur',$data); 
+    //     $this->load->view('template/footer');
+    // }
 
 }

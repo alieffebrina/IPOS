@@ -1,0 +1,89 @@
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Data Penjualan
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="<?php echo site_url('C_penjualan'); ?>">Data Penjualan</a></li>
+        <li class="active">Lihat Data</li>
+      </ol>
+    </section>
+    <div class="box-body">
+    <?php if ($this->session->flashdata('SUCCESS')) { ?>
+       <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h5><i class="icon fa fa-check"></i> Success!</h5>
+          Data berhasil di perbarui.
+        </div>                 
+      <?php } ?>
+    </div>
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Data Penjualan</h3>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>No</th>
+                  <th>No Nota Penjualan</th>
+                  <th>Tgl Nota</th>
+                  <th>Pelanggan</th>
+                  <th>Alamat</th>
+                  <th>Biaya Kirim</th>
+                  <th>Diskon</th>
+                  <th>Total Harga</th>
+                  <th>Jenis Pembayaran</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                  $no=1;
+                  foreach ($penjualan as $penjualan) { ?>
+                <tr>
+                  <td><?php echo $no++; ?></td>
+                  <td><?php echo $penjualan->id_penjualan; ?></td>
+                  <td><?php echo $penjualan->tglnota;?></td>
+                  <td><?php echo $penjualan->nama;?></td>
+                  <td><?php echo $penjualan->alamat;?></td>
+                  <td>Rp. <?php echo number_format($penjualan->ongkir,0,",","."); ?></td> 
+                  <td>Rp. <?php echo number_format($penjualan->diskon,0,",","."); ?></td>
+                  <td>Rp. <?php echo number_format($penjualan->total,0,",","."); ?></td>
+                  <td><?php echo $penjualan->pembayaran; ?></td>
+                  <td><?php if($penjualan->status == '1'){ echo "Lunas";} else {echo "Belum Lunas"; }?></td>
+                  
+                  <td>
+                    <div class="btn-group">
+                      <a href="<?php echo site_url('C_penjualan/view/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
+                      <a href="<?php echo site_url('C_penjualan/edit/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
+                      <a href="<?php echo site_url('C_penjualan/hapus/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-danger">Retur</button></a>
+                    </div>
+                  </td>
+                </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+              <a href="<?php echo site_url('C_penjualan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>

@@ -3,13 +3,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Jenis Barang
+        Data Surat Jalan
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo site_url('C_jenisbarang'); ?>">Data Master</a></li>
-        <li class="active">Data Jenis Barang</li>
+        <li><a href="<?php echo site_url('C_suratjalan'); ?>">Data Surat Jalan</a></li>
+        <li class="active">Lihat Data</li>
       </ol>
     </section>
     <div class="box-body">
@@ -27,7 +27,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Jenis Barang</h3>
+              <h3 class="box-title">Data Surat Jalan</h3>
             </div>
             <!-- /.box-header -->
 
@@ -36,30 +36,40 @@
                 <thead>
                 <tr>
                   <th>No</th>
-                  <th>Nama</th>
+                  <th>Nota Surat Jalan</th>
+                  <th>Nota Penjualan</th>
+                  <th>Tanggal Kirim</th>
+                  <th>Nama Pelanggan</th>
+                  <th>Alamat</th>
+                  <th>Nama Pengirim</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                   <?php 
                   $no=1;
-                  foreach ($jenisbarang as $jenisbarang) { ?>
+                  foreach ($suratjalan as $suratjalan) { ?>
                 <tr>
                   <td><?php echo $no++; ?></td>
-                  <td><?php echo $jenisbarang->jenisbarang; ?></td>
+                  <td><?php echo $suratjalan->id_suratjalan; ?></td>
+                  <td><?php echo $suratjalan->id_penjualan;?></td>
+                  <td><?php echo $suratjalan->tglkirim;?></td>
+                  <td><?php echo $suratjalan->nama; ?></td>
+                  <td><?php echo $suratjalan->alamat;?></td>
+                  <td><?php echo $suratjalan->namapengirim; ?></td>
+                  
                   <td>
                     <div class="btn-group">
-                      <!--<a href="<?php echo site_url('C_jenisbarang/view/'.$jenisbarang->id_jenisbarang); ?>"><button type="button" class="btn btn-success">Lihat</button></a>-->
-                      <a href="<?php echo site_url('C_jenisbarang/edit/'.$jenisbarang->id_jenisbarang); ?>"><button type="button" class="btn btn-info">Edit</button></a>
-                      <a href="<?php echo site_url('C_jenisbarang/hapus/'.$jenisbarang->id_jenisbarang); ?>"><button type="button" class="btn btn-danger">Hapus</button></a>
+                      <a href="<?php echo site_url('C_suratjalan/view/'.$suratjalan->id_suratjalan); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
+                      <a href="<?php echo site_url('C_suratjalan/edit/'.$suratjalan->id_suratjalan); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
+                      <!-- <a href="<?php echo site_url('C_suratjalan/hapus/'.$pembelian->id_suratjalan); ?>"><button type="button" class="btn btn-danger">Retur</button></a> -->
                     </div>
                   </td>
                 </tr>
                   <?php } ?>
                 </tbody>
               </table>
-              <a href="<?php echo site_url('C_barang/view'); ?>"><button type="submit" class="btn btn-default">Kembali</button></a>
-              <!--<a href="<?php echo site_url('C_jenisbarang/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>-->
+              <a href="<?php echo site_url('C_suratjalan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
             </div>
             <!-- /.box-body -->
           </div>

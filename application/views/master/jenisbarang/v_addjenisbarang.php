@@ -40,8 +40,10 @@
                   <div class="col-sm-10">
                     <button type="reset" class="btn btn-default">Batal</button>
                     <button type="submit" class="btn btn-info">Simpan Data</button>
+                    <a href="<?php echo site_url('C_jenisbarang/view'); ?>"><button type="submit" class="btn btn-info">Lihat</button></a>
                   </div>
               </div>
+
               <!-- /.box-footer -->
             </form>
           </div>
