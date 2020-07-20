@@ -68,12 +68,8 @@ class M_User extends CI_Model {
 
     function edit(){
         $user = array(
-            'nik' => $this->input->post('nik'),
             'username' => $this->input->post('username'),
             'nama' => $this->input->post('nama'),
-            'alamat' => $this->input->post('alamat'),
-            'id_kota' => $this->input->post('kota'),
-            'id_provinsi' => $this->input->post('prov'),
             'password' => $this->input->post('password'),
         );
 

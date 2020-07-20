@@ -39,7 +39,6 @@
                   <th>NIK</th>
                   <th>Nama</th>
                   <th>Username</th>
-                  <th>Alamat</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -52,7 +51,6 @@
                   <td><?php echo $user->nik; ?></td>
                   <td><?php echo $user->nama; ?></td>
                   <td><?php echo $user->username; ?></td>
-                  <td><?php echo $user->alamat; ?></td>
                   <td>
                     <div class="btn-group">
                       <a href="<?php echo site_url('C_Setting/view/'.$user->id_user); ?>"><button type="button" class="btn btn-success">Hak Akses Login</button></a>
