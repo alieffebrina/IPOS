@@ -125,6 +125,8 @@
           // set isi dari combobox kota
           // lalu munculkan kembali combobox kotanya
           // $("#nama_suplier").html("aaaa");
+
+          $('#limit').val(response.limit);
           $("#nama_suplier").html(response.list_suplier).show();
           $("#alamat").html(response.list_alamat).show();
         },
@@ -201,14 +203,14 @@
   </script>
 <script type="text/javascript">
   function startCalculate(){
-    interval=setInterval("Calculate()",10);
+    var interval=setInterval("Calculate()",10);
 
-  }
+  };
 
   function startCalculatetotal(){
 
-    interval=setInterval("Calculate_total()",10);
-  }
+    var intervala=setInterval("Calculate_total()",10);
+  };
   function Calculate(){
       var a = document.getElementById('harga').value;
       var b = document.getElementById('qtt').value;
@@ -233,58 +235,84 @@
 
       document.getElementById('subtotal').value = formatRupiah(rupiah) ;
       document.getElementById('subtotalrupiah').value = bilangan ;   
-  }
+  };
   function Calculate_total(){
       var d = (document.getElementById('diskonbawah').value==''?0:parseInt(document.getElementById('diskonbawah').value));
       var e = (document.getElementById('biayalain').value==''?0:parseInt(document.getElementById('biayalain').value));
       var f = (document.getElementById('subtotalbawahrupiah').value==''?0:parseInt(document.getElementById('subtotalbawahrupiah').value));
+      var hitungtotal = f-d+e+1-1;
+      if (d>f){
+        $("#nilaidiskonbawah").css("color","#fc5d32");
+        $("#diskonbawah").css("border-color","#fc5d32");
+        $("#nilaidiskonbawah").html("diskon melebihi total penjualan");
+        $("#diskonbawah").val("");
+      }
+      var numbertotal = hitungtotal.toString(),
+        sisa  = numbertotal.length % 3,
+        rupiah  = numbertotal.substr(0, sisa),
+        ribuan  = numbertotal.substr(sisa).match(/\d{3}/g);
+          
+      if (ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+      }
+      document.getElementById('totalfixruppiah').value = hitungtotal;
+      document.getElementById('totalfix').innerHTML = formatRupiah(rupiah);
+      var input = document.getElementById('totalfix').innerHTML.replace(/\./g, "");
+      //terbilang
+      document.getElementById("terbilang").innerHTML = terbilang(input);
 
-      if(d<f || f==0){
-        var hitungtotal = f-d+e;
-        var numbertotal = hitungtotal.toString(),
-          sisa  = numbertotal.length % 3,
-          rupiah  = numbertotal.substr(0, sisa),
-          ribuan  = numbertotal.substr(sisa).match(/\d{3}/g);
+    //   if(d<f || f==0){
+    //     var hitungtotal = f-d+e;
+    //     var numbertotal = hitungtotal.toString(),
+    //       sisa  = numbertotal.length % 3,
+    //       rupiah  = numbertotal.substr(0, sisa),
+    //       ribuan  = numbertotal.substr(sisa).match(/\d{3}/g);
 
 
-        // COBA UNUK MENGECEK APAKAH DISKON MELEBIHI TOTAL
-        // var hitungtotal = f-d+e+1-1;
-        // if (d>f){
-        //   $("#nilaidiskonbawah").css("color","#fc5d32");
-        //   $("#diskonbawah").css("border-color","#fc5d32");
-        //   $("#nilaidiskonbawah").html("diskon melebihi total penjualan");
-        //   $("#diskonbawah").val("");
-        // }
-        // var numbertotal = hitungtotal.toString(),
-        //   sisa  = numbertotal.length % 3,
-        //   rupiah  = numbertotal.substr(0, sisa),
-        //   ribuan  = numbertotal.substr(sisa).match(/\d{3}/g);
+    //     // COBA UNUK MENGECEK APAKAH DISKON MELEBIHI TOTAL
+    //     // var hitungtotal = f-d+e+1-1;
+    //     // if (d>f){
+    //     //   $("#nilaidiskonbawah").css("color","#fc5d32");
+    //     //   $("#diskonbawah").css("border-color","#fc5d32");
+    //     //   $("#nilaidiskonbawah").html("diskon melebihi total penjualan");
+    //     //   $("#diskonbawah").val("");
+    //     // }
+    //     // var numbertotal = hitungtotal.toString(),
+    //     //   sisa  = numbertotal.length % 3,
+    //     //   rupiah  = numbertotal.substr(0, sisa),
+    //     //   ribuan  = numbertotal.substr(sisa).match(/\d{3}/g);
 
             
-        if (ribuan) {
-          separator = sisa ? '.' : '';
-          rupiah += separator + ribuan.join('.');
-        }
+    //     if (ribuan) {
+    //       separator = sisa ? '.' : '';
+    //       rupiah += separator + ribuan.join('.');
+    //     }
 
-        // ME
-        document.getElementById('totalfixruppiah').value = hitungtotal;
+    //     // ME
+    //     document.getElementById('totalfixruppiah').value = hitungtotal;
 
-        document.getElementById('totalfix').innerHTML = formatRupiah(rupiah);
-        var input = document.getElementById('totalfix').innerHTML.replace(/\./g, "");
+    //     document.getElementById('totalfix').innerHTML = formatRupiah(rupiah);
+    //     var input = document.getElementById('totalfix').innerHTML.replace(/\./g, "");
 
-        document.getElementById('total').value = input;
-        //terbilang
-        document.getElementById("terbilang").innerHTML = terbilang(input);
-    }else{
-      alert('diskon tidak boleh lebih besar dari subtotal penjualan');
-      document.getElementById('diskonbawah').value=0;
-      Calculate_total();
-    }
+    //     document.getElementById('total').value = input;
+    //     //terbilang
+    //     document.getElementById("terbilang").innerHTML = terbilang(input);
+    // }else{
+    //   alert('diskon tidak boleh lebih besar dari subtotal penjualan');
+    //   document.getElementById('diskonbawah').value=0;
+    //   Calculate_total();
+    // }
+  };
 
   function stopCalc(){
     clearInterval(interval);
     // clearInterval(intervala);
-  }
+  };
+  function stopCalctotal(){
+    clearInterval(intervala);
+    // clearInterval(intervala);
+  };
  // function inputTerbilang() {
  //    //membuat inputan otomatis jadi mata uang
 
@@ -302,10 +330,8 @@ function ceklimitbeforesubmit(e) {
     }else{
       return true;
     }
-  }
+  };
   
-</script>
-<script>
   $(document).ready(function() {
     // var id = 1; 
     // var sumHsl = 0;
@@ -354,6 +380,7 @@ function ceklimitbeforesubmit(e) {
       // });
       var id = 1; 
     var sumHsl = 0;
+    var barangall=0;
 
     $("#butsend").click(function() {
       if($("#subtotal").val()!=''){
@@ -541,6 +568,22 @@ function toggle(source) {
             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
           }
         });
+      }else{
+        alert('pilih pelanggan terlebih dahulu');
+        $(this).prop('checked', false);
+      }
+    });
+    $("#cash").click(function () {
+        $('#tgljatuhtempo').attr('disabled','disabled'); 
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#belikredit").click(function () {
+      if($("#nama_toko").val()!=''){
+            $('#tgljatuhtempo').removeAttr('disabled');
       }else{
         alert('pilih pelanggan terlebih dahulu');
         $(this).prop('checked', false);

@@ -69,12 +69,13 @@
                   <label for="inputPassword3" class="col-sm-1 control-label">Type Pembayaran</label>
                   <div class="col-sm-10">
                   <input type="radio" id="cash" name="pembayaran" value="cash" required="required"> Cash
-                  <input type="radio" id="kredit" name="pembayaran" value="kredit"> Kredit
+                  <input type="radio" id="belikredit" name="pembayaran" value="kredit"> Kredit
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Tanggal Jatuh Tempo</label>
                   <div class="col-sm-10">
+                    <input type="hidden" class="form-control" id="limit" name='limit'>
                     <input type="date" class="form-control" id="tgljatuhtempo" name="tgljatuhtempo" disabled="disabled">
                   </div>
                 </div>
@@ -111,7 +112,7 @@
 
                   <div class="col-sm-10">
                     <div class="input-group">
-                      <input type="number" class="form-control" id="qtt" value="" onfocus="startCalculate()" onblur="stopCalc()">
+                      <input type="number" class="form-control" id="qtt" value="" onfocus="startCalculate();" onblur="stopCalc();">
                       <span class="input-group-addon" id="tampilsatuan"></span>
                     </div>
                   </div>
@@ -125,7 +126,7 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">Diskon</label>
                   <div class="col-sm-10" id="nama_suplier">
-                    <input type="text" class="form-control" id="diskon" onfocus="startCalculate()" onblur="stopCalc()">
+                    <input type="text" class="form-control" id="diskon" onfocus="startCalculate();" onblur="stopCalc();">
                     <span id="nilaidiskon"></span>
                   </div>
                 </div>
@@ -208,13 +209,14 @@
                     <input type="hidden" class="form-control"  name="barangall" id="barangall" readonly>
                   <div class="col-sm-9">
                     <input type="text" class="form-control"  name="subtotalbawah" id="subtotalbawah" readonly>
+                    <input type="hidden" class="form-control" name="subtotalbawahrupiah" id="subtotalbawahrupiah">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-3 control-label">Diskon</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="diskonbawah" name="diskonbawah" value=""  onfocus="startCalculatetotal()" onblur="stopCalc()">
+                    <input type="text" class="form-control" id="diskonbawah" name="diskonbawah" value=""  onfocus="startCalculatetotal();" onblur="stopCalctotal();">
                     <span id="nilaidiskonbawah"></span>
                   </div>
                 </div>
@@ -222,7 +224,7 @@
                   <label for="inputEmail3" class="col-sm-3 control-label">Biaya Lain Lain</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="biayalain" name="biayalain" value=""  onchange ="startCalculatetotal()" >
+                    <input type="text" class="form-control" id="biayalain" name="biayalain" value=""  onchange ="startCalculatetotal();" >
                   </div>
                 </div>
               </div>

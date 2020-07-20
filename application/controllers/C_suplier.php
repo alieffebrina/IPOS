@@ -44,12 +44,13 @@ class C_suplier extends CI_Controller{
             foreach($hasil_kode as $data){
               $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$data->nama_suplier."' readonly>"; // Tambahkan tag option ke variabel $lists
               $ala = $data->alamat;
+              $limit = $data->limit;
               // $lists = "ok";
             }
             
             // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$hasil_kode."' readonly>";
 
-            $callback = array('list_suplier'=>$lists, 'list_alamat'=>$ala); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+            $callback = array('list_suplier'=>$lists, 'list_alamat'=>$ala, 'limit'=>$limit); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
             echo json_encode($callback); // konversi varibael $callback menjadi JSON
     }
 
