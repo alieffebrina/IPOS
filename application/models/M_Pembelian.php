@@ -15,6 +15,19 @@ class M_Pembelian extends CI_Model {
         return $this->db->get('tb_pembelian')->result();
     }
 
+        //$this->db->select('ts2.satuan satuan_konversi,ts1.satuan nama_satuan,tb_barang.*,tb_stokopname.*,tb_jenisbarang.*');
+
+    function pemakaianlimit($iduser){
+        $this->db->select('sum(total) as totalpakai, tb_suplier.*');
+        $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
+        $where = array(
+            'tb_suplier.id_suplier' => $iduser,
+            'status' => 'belum'
+        );
+        return $this->db->get_where('tb_pembelian', $where)->result();
+    }
+    
+
     function getdetail($ida){
         $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
         $where = array(

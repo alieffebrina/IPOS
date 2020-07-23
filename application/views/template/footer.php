@@ -614,6 +614,36 @@ function toggle(source) {
   $(document).ready(function() {
     $("#belikredit").click(function () {
       if($("#nama_toko").val()!=''){
+        $.ajax({
+          type: "POST", // Method pengiriman data bisa dengan GET atau POST
+          url: "<?php echo base_url("index.php/C_Pembelian/getlimit"); ?>", // Isi dengan url/path file php yang dituju
+          data: {id_suplier : $("#nama_toko").val()}, // data yang akan dikirim ke file yang dituju
+          dataType: "json",
+          beforeSend: function(e) {
+            if(e && e.overrideMimeType) {
+              e.overrideMimeType("application/json;charset=UTF-8");
+            }
+          },
+          success: function(response){ // Ketika proses pengiriman berhasil
+            $('#limit').val(response.limit);
+            $('#tgljatuhtempo').removeAttr('disabled');
+          },
+          error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
+            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
+          }
+        });
+      }else{
+        alert('pilih suplier terlebih dahulu');
+        $(this).prop('checked', false);
+        $('#cash').prop('checked', true);
+      }
+    });
+  });
+</script>
+<!-- <script type="text/javascript">
+  $(document).ready(function() {
+    $("#belikredit").click(function () {
+      if($("#nama_toko").val()!=''){
             $('#tgljatuhtempo').removeAttr('disabled');
       }else{
         alert('pilih pelanggan terlebih dahulu');
@@ -628,7 +658,7 @@ function toggle(source) {
         }
     });
   });
-</script>
+</script> -->
 <script type="text/javascript">
   function embuh(){
     var embuha = document.getElementById('kodeformat1').value;

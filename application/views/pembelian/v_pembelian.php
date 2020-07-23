@@ -73,9 +73,14 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-1 control-label">Sisa Limit</label>
+                  <div class="col-sm-10">
+                  <input type="text" class="form-control" id="limit" name='limit' disabled="disabled" >
+                  </div>
+                </div>
+                <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Tanggal Jatuh Tempo</label>
                   <div class="col-sm-10">
-                    <input type="hidden" class="form-control" id="limit" name='limit'>
                     <input type="date" class="form-control" id="tgljatuhtempo" name="tgljatuhtempo" disabled="disabled">
                   </div>
                 </div>

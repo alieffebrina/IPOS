@@ -86,4 +86,20 @@ class C_Pembelian extends CI_Controller{
         $this->load->view('pembelian/v_retur',$data); 
         $this->load->view('template/footer');
     }
+
+    function getlimit(){
+        $iduser = $this->input->post('id_suplier');
+        
+        $hasil_kode = $this->M_Pembelian->pemakaianlimit($iduser);
+        
+        foreach($hasil_kode as $data){
+          $total = $data->totalpakai;
+          $limitawal = $data->limit;
+          $a = number_format($limitawal-$total);
+          // $lists = "ok";
+        }
+        
+        $callback = array('limit'=>$a); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+        echo json_encode($callback); // konversi varibael $callback menjadi JSON
+    }
 }
