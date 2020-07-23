@@ -32,6 +32,16 @@ class M_penjualan extends CI_Model {
         return $this->db->get_where('tb_detailpenjualan', $where)->result();
     }
 
+    function getdetailreturpenjualan($ida){
+        $this->db->join('tb_barang', 'tb_barang.id_barang = tb_detailreturpenjualan.id_barang');
+        $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
+        $this->db->join('tb_satuan', 'tb_satuan.id_satuan = tb_barang.id_satuan');
+        $where = array(
+            'tb_detailreturpenjualan.id_returpenjualan' => $ida
+        );
+        return $this->db->get_where('tb_detailreturpenjualan', $where)->result();
+    }
+
     function getretur($ida){
         $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
         $where = array(
@@ -99,6 +109,7 @@ class M_penjualan extends CI_Model {
             $status = 0;
         }
 
+        date_default_timezone_set('Asia/Jakarta');
         $penjualan = array(
             'id_user' => $id,
             'id_penjualan' => $this->input->post('nonota'),
@@ -113,10 +124,10 @@ class M_penjualan extends CI_Model {
             'diskon' => $this->input->post('diskonbawah'),
             'status' => $status
         );
-        
+        // echo'<pre>';print_r($penjualan);exit;
         $this->db->insert('tb_penjualan', $penjualan);
         if ($pembayaran != 'cash'){
-            $query = "UPDATE tb_pelanggan SET limit=(limit-".$penjualan['total'].") WHERE id_pelanggan='".$penjualan['id_pelanggan']."'";
+            $query = "UPDATE tb_pelanggan SET tb_pelanggan.limit=tb_pelanggan.limit-".$penjualan['total']." WHERE id_pelanggan='".$penjualan['id_pelanggan']."'";
             $this->db->query($query);
         }
         $barang = $this->input->post('id_barang');

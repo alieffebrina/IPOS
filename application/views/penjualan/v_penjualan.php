@@ -13,7 +13,7 @@
     </section>
 <!-- Main content -->
     <section class="content">
-       <form class="form-horizontal" method="POST" action="<?php echo site_url('C_penjualan/tambah')?>">
+       <form class="form-horizontal" method="POST" action="<?php echo site_url('C_penjualan/tambah')?>" id='formpenjualan'>
       <div class="row">
         <!-- left column -->
         <div class="col-md-12">
@@ -61,17 +61,26 @@
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Type Pembayaran</label>
                   <div class="col-sm-10">
-                  <input type="radio" id="cash" name="pembayaran" value="cash"> Cash
+                  <input type="radio" id="cash" name="pembayaran" value="cash" checked> Cash
                   <input type="radio" id="kredit" name="pembayaran" value="kredit"> Kredit
                   </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Tanggal Jatuh Tempo</label>
                   <div class="col-sm-10">
                     <input type="hidden" class="form-control" id="limit" name='limit'>
                     <input type="date" class="form-control" id="tgljatuhtempo" name="tgljatuhtempo" disabled="disabled">
                   </div>
+                </div> -->
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-1 control-label">Limit / Tanggal Jatuh Tempo</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" id="limit" name='limit'disabled="disabled">
+                    <input type="date" class="form-control" id="tgljatuhtempo" name="tgljatuhtempo" disabled="disabled">
+                  </div>
                 </div>
+
               </div>
               <!-- /.box-body -->
               <!-- /.box-footer -->
@@ -118,7 +127,7 @@
                   <label for="inputEmail3" class="col-sm-1 control-label">Diskon</label>
                   <div class="col-sm-10" id="nama">
                     <input type="text" class="form-control" id="diskon" onkeyup='Calculate()'>
-                   
+                    <span id="nilaidiskon"></span>
                   </div>
                 </div>
                 <div class="form-group">
@@ -128,7 +137,7 @@
                     <input type="hidden" class="form-control" id="subtotalrupiah">
                   </div>
                   <!-- <a class=""> -->
-                  <button type='button' class="btn btn-primary" id="butsend">add data</button>
+                  <button type='button' class="btn btn-primary" id="butsendpenjualan">add data</button>
                 </div>
               </div>
               <!-- /.box-body -->
@@ -207,6 +216,7 @@
 
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="diskonbawah" name="diskonbawah" value=""  onkeyup="Calculate_total()">
+                    <span id="nilaidiskonbawah"></span>
                   </div>
                 </div>
                 <div class="form-group">

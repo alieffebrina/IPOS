@@ -7,6 +7,9 @@ class C_Pelanggan extends CI_Controller{
         $this->load->library('session');
         $this->load->model('M_pelanggan');
         $this->load->model('M_Setting');
+        if(!$this->session->userdata('id_user')){
+            redirect('C_Login');
+        }
     }
 
     function index()
@@ -36,13 +39,13 @@ class C_Pelanggan extends CI_Controller{
         
         $kode = $this->input->post('id_pelanggan');
                 # select ke model member Kualifikasiname yang diinput Kualifikasi
-        $hasil_kode = $this->M_pelanggan->cek_pelanggan($kode);
+        $hasil_kode = $this->M_pelanggan->getspek($kode);
          
                 # pengecekan value $hasil_Kualifikasiname
         if(count($hasil_kode)!=0){
           # kalu value $hasil_Kualifikasiname tidak 0
                   # echo 1 untuk pertanda Kualifikasiname sudah ada pada db    
-                       echo '1';
+                       echo json_encode((object) array('list_alamat'=>$hasil_kode[0]->alamat,'limit_pelanggan'=>$hasil_kode[0]->limit_pelanggan));
         }else{
                   # kalu value $hasil_Kualifikasiname = 0
                   # echo 2 untuk pertanda Kualifikasiname belum ada pada db
@@ -104,4 +107,7 @@ class C_Pelanggan extends CI_Controller{
         redirect('C_pelanggan');
     }
 
+    function get_limit(){
+        echo json_encode($this->M_pelanggan->get_limit($this->input->post('id')));
+    }
 }

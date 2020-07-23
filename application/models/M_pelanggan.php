@@ -17,13 +17,20 @@ class M_pelanggan extends CI_Model {
         return $this->db->get_where('tb_pelanggan',$where)->result();
     }
 
+    function get_limit($id){
+        $this->db->select('FORMAT(tb_pelanggan.limit,0) as limit_pelanggan',false);
+        $where = array(
+            'id_pelanggan' => $id
+        );
+        return $this->db->get_where('tb_pelanggan', $where)->row();
+    }
     function tambahdata($id){
         $harga = $this->input->post('rupiah');
         $harga_str = preg_replace("/[^0-9]/", "", $harga);
 
         $pelanggan = array(
             'id_user' => $id,
-            'nama' => $this->input->post('nama_pelanggan'),
+            'nama' => $this->input->post('nama'),
             'alamat' => $this->input->post('alamat'),
             'id_kota' => $this->input->post('kota'),
             'id_provinsi' => $this->input->post('prov'),
@@ -35,12 +42,12 @@ class M_pelanggan extends CI_Model {
         $this->db->insert('tb_pelanggan', $pelanggan);
     }
 
-
     function cekkodepelanggan(){
         $this->db->select_max('id_pelanggan');
         $idpelanggan = $this->db->get('tb_pelanggan');
         return $idpelanggan->row();
     }
+
     //function tambahakses($id){
     //    $total = $this->db->count_all_results('tb_submenu');
 
@@ -53,7 +60,7 @@ class M_pelanggan extends CI_Model {
     //}
 
     function getspek($iduser){
-        $this->db->select('*');
+        $this->db->select('FORMAT(tb_pelanggan.limit,0) as limit_pelanggan,tb_provinsi.*,tb_kota.*,tb_pelanggan.*',false);
         $this->db->join('tb_provinsi', 'tb_provinsi.id_provinsi = tb_pelanggan.id_provinsi');
         $this->db->join('tb_kota', 'tb_kota.id_kota = tb_pelanggan.id_kota'); 
         $where = array(
@@ -69,7 +76,7 @@ class M_pelanggan extends CI_Model {
         $pelanggan = array(
 
             'id_user' => $id,
-            'nama' => $this->input->post('nama_pelanggan'),
+            'nama' => $this->input->post('nama'),
             'alamat' => $this->input->post('alamat'),
             'id_kota' => $this->input->post('kota'),
             'id_provinsi' => $this->input->post('prov'),
