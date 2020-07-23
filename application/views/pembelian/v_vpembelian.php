@@ -71,7 +71,11 @@
                     <div class="btn-group">
                       <a href="<?php echo site_url('C_Pembelian/view/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
                       <a href="<?php echo site_url('C_Pembelian/edit/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
-                      <a href="<?php echo site_url('C_Pembelian/hapus/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-danger">Retur</button></a>
+                      <a href="<?php echo site_url('C_Pembelian/retur/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-danger">Retur</button></a>
+                      <?php if ($pembelian->status == 'belum') { ?>
+                        
+                      <a href="<?php echo site_url('C_Pembelian/bayar/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-primary">Bayar</button></a>
+                      <?php } ?>
                     </div>
                   </td>
                 </tr>

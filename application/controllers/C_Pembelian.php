@@ -76,14 +76,27 @@ class C_Pembelian extends CI_Controller{
         $this->load->view('template/footer');
     }
 
-    function retur()
+    function hutang()
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['pembelian'] = $this->M_Pembelian->getretur();
-        $this->load->view('pembelian/v_retur',$data); 
+        $data['pembelian'] = $this->M_Pembelian->gethutang();
+        $this->load->view('pembelian/v_vpembelian',$data); 
+        $this->load->view('template/footer');
+    }
+
+
+    function retur($ida)
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['pembelian'] = $this->M_Pembelian->getdetail($ida);
+        $data['dtlpembelian'] = $this->M_Pembelian->getdetailpembelian($ida);
+        $this->load->view('pembelian/v_returpembelian',$data); 
         $this->load->view('template/footer');
     }
 
@@ -101,5 +114,13 @@ class C_Pembelian extends CI_Controller{
         
         $callback = array('limit'=>$a); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
         echo json_encode($callback); // konversi varibael $callback menjadi JSON
+    }
+
+     function bayar($ida)
+    {   
+        // $id = $this->session->userdata('id_user');
+        $this->M_Pembelian->edit($ida);
+        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        redirect('C_Pembelian');
     }
 }

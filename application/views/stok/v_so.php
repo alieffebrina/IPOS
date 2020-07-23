@@ -77,7 +77,7 @@
                     <input type="hidden" name="barang" value="<?php echo $barang->id_barang ?>">
                     <input type="hidden" name="hasilkonversi" value="<?php echo $barang->stokskrg; ?>">
                     <input type="hidden" name="stokreturopname" value="<?php echo $barang->stokreturopname; ?>">
-                    <input type="text" name="satuanreturopname" value="<?php echo $barang->satuanreturopname; ?>">
+                    <input type="hidden" name="satuanreturopname" value="<?php echo $barang->satuanreturopname; ?>">
                     <input type="hidden" name="satuankonversi" value="<?php echo $barang->satuan_konversi; ?>">
                     <div class="btn-group">
                       <?php if($barang->status != "1"){?> 

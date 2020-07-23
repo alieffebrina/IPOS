@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Jul 2020 pada 12.50
+-- Waktu pembuatan: 23 Jul 2020 pada 15.34
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.2.31
 
@@ -175,7 +175,7 @@ CREATE TABLE `tb_barang` (
 --
 
 INSERT INTO `tb_barang` (`id_barang`, `no_urut`, `barang`, `id_satuan`, `id_jenisbarang`, `stok`, `stokretur`, `stokmin`, `hargabeli`, `id_konversi`, `tgl_update`, `id_user`, `hasil_konversi`) VALUES
-('2020-07-14-a-2', 2, 'Paving 1', 1, 4, 23.255813953488, 0, 20, 60000, 3, '2020-07-19', 8, 1000),
+('2020-07-14-a-2', 2, 'Paving 1', 1, 4, 24.255813953488, 0, 20, 60000, 3, '2020-07-19', 8, 1043),
 ('2020-07-15-a-1', 7, 'paving 21', 1, 6, 85988, 0, 1, 1000, 3, '2020-07-19', 8, 3697484),
 ('2020-07-16-a-1', 11, 'paving 16', 1, 4, 23.255813953488, 2, 1, 1000, 3, '2020-07-19', 8, 1000),
 ('B.2020-07-19.1', 12, '', 0, 0, 0, 0, 0, 0, 0, '2020-07-19', 8, 0),
@@ -206,7 +206,8 @@ INSERT INTO `tb_detailpembelian` (`id_detailpembelian`, `id_pembelian`, `id_bara
 (3, 'PBL.2020-07-18.2', '2020-07-15-a-1', 2, 2, 1000),
 (4, 'PBL.2020-07-18.2', '2020-07-16-a-1', 111, 1, 1000),
 (5, 'PBL.2020-07-19.1', '2020-07-15-a-1', 0, 1, 1000),
-(6, 'PBL.2020-07-19.2', '2020-07-15-a-1', 0, 2, 1000);
+(6, 'PBL.2020-07-19.2', '2020-07-15-a-1', 0, 2, 1000),
+(7, 'PBL.2020-07-23.1', '2020-07-14-a-2', 0, 1, 60000);
 
 -- --------------------------------------------------------
 
@@ -947,8 +948,8 @@ INSERT INTO `tb_menu` (`id_menu`, `menu`, `icon`) VALUES
 (1, 'Data Master', 'fa fa-dashboard'),
 (2, 'Penjualan', 'fa fa-files-o'),
 (3, 'Pembelian', 'fa fa-th'),
-(4, 'Nota Pembayaran', 'fa fa-pie-chart'),
-(5, 'Stok', 'fa fa-edit'),
+(4, 'Stok', 'fa fa-edit'),
+(5, 'Laporan', 'fa fa-pie-chart'),
 (6, 'Accounting', 'fa fa-laptop'),
 (7, 'Setting', 'fa fa-table');
 
@@ -1020,7 +1021,8 @@ INSERT INTO `tb_pembelian` (`id_pembelian`, `id_suplier`, `tglnotapembelian`, `t
 ('PBL.2020-07-18.1', 1, '2020-07-18', 3009, 'kredit', '2020-07-18', '2020-07-18', 8, 11, 0, 'lunas'),
 ('PBL.2020-07-18.2', 1, '2020-07-18', 2887, 'cash', '2020-07-18', '2020-07-18', 8, 0, 0, 'lunas'),
 ('PBL.2020-07-19.1', 1, '2020-07-19', 1000, 'cash', '2020-07-19', '2020-07-19', 8, 0, 0, 'lunas'),
-('PBL.2020-07-19.2', 1, '2020-07-19', 2000, 'cash', '2020-07-19', '2020-07-19', 8, 0, 0, 'lunas');
+('PBL.2020-07-19.2', 1, '2020-07-19', 2000, 'cash', '2020-07-19', '2020-07-19', 8, 0, 0, 'lunas'),
+('PBL.2020-07-23.1', 1, '2020-07-23', 60001, 'kredit', '2020-07-28', '2020-07-23', 8, 2, 1, 'belum');
 
 -- --------------------------------------------------------
 
@@ -1213,30 +1215,30 @@ INSERT INTO `tb_submenu` (`id_submenu`, `id_menus`, `submenu`, `linksubmenu`, `s
 (3, 1, 'Data Konversi', 'C_konversi', 'aktif'),
 (4, 1, 'Data Jenis Barang', 'C_jenisbarang', 'aktif'),
 (5, 1, 'Data Satuan', 'C_satuan', 'aktif'),
-(6, 1, 'Data Gudang', 'C_Gudang', 'tidak'),
+(6, 5, 'Laporan Kas', '', 'aktif'),
 (7, 1, 'Data Barang', 'C_barang', 'aktif'),
 (8, 1, 'Data Pelanggan', 'C_Pelanggan', 'aktif'),
 (9, 1, 'Data Suplier', 'C_suplier', 'aktif'),
 (10, 2, 'Transaksi Penjualan', 'C_penjualan', 'aktif'),
 (11, 2, 'Surat Jalan', 'C_suratjalan', 'aktif'),
-(12, 2, 'Invoice', '', 'tidak'),
-(13, 2, 'Retur', '', 'aktif'),
+(12, 5, 'Laporan Piutang', '', 'aktif'),
+(13, 2, 'Retur', 'C_Penjualan/retur', 'aktif'),
 (14, 3, 'Transaksi Pembelian', 'C_Pembelian', 'aktif'),
-(15, 3, 'Penerimaan Barang', '', 'tidak'),
-(16, 4, 'Pembayaran Purchase ', '', 'aktif'),
-(17, 4, 'Pembayaran Sales Order', '', 'aktif'),
-(18, 5, 'Stock ', 'C_Stok', 'aktif'),
-(19, 5, 'Mutasi Barang', '', 'aktif'),
-(20, 6, 'Hutang', '', 'aktif'),
+(15, 5, 'Laporan Hutang', 'C_Pembelian/hutang', 'aktif'),
+(16, 5, 'Laporan Pembelian', 'C_Pembelian', 'aktif'),
+(17, 5, 'Laporan Penjualan', 'C_Penjualan', 'aktif'),
+(18, 4, 'Stock ', 'C_Stok', 'aktif'),
+(19, 4, 'Mutasi Barang', '', 'aktif'),
+(20, 6, 'Hutang', 'C_Pembelian/hutang', 'aktif'),
 (21, 6, 'Piutang', '', 'aktif'),
-(22, 6, 'Pendapatan', '', 'aktif'),
-(23, 6, 'Pengeluaran', '', 'aktif'),
+(22, 6, 'Arus Kas', '', 'aktif'),
+(23, 6, 'Laba Rugi', '', 'aktif'),
 (24, 7, 'Hak Akses Login', 'C_Setting', 'aktif'),
 (25, 7, 'Data Kode', 'C_Setting/vkode', 'aktif'),
 (26, 3, 'Retur', 'C_Pembelian/retur', 'aktif'),
-(27, 5, 'Stock Opname', 'C_Stok/so', 'aktif'),
+(27, 4, 'Stock Opname', 'C_Stok/so', 'aktif'),
 (28, 1, 'Data Harga', 'C_harga', 'aktif'),
-(29, 5, 'Stok Retur', 'C_Stok/retur', 'aktif');
+(29, 4, 'Stok Retur', 'C_Stok/retur', 'aktif');
 
 -- --------------------------------------------------------
 
@@ -1504,7 +1506,7 @@ ALTER TABLE `tb_barang`
 -- AUTO_INCREMENT untuk tabel `tb_detailpembelian`
 --
 ALTER TABLE `tb_detailpembelian`
-  MODIFY `id_detailpembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_detailpembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_detailpenjualan`
@@ -1564,7 +1566,7 @@ ALTER TABLE `tb_konversi`
 -- AUTO_INCREMENT untuk tabel `tb_menu`
 --
 ALTER TABLE `tb_menu`
-  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pelanggan`

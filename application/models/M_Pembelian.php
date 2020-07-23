@@ -15,7 +15,13 @@ class M_Pembelian extends CI_Model {
         return $this->db->get('tb_pembelian')->result();
     }
 
-        //$this->db->select('ts2.satuan satuan_konversi,ts1.satuan nama_satuan,tb_barang.*,tb_stokopname.*,tb_jenisbarang.*');
+    function gethutang(){
+        $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
+        $where = array(
+            'status' => 'belum'
+        );
+        return $this->db->get_where('tb_pembelian',$where)->result();
+    }
 
     function pemakaianlimit($iduser){
         $this->db->select('sum(total) as totalpakai, tb_suplier.*');
@@ -37,9 +43,11 @@ class M_Pembelian extends CI_Model {
     }
 
     function getdetailpembelian($ida){
+        $this->db->select('ts2.satuan satuan_konversi,ts1.satuan nama_satuan,tb_detailpembelian.harga hargabeli, tb_detailpembelian.*,tb_barang.*');
         $this->db->join('tb_barang', 'tb_barang.id_barang = tb_detailpembelian.id_barang');
         $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
-        $this->db->join('tb_satuan', 'tb_satuan.id_satuan = tb_barang.id_satuan');
+        $this->db->join('tb_satuan ts1', 'ts1.id_satuan = tb_barang.id_satuan');
+        $this->db->join('tb_konversi ts2', 'ts2.id_konversi = tb_barang.id_konversi');
         $where = array(
             'tb_detailpembelian.id_pembelian' => $ida
         );
@@ -118,6 +126,20 @@ class M_Pembelian extends CI_Model {
             }
         }
         
+    }
+
+    function edit($ida){
+        $barang = array(
+
+            'status' => 'lunas'
+        );
+
+        $where = array(
+            'id_pembelian' =>  $ida,
+        );
+        
+        $this->db->where($where);
+        $this->db->update('tb_pembelian',$barang);
     }
 
 }
