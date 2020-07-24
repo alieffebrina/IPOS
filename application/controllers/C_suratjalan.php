@@ -51,7 +51,7 @@ class C_suratjalan extends CI_Controller{
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
 
-        $modul = 'Surat Jalan';
+        $modul = 'suratjalan';
         $kode = $this->M_Setting->cekkode($modul);
         foreach ($kode as $modul) {
             $a = $modul->kodefinal;

@@ -110,22 +110,38 @@ class C_penjualan extends CI_Controller{
 
     function get_info_penjualan(){// Ambil data ID Provinsi yang dikirim via ajax post
             $id_penjualan = $this->input->post('id_penjualan');
+            $type = $this->input->post('type');
             if($id_penjualan!=''){
             $data['penjualan'] = $this->M_penjualan->getdetail($id_penjualan);
             $data['dtlpenjualan'] = $this->M_penjualan->getdetailpenjualan($id_penjualan);
             
             $no=1; $table='';
+            if($type=='retur'){
+                foreach ($data['dtlpenjualan'] as $key=>$dtl) {
+                       $table.="<tr id='".$key."'>
+                        <td><input type='hidden' name='id_detailpenjualan[]' value='".$dtl->id_detailpenjualan."'>". $no++ ."</td>
+                        <td><input type='hidden' name='id_barang[]' value='".$dtl->id_barang."'>". $dtl->barang ."</td>
+                        <td><input type='hidden' name='satuan[]' value='".$dtl->satuan."'>". $dtl->satuan ."</td>
+                        <td>". $dtl->jenisbarang ."</td>
+                        <td><input type='hidden' id='qtt_".$key."' value='".$dtl->qtt."'>". $dtl->qtt ."</td>
+                        <td><input type='text' name='jumlahretur[]' value='' onkeyup='check_retur(this);'></td>
+                        <td><input type='hidden' name='harga[]' value='".$dtl->harga."'>". number_format($dtl->harga) ."</td>
+                      </tr>";
+                  } 
+            }else{
                 foreach ($data['dtlpenjualan'] as $dtl) {
-                   $table.="<tr>
-                    <td>". $no++ ."</td>
-                    <td>". $dtl->barang ."</td>
-                    <td>". $dtl->qtt ."</td>
-                    <td>". $dtl->satuan ."</td>
-                    <td>". number_format($dtl->harga) ."</td>
-                    <td>". number_format($dtl->diskon) ."</td>
-                    <td>". number_format($dtl->subtotal) ."</td>
-                  </tr>";
-              } 
+                       $table.="<tr>
+                        <td>". $no++ ."</td>
+                        <td>". $dtl->barang ."</td>
+                        <td>". $dtl->qtt ."</td>
+                        <td>". $dtl->satuan ."</td>
+                        <td>". number_format($dtl->harga) ."</td>
+                        <td>". number_format($dtl->diskon) ."</td>
+                        <td>". number_format($dtl->subtotal) ."</td>
+                      </tr>";
+                  } 
+            }
+                
             // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$hasil_kode."' readonly>";
 
             $callback = array('id_pelanggan'=>$data['penjualan'][0]->id_pelanggan,'nama'=>$data['penjualan'][0]->nama, 'alamat'=>$data['penjualan'][0]->alamat, 'detail_penjualan' =>$table); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota

@@ -14,6 +14,7 @@
 <!-- Main content -->
     <section class="content">
        <form class="form-horizontal" method="POST" action="<?php echo site_url('C_suratjalan/tambah')?>">
+      <input type="hidden" id="type" value='surat_jalan'>
       <div class="row">
         <!-- left column -->
         <div class="col-md-12">

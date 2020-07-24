@@ -30,7 +30,7 @@ class M_pelanggan extends CI_Model {
 
         $pelanggan = array(
             'id_user' => $id,
-            'nama' => $this->input->post('nama_pelanggan'),
+            'nama' => $this->input->post('nama'),
             'alamat' => $this->input->post('alamat'),
             'id_kota' => $this->input->post('kota'),
             'id_provinsi' => $this->input->post('prov'),
@@ -76,7 +76,7 @@ class M_pelanggan extends CI_Model {
         $pelanggan = array(
 
             'id_user' => $id,
-            'nama' => $this->input->post('nama_pelanggan'),
+            'nama' => $this->input->post('nama'),
             'alamat' => $this->input->post('alamat'),
             'id_kota' => $this->input->post('kota'),
             'id_provinsi' => $this->input->post('prov'),

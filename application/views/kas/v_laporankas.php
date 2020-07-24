@@ -31,8 +31,8 @@
             </div>
             <div class="box-header">
               <h4 class="box-title">Filter Data</h4> &nbsp; &nbsp;
-              <input type="date" name="tglawal" id="tglawal"> Sampai
-              <input type="date" name="tglakhir" id="tglakhir" onkeyup="search();">
+              <input type="date" name="tglawal"> Sampai
+              <input type="date" name="tglakhir" onkeyup="datakas()">
             </div>
             <!-- /.box-header -->
 
@@ -46,21 +46,17 @@
                   <th>Nominal</th>
                 </tr>
                 </thead>
-                <tbody id="data">
-                  <?php 
+                <tbody>
+                 <?php 
                   $no=1;
-                  if( ! empty($kas)){ // Jika data pada database tidak sama dengan empty (alias ada datanya)
                   foreach ($kas as $kas) { ?>
-                      <tr>
-                        <td><?php echo $no++; ?></td>
-                        <td><?php echo date('d-m-Y', strtotime($kas->tglkas));?></td>
-                        <td><?php echo $kas->ket; ?></td>
-                        <td><?php echo number_format($kas->nominal); ?></td>
-                      </tr>
-                    <?php }
-                     }else{ 
-                      echo "<tr><td colspan='4'>Data tidak ada</td></tr>";
-                    } ?>
+                <tr>
+                  <td><?php echo $no++; ?></td>
+                  <td><?php echo date('d-m-Y', strtotime($kas->tglkas));?></td>
+                  <td><?php echo $kas->ket; ?></td>
+                  <td><?php echo number_format($kas->nominal); ?></td>
+                </tr>
+                  <?php } ?>
                 </tbody>
               </table>
               <a href="<?php echo site_url('C_Kas/add'); ?>"><button type="submit" class="btn btn-default">Tambah Data</button></a>

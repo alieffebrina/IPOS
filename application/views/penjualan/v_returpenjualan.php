@@ -1,88 +1,143 @@
-<!-- Content Wrapper. Contains page content -->
+  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Retur Penjualan
-        <!-- <small>Stok Opname</small> -->
+        Retur Penjualan
+        <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Data Transaksi Penjualan</a></li>
-        <li><a href="<?php echo site_url('C_returpenjualan/'); ?>">Data Retur Penjualan</a></li>>
-        <li class="active">Lihat Data Retur Penjualan</li>
+        <li><a href="<?php echo site_url('C_returpenjualan'); ?>"><i class="fa fa-dashboard"></i> Retur Penjualan</a></li>
+        <li class="active"><a href="<?php echo site_url('C_penjualan'); ?>">Transaksi Retur Penjualan</a></li>
       </ol>
     </section>
-    <div class="box-body">
-    <?php if ($this->session->flashdata('SUCCESS')) { ?>
-       <div class="alert alert-success alert-dismissible">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <h5><i class="icon fa fa-check"></i> Success!</h5>
-          Data berhasil di perbarui.
-        </div>                 
-      <?php } ?>
-    </div>
-    <!-- Main content -->
+<!-- Main content -->
     <section class="content">
+       <form class="form-horizontal" method="POST" action="<?php echo site_url('C_returpenjualan/tambah')?>">
+      <input type="hidden" id="type" value='retur'>
       <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Data Retur Penjualan</h3>
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Retur Penjualan</h3>
             </div>
             <!-- /.box-header -->
+            <!-- form start -->
+           
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-1 control-label">No Retur Penjualan</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="id_returpenjualan" name="id_returpenjualan" value="<?php echo $kode; ?>" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-1 control-label">Tanggal Retur</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="tanggalretur" name="tanggalretur" value="<?php echo date('d-m-Y')?>" readonly>
+                  </div>
+                </div>
 
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Tanggal Retur</th>
-                  <th>Nota Penjualan</th>
-                  <th>Id Barang</th>
-                  <th>Nama Barang</th>
-                  <th>Quantity</th>
-                  <th>Quantity Retur</th>
-                  <th>Harga</th>
-                  <th>Total</th>
-                  <th>Keterangan/th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                  <?php 
-                  $no=1;
-                  foreach ($returpenjualan as $returpenjualan) { ?>
-                <tr>
-                  <td><?php echo $no++; ?></td>
-                  <td><?php echo $returpenjualan->tanggal; ?></td>
-                  <td><?php echo $returpenjualan->id_penjualan;?></td>
-                  <td><?php echo $returpenjualan->id_barang;?></td>
-                  <td><?php echo $returpenjualan->barang; ?></td>
-                  <td><?php echo $returpenjualan->qtt; ?></td>
-                  <td><?php echo $returpenjualan->qttretur; ?></td>
-                  <td><?php echo $returpenjualan->harga; ?></td>
-                  <td><?php echo $returpenjualan->total; ?></td>
-                  <td><?php echo $returpenjualan->Keterangan; ?></td>
-                  <td><?php if($preturpenjualan->status == '1'){ echo "Retur";} else {echo "Pending"; }?></td>
-                  <td>
-                    <div class="btn-group">
-                      <a href="<?php echo site_url('C_returpenjualan/terkirimretur/'.$penjualan->id_returpenjualan.'/'.$penjualan->id_idpenjualan.'/'.$penjualan->id_barang.'/'.$penjualan->qttretur); ?>"><button type="button" class="btn btn-success">Terkirim</button></a>
-                    </div>
-                  </td>
-                </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
-              <a href="<?php echo site_url('C_returpenjualan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Barang</button></a>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-1 control-label">Nota Penjualan</label>
+                  <div class="col-sm-10">
+                    <select class="form-control select2" id="id_penjualan" name="id_penjualan" style="width: 100%;">
+                      <option value="">--Pilih--</option>
+                      <?php foreach ($penjualan as $penjualan) { ?>
+                      <option value="<?php echo $penjualan->id_penjualan ?>"><?php echo $penjualan->id_penjualan ?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-1 control-label">Nama Pelanggan</label>
+                  <div class="col-sm-10">
+                    <input type="hidden" id="id_pelanggan">
+                    <input type="text" name="nama" class="form-control" id="nama" readonly>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-1 control-label">Alamat</label>
+                  <div class="col-sm-10">
+                    <textarea name="alamat" class="form-control" id="alamat" readonly></textarea>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="ketretur" class="col-sm-1 control-label">Keterangan Retur</label>
+                  <div class="col-sm-10">
+                    <textarea name="ketretur" class="form-control" id="ketretur"></textarea>
+                  </div>
+                </div>
+                <!-- <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-1 control-label">Nama Pengirim</label>
+                  <div class="col-sm-10" id="namapengirim">
+                    <input type="text" class="form-control" name="namapengirim" name="namapengirim">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-1 control-label">Pengiriman</label>
+                  <div class="col-sm-10">
+                  <input type="radio" id="Dikirim" name="pengiriman" value="Dikirim"> Dikirim
+                  <input type="radio" id="Diambil" name="pengiriman" value="Diambil"> Diambil
+                  </div>
+                </div> -->
+              </div>
+              <!-- /.box-body -->
+              <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+
+          <!-- Form Element sizes -->
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">List Barang</h3>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 table-responsive">
+                <table class="table table-striped" id="tabelku">
+                  <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Barang</th>
+                    <th>Satuan</th>
+                    <th>Jenis Barang</th>
+                    <th>Qtt Beli</th>
+                    <th>Qtt Retur</th>
+                    <th>Harga</th> 
+                  </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.col -->
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         </div>
-        <!-- /.col -->
+        <!-- left column -->
+
+        <div class="col-md-6">
+          <div class="box box-danger">
+            <div class="col-xs-12">
+                <button type="button" class="btn btn-default pull-right">Cancel</button>
+                <input type="submit" class="btn btn-info pull-right" value="Simpan">
+                <button type="button" class="btn btn-info pull-right">Cetak Nota</button>
+            </div>
+          </div>
+        </div>
+        <!--/.col (right) -->
       </div>
+
+            </form>
       <!-- /.row -->
     </section>
     <!-- /.content -->
+    <div class="clearfix"></div>
   </div>

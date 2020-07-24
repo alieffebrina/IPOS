@@ -96,7 +96,33 @@
     })
   })
 </script>
+<script type="text/javascript">
+  function search(){
+     $.ajax({
+      url: "<?php echo base_url("index.php/C_Kas/search"); ?>", // Isi dengan url/path file php yang 
+      type: 'POST', // Tentukan type nya POST atau GET
+      data: {tglawal: $("#tglawal").val(), tglakhir: $("#tglakhir").val(),}, // Set data yang akan dikirim
+      dataType: "json",
+      beforeSend: function(e) {
+        if(e && e.overrideMimeType) {
+          e.overrideMimeType("application/json;charset=UTF-8");
+        }
+      },
+      success: function(response){ // Ketika proses pengiriman berhasil
+        // Ubah kembali text button search menjadi SEARCH
+        // Dan hapus atribut disabled untuk meng-enable kembali button search nya
+        $("#btn-search").html("SEARCH").removeAttr("disabled");
+        
+        // Ganti isi dari div view dengan view yang diambil dari controller siswa function search
+        $("#data").html(response.kas);
+      },
+      error: function (xhr, ajaxOptions, thrownError) { // Ketika terjadi error
+        alert(xhr.responseText); // munculkan alert
+      }
+    });
+   }
 
+</script>
 <!-- Page script -->
 <!-- <script>
   $(function () {
