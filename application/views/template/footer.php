@@ -109,9 +109,6 @@
         }
       },
       success: function(response){ // Ketika proses pengiriman berhasil
-        // Ubah kembali text button search menjadi SEARCH
-        // Dan hapus atribut disabled untuk meng-enable kembali button search nya
-        $("#btn-search").html("SEARCH").removeAttr("disabled");
         
         // Ganti isi dari div view dengan view yang diambil dari controller siswa function search
         $("#data").html(response.kas);

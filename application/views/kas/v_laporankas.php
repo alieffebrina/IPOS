@@ -31,8 +31,9 @@
             </div>
             <div class="box-header">
               <h4 class="box-title">Filter Data</h4> &nbsp; &nbsp;
-              <input type="date" name="tglawal"> Sampai
-              <input type="date" name="tglakhir" onkeyup="datakas()">
+              <input type="date" name="tglawal" id="tglawal"> Sampai
+              <input type="date" name="tglakhir" id="tglakhir" onkeyup="datakas()">
+              <!-- <input type="button" name="search" onclick=""> -->
             </div>
             <!-- /.box-header -->
 

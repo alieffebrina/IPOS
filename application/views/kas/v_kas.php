@@ -1,4 +1,5 @@
 <!-- Content Wrapper. Contains page content -->
+<div id="data">
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -29,13 +30,17 @@
             <div class="box-header">
               <h3 class="box-title">Data Kas Keluar</h3>
             </div>
-            <div class="box-header">
-              <h4 class="box-title">Filter Data</h4> &nbsp; &nbsp;
-              <input type="date" name="tglawal" id="tglawal"> Sampai
-              <input type="date" name="tglakhir" id="tglakhir" onkeyup="search();">
-            </div>
+            <div class="box-body" >
+                <table class="table table-bordered">
+                  <tbody>
+                  <tr>
+                    <td style="align-content: left;">Filter Data  &nbsp;  &nbsp; <input type="date" name="tglawal" id="tglawal" class="input-sm"> &nbsp; Sampai &nbsp; 
+                      <input type="date" name="tglakhir" id="tglakhir" class="input-sm"> &nbsp;&nbsp;
+                      <button id="search" name="search" class="btn btn-warning" onclick="search();"><i class="fa fa-search"></i>  Cari</button></td>
+                  </tr></tbody>
+                </table>
+          </div>
             <!-- /.box-header -->
-
               <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -46,7 +51,7 @@
                   <th>Nominal</th>
                 </tr>
                 </thead>
-                <tbody id="data">
+                <tbody >
                   <?php 
                   $no=1;
                   if( ! empty($kas)){ // Jika data pada database tidak sama dengan empty (alias ada datanya)
@@ -75,3 +80,4 @@
     </section>
     <!-- /.content -->
   </div>
+</div>

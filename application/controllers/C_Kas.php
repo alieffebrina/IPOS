@@ -28,8 +28,6 @@ class C_Kas extends CI_Controller{
         
         // Kita load file view.php sambil mengirim data siswa hasil query function search di SiswaModel
         $hasil = $this->load->view('kas/v_kas', array('kas'=>$kas), true);
-        
-        // Buat sebuah array
         $callback = array(
           'kas' => $hasil, // Set array hasil dengan isi dari view.php yang diload tadi
         );
