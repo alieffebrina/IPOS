@@ -306,6 +306,37 @@
     });
   });
   </script>
+  <script type="text/javascript">
+    function returpembelian(){
+      var d = (document.getElementById('diskonbawah').value==''?0:parseInt(document.getElementById('diskonbawah').value));
+      var e = (document.getElementById('biayalain').value==''?0:parseInt(document.getElementById('biayalain').value));
+      var f = (document.getElementById('subtotalbawahrupiah').value==''?0:parseInt(document.getElementById('subtotalbawahrupiah').value));
+      
+      if (d>f){
+        var hitungtotal = f+e+1-1;
+        $("#nilaidiskonbawah").css("color","#fc5d32");
+        $("#diskonbawah").css("border-color","#fc5d32");
+        $("#nilaidiskonbawah").html("diskon melebihi total penjualan");
+        $("#diskonbawah").val("");
+      }else{
+        var hitungtotal = f-d+e+1-1;
+      }
+      var numbertotal = hitungtotal.toString(),
+        sisa  = numbertotal.length % 3,
+        rupiah  = numbertotal.substr(0, sisa),
+        ribuan  = numbertotal.substr(sisa).match(/\d{3}/g);
+          
+      if (ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+      }
+      document.getElementById('total').value = hitungtotal;
+      document.getElementById('totalfix').innerHTML = formatRupiah(rupiah);
+      var input = document.getElementById('totalfix').innerHTML.replace(/\./g, "");
+      //terbilang
+      document.getElementById("terbilang").innerHTML = terbilang(input);
+  };
+  </script>
 <script type="text/javascript">
   function startCalculate(){
     var interval=setInterval("Calculate()",10);

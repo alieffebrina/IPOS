@@ -3,13 +3,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Lihat Transaksi Pembelian
+        Retur Pembelian
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('C_Pembelian'); ?>"><i class="fa fa-dashboard"></i> Pembelian</a></li>
-        <li><a href="<?php echo site_url('C_Pembelian'); ?>">Transaksi Pembelian</a></li>
-        <li class="active"><a href="<?php echo site_url('C_Pembelian'); ?>">Lihat Transaksi Pembelian</a></li>
+        <li><a href="<?php echo site_url('C_Pembelian'); ?>">Retur Pembelian</a></li>
+        <li class="active"><a href="<?php echo site_url('C_Pembelian'); ?>">Retur Pembelian</a></li>
       </ol>
     </section>
 <!-- Main content -->
@@ -24,11 +24,19 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <?php foreach ($pembelian as $key) { ?>
+            <?php echo form_open("C_Pembelian/tambahretur", array('enctype'=>'multipart/form-data')); ?>
             <div class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-1 control-label">No Nota</label>
+                  <label for="inputEmail3" class="col-sm-1 control-label">No Retur Pembelian</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="noretur" name="noretur" value="<?php echo $kode ?>" readonly>
+                  </div>
+                </div>
+            <?php foreach ($pembelian as $key) { ?>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-1 control-label">No Nota Pembelian</label>
 
                   <div class="col-sm-10">
                     <input type="text" class="form-control" id="nonota" name="nonota" value="<?php echo $key->id_pembelian; ?>" readonly>
@@ -45,14 +53,14 @@
                   <label for="inputEmail3" class="col-sm-1 control-label">Nama Toko</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nonota" name="nonota" value="<?php echo $key->nama_toko; ?>" readonly>
+                    <input type="text" class="form-control" id="nama_toko" name="nama_toko" value="<?php echo $key->nama_toko; ?>" readonly>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">Nama Suplier</label>
                   <div class="col-sm-10" id="nama_suplier">
                     
-                    <input type="text" class="form-control" id="nonota" name="nonota" value="<?php echo $key->nama_suplier; ?>" readonly>
+                    <input type="text" class="form-control" id="nama_suplier" name="nama_suplier" value="<?php echo $key->nama_suplier; ?>" readonly>
                   </div>
                 </div>
                 <div class="form-group">
@@ -62,16 +70,16 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-1 control-label">Type Pembayaran</label>
+                  <label for="inputPassword3" class="col-sm-1 control-label">Type Retur</label>
                   <div class="col-sm-10">
-                  <input type="radio" name="pembayaran" <?php if($key->jenispembayaran == "cash"){ echo 'checked="checked"'; }?> disabled> Cash
-                  <input type="radio" name="pembayaran" <?php if($key->jenispembayaran == "kredit"){ echo 'checked="checked"'; }?> disabled> Kredit
+                  <input type="radio" name="pembayaran" value="uang" required> Uang
+                  <input type="radio" name="pembayaran" value="barang"> Barang
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-1 control-label">Tanggal Jatuh Tempo</label>
+                  <label for="inputPassword3" class="col-sm-1 control-label">Keterangan</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control" id="tgljatuhtempo" name="tgljatuhtempo" value="<?php echo $key->tgljatuhtempo; ?>"readonly >
+                    <textarea class="form-control" name="ket" id="ket"></textarea>
                   </div>
                 </div>
               </div>
@@ -97,7 +105,6 @@
                     <th>Qtt</th>
                     <th>Satuan</th>
                     <th>Harga</th>
-                    <th>Subharga</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -105,21 +112,27 @@
                       $sub = 0;
                     foreach ($dtlpembelian as $dtl) {
                       $subtotal = (($dtl->qtt*$dtl->harga)-$dtl->diskon); 
-                      $sub = $sub + $subtotal; ?>
+                      $sub = $sub + $subtotal;
+                      $qt = $dtl->qtt*$dtl->qttkonversi; ?>
                       <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><?php echo $dtl->barang ?></td>
+                        <td><?php echo $dtl->barang ?><input type="hidden" name="barang[]" id="barang" value="<?php echo $dtl->id_barang ?>">
+                          <input type="hidden" name="hargaretur[]" id="hargaretur" value="<?php echo $dtl->harga ?>">
+                          <input type="hidden" name="stokretur[]" id="stokretur" value="<?php echo $dtl->stokretur ?>">
+                          <input type="hidden" name="stokkonversi[]" id="stokkonversi" value="<?php echo $dtl->hasil_konversi ?>">
+                          <input type="hidden" name="qttkonversi[]" id="qttkonversi" value="<?php echo $dtl->qttkonversi ?>">
+                        </td>
                         <td><?php echo $dtl->qtt ?></td>
-                        <td><?php echo $dtl->nama_satuan ?></td>
-                        <td><input type="text" class="form-control" name="qttretur" id="qttretur"></td>
-                        <td>
-                          <select name="satuan_rusak" class="form-control">
+                        <td><?php echo $dtl->nama_satuan ?>
+                        <td><input type="number" class="form-control" name="qttretur[]" id="qttretur" min="0" max="<?php echo $qt ?>"></td>
+                        <td><?php echo $dtl->satuan_konversi ?>
+                          <input type="hidden" name="satuan_konversi[]" id="satuan_konversi" value="<?php echo $dtl->satuan_konversi ?>"></td>
+                          <!-- <select name="satuan_rusak" class="form-control">
                             <option value="<?php echo $dtl->nama_satuan ?>"><?php echo $dtl->nama_satuan ?></option>
                             <option value="<?php echo $dtl->satuan_konversi ?>"><?php echo $dtl->satuan_konversi ?></option>
                           </select>
-                        </td>
+                        </td> -->
                         <td><?php echo number_format($dtl->hargabeli); ?></td>
-                        <td><div id="subtotal"></td>
                       </tr>
                     <?php } ?>
                   </tbody>
@@ -130,10 +143,14 @@
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
+          <input type="submit" class="btn btn-primary" id="submit">
         </div>
+
+      <?php 
+       echo form_close(); ?>
         <?php $this->load->view('master/setting/terbilang'); ?>
         <!-- left column -->
-        <div class="col-md-6">
+       <!--  <div class="col-md-6">
           <div class="box box-danger">
             <div class="col-xs-12">
               <p class="lead" style="text-align: center;"><b>Total :</b></p>
@@ -143,10 +160,10 @@
               <h3 class="text-muted well well-sm no-shadow" id="terbilang" style="text-align: center;"><?php echo (terbilang($key->total))." rupiah"?></h3>
             </div>
 
-            <!-- /.box-body -->
+            < /.box-body -
           </div>
-        </div>
-        <div class="col-md-6">
+        </div> -->
+        <!-- <div class="col-md-6">
           <div class="box box-danger">
             <div class="col-xs-18">
               
@@ -174,15 +191,15 @@
                   <label for="inputEmail3" class="col-sm-3 control-label">Biaya Lain Lain</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="biayalain" name="biayalain"value="<?php echo number_format($key->biayalain) ?>" >
+                    <input type="text" class="form-control" id="biayalain" name="biayalain" value="<?php echo number_format($key->biayalain) ?>" >
                   </div>
                 </div>
               </div>
             </div>
             <?php } ?>
-            <!-- /.box-body -->
+             /.box-body 
           </div>
-        </div>
+        </div> -->
 
       </div>
       <!-- /.row -->

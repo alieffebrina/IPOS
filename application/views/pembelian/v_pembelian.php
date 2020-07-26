@@ -215,7 +215,7 @@
                     <input type="hidden" class="form-control"  name="barangall" id="barangall" readonly>
                   <div class="col-sm-9">
                     <input type="text" class="form-control"  name="subtotalbawah" id="subtotalbawah" readonly>
-                    <input type="text" class="form-control" name="subtotalbawahrupiah" id="subtotalbawahrupiah">
+                    <input type="hidden" class="form-control" name="subtotalbawahrupiah" id="subtotalbawahrupiah">
                   </div>
                 </div>
                 <div class="form-group">

@@ -64,6 +64,14 @@ class C_Pembelian extends CI_Controller{
 
     }
 
+     function tambahretur(){
+        $id = $this->session->userdata('id_user');
+        $hasil_kode = $this->M_Pembelian->tambahretur($id);
+        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        redirect('C_Pembelian/mretur');
+
+    }
+
     function view($ida)
     {
         $this->load->view('template/header');
@@ -94,9 +102,41 @@ class C_Pembelian extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
+        $modul = 'retur pembelian';
+        $kode = $this->M_Setting->cekkode($modul);
+        foreach ($kode as $modul) {
+            $a = $modul->kodefinal;
+            if (strpos($a, 'ggal') != false) {
+                date_default_timezone_set('Asia/Jakarta');
+                $tgl = date('Y-m-d');
+                $a = str_replace("tanggal", $tgl, $a);
+                $data = $this->M_Pembelian->cekreturtgl();
+                $no = count($data) + 1;
+                $kode2 = str_replace("no", $no, $a);
+            } else {
+                $data = $this->M_Pembelian->cekkodepembelian();
+                foreach ($data as $id) {
+                    $id = $id+1;
+                    $kode2 = str_replace("no", $id, $a);
+                }
+            }
+        }
+
+        $data['kode'] = $kode2;
         $data['pembelian'] = $this->M_Pembelian->getdetail($ida);
         $data['dtlpembelian'] = $this->M_Pembelian->getdetailpembelian($ida);
         $this->load->view('pembelian/v_returpembelian',$data); 
+        $this->load->view('template/footer');
+    }
+
+    function mretur()
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['retur'] = $this->M_Pembelian->getretur();
+        $this->load->view('pembelian/v_retur',$data); 
         $this->load->view('template/footer');
     }
 
