@@ -41,26 +41,42 @@ n<!-- Content Wrapper. Contains page content -->
                   <th>Tgl Retur </th>
                   <th>Suplier</th>
                   <th>Type Retur</th>
-                  <th>Total Harga</th>
+                  <th>Total</th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
                 </thead>
-                <tbody><tr>
+                <tbody>
                   <?php 
                   $no =1;
-                  foreach ($retur as $retur) { ?>
+                  foreach ($retur as $retur) {
+                    $statusdetail = $this->db->query("select count(statusdetail) as statusdetail from tb_detailreturpembelian where id_retur = '$retur->id_returpembelian' and statusdetail = 'belum'"); 
+                  foreach ($statusdetail->result() as $statusdetail) { 
+                    if ($statusdetail->statusdetail!=0) { 
+                      $status = 'Retur belum dikembalikan'; 
+                      $disable = 'enabled'; ?>
+                <tr style="color: red">
+                    <?php } else {
+                      $status = 'Retur sudah dikembalikan';
+                      $disable = 'disabled'; 
+                     ?>
+                      <tr>
+                    <?php }
+                  }
+                    ?>
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $retur->id_returpembelian; ?></td>
                   <td><?php echo $retur->notapembelian; ?></td>
                   <td><?php echo date('d-m-Y', strtotime($retur->tglretur));?></td>
                   <td><?php echo $retur->nama_toko;?></td>
                   <td><?php echo $retur->jenispengembalian; ?></td>
-                  <td>Rp. <?php echo number_format($retur->total,0,",","."); ?></td>
-                  
+                  <td>Rp. <?php echo number_format($retur->totalretur,0,",","."); ?></td>
+                  <td><?php echo $status; ?></td>
                   <td>
                     <div class="btn-group">
-                      <a href="<?php echo site_url('C_Pembelian/view/'.$retur->id_returpembelian); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
-                      <a href="<?php echo site_url('C_Pembelian/edit/'.$retur->id_returpembelian); ?>"><button type="button" class="btn btn-info">Cetak</button></a>                    
+                      <a href="<?php echo site_url('C_Pembelian/vretur/'.$retur->id_returpembelian); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
+                      <a href="<?php echo site_url('C_Pembelian/edit/'.$retur->id_returpembelian); ?>"><button type="button" class="btn btn-info">Cetak</button></a>   
+                     <!--  <?php if ($status == 'Retur belum dikembalikan'){ ?> <a href="<?php echo site_url('C_Pembelian/statusrubah/'.$retur->id_returpembelian); ?>"><button type="button" class="btn btn-danger" >Rubah Status</button></a> <?php } ?> -->                        
                     </div>
                   </td>
                 </tr>

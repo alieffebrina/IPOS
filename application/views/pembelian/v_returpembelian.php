@@ -100,10 +100,10 @@
                   <tr>
                     <th>No</th>
                     <th>Barang</th>
-                    <th>Qtt</th>
-                    <th>Satuan</th>
-                    <th>Qtt</th>
-                    <th>Satuan</th>
+                    <th>Qtt Beli</th>
+                    <th>Satuan Beli</th>
+                    <th>Qtt Retur</th>
+                    <th>Satuan Retur</th>
                     <th>Harga</th>
                   </tr>
                   </thead>

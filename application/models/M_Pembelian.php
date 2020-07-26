@@ -25,8 +25,10 @@ class M_Pembelian extends CI_Model {
     }
 
     function getretur(){
-        $this->db->join('tb_pembelian', 'tb_returpembelian.notapembelian = tb_pembelian.id_pembelian');
+        $this->db->select('tb_returpembelian.total totalretur,tb_pembelian.*,tb_suplier.*, tb_returpembelian.*');
+        $this->db->join('tb_pembelian', 'tb_pembelian.id_pembelian = tb_returpembelian.notapembelian');
         $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
+        $this->db->order_by('id_returpembelian', 'DESC');
         return $this->db->get('tb_returpembelian')->result();
     }
 
@@ -180,7 +182,8 @@ class M_Pembelian extends CI_Model {
                         'id_barang' => $barang[$key],
                         'qtt' => $value,
                         'satuanretur' => $satuan_konversi[$key],
-                        'harga' => $hargaretur[$key],
+                        'harga' => $hargaretur[$key]/$qttkonversi[$key],
+                        'subtotal' => ($hargaretur[$key]/$qttkonversi[$key])*$value,
                         'statusdetail' => $status );
 
                         $this->db->insert('tb_detailreturpembelian', $data);
@@ -196,29 +199,28 @@ class M_Pembelian extends CI_Model {
                 }
             }
         }
-
+        $a =  $this->input->post('noretur');
+        $totalretur = $this->db->query("select sum(subtotal) as totalretur from tb_detailreturpembelian where id_retur = '$a'"); 
+            foreach ($totalretur->result() as $totalretur) {
+                $b = $totalretur->totalretur;
+            }
 
         $pembelian = array(
             'id_user' => $id,
             'notapembelian' => $this->input->post('nonota'),
             'id_returpembelian' => $this->input->post('noretur'),
             'tglretur' => date('Y-m-d'),
-            // 'total' => $this->input->post('total'),
+            'total' => $b,
             'jenispengembalian' => $this->input->post('pembayaran'),
             'ket' => $this->input->post('ket')
         );
         
         $this->db->insert('tb_returpembelian', $pembelian);
-
-        if ($jenispengembalian == 'barang'){
-
-        }
         
     }
 
     function edit($ida){
         $barang = array(
-
             'status' => 'lunas'
         );
 
@@ -229,5 +231,66 @@ class M_Pembelian extends CI_Model {
         $this->db->where($where);
         $this->db->update('tb_pembelian',$barang);
     }
+
+    function statusrubah($ida, $idbarang, $stok, $hasilkonversi){
+        $barang = array(
+            'statusdetail' => 'sudah'
+        );
+
+        $where = array(
+            'id_detailreturbeli' =>  $ida,
+            'id_barang' => $idbarang
+        );
+        
+        $this->db->where($where);
+        $this->db->update('tb_detailreturpembelian',$barang);
+
+
+        $barang = array(
+            'hasil_konversi' => $hasilkonversi,
+            'stok' => $stok
+        );
+
+        $where = array(
+            'id_barang' => $idbarang
+        );
+        
+        $this->db->where($where);
+        $this->db->update('tb_barang',$barang);
+
+    }
+
+
+    function vretur($ida){
+        // $this->db->select('tb_returpembelian.total totalretur,tb_pembelian.*,tb_suplier.*, tb_returpembelian.*');
+        $this->db->join('tb_pembelian', 'tb_pembelian.id_pembelian = tb_returpembelian.notapembelian');
+        $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
+        $where = array(
+            'tb_returpembelian.id_returpembelian' => $ida
+        );
+        return $this->db->get_where('tb_returpembelian', $where)->result();
+    }
+
+    function vreturdetail($ida){
+        // $this->db->select('tb_detailreturpembelian.harga hargaretur, tb_barang.*, tb_jenisbarang.*');
+        $this->db->join('tb_barang', 'tb_barang.id_barang = tb_detailreturpembelian.id_barang');
+        $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
+        $where = array(
+            'tb_detailreturpembelian.id_retur' => $ida
+        );
+        return $this->db->get_where('tb_detailreturpembelian', $where)->result();
+    }
+
+    function getdetailbarang($idbarang, $ida){
+
+        $this->db->join('tb_detailreturpembelian', 'tb_detailreturpembelian.id_barang = tb_barang.id_barang');
+        $this->db->join('tb_konversi', 'tb_konversi.id_konversi = tb_barang.id_konversi');
+        $where = array(
+            'tb_barang.id_barang' => $idbarang,
+            'tb_detailreturpembelian.id_detailreturbeli' => $ida,
+        );
+        return $this->db->get_where('tb_barang', $where)->result();
+    }
+
 
 }

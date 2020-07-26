@@ -163,4 +163,35 @@ class C_Pembelian extends CI_Controller{
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
         redirect('C_Pembelian');
     }
+
+    function statusrubah( $idbarang,$ida)
+    {   
+        // $id = $this->session->userdata('id_user');
+        // $this->M_Pembelian->statusrubah($ida, $idbarang);
+        $detailbarang = $this->M_Pembelian->getdetailbarang($idbarang, $ida);
+        foreach($detailbarang as $detailbarang){
+          $stoka = $detailbarang->stok;
+          $konversi = $detailbarang->qttkonversi;
+          $hasilkonversi = $detailbarang->hasil_konversi;
+          $retur = $detailbarang->qtt;
+          $hasilkonversi = $hasilkonversi-$retur;
+          $stok = $hasilkonversi/$konversi;
+          // echo 'stok = '.$stoka.' konversi = '.$konversi.'hasil_konversi = '.$hasilkonversi.' retur = '.$retur.' stokakhir = '.$stok;
+          $this->M_Pembelian->statusrubah($ida, $idbarang, $stok, $hasilkonversi);
+        }
+        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        redirect('C_Pembelian/mretur');
+    }
+
+     function vretur($ida)
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['retur'] = $this->M_Pembelian->vretur($ida);
+        $data['dtlretur'] = $this->M_Pembelian->vreturdetail($ida);
+        $this->load->view('pembelian/v_detailretur',$data); 
+        $this->load->view('template/footer');
+    }
 }
