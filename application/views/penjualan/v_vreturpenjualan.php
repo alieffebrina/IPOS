@@ -20,6 +20,13 @@
           Data berhasil di perbarui.
         </div>                 
       <?php } ?>
+       <?php if ($this->session->flashdata('ERROR')) { ?>
+       <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h5><i class="icon fa fa-check"></i> Error!</h5>
+          Approve gagal cek stok sebelum approve retur
+        </div>                 
+      <?php } ?>
     </div>
     <!-- Main content -->
     <section class="content">
@@ -39,14 +46,13 @@
                   <th>Nota Retur</th>
                   <th>Nota Penjualan</th>
                   <th>Tanggal Retur</th>
-                  <th>Nama Pelanggan</th>
-                  <th>Alamat</th>
+                  <th>Pelanggan</th>
                   <th>Barang</th>
                   <th>Satuan</th>
-                  <th>Jenis Barang</th>
                   <th>Qtt Jual</th>
                   <th>Qtt Retur</th>
                   <th>Keterangan</th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -59,18 +65,20 @@
                   <td><?php echo $returpenjualan->id_returpenjualan ?></td>
                   <td><?php echo $returpenjualan->id_penjualan;?></td>
                   <td><?php echo $returpenjualan->tanggalretur;?></td>
-                  <td><?php echo $returpenjualan->nama; ?></td>
-                  <td><?php echo $returpenjualan->alamat;?></td>
-                  <td><?php echo $returpenjualan->barang;?></td>
+                  <td><?php echo $returpenjualan->nama; ?><br><?php echo $returpenjualan->alamat;?></td>
+                  <td><?php echo $returpenjualan->barang;?><br><?php echo $returpenjualan->jenisbarang;?></td>
                   <td><?php echo $returpenjualan->satuan; ?></td>
-                  <td><?php echo $returpenjualan->jenisbarang;?></td>
                   <td><?php echo $returpenjualan->qtt;?></td>
                   <td><?php echo $returpenjualan->jumlahretur; ?></td>
                   <td><?php echo $returpenjualan->ketretur;?></td>
+                  <td><?php echo ($returpenjualan->status==0)?'pending':'approve';?></td>
                   
                   <td>
                     <div class="btn-group">
                       <a href="<?php echo site_url('C_returpenjualan/view/'.$returpenjualan->id_returpenjualan); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
+                      <?php if($returpenjualan->status==0){?>
+                      <a href="<?php echo site_url('C_returpenjualan/ganti_status/'.$returpenjualan->id_returpenjualan); ?>"><button type="button" class="btn btn-success">Approved</button></a>
+                      <?php }?>
                       <a href="<?php echo site_url('C_returpenjualan/edit/'.$returpenjualan->id_returpenjualan); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
                       <!-- <a href="<?php echo site_url('C_returpenjualan/hapus/'.$pembelian->id_suratjalan); ?>"><button type="button" class="btn btn-danger">Retur</button></a> -->
                     </div>
@@ -79,7 +87,7 @@
                   <?php } ?>
                 </tbody>
               </table>
-              <a href="<?php echo site_url('C_returpenjualan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
+              <!-- <a href="<?php echo site_url('C_returpenjualan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a> -->
             </div>
             <!-- /.box-body -->
           </div>

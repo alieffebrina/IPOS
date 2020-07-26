@@ -938,5 +938,86 @@ function toggle(source) {
       return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
     }
   </script>
+  <script>
+  $(document).ready(function(){ // Ketika halaman sudah siap (sudah selesai di load)
+    // Kita sembunyikan dulu untuk loadingnya
+    var id_penjualan = document.getElementById('id_penjualan');
+    
+    if(id_penjualan){
+      if($("#id_penjualan").val()!=''){
+      $.ajax({
+        type: "POST", // Method pengiriman data bisa dengan GET atau POST
+        url: "<?php echo base_url("index.php/C_penjualan/get_info_penjualan"); ?>", // Isi dengan url/path file php yang dituju
+        data: {id_penjualan : $("#id_penjualan").val(), type : $("#type").val()}, // data yang akan dikirim ke file yang dituju
+        dataType: "json",
+        beforeSend: function(e) {
+          if(e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response){ 
+        console.log(response);// Ketika proses pengiriman berhasil
+          // set isi dari combobox kota
+          // lalu munculkan kembali combobox kotanya
+          $('#id_pelanggan').val(response.id_pelanggan);
+          $("#nama").val(response.nama);
+          $("#alamat").html(response.alamat).show();
+          $("#tabelku > tbody").html(response.detail_penjualan).show();
+        },
+        error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
+        }
+      });
+    }}
+    $("#id_penjualan").change(function(){ // Ketika user mengganti atau memilih data provinsi
+    
+      $.ajax({
+        type: "POST", // Method pengiriman data bisa dengan GET atau POST
+        url: "<?php echo base_url("index.php/C_penjualan/get_info_penjualan"); ?>", // Isi dengan url/path file php yang dituju
+        data: {id_penjualan : $("#id_penjualan").val(), type : $("#type").val()}, // data yang akan dikirim ke file yang dituju
+        dataType: "json",
+        beforeSend: function(e) {
+          if(e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response){ 
+        console.log(response);// Ketika proses pengiriman berhasil
+          // set isi dari combobox kota
+          // lalu munculkan kembali combobox kotanya
+          $('#id_pelanggan').val(response.id_pelanggan);
+          $("#nama").val(response.nama);
+          $("#alamat").html(response.alamat).show();
+          $("#tabelku > tbody").html(response.detail_penjualan).show();
+        },
+        error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
+        }
+      });
+    });
+    $("#formretur").on('submit', function(e){
+        if($("#id_penjualan").val()==''){alert('Penjualan retur harus diisi');
+            e.preventDefault();
+            return false;
+        }else{
+          if($("#ketretur").val()==''){alert('Keterangan retur harus diisi');
+              e.preventDefault();
+              return false;
+          }else{
+            return true;
+          }
+        }
+        
+    });
+  });
+  function check_retur(row){
+    var id=$(row).closest('tr').attr('id');
+    var qtt= $("#tabelku > tbody").find('td').find('#qtt_'+id).val();
+    if(parseInt(qtt)<$(row).val()){
+      $(row).val(qtt);
+      alert('retur tidak boleh melebihi penjualan');
+    }
+  }
+  </script>
 </body>
 </html>

@@ -61,6 +61,13 @@
                     <textarea name="alamat" class="form-control" id="alamat" readonly><?php echo $key->alamat ?></textarea>
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-1 control-label">Keterangan</label>
+                  <div class="col-sm-10">
+                    <textarea name="alamat" class="form-control" id="alamat" readonly><?php echo $key->ketretur ?></textarea>
+                  </div>
+                </div>
                 
                 <!-- <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Nama Pengirim</label>
@@ -86,11 +93,10 @@
                   <tr>
                     <th>No</th>
                     <th>Barang</th>
-                    <th>Qtt</th>
                     <th>Satuan</th>
-                    <!-- <th>Harga</th>
-                    <th>Diskon</th>
-                    <th>Sub Total</th> -->
+                    <th>Jenis Barang</th>
+                    <th>Qtt</th>
+                    <th>Qtt Retur</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -106,10 +112,6 @@
                         <td><?php echo $dtl->jenisbarang ?></td>
                         <td><?php echo $dtl->qtt ?></td>
                         <td><?php echo $dtl->jumlahretur ?></td>
-                        <td><?php echo $dtl->ketretur ?></td>
-                        <!-- <td><?php echo number_format($dtl->harga) ?></td>
-                        <td><?php echo number_format($dtl->diskon) ?></td>
-                        <td><?php echo number_format($subtotal); ?></td> -->
                       </tr>
                     <?php } ?>
                   </tbody>

@@ -40,6 +40,8 @@
                   <th>Tgl Nota</th>
                   <th>Pelanggan</th>
                   <th>Alamat</th>
+                  <!-- <th>Barang</th>
+                  <th>Qtt</th> -->
                   <th>Biaya Kirim</th>
                   <th>Diskon</th>
                   <th>Total Harga</th>
@@ -51,13 +53,24 @@
                 <tbody>
                   <?php 
                   $no=1;
-                  foreach ($penjualan as $penjualan) { ?>
-                <tr>
+                  foreach ($penjualan as $penjualan) {
+                    if($penjualan->status == '0'){ ?>
+
+                <tr style="color: red">
+
+                    <?php } else { ?>
+                      <tr>
+                    <?php }
+                    ?>
+
+                <!--<tr>-->
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $penjualan->id_penjualan; ?></td>
                   <td><?php echo $penjualan->tglnota;?></td>
                   <td><?php echo $penjualan->nama;?></td>
                   <td><?php echo $penjualan->alamat;?></td>
+                  <!-- <td><?php echo $penjualan->barang;?></td>
+                  <td><?php echo $penjualan->qtt;?></td> -->
                   <td>Rp. <?php echo number_format($penjualan->ongkir,0,",","."); ?></td> 
                   <td>Rp. <?php echo number_format($penjualan->diskon,0,",","."); ?></td>
                   <td>Rp. <?php echo number_format($penjualan->total,0,",","."); ?></td>
@@ -66,9 +79,14 @@
                   
                   <td>
                     <div class="btn-group">
-                      <a href="<?php echo site_url('C_penjualan/view/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
+                     <a href="<?php echo site_url('C_penjualan/view/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
                       <a href="<?php echo site_url('C_penjualan/edit/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
-                      <a href="<?php echo site_url('C_penjualan/hapus/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-danger">Retur</button></a>
+                      <a href="<?php echo site_url('C_returpenjualan/add/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-danger">Retur</button></a>
+
+                      <?php if ($penjualan->status == '0') { ?>
+                        
+                      <a href="<?php echo site_url('C_penjualan/bayar/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-primary">Bayar</button></a>
+                      <?php } ?>
                     </div>
                   </td>
                 </tr>

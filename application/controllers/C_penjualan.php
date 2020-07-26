@@ -25,20 +25,6 @@ class C_penjualan extends CI_Controller{
         $this->load->view('template/footer');
     }
 
-    // public function tambah()
-    // {   
-
-    //     $id = $this->session->userdata('id_user');
-    //     $this->M_penjualan->tambahdata($id);
-    //     // $data = $this->M_pelanggan->cekkodepelanggan();
-    //     // foreach ($data as $id) {
-    //     //     $id =$id;
-    //     //     $this->M_pelanggan->tambahakses($id);
-    //     // }
-    //     $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
-    //     redirect('C_penjualan');
-    // }
-
     function tambah(){
         $id = $this->session->userdata('id_user');
         $hasil_kode = $this->M_penjualan->tambahdata($id);
@@ -97,14 +83,36 @@ class C_penjualan extends CI_Controller{
         $this->load->view('template/footer');
     }
 
-    function retur()
+    // function retur()
+    // {
+    //     $this->load->view('template/header');
+    //     $id = $this->session->userdata('id_user');
+    //     $data['menu'] = $this->M_Setting->getmenu1($id);
+    //     $this->load->view('template/sidebar.php', $data);
+    //     $data['penjualan'] = $this->M_penjualan->getreturpenjualan();
+    //     $this->load->view('penjualan/v_retur',$data); 
+    //     $this->load->view('template/footer');
+    // }
+
+    function piutang()
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['penjualan'] = $this->M_penjualan->getreturpenjualan();
-        $this->load->view('penjualan/v_retur',$data); 
+        $data['penjualan'] = $this->M_penjualan->getpiutang();
+        $this->load->view('penjualan/v_vpenjualan',$data); 
+        $this->load->view('template/footer');
+    }
+
+    function laporan()
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['penjualan'] = $this->M_penjualan->getlaporan();
+        $this->load->view('penjualan/v_laporanpenjualan',$data); 
         $this->load->view('template/footer');
     }
 
@@ -148,7 +156,14 @@ class C_penjualan extends CI_Controller{
             echo json_encode($callback); 
         }
 
+    }
 
+     function bayar($ida)
+    {   
+        // $id = $this->session->userdata('id_user');
+        $this->M_penjualan->edit($ida);
+        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        redirect('C_Penjualan');
     }
 
 }

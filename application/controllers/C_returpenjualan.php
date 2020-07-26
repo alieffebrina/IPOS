@@ -22,20 +22,6 @@ class C_returpenjualan extends CI_Controller{
         $this->load->view('template/footer');
     }
 
-    // public function tambah()
-    // {   
-
-    //     $id = $this->session->userdata('id_user');
-    //     $this->M_penjualan->tambahdata($id);
-    //     // $data = $this->M_pelanggan->cekkodepelanggan();
-    //     // foreach ($data as $id) {
-    //     //     $id =$id;
-    //     //     $this->M_pelanggan->tambahakses($id);
-    //     // }
-    //     $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
-    //     redirect('C_penjualan');
-    // }
-
     function tambah(){
         $id = $this->session->userdata('id_user');
         $hasil_kode = $this->M_returpenjualan->tambahdata($id);
@@ -44,8 +30,9 @@ class C_returpenjualan extends CI_Controller{
 
     }
 
-    function add()
+    function add($invoice='')
     {
+        // echo $invoice;exit;
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
@@ -70,7 +57,7 @@ class C_returpenjualan extends CI_Controller{
                 }
             }
         }
-
+        $data['invoice']=$invoice;
         $data['kode'] = $kode2;
         $data['penjualan'] = $this->M_penjualan->getpenjualan();
         $data['barang'] = $this->M_barang->getbarang();
@@ -85,24 +72,25 @@ class C_returpenjualan extends CI_Controller{
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
         $data['returpenjualan'] = $this->M_returpenjualan->getreturpenjualan($ida);
-        $data['dtlreturpenjualan'] = $this->M_penjualan->getdetailreturpenjualan($data['returpenjualan'][0]->id_penjualan);
+        $data['dtlreturpenjualan'] = $this->M_returpenjualan->getdetailreturpenjualan($ida);
 
         //$data['penjualan'] = $this->M_penjualan->getretur($ida);
         //$data['returpenjualan'] = $this->M_penjualan->getreturpenjualan($ida);
 
-        $this->load->view('penjualan/v_viewsuratjalan',$data); 
+        $this->load->view('penjualan/v_viewreturpenjualan',$data); 
         $this->load->view('template/footer');
     }
 
-    // function retur()
-    // {
-    //     $this->load->view('template/header');
-    //     $id = $this->session->userdata('id_user');
-    //     $data['menu'] = $this->M_Setting->getmenu1($id);
-    //     $this->load->view('template/sidebar.php', $data);
-    //     $data['penjualan'] = $this->M_penjualan->getreturpenjualan();
-    //     $this->load->view('penjualan/v_retur',$data); 
-    //     $this->load->view('template/footer');
-    // }
+    function ganti_status($id_returpenjualan)
+    {
+        $hasil = $this->M_returpenjualan->ganti_status($id_returpenjualan);
+        if($hasil){
+            $this->session->set_flashdata('SUCCESS', "Record status updated Successfully!!");
+        }else{
+            $this->session->set_flashdata('ERROR', "Approve gagal cek stok sebelum approve retur");
+        }
+        // print_r($hasil);exit;
+        redirect('C_returpenjualan');
+    }
 
 }

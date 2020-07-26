@@ -13,7 +13,7 @@
     </section>
 <!-- Main content -->
     <section class="content">
-       <form class="form-horizontal" method="POST" action="<?php echo site_url('C_returpenjualan/tambah')?>">
+       <form class="form-horizontal" method="POST" action="<?php echo site_url('C_returpenjualan/tambah')?>" id='formretur'>
       <input type="hidden" id="type" value='retur'>
       <div class="row">
         <!-- left column -->
@@ -43,12 +43,16 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">Nota Penjualan</label>
                   <div class="col-sm-10">
+                    <?php if($invoice==''){?>
                     <select class="form-control select2" id="id_penjualan" name="id_penjualan" style="width: 100%;">
                       <option value="">--Pilih--</option>
                       <?php foreach ($penjualan as $penjualan) { ?>
                       <option value="<?php echo $penjualan->id_penjualan ?>"><?php echo $penjualan->id_penjualan ?></option>
                       <?php } ?>
                     </select>
+                    <?php }else{?>
+                      <input type="text" name="id_penjualan" class="form-control" id="id_penjualan" readonly value='<?= $invoice?>'>
+                      <?php }?>
                   </div>
                 </div>
 

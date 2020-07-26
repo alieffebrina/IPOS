@@ -22,6 +22,24 @@ class M_penjualan extends CI_Model {
         return $this->db->get_where('tb_penjualan', $where)->result();
     }
 
+    function getpiutang(){
+        $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
+        $where = array(
+            'status' => 'belum lunas'
+        );
+        return $this->db->get_where('tb_penjualan',$where)->result();
+    }
+
+    function pemakaianlimit($iduser){
+        $this->db->select('sum(total) as totalpakai, tb_pelanggan.*');
+        $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
+        $where = array(
+            'tb_pelanggan.id_pelanggan' => $iduser,
+            'status' => 'belum lunas'
+        );
+        return $this->db->get_where('tb_penjualan', $where)->result();
+    }
+
     function getdetailpenjualan($ida){
         $this->db->join('tb_barang', 'tb_barang.id_barang = tb_detailpenjualan.id_barang');
         $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
@@ -32,17 +50,15 @@ class M_penjualan extends CI_Model {
         return $this->db->get_where('tb_detailpenjualan', $where)->result();
     }
 
-    function getdetailreturpenjualan($ida){
-        $this->db->join('tb_barang', 'tb_barang.id_barang = tb_detailreturpenjualan.id_barang');
-        $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
-        $this->db->join('tb_satuan', 'tb_satuan.id_satuan = tb_barang.id_satuan');
+    function getretur($ida){
+        $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
         $where = array(
-            'tb_detailreturpenjualan.id_returpenjualan' => $ida
+            'tb_penjualan.id_penjualan' => $ida
         );
-        return $this->db->get_where('tb_detailreturpenjualan', $where)->result();
+        return $this->db->get_where('tb_penjualan', $where)->result();
     }
 
-    function getretur($ida){
+    function getlaporan($ida){
         $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
         $where = array(
             'tb_penjualan.id_penjualan' => $ida
@@ -73,33 +89,6 @@ class M_penjualan extends CI_Model {
         return $query->result();
     }
 
-
-    // INI YANG SAMA KOKO KEMARIN
-    //----------------------------------------------------------
-    // function tambahdata($id){
-    //     $harga = $this->input->post('rupiah');
-    //     $harga_str = preg_replace("/[^0-9]/", "", $harga);
-
-    //     $penjualan = array(
-    //         'id_user' => $id,
-    //         'id_penjualan' => $this->input->post('nonota'),
-    //         'id_pelanggan' => $this->input->post('nama'),
-    //         'tglnota' => date('Y-m-d'),
-    //         'tgl_update' => date('Y-m-d'),
-    //         'total' => $this->input->post('subtotalbawah'),
-    //         'pembayaran' => $this->input->post('pembayaran'),
-    //         'tgljatuhtempo' => date('Y-m-d'),
-    //         'ongkir' => $this->input->post('biayalain'),
-    //         'diskon' => $this->input->post('diskonbawah')
-
-    //     );
-        
-    //     $this->db->insert('tb_penjualan', $penjualan);
-    // }
-
-
-    // COBA MASUK DETAIL PENJUALAN
-    //------------------------------------------------------
     function tambahdata($id){
         // echo "<pre>";print_r($this->input->post());exit;
         $pembayaran = $this->input->post('pembayaran');
@@ -154,5 +143,19 @@ class M_penjualan extends CI_Model {
                         $this->db->query($query);
             }
         }
+    }
+
+    function edit($ida){
+        $barang = array(
+
+            'status' => '1'
+        );
+
+        $where = array(
+            'id_penjualan' =>  $ida,
+        );
+        
+        $this->db->where($where);
+        $this->db->update('tb_penjualan',$barang);
     }
 }
