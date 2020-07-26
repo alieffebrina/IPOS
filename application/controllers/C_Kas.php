@@ -53,4 +53,19 @@ class C_Kas extends CI_Controller{
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
         redirect('C_Kas');
     }
+
+    public function excel()
+    {   
+        echo "ok";
+        // $tglawal = $this->input->post('tglawal');
+        // $tglakhir = $this->input->post('tglakhir');
+        // if ($tglakhir==NULL){
+        //     $kas =  $this->M_kas->getall();
+        // } else {
+        //     $kas = $this->M_kas->search();
+        // }
+        // $data = array('title' => 'Laporan Data Kas Keluar',
+        //         'excel' => $kas);
+        // $this->load->view('kas/excel_kas', $data);
+    }
 }

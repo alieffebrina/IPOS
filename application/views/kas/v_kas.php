@@ -36,7 +36,8 @@
                   <tr>
                     <td style="align-content: left;">Filter Data  &nbsp;  &nbsp; <input type="date" name="tglawal" id="tglawal" class="input-sm"> &nbsp; Sampai &nbsp; 
                       <input type="date" name="tglakhir" id="tglakhir" class="input-sm"> &nbsp;&nbsp;
-                      <button id="search" name="search" class="btn btn-warning" onclick="search();"><i class="fa fa-search"></i>  Cari</button></td>
+                      <button id="search" name="search" class="btn btn-warning" onclick="search();"><i class="fa fa-search"></i>  Cari</button>
+                      <button id="excelkas" class="btn btn-warning" onclick="excelkas();"  ><i class="fa fa-search"></i>  Excel</button></td>
                   </tr></tbody>
                 </table>
           </div>

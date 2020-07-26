@@ -120,6 +120,18 @@
    }
 
 </script>
+
+<script type="text/javascript">
+  function excelkas(){
+     $.ajax({
+      url: "<?php echo base_url("index.php/C_Kas/excel"); ?>", // Isi dengan url/path file php yang 
+      type: 'POST', // Tentukan type nya POST atau GET
+      data: {tglawal: $("#tglawal").val(), tglakhir: $("#tglakhir").val(),}, // Set data yang akan dikirim
+      dataType: "json",
+    });
+   }
+
+</script>
 <!-- Page script -->
 <!-- <script>
   $(function () {
