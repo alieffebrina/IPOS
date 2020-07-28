@@ -46,14 +46,9 @@
                     <input type="text" class="form-control" id="jenisbarang" name="jenisbarang" value="<?php echo $barang->jenisbarang ?>" readonly>
                   </div>
                 </div>
-<!-- <<<<<<< HEAD -->
-                 <!-- <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Merk Barang</label>
-=======
                 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">No. Urut</label>
->>>>>>> 93dd99ee040d4ed82c3f7e3a8cdacb3515bfbd98
                   <div class="col-sm-9">
                     <textarea class="form-control" rows="3" id="nourut" name="nourut" readonly><?php echo $barang->nourut ?></textarea>
                   </div> -->
@@ -88,7 +83,7 @@
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="hasil_konversi" name="hasil_konversi" value="<?php echo $barang->qttkonversi ?>" readonly>
                   </div>
-                </div> -->
+                </div>
               </div>
               <?php } ?>
               <!-- /.box-body -->

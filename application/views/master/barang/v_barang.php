@@ -13,11 +13,11 @@
       </ol>
     </section>
     <div class="box-body">
-    <?php if ($this->session->flashdata('SUCCESS')) { ?>
+    <?php if ($this->session->flashdata('Sukses')) { ?>
        <div class="alert alert-success alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <h5><i class="icon fa fa-check"></i> Success!</h5>
-          Data berhasil di perbarui.
+          <h5><i class="icon fa fa-check"></i> Sukses!</h5>
+          Data Berhasil Ditambahkan.
         </div>                 
       <?php } ?>
     </div>
@@ -56,9 +56,7 @@
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $barang->barang; ?></td>
                   <td><?php echo $barang->nama_satuan;?></td>
-                  <!-- <td><?php echo $barang->satuan; ?></td> -->
-                  <td><?php echo $barang->jenisbarang; ?></td>
-                  <!-- <td><?php echo $barang->nama_satuan;?></td> -->
+                  <td><?php echo $barang->jenisbarang;?></td>
                   <!-- <td><?php echo $barang->nourut;?></td> -->
                   <td><?php echo $barang->stok;?></td>
                   <td><?php echo $barang->stokmin;?></td>
@@ -78,7 +76,10 @@
                 </tbody>
               </table>
               <a href="<?php echo site_url('C_barang/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
-            </div>
+              <a href="<?php echo site_url('C_satuan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Satuan</button></a>
+              <a href="<?php echo site_url('C_jenisbarang/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Jenis Barang</button></a>
+              <a href="<?php echo site_url('C_konversi/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Konversi</button></a>
+            </div> 
             <!-- /.box-body -->
           </div>
           <!-- /.box -->

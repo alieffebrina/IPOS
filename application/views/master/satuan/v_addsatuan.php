@@ -13,6 +13,15 @@
       </ol>
     </section>
 
+    <div class="box-body">
+    <?php if ($this->session->flashdata('Sukses')) { ?>
+       <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h5><i class="icon fa fa-check"></i> Sukses!</h5>
+          Data Berhasil Ditambahkan.
+        </div>                 
+      <?php } ?>
+    </div>
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -37,8 +46,10 @@
               <!-- /.box-body -->
               <div class="box-footer">
                   <div class="col-sm-10">
-                    <button type="reset" class="btn btn-default">Batal</button>
+                    <!-- <button type="reset" class="btn btn-default">Batal</button> -->
+                    <a href="<?php echo site_url('C_barang/index'); ?>" class="btn btn-default">Batal</a>
                     <button type="submit" class="btn btn-info">Simpan Data</button>
+                    <!-- <a href="<?php echo site_url('C_satuan/view'); ?>" class="btn btn-info">Lihat</a> -->
                   </div>
               </div>
               <!-- /.box-footer -->
@@ -46,7 +57,63 @@
           </div>
           <!-- /.box -->
         </div>
+      </div>
       <!-- /.row -->
+   <!--  </section> -->
+    <!-- /.content -->
+
+          
+    
+    <!-- Main content -->
+    <!-- <section class="content"> -->
+      <div class="row">
+        <div class="col-xs-12">
+          <form class="form-horizontal" method="POST" action="<?php echo site_url('C_satuan')?>">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Data Satuan</h3>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                  $no=1;
+                  foreach ($satuan as $satuan) { ?>
+                <tr>
+                  <td><?php echo $no++; ?></td>
+                  <td><?php echo $satuan->satuan; ?></td>
+                  <td>
+                    <div class="btn-group">
+                      <a href="<?php echo site_url('C_satuan/view/'.$satuan->id_satuan); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
+                      <a href="<?php echo site_url('C_satuan/edit/'.$satuan->id_satuan); ?>"><button type="button" class="btn btn-info">Edit</button></a>
+                      <a href="<?php echo site_url('C_satuan/hapus/'.$satuan->id_satuan); ?>"><button type="button" class="btn btn-danger">Hapus</button></a>
+                    </div>
+                  </td>
+                </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+              <<!-- a href="<?php echo site_url('C_satuan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a> -->
+            </div>
+            <!-- /.box-body -->
+            
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      </form>
     </section>
+    
     <!-- /.content -->
   </div>

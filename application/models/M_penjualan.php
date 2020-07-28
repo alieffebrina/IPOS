@@ -58,12 +58,39 @@ class M_penjualan extends CI_Model {
         return $this->db->get_where('tb_penjualan', $where)->result();
     }
 
-    function getlaporan($ida){
-        $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
-        $where = array(
-            'tb_penjualan.id_penjualan' => $ida
-        );
-        return $this->db->get_where('tb_penjualan', $where)->result();
+    function getlaporan(){
+        if(isset($_POST) && !empty($_POST)){
+            $tgl=explode(' - ', $_POST['tgl']);
+            $tgl_mulai=explode('/', $tgl[0]);
+            $tgl_sampai=explode('/', $tgl[1]);
+        }
+
+        $query = "SELECT tb_suratjalan.id_suratjalan,tb_suratjalan.status status_kirim,tb_penjualan.* from tb_penjualan 
+        left join tb_suratjalan on tb_suratjalan.id_penjualan = tb_penjualan.id_penjualan";
+        if(!empty($tgl[0]) && !empty($tgl[1])){
+            $query=$query." where tglnota between '".($tgl_mulai[2]."-".$tgl_mulai[1]."-".$tgl_mulai[0])."' and '".($tgl_sampai[2]."-".$tgl_sampai[1]."-".$tgl_sampai[0])."'";
+        }
+        $query = $this->db->query($query);
+
+        return $query->result();
+    }
+     function getdetaillaporan(){
+        if(isset($_POST) && !empty($_POST)){
+            $tgl=explode(' - ', $_POST['tgl']);
+            $tgl_mulai=explode('/', $tgl[0]);
+            $tgl_sampai=explode('/', $tgl[1]);
+        }
+        $query = "SELECT tb_penjualan.status status_penjualan,tb_penjualan.id_penjualan ,tb_penjualan.tglnota, tb_satuan.*,tb_jenisbarang.*,tb_barang.*,tb_detailpenjualan.* from tb_detailpenjualan
+        join tb_penjualan on tb_detailpenjualan.id_penjualan = tb_penjualan.id_penjualan
+        join tb_barang on tb_detailpenjualan.id_barang = tb_barang.id_barang
+        join tb_jenisbarang on tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang
+        join tb_satuan on tb_satuan.id_satuan = tb_barang.id_satuan";
+        if(!empty($tgl[0]) && !empty($tgl[1])){
+            $query=$query." where tglnota between '".($tgl_mulai[2]."-".$tgl_mulai[1]."-".$tgl_mulai[0])."' and '".($tgl_sampai[2]."-".$tgl_sampai[1]."-".$tgl_sampai[0])."'";
+        }
+        $query = $this->db->query($query);
+
+        return $query->result();
     }
 
     function getreturpenjualan($ida){

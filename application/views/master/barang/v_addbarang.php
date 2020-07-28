@@ -99,7 +99,12 @@
                       <option value="<?php echo $konversi->id_konversi ?>" data-idsatuan="<?php echo $konversi->id_satuan ?>" data-qttkonversi="<?php echo $konversi->qttkonversi ?>"><?php echo $konversi->satuan_konversi ?></option>
                       <?php } ?>
                     </select>
-                    <input type="hidden" class="form-control" id="hasil_konversi" name="hasil_konversi" >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Hasil Konversi</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="hasil_konversi" name="hasil_konversi" readonly>
                   </div>
                 </div>
               </div>

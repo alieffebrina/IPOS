@@ -69,10 +69,6 @@
                     <input type="text" class="form-control" id="stok" name="stok" placeholder="Stok" value="<?php echo $barang->stok ?>" onkeyup="hitung_konversi_qty()">
                   </div>
                 </div>
-              </div>
-                <!-- <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Merk Barang</label>
-=======
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Stok Min.</label>
                   <div class="col-sm-9">
@@ -87,7 +83,6 @@
                 </div>
                  <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Konversi</label>
->>>>>>> 93dd99ee040d4ed82c3f7e3a8cdacb3515bfbd98
                   <div class="col-sm-9">
                     <select class="form-control select2" id="qttkonversi" name="qttkonversi" style="width: 100%;" onchange="hitung_konversi(this)">
                       <?php foreach ($konversi as $konversi) { ?>
@@ -101,7 +96,7 @@
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="hasil_konversi" name="hasil_konversi" readonly value="<?php echo $barang->hasil_konversi ?>">
                   </div>
-                </div> -->
+                </div>
               </div>
               <?php } ?>
               <!-- /.box-body -->

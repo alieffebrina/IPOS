@@ -7,18 +7,21 @@ class C_satuan extends CI_Controller{
         $this->load->library('session');
         $this->load->model('M_satuan');
         $this->load->model('M_Setting');
+        if(!$this->session->userdata('id_user')){
+            redirect('C_Login');
+        }
     }
 
-    function index()
-    {
-        $this->load->view('template/header');
-        $id = $this->session->userdata('id_user');
-        $data['menu'] = $this->M_Setting->getmenu1($id);
-        $this->load->view('template/sidebar.php', $data);
-        $data['satuan'] = $this->M_satuan->getsatuan();
-        $this->load->view('master/satuan/v_satuan',$data); 
-        $this->load->view('template/footer');
-    }
+    // function index()
+    // {
+    //     $this->load->view('template/header');
+    //     $id = $this->session->userdata('id_user');
+    //     $data['menu'] = $this->M_Setting->getmenu1($id);
+    //     $this->load->view('template/sidebar.php', $data);
+    //     $data['satuan'] = $this->M_satuan->getsatuan();
+    //     $this->load->view('master/satuan/v_satuan',$data); 
+    //     $this->load->view('template/footer');
+    // }
 
     function add()
     {
@@ -26,8 +29,8 @@ class C_satuan extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        //$data['provinsi'] = $this->M_Setting->getprovinsi();
-        $this->load->view('master/satuan/v_addsatuan', $data); 
+        $data['satuan'] = $this->M_satuan->getsatuan(); 
+        $this->load->view('master/satuan/v_addsatuan', $data);
         $this->load->view('template/footer');
     }
 
@@ -61,7 +64,7 @@ class C_satuan extends CI_Controller{
         //     $id =$id;
         //     $this->M_satuan->tambahakses($id);
         // }
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Di Tambahkan.");
         redirect('C_satuan');
     }
 
@@ -93,14 +96,14 @@ class C_satuan extends CI_Controller{
 
         $id = $this->session->userdata('id_user');
         $this->M_satuan->edit($id);
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Diperbarui.");
         redirect('C_satuan');
     }
 
     function hapus($id){
         $where = array('id_satuan' => $id);
         $this->M_Setting->delete($where,'tb_satuan');
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Dihapus");
         redirect('C_satuan');
     }
 

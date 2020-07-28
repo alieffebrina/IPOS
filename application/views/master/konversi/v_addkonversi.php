@@ -13,6 +13,16 @@
       </ol>
     </section>
 
+    <div class="box-body">
+    <?php if ($this->session->flashdata('Sukses')) { ?>
+       <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h5><i class="icon fa fa-check"></i> Sukses!</h5>
+          Data Berhasil Ditambahkan.
+        </div>                 
+      <?php } ?>
+    </div>
+
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -66,9 +76,8 @@
               <!-- /.box-body -->
               <div class="box-footer">
                   <div class="col-sm-10">
-                    <button type="reset" class="btn btn-default">Batal</button>
+                    <a href="<?php echo site_url('C_barang/index'); ?>" class="btn btn-default">Batal</a>
                     <button type="submit" class="btn btn-info">Simpan Data</button>
-                    <a href="<?php echo site_url('C_jenisbarang/view'); ?>"><button type="submit" class="btn btn-info">Lihat</button></a>
                   </div>
               </div>
               <!-- /.box-footer -->
@@ -76,7 +85,60 @@
           </div>
           <!-- /.box -->
         </div>
+      </div>
       <!-- /.row -->
+    
+        <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Data Konversi</h3>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Satuan Awal</th>
+                  <th>Quantity Awal</th>
+                  <th>Satuan Konversi</th>
+                  <th>Quantity Konversi</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                  $no=1;
+                  foreach ($konversi as $konversi) { ?>
+                <tr>
+                  <td><?php echo $no++; ?></td>
+                  <td><?php echo $konversi->satuan_awal; ?></td>
+                  <td><?php echo $konversi->qttawal;?></td>
+                  <td><?php echo $konversi->satuan_konversi; ?></td>
+                  <td><?php echo $konversi->qttkonversi;?></td>
+                  
+                  <td>
+                    <div class="btn-group">
+                      <a href="<?php echo site_url('C_konversi/view/'.$konversi->id_konversi); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
+                      <a href="<?php echo site_url('C_konversi/edit/'.$konversi->id_konversi); ?>"><button type="button" class="btn btn-info">Edit</button></a>
+                      <a href="<?php echo site_url('C_konversi/hapus/'.$konversi->id_konversi); ?>"><button type="button" class="btn btn-danger">Hapus</button></a>
+                    </div>
+                  </td>
+                </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+              <!-- <a href="<?php echo site_url('C_konversi/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a> -->
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
     </section>
     <!-- /.content -->
   </div>

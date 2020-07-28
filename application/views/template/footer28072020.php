@@ -97,6 +97,7 @@
   })
 </script>
 <script type="text/javascript">
+  $(document).ready(function(){ // Ketika halaman sudah siap (sudah selesai di load)
    $("#searchkas").click(function() {
   // function search(){
     var tglaw =  $("#tglawal").val();
@@ -112,8 +113,6 @@
         }
       },
       success: function(response){ // Ketika proses pengiriman berhasil
-       document.getElementById('tglawal').value= tglaw;
-       document.getElementById('tglakhir').value= tglak;
         // Ganti isi dari div view dengan view yang diambil dari controller siswa function search
         $("#data").html(response.kas);
       },
@@ -122,6 +121,7 @@
       }
     });
    // }
+ });
  });
 
 </script>

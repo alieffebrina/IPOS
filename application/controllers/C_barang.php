@@ -7,6 +7,9 @@ class C_barang extends CI_Controller{
         $this->load->library('session');
         $this->load->model('M_barang');
         $this->load->model('M_Setting');
+        if(!$this->session->userdata('id_user')){
+            redirect('C_Login');
+        }
     }
 
     function index()
@@ -54,7 +57,31 @@ class C_barang extends CI_Controller{
          
     }
 
-    function ceksatuan(){
+    // function ceksatuan(){
+    //         // Ambil data ID Provinsi yang dikirim via ajax post
+    //         $idbarang = $this->input->post('id_barang');
+            
+    //         $hasil_kode = $this->M_barang->getspek($idbarang);
+            
+    //         // Buat variabel untuk menampung tag-tag option nya
+    //         // Set defaultnya dengan tag option Pilih
+    //         // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' readonly>";
+    //         $lists=$list_namabarang=$harga='';
+    //         foreach($hasil_kode as $data){
+    //           // $lists .= " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$data->satuan."' readonly>"; // Tambahkan tag option ke variabel $lists
+    //           // $ala = $data->alamat;
+    //             $harga = "<input type='hidden' id='harga' value='".$data->hargabeli."'><input type='text' class='form-control'  onkeyup='Calculate()' id='hargashow' value='".number_format($data->hargabeli)."'>";
+    //             $lists = "<input type='hidden'  id='satuan' value='".$data->nama_satuan."'>".$data->nama_satuan;
+    //             $list_namabarang = "<input type='hidden' id='stok' value='".$data->stok."'><input type='hidden'  id='namabarangshow' value='".$data->barang."'>";
+    //         }
+            
+    //         // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$hasil_kode."' readonly>";
+
+    //         $callback = array('list_satuan'=>$lists, 'list_harga'=>$harga, 'list_namabarang' =>$list_namabarang); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+    //         echo json_encode($callback); // konversi varibael $callback menjadi JSON
+    // }
+
+     function ceksatuan(){
             // Ambil data ID Provinsi yang dikirim via ajax post
             $idbarang = $this->input->post('id_barang');
             
@@ -102,10 +129,13 @@ class C_barang extends CI_Controller{
                 date_default_timezone_set('Asia/Jakarta');
                 $tgl = date('Y-m-d');
                 $a = str_replace("tanggal", $tgl, $a);
-                $data = $this->M_barang->cekbarangtgl();
+                $data = $this->M_barang->cekkodebarang();
+
+                // TAK COBA PAKAI INI KO
+                //----------------------------------------------
+                // $data = $this->M_barang->cekbarangtgl();
                 $no = count($data) + 1;
                 $kode2 = str_replace("no", $no, $a);
-                // $b = $this->M_barang->cekkode($kodeno);
             } else {
                 $data = $this->M_barang->cekkodebarang();
                 foreach ($data as $id) {
@@ -117,7 +147,7 @@ class C_barang extends CI_Controller{
             $kode = $kode2;
             $id = $this->session->userdata('id_user');
             $this->M_barang->tambahdata($id,$kode);
-            $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+            $this->session->set_flashdata('Sukses', "Data Berhasil Ditambahkan.");
             redirect('C_barang');
 
         }
@@ -130,7 +160,7 @@ class C_barang extends CI_Controller{
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
         $data['barang'] = $this->M_barang->getspek($id);
-        $this->load->view('master/barang/v_barang',$data); 
+        $this->load->view('master/barang/v_vbarang',$data); 
         $this->load->view('template/footer');
     }
 
@@ -153,14 +183,14 @@ class C_barang extends CI_Controller{
     {   
         $id = $this->session->userdata('id_user');
         $this->M_barang->edit($id);
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Diperbarui.");
         redirect('C_barang');
     }
 
     function hapus($id){
         $where = array('id_barang' => $id);
         $this->M_Setting->delete($where,'tb_barang');
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Dihapus.");
         redirect('C_barang');
     }
 

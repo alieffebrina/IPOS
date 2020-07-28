@@ -12,16 +12,16 @@ class C_konversi extends CI_Controller{
         }
     }
 
-    function index()
-    {
-        $this->load->view('template/header');
-        $id = $this->session->userdata('id_user');
-        $data['menu'] = $this->M_Setting->getmenu1($id);
-        $this->load->view('template/sidebar.php', $data);
-        $data['konversi'] = $this->M_konversi->getkonversisatuan();
-        $this->load->view('master/konversi/v_konversi',$data); 
-        $this->load->view('template/footer');
-    }
+    // function index()
+    // {
+    //     $this->load->view('template/header');
+    //     $id = $this->session->userdata('id_user');
+    //     $data['menu'] = $this->M_Setting->getmenu1($id);
+    //     $this->load->view('template/sidebar.php', $data);
+    //     $data['konversi'] = $this->M_konversi->getkonversisatuan();
+    //     $this->load->view('master/konversi/v_konversi',$data); 
+    //     $this->load->view('template/footer');
+    // }
 
     function add()
     {
@@ -59,12 +59,7 @@ class C_konversi extends CI_Controller{
 
         $id = $this->session->userdata('id_user');
         $this->M_konversi->tambahdata($id);
-        // $data = $this->M_pelanggan->cekkodepelanggan();
-        // foreach ($data as $id) {
-        //     $id =$id;
-        //     $this->M_pelanggan->tambahakses($id);
-        // }
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Ditambahkan.");
         redirect('C_konversi');
     }
 
@@ -96,14 +91,14 @@ class C_konversi extends CI_Controller{
 
         $id = $this->session->userdata('id_user');
         $this->M_konversi->edit($id);
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Diperbarui.");
         redirect('C_konversi');
     }
 
     function hapus($id){
         $where = array('id_konversi' => $id);
         $this->M_Setting->delete($where,'tb_konversi');
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Dihapus.");
         redirect('C_konversi');
     }
 

@@ -39,7 +39,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                   <div class="col-sm-10">
-                    <button type="submit" class="btn btn-default">Kembali</button>
+                    <a href="<?php echo site_url('C_jenisbarang/add'); ?>" class="btn btn-default">Kembali</a>
                   </div>
               </div>
               <!-- /.box-footer -->

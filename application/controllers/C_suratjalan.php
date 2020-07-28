@@ -94,15 +94,12 @@ class C_suratjalan extends CI_Controller{
         $this->load->view('template/footer');
     }
 
-    // function retur()
-    // {
-    //     $this->load->view('template/header');
-    //     $id = $this->session->userdata('id_user');
-    //     $data['menu'] = $this->M_Setting->getmenu1($id);
-    //     $this->load->view('template/sidebar.php', $data);
-    //     $data['penjualan'] = $this->M_penjualan->getreturpenjualan();
-    //     $this->load->view('penjualan/v_retur',$data); 
-    //     $this->load->view('template/footer');
-    // }
+    function kirim($ida)
+    {   
+        // $id = $this->session->userdata('id_user');
+        $this->M_suratjalan->edit($ida);
+        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        redirect('C_suratjalan');
+    }
 
 }

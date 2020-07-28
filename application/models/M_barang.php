@@ -12,6 +12,18 @@ class M_barang extends CI_Model {
         return $query->result();
     }
 
+
+    // INI YANG SAMA KOKO
+    //--------------------------------
+    // function getnama($ida){
+    //     $where = array(
+    //         'id_barang' => $ida
+    //     );
+    //     return $this->db->get_where('tb_barang',$where)->result();
+    // }
+
+    // INI AKU COBA LAGI MASUK DETAIL PENJUALAN
+    //-----------------------------------------------
     function getnama($ida){
         $this->db->select('tb_jenisbarang.jenisbarang,ts2.satuan satuan_konversi,ts1.satuan nama_satuan, ts1.id_satuan satuanawal, ts2.id_satuan satuankon, tb_barang.*,tb_konversi.*');
         $this->db->join('tb_satuan ts1', 'ts1.id_satuan = tb_barang.id_satuan');
@@ -24,6 +36,39 @@ class M_barang extends CI_Model {
         return $this->db->get_where('tb_barang',$where)->result();
     }
 
+    // INI YANG SAMA KOKO
+    //---------------------------------
+    // function tambahdata($id,$kode){
+    //     $harga = $this->input->post('rupiah');
+    //     $harga_str = preg_replace("/[^0-9]/", "", $harga);
+
+    //     //$qttkonversi = $this->input->post('qttkonversi'),
+    //     //$qttstok = $this->input->post('stok'),
+    //     //$total = $qttkonversi * $qttstok;
+
+    //     $barang = array(
+    //         'id_user' => $id,
+    //         'id_barang' => $kode,
+    //         'barang' => $this->input->post('barang'),
+    //         'id_satuan' => $this->input->post('satuan'),
+    //         'id_jenisbarang' => $this->input->post('jenisbarang'),
+    //         // 'nourut' => $this->input->post('nourut'),
+    //         'stok' => $this->input->post('stok'),
+    //         'stokmin' => $this->input->post('stokmin'),
+    //         'hargabeli' => $harga_str,
+    //         'id_konversi' => $this->input->post('qttkonversi'),
+    //         'stok' => $this->input->post('stok'),
+    //         'hasil_konversi' => $this->input->post('hasil_konversi'),
+    //         //'id_konversi' => $total,
+    //         'tgl_update' => date('Y-m-d')
+    //     );
+        
+    //     $this->db->insert('tb_barang', $barang);
+    // }
+
+
+    // INI AKU NYOBA LAGI
+    //---------------------------------------------------------
     function tambahdata($id,$kode){
         $harga = $this->input->post('rupiah');
         $harga_str = preg_replace("/[^0-9]/", "", $harga);
@@ -39,8 +84,6 @@ class M_barang extends CI_Model {
             'id_satuan' => $this->input->post('satuan'),
             'id_jenisbarang' => $this->input->post('jenisbarang'),
             // 'merk' => $this->input->post('merk'),
-            'id_barang' => $kode,
-            'tgl_update' => $now,
             // 'nourut' => $this->input->post('nourut'),
             'stok' => $this->input->post('stok'),
             'stokmin' => $this->input->post('stokmin'),
@@ -61,6 +104,9 @@ class M_barang extends CI_Model {
         return $idbarang->row();
     }
 
+
+    // TAK AMBAHIN INI KO
+    //----------------------------------------------------------------
     function cekbarangtgl(){
         $now = date('Y-m-d');
         $where = array(
@@ -81,7 +127,7 @@ class M_barang extends CI_Model {
     //}
 
     function getspek($iduser){
-        $this->db->select('tb_jenisbarang.jenisbarang,ts2.satuan satuan_konversi,ts1.satuan nama_satuan,tb_barang.*,tb_konversi.*');
+        $this->db->select('tb_jenisbarang.jenisbarang,ts2.satuan satuan_konversi,ts1.satuan nama_satuan,tb_barang.*, tb_konversi.*');
         $this->db->join('tb_satuan ts1', 'ts1.id_satuan = tb_barang.id_satuan');
         $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
         $this->db->join('tb_konversi', 'tb_konversi.id_konversi = tb_barang.id_konversi');
@@ -127,6 +173,5 @@ class M_barang extends CI_Model {
         $this->db->where($where);
         $this->db->update('tb_barang',$barang);
     }
-
     
 }

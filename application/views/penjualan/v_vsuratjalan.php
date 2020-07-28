@@ -42,6 +42,7 @@
                   <th>Nama Pelanggan</th>
                   <th>Alamat</th>
                   <th>Nama Pengirim</th>
+                  <th>Status Kirim</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -57,12 +58,15 @@
                   <td><?php echo $suratjalan->nama; ?></td>
                   <td><?php echo $suratjalan->alamat;?></td>
                   <td><?php echo $suratjalan->namapengirim; ?></td>
+                  <td><?php if($suratjalan->status == '1'){ echo "Dikirim";} else {echo "Belum Dikirim"; }?></td>
                   
                   <td>
                     <div class="btn-group">
                       <a href="<?php echo site_url('C_suratjalan/view/'.$suratjalan->id_suratjalan); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
                       <a href="<?php echo site_url('C_suratjalan/edit/'.$suratjalan->id_suratjalan); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
-                      <!-- <a href="<?php echo site_url('C_suratjalan/hapus/'.$pembelian->id_suratjalan); ?>"><button type="button" class="btn btn-danger">Retur</button></a> -->
+                      <?php if ($suratjalan->status == '0') { ?>
+                      <a href="<?php echo site_url('C_suratjalan/kirim/'.$suratjalan->id_suratjalan); ?>"><button type="button" class="btn btn-primary">Kirim</button></a>
+                       <?php } ?>
                     </div>
                   </td>
                 </tr>

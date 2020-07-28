@@ -7,18 +7,21 @@ class C_jenisbarang extends CI_Controller{
         $this->load->library('session');
         $this->load->model('M_jenisbarang');
         $this->load->model('M_Setting');
+        if(!$this->session->userdata('id_user')){
+            redirect('C_Login');
+        }
     }
 
-    function index()
-    {
-        $this->load->view('template/header');
-        $id = $this->session->userdata('id_user');
-        $data['menu'] = $this->M_Setting->getmenu1($id);
-        $this->load->view('template/sidebar.php', $data);
-        $data['jenisbarang'] = $this->M_jenisbarang->getjenisbarang();
-        $this->load->view('master/jenisbarang/v_jenisbarang',$data); 
-        $this->load->view('template/footer');
-    }
+    // function index()
+    // {
+    //     $this->load->view('template/header');
+    //     $id = $this->session->userdata('id_user');
+    //     $data['menu'] = $this->M_Setting->getmenu1($id);
+    //     $this->load->view('template/sidebar.php', $data);
+    //     $data['jenisbarang'] = $this->M_jenisbarang->getjenisbarang();
+    //     $this->load->view('master/jenisbarang/v_jenisbarang',$data); 
+    //     $this->load->view('template/footer');
+    // }
 
     function add()
     {
@@ -61,7 +64,7 @@ class C_jenisbarang extends CI_Controller{
         //     $id =$id;
         //     $this->M_jenisbarang->tambahakses($id);
         // }
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Ditambahkan.");
         redirect('C_jenisbarang');
     }
 
@@ -93,14 +96,14 @@ class C_jenisbarang extends CI_Controller{
 
         $id = $this->session->userdata('id_user');
         $this->M_jenisbarang->edit($id);
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Diperbarui.");
         redirect('C_jenisbarang');
     }
 
     function hapus($id){
         $where = array('id_jenisbarang' => $id);
         $this->M_Setting->delete($where,'tb_jenisbarang');
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Dihapus.");
         redirect('C_jenisbarang');
     }
 

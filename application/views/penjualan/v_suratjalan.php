@@ -36,7 +36,13 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">Tanggal Kirim</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="tgl" name="tgl" value="<?php echo date('d-m-Y')?>" readonly>
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="datepicker form-control" id="tgl" name="tgl" value="<?php echo date('d-m-Y')?>">
+                    </div>
+                    
                   </div>
                 </div>
 
@@ -77,7 +83,7 @@
                   <label for="inputPassword3" class="col-sm-1 control-label">Pengiriman</label>
                   <div class="col-sm-10">
                   <input type="radio" id="Dikirim" name="pengiriman" value="Dikirim"> Dikirim
-                  <input type="radio" id="Diambil" name="pengiriman" value="Diambil"> Diambil
+                  <input type="radio" id="Diambil" name="pengiriman" value="Belum" checked> Belum dikirim
                   </div>
                 </div>
               </div>
