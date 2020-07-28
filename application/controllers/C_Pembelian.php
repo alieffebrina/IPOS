@@ -9,6 +9,7 @@ class C_Pembelian extends CI_Controller{
         $this->load->model('M_Setting');
         $this->load->model('M_suplier');
         $this->load->model('M_barang');
+        $this->load->library('pdf');     
     }
 
     function index()
@@ -193,5 +194,74 @@ class C_Pembelian extends CI_Controller{
         $data['dtlretur'] = $this->M_Pembelian->vreturdetail($ida);
         $this->load->view('pembelian/v_detailretur',$data); 
         $this->load->view('template/footer');
+    }
+
+    function cetakpembelian($ida){
+        $pdf = new FPDF('L','mm',array('110', '215'));
+        // membuat halaman baru
+        $pdf->AddPage();
+        // setting jenis font yang akan digunakan
+        $pdf->SetFont('Arial','B',16,'C');
+        // mencetak string 
+        $pdf->Cell(200,8,'Pesanan Pembelian',0,1,'C');
+        $pdf->SetFont('Arial','B',12);
+        // Memberikan space kebawah agar tidak terlalu rapat
+        // $pdf->Cell(10,8,'',0,1);
+        $pdf->SetFont('Arial','',10,'C');
+
+        $pembelian = $this->M_Pembelian->getdetail($ida);
+        $dtlpembelian = $this->M_Pembelian->getdetailpembelian($ida);
+        foreach ($pembelian as $key ) {
+            
+            $pdf->Cell(30,7,'Nota Pembelian',0,0);
+            $pdf->Cell(5,7,':',0,0,'C');
+            $pdf->Cell(40,7,$key->id_pembelian,0,1);
+            $pdf->Cell(30,7,'Tanggal',0,0);
+            $pdf->Cell(5,7,':',0,0,'C');
+            $pdf->Cell(40,7,$key->tglnotapembelian,0,1);
+            $pdf->Cell(30,7,'Suplier',0,0);
+            $pdf->Cell(5,7,':',0,0,'C');
+            $pdf->Cell(40,7,$key->nama_toko,0,1);
+            $pdf->Cell(30,7,'Jenis Pembayaran',0,0);
+            $pdf->Cell(5,7,':',0,0,'C');
+            $pdf->Cell(40,7,$key->jenispembayaran,0,1);
+        
+        }
+            $pdf->Cell(10,7,'No',1,0);
+            $pdf->Cell(30,7,'Kode Barang',1,0);
+            $pdf->Cell(30,7,'Nama Item',1,0);
+            $pdf->Cell(20,7,'Jumlah',1,0);
+            $pdf->Cell(20,7,'Satuan',1,0);
+            $pdf->Cell(30,7,'Harga',1,0);
+            $pdf->Cell(20,7,'Diskon',1,0);
+            $pdf->Cell(30,7,'Total',1,1);
+        $no =1;
+        foreach ($dtlpembelian as $dtl ) {
+            
+            $pdf->Cell(10,7,$no++,1,0);
+            $pdf->Cell(30,7,$dtl->id_barang,1,0);
+            $pdf->Cell(30,7,$dtl->barang,1,0);
+            $pdf->Cell(20,7,$dtl->qtt,1,0);
+            $pdf->Cell(20,7,$dtl->nama_satuan,1,0);
+            $pdf->Cell(30,7,number_format($dtl->harga),1,0);
+            $pdf->Cell(20,7,number_format($dtl->diskon),1,0);
+            $pdf->Cell(30,7,number_format(($dtl->harga*$dtl->qtt)-$dtl->diskon),1,1);
+        
+        } 
+        foreach ($pembelian as $key ) {
+            
+            $pdf->Cell(30,7,'Diskon',0,0);
+            $pdf->Cell(5,7,':',0,0,'C');
+            $pdf->Cell(40,7,$key->diskon,0,1);
+            $pdf->Cell(30,7,'Biaya Lain ',0,0);
+            $pdf->Cell(5,7,':',0,0,'C');
+            $pdf->Cell(40,7,$key->biayalain,0,1);
+            $pdf->Cell(30,7,'Total Akhir',0,0);
+            $pdf->Cell(5,7,':',0,0,'C');
+            $pdf->Cell(40,7,number_format($key->total),0,1);
+        
+        }
+
+        $pdf->Output();
     }
 }

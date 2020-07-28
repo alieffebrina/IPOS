@@ -56,16 +56,19 @@ class C_Kas extends CI_Controller{
 
     public function excel()
     {   
-        echo "ok";
+        // echo "ok";
         // $tglawal = $this->input->post('tglawal');
-        // $tglakhir = $this->input->post('tglakhir');
-        // if ($tglakhir==NULL){
-        //     $kas =  $this->M_kas->getall();
-        // } else {
-        //     $kas = $this->M_kas->search();
-        // }
-        // $data = array('title' => 'Laporan Data Kas Keluar',
-        //         'excel' => $kas);
-        // $this->load->view('kas/excel_kas', $data);
+        // redirect('C_Kas/search');
+        $tglakhir = $this->input->post('tglakhir');
+        if ($tglakhir==NULL){
+            // echo "null";
+            $kas =  $this->M_kas->getall();
+        } else {
+            $kas = $this->M_kas->search();
+            // echo "ada";
+        }
+        $data = array('title' => 'Laporan Data Kas Keluar',
+                'excel' => $kas);
+        $this->load->view('kas/excelkas', $data);
     }
 }

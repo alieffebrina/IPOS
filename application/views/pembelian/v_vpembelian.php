@@ -70,7 +70,7 @@ n<!-- Content Wrapper. Contains page content -->
                   <td>
                     <div class="btn-group">
                       <a href="<?php echo site_url('C_Pembelian/view/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
-                      <a href="<?php echo site_url('C_Pembelian/edit/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
+                      <a href="<?php echo site_url('C_Pembelian/cetakpembelian/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
                       <a href="<?php echo site_url('C_Pembelian/retur/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-danger">Retur</button></a>
                       <?php if ($pembelian->status == 'belum') { ?>
                         

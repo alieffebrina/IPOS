@@ -97,7 +97,10 @@
   })
 </script>
 <script type="text/javascript">
-  function search(){
+   $("#searchkas").click(function() {
+  // function search(){
+    var tglaw =  $("#tglawal").val();
+    var tglak =  $("#tglakhir").val();
      $.ajax({
       url: "<?php echo base_url("index.php/C_Kas/search"); ?>", // Isi dengan url/path file php yang 
       type: 'POST', // Tentukan type nya POST atau GET
@@ -109,7 +112,8 @@
         }
       },
       success: function(response){ // Ketika proses pengiriman berhasil
-        
+       document.getElementById('tglawal').value= tglaw;
+       document.getElementById('tglakhir').value= tglak;
         // Ganti isi dari div view dengan view yang diambil dari controller siswa function search
         $("#data").html(response.kas);
       },
@@ -117,11 +121,41 @@
         alert(xhr.responseText); // munculkan alert
       }
     });
-   }
+   // }
+ });
+
+</script>
+<script type="text/javascript">
+   $("#excelkas").click(function() {
+  // function search(){
+    var tglaw =  $("#tglawal").val();
+    var tglak =  $("#tglakhir").val();
+     $.ajax({
+      url: "<?php echo base_url("index.php/C_Kas/excel"); ?>", // Isi dengan url/path file php yang 
+      type: 'POST', // Tentukan type nya POST atau GET
+      data: {tglawal: $("#tglawal").val(), tglakhir: $("#tglakhir").val(),}, // Set data yang akan dikirim
+      dataType: "json",
+      beforeSend: function(e) {
+        if(e && e.overrideMimeType) {
+          e.overrideMimeType("application/json;charset=UTF-8");
+        }
+      },
+      success: function(response){ // Ketika proses pengiriman berhasil
+       // document.getElementById('tglawal').value= tglaw;
+       // document.getElementById('tglakhir').value= tglak;
+        // Ganti isi dari div view dengan view yang diambil dari controller siswa function search
+        // $("#data").html(response.kas);
+      },
+      error: function (xhr, ajaxOptions, thrownError) { // Ketika terjadi error
+        // alert(xhr.responseText); // munculkan alert
+      }
+    });
+   // }
+ });
 
 </script>
 
-<script type="text/javascript">
+<<!-- script type="text/javascript">
   function excelkas(){
      $.ajax({
       url: "<?php echo base_url("index.php/C_Kas/excel"); ?>", // Isi dengan url/path file php yang 
@@ -131,7 +165,7 @@
     });
    }
 
-</script>
+</script> -->
 <!-- Page script -->
 <!-- <script>
   $(function () {

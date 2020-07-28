@@ -34,10 +34,14 @@
                 <table class="table table-bordered">
                   <tbody>
                   <tr>
+                   <form class="form-horizontal" method="POST" action="<?php echo site_url('C_Kas/excel')?>">
                     <td style="align-content: left;">Filter Data  &nbsp;  &nbsp; <input type="date" name="tglawal" id="tglawal" class="input-sm"> &nbsp; Sampai &nbsp; 
                       <input type="date" name="tglakhir" id="tglakhir" class="input-sm"> &nbsp;&nbsp;
-                      <button id="search" name="search" class="btn btn-warning" onclick="search();"><i class="fa fa-search"></i>  Cari</button>
-                      <button id="excelkas" class="btn btn-warning" onclick="excelkas();"  ><i class="fa fa-search"></i>  Excel</button></td>
+
+                      <input type="button" name="searchkas" class="btn btn-primary" value="cari" id="searchkas">
+                      <!-- <input type="button" id="search" name="search" class="btn btn-warning" onclick="search();" value="cari"> -->
+                      <button id="excelkas" class="btn btn-warning" type="submit"  ><i class="fa fa-search"></i>  Excel</button></td>
+                      </form>
                   </tr></tbody>
                 </table>
           </div>
