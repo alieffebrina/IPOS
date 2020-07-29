@@ -24,6 +24,43 @@ n<!-- Content Wrapper. Contains page content -->
     <!-- Main content -->
     <section class="content">
       <div class="row">
+
+        <div class='col-lg-12'>
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Filter</h3>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+              <form action='<?= site_url("C_Pembelian/laporan")?>' method='POST'>
+                <div class='row'>
+                  <div class="col-lg-12">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Tanggal</label>
+                      <div class="col-sm-4">
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="tanggalan form-control" id="tgl" name="tgl" value="<?php echo date('d-m-Y')?>">
+                          </div>
+                      </div>
+                  </div>
+                </div><br>
+                <div class='row'>
+                  <div class='col-lg-12'>
+                    <label for="inputEmail3" class="col-sm-2 control-label"></label>
+                    <div class="col-sm-3">
+                      <button type="submit" name="btn_submit" value="search" class="btn btn-primary">Tampilkan</button>
+                      <button type="submit" name="excel" id="btn_print" value="excel" class="btn btn-warning">Excel</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
@@ -46,7 +83,6 @@ n<!-- Content Wrapper. Contains page content -->
                   <th>Tgl Jatuh Tempo</th>
                   <th>Total Harga</th>
                   <th>Status Pembayaran</th>
-                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -70,17 +106,6 @@ n<!-- Content Wrapper. Contains page content -->
                   <td>Rp. <?php echo number_format($pembelian->total,0,",","."); ?></td>
                   <td><?php echo $pembelian->status; ?></td>
                   
-                  <td>
-                    <div class="btn-group">
-                      <a href="<?php echo site_url('C_Pembelian/view/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
-                      <a href="<?php echo site_url('C_Pembelian/cetakpembelian/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
-                      <a href="<?php echo site_url('C_Pembelian/retur/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-danger">Retur</button></a>
-                      <?php if ($pembelian->status == 'belum') { ?>
-                        
-                      <a href="<?php echo site_url('C_Pembelian/bayar/'.$pembelian->id_pembelian); ?>"><button type="button" class="btn btn-primary">Bayar</button></a>
-                      <?php } ?>
-                    </div>
-                  </td>
                 </tr>
                   <?php } ?>
                 </tbody>

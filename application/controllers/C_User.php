@@ -63,13 +63,13 @@ class C_User extends CI_Controller{
         redirect('C_User');
     }
 
-    function view($id)
+    function view($ida)
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['user'] = $this->M_User->getspek($id);
+        $data['user'] = $this->M_User->getspek($ida);
         $this->load->view('master/user/v_vuser',$data); 
         $this->load->view('template/footer');
     }

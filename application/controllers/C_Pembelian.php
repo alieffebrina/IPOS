@@ -35,7 +35,7 @@ class C_Pembelian extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['pembelian'] = $this->M_Pembelian->getall();
+        $data['pembelian'] = $this->M_Pembelian->getlaporan();
         $this->load->view('pembelian/v_laporanpembelian',$data); 
         $this->load->view('template/footer');
         }
