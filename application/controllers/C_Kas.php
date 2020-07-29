@@ -12,8 +12,8 @@ class C_Kas extends CI_Controller{
     function index()
     {   
 
-            $tgla = $this->input->post('tgl');
-            $tglb = str_replace(' ', '', $tgla);
+        $tgla = $this->input->post('tgl');
+        $tglb = str_replace(' ', '', $tgla);
         $excel = $this->input->post('excel');
         if ($excel == 'excel'){
             redirect('C_Kas/excel/'.$tglb);
@@ -24,6 +24,25 @@ class C_Kas extends CI_Controller{
         $this->load->view('template/sidebar.php', $data);
         $data['kas'] = $this->M_kas->search($tglb);
         $this->load->view('kas/v_kas', $data); 
+        $this->load->view('template/footer');
+        }
+    }
+
+    function laporan()
+    {   
+
+        $tgla = $this->input->post('tgl');
+        $tglb = str_replace(' ', '', $tgla);
+        $excel = $this->input->post('excel');
+        if ($excel == 'excel'){
+            redirect('C_Kas/excel/'.$tglb);
+        } else {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['kas'] = $this->M_kas->search($tglb);
+        $this->load->view('kas/v_laporankas', $data); 
         $this->load->view('template/footer');
         }
     }

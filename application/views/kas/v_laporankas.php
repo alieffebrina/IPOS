@@ -67,9 +67,6 @@
             <div class="box-header">
               <h3 class="box-title">Data Kas Keluar</h3>
             </div>
-            <div class="box-header">
-              <a href="<?php echo site_url('C_Kas/add'); ?>"><button type="submit" class="btn btn-default">Tambah Data</button></a>
-            </div>
             <!-- /.box-header -->
               <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">

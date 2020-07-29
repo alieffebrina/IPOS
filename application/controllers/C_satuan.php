@@ -65,7 +65,7 @@ class C_satuan extends CI_Controller{
         //     $this->M_satuan->tambahakses($id);
         // }
         $this->session->set_flashdata('Sukses', "Data Berhasil Di Tambahkan.");
-        redirect('C_satuan');
+        redirect('C_satuan/add');
     }
 
     function view($ida)
