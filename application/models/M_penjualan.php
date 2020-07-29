@@ -61,8 +61,8 @@ class M_penjualan extends CI_Model {
     function getlaporan(){
         if(isset($_POST) && !empty($_POST)){
             $tgl=explode(' - ', $_POST['tgl']);
-            $tgl_mulai=explode('/', $tgl[0]);
-            $tgl_sampai=explode('/', $tgl[1]);
+            $tgl_mulai=explode('.', $tgl[0]);
+            $tgl_sampai=explode('.', $tgl[1]);
         }
 
         $query = "SELECT tb_suratjalan.id_suratjalan,tb_suratjalan.status status_kirim,tb_penjualan.* from tb_penjualan 
@@ -77,8 +77,8 @@ class M_penjualan extends CI_Model {
      function getdetaillaporan(){
         if(isset($_POST) && !empty($_POST)){
             $tgl=explode(' - ', $_POST['tgl']);
-            $tgl_mulai=explode('/', $tgl[0]);
-            $tgl_sampai=explode('/', $tgl[1]);
+            $tgl_mulai=explode('.', $tgl[0]);
+            $tgl_sampai=explode('.', $tgl[1]);
         }
         $query = "SELECT tb_penjualan.status status_penjualan,tb_penjualan.id_penjualan ,tb_penjualan.tglnota, tb_satuan.*,tb_jenisbarang.*,tb_barang.*,tb_detailpenjualan.* from tb_detailpenjualan
         join tb_penjualan on tb_detailpenjualan.id_penjualan = tb_penjualan.id_penjualan

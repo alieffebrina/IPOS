@@ -25,26 +25,48 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
+
+        <div class='col-lg-12'>
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Filter</h3>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+              <form action='<?= site_url("C_Kas")?>' method='POST'>
+                <div class='row'>
+                  <div class="col-lg-12">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Tanggal</label>
+                      <div class="col-sm-4">
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="tanggalan form-control" id="tgl" name="tgl" value="<?php echo date('d-m-Y')?>">
+                          </div>
+                      </div>
+                  </div>
+                </div><br>
+                <div class='row'>
+                  <div class='col-lg-12'>
+                    <label for="inputEmail3" class="col-sm-2 control-label"></label>
+                    <div class="col-sm-3">
+                      <button type="submit" name="btn_submit" value="search" class="btn btn-primary">Tampilkan</button>
+                      <button type="submit" name="excel" id="btn_print" value="excel" class="btn btn-warning">Download</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Data Kas Keluar</h3>
             </div>
-            <div class="box-body" >
-                <table class="table table-bordered">
-                  <tbody>
-                  <tr>
-                   <!-- <form class="form-horizontal" method="POST" action="<?php echo site_url('C_Kas/excel')?>"> -->
-                    <td style="align-content: left;">Filter Data  &nbsp;  &nbsp; <input type="date" name="tglawal" id="tglawal" class="input-sm"> &nbsp; Sampai &nbsp; 
-                      <input type="date" name="tglakhir" id="tglakhir" class="input-sm"> &nbsp;&nbsp;
-                      <button id="searchkas" class="btn btn-primary" type="button"  ><i class="fa fa-search"></i>  Cari</button>
-                      <!-- <input type="button" name="searchkas" class="btn btn-primary" value="Cari" id="searchkas"><i class="fa fa-search"></i> -->
-                      <!-- <input type="button" id="search" name="search" class="btn btn-warning" onclick="search();" value="cari"> -->
-                      <button id="excelkas" class="btn btn-warning" type="submit"  ><i class="fa fa-document"></i>  Excel</button></td>
-                      <!-- </form> -->
-                  </tr></tbody>
-                </table>
-          </div>
             <!-- /.box-header -->
               <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">

@@ -10,30 +10,23 @@ class C_Kas extends CI_Controller{
     }
 
     function index()
-    {
+    {   
+
+            $tgla = $this->input->post('tgl');
+            $tglb = str_replace(' ', '', $tgla);
+        $excel = $this->input->post('excel');
+        if ($excel == 'excel'){
+            redirect('C_Kas/excel/'.$tglb);
+        } else {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['kas'] = $this->M_kas->getall();
+        $data['kas'] = $this->M_kas->search($tglb);
         $this->load->view('kas/v_kas', $data); 
         $this->load->view('template/footer');
+        }
     }
-
-    public function search(){
-    // Ambil data NIS yang dikirim via ajax post
-        $tglawal = $this->input->post('tglawal');
-        $tglakhir = $this->input->post('tglakhir');
-        $kas = $this->M_kas->search();
-        
-        // Kita load file view.php sambil mengirim data siswa hasil query function search di SiswaModel
-        $hasil = $this->load->view('kas/v_kas', array('kas'=>$kas), true);
-        $callback = array(
-          'kas' => $hasil, // Set array hasil dengan isi dari view.php yang diload tadi
-        );
-        echo json_encode($callback); // konversi varibael $callback menjadi JSON
-      }
-
 
     function add()
     {
@@ -54,19 +47,10 @@ class C_Kas extends CI_Controller{
         redirect('C_Kas');
     }
 
-    public function excel()
+    public function excel($tglb)
     {   
-        // echo "ok";
-        // $tglawal = $this->input->post('tglawal');
-        // redirect('C_Kas/search');
-        $tglakhir = $this->input->post('tglakhir');
-        if ($tglakhir==NULL){
-            // echo "null";
-            $kas =  $this->M_kas->getall();
-        } else {
-            $kas = $this->M_kas->search();
-            // echo "ada";
-        }
+        
+        $kas = $this->M_kas->search($tglb);
         $data = array('title' => 'Laporan Data Kas Keluar',
                 'excel' => $kas);
         $this->load->view('kas/excelkas', $data);
