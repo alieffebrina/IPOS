@@ -56,9 +56,7 @@ class M_User extends CI_Model {
     }
 
     function getspek($iduser){
-		$this->db->select('*');
-        $this->db->join('tb_provinsi', 'tb_provinsi.id_provinsi = tb_user.id_provinsi');
-        $this->db->join('tb_kota', 'tb_kota.id_kota = tb_user.id_kota'); 
+		$this->db->select('*'); 
         $where = array(
             'id_user' => $iduser
         );

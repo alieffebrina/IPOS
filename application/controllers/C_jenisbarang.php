@@ -65,7 +65,7 @@ class C_jenisbarang extends CI_Controller{
         //     $this->M_jenisbarang->tambahakses($id);
         // }
         $this->session->set_flashdata('Sukses', "Data Berhasil Ditambahkan.");
-        redirect('C_jenisbarang');
+        redirect('C_jenisbarang/add');
     }
 
     function view($ida)
@@ -97,14 +97,14 @@ class C_jenisbarang extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $this->M_jenisbarang->edit($id);
         $this->session->set_flashdata('Sukses', "Data Berhasil Diperbarui.");
-        redirect('C_jenisbarang');
+        redirect('C_jenisbarang/add');
     }
 
     function hapus($id){
         $where = array('id_jenisbarang' => $id);
         $this->M_Setting->delete($where,'tb_jenisbarang');
         $this->session->set_flashdata('Sukses', "Data Berhasil Dihapus.");
-        redirect('C_jenisbarang');
+        redirect('C_jenisbarang/add');
     }
 
 }

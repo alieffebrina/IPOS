@@ -97,14 +97,14 @@ class C_satuan extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $this->M_satuan->edit($id);
         $this->session->set_flashdata('Sukses', "Data Berhasil Diperbarui.");
-        redirect('C_satuan');
+        redirect('C_satuan/add');
     }
 
     function hapus($id){
         $where = array('id_satuan' => $id);
         $this->M_Setting->delete($where,'tb_satuan');
         $this->session->set_flashdata('Sukses', "Data Berhasil Dihapus");
-        redirect('C_satuan');
+        redirect('C_satuan/add');
     }
 
 }
