@@ -34,5 +34,6 @@ class Welcome extends CI_Controller {
 		$this->load->view('template/sidebar.php', $data);
 		$this->load->view('template/index.php');
 		$this->load->view('template/footer.php');
+		$this->load->view('template/footerwelcome.php');
 	}
 }

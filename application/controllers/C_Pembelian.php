@@ -23,6 +23,25 @@ class C_Pembelian extends CI_Controller{
         $this->load->view('template/footer');
     }
 
+    function laporan()
+    {
+        $tgla = $this->input->post('tgl');
+        $tglb = str_replace(' ', '', $tgla);
+        $excel = $this->input->post('excel');
+        if ($excel == 'excel'){
+            redirect('C_Pembelian/excel/'.$tglb);
+        } else {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['pembelian'] = $this->M_Pembelian->getall();
+        $this->load->view('pembelian/v_laporanpembelian',$data); 
+        $this->load->view('template/footer');
+        }
+    }
+
+
     function add()
     {
         $this->load->view('template/header');
