@@ -29,6 +29,9 @@
             <div class="box-header">
               <h3 class="box-title">Setting Kode</h3>
             </div>
+            <div class="box-header">
+              <a href="<?php echo site_url('C_Setting/addkode'); ?>"><button type="button" class="btn btn-warning" >Setting Penomoran</button></a>
+            </div>
             <!-- /.box-header -->
 
             <div class="box-body">
@@ -58,7 +61,6 @@
                   <?php } ?>
                 </tbody>
               </table>
-              <a href="<?php echo site_url('C_Setting/addkode'); ?>"><button type="button" class="btn btn-warning" >Setting Penomoran</button></a>
             </div>
             <!-- /.box-body -->
           </div>
