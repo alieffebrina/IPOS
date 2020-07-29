@@ -29,6 +29,9 @@
             <div class="box-header">
               <h3 class="box-title">Data Penjualan</h3>
             </div>
+            <div class="box-header">
+              <a href="<?php echo site_url('C_penjualan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
+            </div>
             <!-- /.box-header -->
 
             <div class="box-body">
@@ -93,7 +96,6 @@
                   <?php } ?>
                 </tbody>
               </table>
-              <a href="<?php echo site_url('C_penjualan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
             </div>
             <!-- /.box-body -->
           </div>

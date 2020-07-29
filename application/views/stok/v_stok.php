@@ -29,11 +29,14 @@
             <div class="box-header">
               <h3 class="box-title">Data Stok</h3>
             </div>
+            <div class="box-header">
+              <a href="<?php echo site_url('C_barang/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Barang</button></a>
+            </div>
             <!-- /.box-header -->
 
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
-                <thead >
+                <thead>
                 <tr>
                   <th rowspan="2" style="text-align: center;">No</th>
                   <th rowspan="2" style="text-align: center;">Id Barang</th>
@@ -44,7 +47,6 @@
                   <th rowspan="2" style="text-align: center;">Action</th>
                 </tr>
                 <tr>
-
                   <th style="text-align: center;">Stok</th>
                   <th style="text-align: center;">Satuan</th>
                   <th style="text-align: center;">Stok</th>
@@ -76,7 +78,6 @@
                   <?php } ?>
                 </tbody>
               </table>
-              <a href="<?php echo site_url('C_barang/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Barang</button></a>
             </div>
             <!-- /.box-body -->
           </div>

@@ -74,7 +74,7 @@
 <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
 <script src="<?php echo base_url() ?>assets/bower_components/Flot/jquery.flot.categories.js"></script>
 <!-- Page script -->
-<script>
+<!-- <script>
   $(function () {
     /*
      * Flot Interactive Chart
@@ -133,7 +133,7 @@
       + '<br>'
       + Math.round(series.percent) + '%</div>'
   }
-</script>
+</script> -->
 <script>
   $(document).ready(function(){ 
     $('#example1').DataTable();
