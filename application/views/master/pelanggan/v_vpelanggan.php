@@ -29,16 +29,9 @@
               <div class="box-body">
                 <?php foreach ($pelanggan as $pelanggan) { ?>
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Nama Toko</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Nama Pelanggan</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nama_toko" name="nama_toko" value="<?php echo $pelanggan->nama_toko ?>"readonly>
-                    <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $pelanggan->id_pelanggan ?>" >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Nama pelanggan</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" value="<?php echo $pelanggan->nama_pelanggan ?>" readonly>
+                    <input type="text" class="form-control" id="nama" name="nama" value="<?php echo $pelanggan->nama ?>" readonly>
                   </div>
                 </div>
                 <div class="form-group">
@@ -50,7 +43,6 @@
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Provinsi</label>
                   <div class="col-sm-9">
-
                     <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" value="<?php echo $pelanggan->name_prov ?>" readonly>
                   </div>
                 </div>
@@ -76,7 +68,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                   <div class="col-sm-10">
-                    <button type="submit" class="btn btn-default">Kembali</button>
+                    <a href="<?php echo site_url('C_Pelanggan/index'); ?>" class="btn btn-default">Kembali</a>
                   </div>
               </div>
               <!-- /.box-footer -->

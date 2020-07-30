@@ -47,13 +47,6 @@
                   </div>
                 </div>
                 
-                <!-- <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">No. Urut</label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" rows="3" id="nourut" name="nourut" readonly><?php echo $barang->nourut ?></textarea>
-                  </div> -->
-                
-                </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Stok</label>
                   <div class="col-sm-9">
@@ -79,7 +72,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Konversi</label>
+                  <label for="inputPassword3" class="col-sm-2 control-label">Hasil Konversi</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="hasil_konversi" name="hasil_konversi" value="<?php echo $barang->qttkonversi ?>" readonly>
                   </div>
@@ -89,7 +82,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                   <div class="col-sm-10">
-                    <button type="submit" class="btn btn-default">Kembali</button>
+                    <a href="<?php echo site_url('C_barang/index'); ?>" class="btn btn-default">Kembali</a>
                   </div>
               </div>
               <!-- /.box-footer -->

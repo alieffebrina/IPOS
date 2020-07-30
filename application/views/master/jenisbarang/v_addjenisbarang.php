@@ -35,7 +35,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" method="POST" action="<?php echo site_url('C_jenisbarang/tambah')?>">
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('C_jenisbarang/tambah')?>"  id='formjenisbarang'>
               <div class="box-body">
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Nama</label>

@@ -129,7 +129,7 @@ class C_barang extends CI_Controller{
                 date_default_timezone_set('Asia/Jakarta');
                 $tgl = date('Y-m-d');
                 $a = str_replace("tanggal", $tgl, $a);
-                $data = $this->M_barang->cekkodebarang();
+                $data = $this->M_barang->cekbarangtgl();
 
                 // TAK COBA PAKAI INI KO
                 //----------------------------------------------
@@ -153,13 +153,13 @@ class C_barang extends CI_Controller{
         }
     }
 
-    function view($id)
+    function view($ida)
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['barang'] = $this->M_barang->getspek($id);
+        $data['barang'] = $this->M_barang->getspek($ida);
         $this->load->view('master/barang/v_vbarang',$data); 
         $this->load->view('template/footer');
     }

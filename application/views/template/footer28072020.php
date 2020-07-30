@@ -582,6 +582,7 @@
         }
       });
 
+  
 
       $("#butsendpenjualan").click(function() {
         if($("#subtotal").val()!=''){
@@ -671,6 +672,20 @@
 
         
   });
+
+  $(document).ready(function() {
+    $("#formsatuan").on('submit', function(e){
+        if($("#satuan").val()==''){alert('Nama satuan harus diisi');
+            e.preventDefault();
+            return false;
+        }
+        else if($("#satuan").val()=='satuan'){
+          alert('Nama satuan tidak boleh sama');
+          e.preventDefault();
+          return false;
+        }
+  });
+
 </script>
   <script type="text/javascript">
   function Angkasaja(evt) {

@@ -28,9 +28,9 @@
             <form class="form-horizontal" method="POST" action="<?php echo site_url('C_Pelanggan/tambah')?>">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Nama</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Nama Pelanggan</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" placeholder="Nama Pelanggan">
+                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Pelanggan">
                   </div>
                 </div>
                 <div class="form-group">
@@ -73,7 +73,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                   <div class="col-sm-10">
-                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <a href="<?php echo site_url('C_Pelanggan/index'); ?>" class="btn btn-default">Batal</a>
                     <button type="submit" class="btn btn-info">Simpan Data</button>
                   </div>
               </div>

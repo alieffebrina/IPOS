@@ -111,7 +111,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                   <div class="col-sm-10">
-                    <button type="submit" class="btn btn-default">Batal</button>
+                    <a href="<?php echo site_url('C_barang/index'); ?>" class="btn btn-default">Batal</a>
                     <button type="submit" class="btn btn-info">Simpan Data</button>
                   </div>
               </div>

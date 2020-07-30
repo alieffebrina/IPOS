@@ -29,9 +29,9 @@
               <div class="box-body">
                 <?php foreach ($pelanggan as $pelanggan) { ?>
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Nama pelanggan</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Nama Pelanggan</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" value="<?php echo $pelanggan->nama ?>">
+                    <input type="text" class="form-control" id="nama" name="nama" value="<?php echo $pelanggan->nama ?>">
                     <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $pelanggan->id_pelanggan ?>">
                   </div>
                 </div>
@@ -77,7 +77,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                   <div class="col-sm-10">
-                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <a href="<?php echo site_url('C_Pelanggan/index'); ?>" class="btn btn-default">Batal</a>
                     <button type="submit" class="btn btn-info">Simpan Data</button>
                   </div>
               </div>

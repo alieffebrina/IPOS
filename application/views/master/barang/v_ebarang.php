@@ -13,6 +13,16 @@
       </ol>
     </section>
 
+    <div class="box-body">
+    <?php if ($this->session->flashdata('Sukses')) { ?>
+       <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h5><i class="icon fa fa-check"></i> Sukses!</h5>
+          Data Berhasil Diperbarui.
+        </div>                 
+      <?php } ?>
+    </div>
+
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -102,7 +112,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                   <div class="col-sm-10">
-                    <button type="reset" class="btn btn-default">Batal</button>
+                    <a href="<?php echo site_url('C_barang/index'); ?>" class="btn btn-default">Batal</a>
                     <button type="submit" class="btn btn-info">Simpan Data</button>
                   </div>
               </div>

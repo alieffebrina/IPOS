@@ -83,7 +83,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                   <div class="col-sm-10">
-                    <a href="<?php echo site_url('C_User'); ?>"><button type="button" class="btn btn-default">Cancel</button></a>
+                    <a href="<?php echo site_url('C_User/index'); ?>" class="btn btn-default">Batal</a>
                     <button type="submit" class="btn btn-info">Simpan Data</button>
                   </div>
               </div>
