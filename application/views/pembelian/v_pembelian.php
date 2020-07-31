@@ -68,7 +68,7 @@
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Type Pembayaran</label>
                   <div class="col-sm-10">
-                  <input type="radio" id="cash" name="pembayaran" value="cash" required="required"> Cash
+                  <input type="radio" id="belicash" name="pembayaran" value="cash" required="required"> Cash
                   <input type="radio" id="belikredit" name="pembayaran" value="kredit"> Kredit
                   </div>
                 </div>
@@ -107,7 +107,7 @@
                     <select class="form-control select2" id="nama_barang" style="width: 100%;">
                       <option value="">--Pilih--</option>
                       <?php foreach ($barang as $barang) { ?>
-                      <option value="<?php echo $barang->id_barang ?>"><?php echo $barang->barang ?></option>
+                      <option value="<?php echo $barang->id_barang ?>"><?php echo $barang->barang.' / '.$barang->jenisbarang ?></option>
                       <?php } ?>
                     </select>
                   </div><div id="namashow"></div>
@@ -140,6 +140,7 @@
                   <div class="col-sm-10">
                     <input type="text" class="form-control" id="subtotal" readonly>
                     <input type="hidden" class="form-control" id="subtotalrupiah">
+                    <input type="hidden" class="form-control" id="jenisbarang">
                   </div>
                   <!-- <a class=""> -->
                     <!-- <input type="submit" class="btn btn-primary"> -->
@@ -165,6 +166,7 @@
                   <tr>
                     <th>No</th>
                     <th>Barang</th>
+                    <th>Jenis Barang</th>
                     <th>Qtt</th>
                     <th>Satuan</th>
                     <th>Harga</th>

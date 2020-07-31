@@ -79,6 +79,7 @@
                   <th>Tanggal</th>
                   <th>Keterangan</th>
                   <th>Nominal</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody >
@@ -91,6 +92,13 @@
                         <td><?php echo date('d-m-Y', strtotime($kas->tglkas));?></td>
                         <td><?php echo $kas->ket; ?></td>
                         <td><?php echo number_format($kas->nominal); ?></td>
+                        <td>
+                          <div class="btn-group">
+                            <a href="<?php echo site_url('C_Kas/view/'.$kas->id_kas); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
+                            <a href="<?php echo site_url('C_Kas/edit/'.$kas->id_kas); ?>"><button type="button" class="btn btn-info">Edit</button></a>
+                            <a href="<?php echo site_url('C_Kas/hapus/'.$kas->id_kas); ?>"><button type="button" class="btn btn-danger">Hapus</button></a>
+                          </div>
+                        </td>
                       </tr>
                     <?php }
                      }else{ 

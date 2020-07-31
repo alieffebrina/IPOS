@@ -90,7 +90,7 @@ class C_barang extends CI_Controller{
             // Buat variabel untuk menampung tag-tag option nya
             // Set defaultnya dengan tag option Pilih
             // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' readonly>";
-            $lists=$list_namabarang=$harga='';
+            $lists=$list_namabarang=$harga=$jenisbarang='';
             foreach($hasil_kode as $data){
               // $lists .= " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$data->satuan."' readonly>"; // Tambahkan tag option ke variabel $lists
               // $ala = $data->alamat;
@@ -99,11 +99,12 @@ class C_barang extends CI_Controller{
                 $lists = "<input type='hidden' class='form-control' name='satuan' id='satuan' value='".$data->nama_satuan."'><input type='hidden' class='form-control' name='kodesatuan' id='kodesatuan' value='".$data->id_satuan."'><input type='hidden' class='form-control' name='qttkonversi' id='qttkonversi' value='".$data->qttkonversi."'>".$data->nama_satuan;
                 $list_namabarang = "<input type='hidden' class='form-control' name='namabarangshow' id='namabarangshow' value='".$data->barang."'>
                 <input type='hidden' class='form-control' name='stokaw' id='stokaw' value='".$data->hasil_konversi."'>";
+                $jenisbarang = $data->jenisbarang;
             }
             
             // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$hasil_kode."' readonly>";
 
-            $callback = array('list_satuan'=>$lists, 'list_harga'=>$harga, 'list_namabarang' =>$list_namabarang); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+            $callback = array('list_satuan'=>$lists, 'list_harga'=>$harga, 'list_namabarang' =>$list_namabarang, 'jenisbarang' =>$jenisbarang); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
             echo json_encode($callback); // konversi varibael $callback menjadi JSON
     }
 

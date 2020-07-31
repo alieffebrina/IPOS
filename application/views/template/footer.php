@@ -691,6 +691,12 @@ function toggle(source) {
         $('#cash').prop('checked', true);
       }
     });
+
+    $("#cash").click(function(){
+
+            $('#limit').val('');
+            document.getElementById("tgljatuhtempo").disabled = true;
+    });
   });
 </script>
 
@@ -719,10 +725,15 @@ function toggle(source) {
       }else{
         alert('pilih suplier terlebih dahulu');
         $(this).prop('checked', false);
-        $('#cash').prop('checked', true);
+        $('#belicash').prop('checked', true);
       }
     });
-  });
+    $("#belicash").click(function(){
+
+            $('#limit').val('');
+            document.getElementById("tgljatuhtempo").disabled = true;
+    });
+        });
 </script>
 <!-- <script type="text/javascript">
   $(document).ready(function() {

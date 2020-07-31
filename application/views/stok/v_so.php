@@ -49,7 +49,7 @@
                   <th style="text-align: center;">Stok Awal</th>
                   <th style="text-align: center;">Stok Opname</th>
                   <th style="text-align: center;">Satuan</th>
-                  <th style="text-align: center;">Stok Retur</th>
+                  <th style="text-align: center;">Stok Selisih</th>
                   <th style="text-align: center;">Satuan</th>
                 </tr>
                 </thead>

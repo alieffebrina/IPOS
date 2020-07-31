@@ -38,4 +38,33 @@ class M_kas extends CI_Model {
         
         $this->db->insert('tb_kas', $kas);
     }
+
+    function getspek($ida){
+        $this->db->select('*');
+        $where = array(
+            'id_kas' => $ida
+        );
+        $query = $this->db->get_where('tb_kas', $where);
+        return $query->result();
+    }
+
+    function edit($id){
+        
+        $harga = $this->input->post('rupiah');
+        $harga_str = preg_replace("/[^0-9]/", "", $harga);
+        $barang = array(
+
+            'id_user' => $id,
+            'tglkas' => $this->input->post('tgl'),
+            'nominal' => $harga_str
+        );
+
+        $where = array(
+            'id_kas' =>  $this->input->post('idkas'),
+        );
+        
+        $this->db->where($where);
+        $this->db->update('tb_kas',$barang);
+    }
+
 }

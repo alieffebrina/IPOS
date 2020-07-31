@@ -74,4 +74,43 @@ class C_Kas extends CI_Controller{
                 'excel' => $kas);
         $this->load->view('kas/excelkas', $data);
     }
+
+    function view($ida)
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['kas'] = $this->M_kas->getspek($ida);
+        $this->load->view('kas/v_vkas',$data); 
+        $this->load->view('template/footer');
+    }
+
+    function editkas()
+    {   
+        $id = $this->session->userdata('id_user');
+        $this->M_kas->edit($id);
+        $this->session->set_flashdata('Sukses', "Data Berhasil Diperbarui.");
+        redirect('C_Kas');
+    }
+
+    function edit($ida)
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['kas'] = $this->M_kas->getspek($ida);
+        $this->load->view('kas/v_ekas',$data); 
+        $this->load->view('template/footer');
+    }
+
+     function hapus($id){
+        $where = array('id_kas' => $id);
+        $this->M_Setting->delete($where,'tb_kas');
+        $this->session->set_flashdata('Sukses', "Data Berhasil Dihapus.");
+        redirect('C_Kas');
+    }
+
+
 }

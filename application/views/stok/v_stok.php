@@ -29,9 +29,6 @@
             <div class="box-header">
               <h3 class="box-title">Data Stok</h3>
             </div>
-            <div class="box-header">
-              <a href="<?php echo site_url('C_barang/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Barang</button></a>
-            </div>
             <!-- /.box-header -->
 
             <div class="box-body">
