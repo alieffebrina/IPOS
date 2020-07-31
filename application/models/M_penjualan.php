@@ -185,4 +185,12 @@ class M_penjualan extends CI_Model {
         $this->db->where($where);
         $this->db->update('tb_penjualan',$barang);
     }
+
+    function datapenjualan(){
+        $now = date('m');
+        $this->db->select('sum(total) as totalpenjualan from tb_penjualan where tglnota(m, tglnota) = tglnota(m, tglnota(m, -1, getdate())) AND tglnota(yyyy, tglnota) = tglnota(yyyy, tglnota(m, -1, getdate()))');
+        // $this->db->where('month(tglnota)',$now);
+        return $this->db->get('tb_penjualan')->result();
+    }
+
 }

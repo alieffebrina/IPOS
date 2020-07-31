@@ -93,5 +93,10 @@ class M_pelanggan extends CI_Model {
         $this->db->update('tb_pelanggan',$pelanggan);
     }
 
+    function datapelanggan(){
+        $query = $this->db->get('tb_pelanggan');
+        return $query->num_rows();
+    }
+
     
 }

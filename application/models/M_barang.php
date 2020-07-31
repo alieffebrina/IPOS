@@ -115,5 +115,10 @@ class M_barang extends CI_Model {
         $this->db->where($where);
         $this->db->update('tb_barang',$barang);
     }
+
+    function totalitem(){
+        $query = $this->db->get('tb_barang');
+        return $query->num_rows();
+    }
     
 }

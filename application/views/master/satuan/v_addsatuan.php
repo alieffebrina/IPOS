@@ -102,7 +102,7 @@
                   <?php } ?>
                 </tbody>
               </table>
-              <<!-- a href="<?php echo site_url('C_satuan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a> -->
+              <!-- a href="<?php echo site_url('C_satuan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a> -->
             </div>
             <!-- /.box-body -->
             
