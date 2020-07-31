@@ -232,40 +232,45 @@ class C_Pembelian extends CI_Controller{
         $this->load->view('template/footer');
     }
 
+    function cetak($ida)
+    {
+        $this->load->view('pembelian/cetak'); 
+    }
+
     function cetakpembelian($ida){
         $pdf = new FPDF('L','mm',array('110', '215'));
         // membuat halaman baru
         $pdf->AddPage();
         // setting jenis font yang akan digunakan
-        $pdf->SetFont('Arial','B',16,'C');
+        $pdf->SetFont('Arial','',11,'C');
         // mencetak string 
-        $pdf->Cell(200,8,'Pesanan Pembelian',0,1,'C');
-        $pdf->SetFont('Arial','B',12);
-        // Memberikan space kebawah agar tidak terlalu rapat
-        // $pdf->Cell(10,8,'',0,1);
-        $pdf->SetFont('Arial','',10,'C');
+        $pdf->Cell(90,5,'ADP Paving',0,0,'L');        
 
         $pembelian = $this->M_Pembelian->getdetail($ida);
         $dtlpembelian = $this->M_Pembelian->getdetailpembelian($ida);
         foreach ($pembelian as $key ) {
+
+            $pdf->Cell(100,5,'Tanggal : '.$key->tglnotapembelian,0,1,'R');
+            $pdf->Line(10,15,200,15);
+        // Memberikan space kebawah agar tidak terlalu rapat
+        // $pdf->Cell(10,8,'',0,1);
+            $pdf->SetFont('Arial','',10,'C');
             
-            $pdf->Cell(30,7,'Nota Pembelian',0,0);
-            $pdf->Cell(5,7,':',0,0,'C');
-            $pdf->Cell(40,7,$key->id_pembelian,0,1);
-            $pdf->Cell(30,7,'Tanggal',0,0);
-            $pdf->Cell(5,7,':',0,0,'C');
-            $pdf->Cell(40,7,$key->tglnotapembelian,0,1);
-            $pdf->Cell(30,7,'Suplier',0,0);
-            $pdf->Cell(5,7,':',0,0,'C');
-            $pdf->Cell(40,7,$key->nama_toko,0,1);
-            $pdf->Cell(30,7,'Jenis Pembayaran',0,0);
-            $pdf->Cell(5,7,':',0,0,'C');
-            $pdf->Cell(40,7,$key->jenispembayaran,0,1);
+            $pdf->Cell(40,5,'Nota Pembelian',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,$key->id_pembelian,0,1);
+            $pdf->Cell(40,5,'Nama Suplier',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,$key->nama_toko,0,1);
+            $pdf->Cell(40,5,'Jenis Pembayaran',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,$key->jenispembayaran,0,1);
         
         }
+            $pdf->Cell(10,2,'',0,1);
             $pdf->Cell(10,7,'No',1,0);
-            $pdf->Cell(30,7,'Kode Barang',1,0);
-            $pdf->Cell(30,7,'Nama Item',1,0);
+            $pdf->Cell(30,7,'Nama Barang',1,0);
+            $pdf->Cell(30,7,'Jenis Barang',1,0);
             $pdf->Cell(20,7,'Jumlah',1,0);
             $pdf->Cell(20,7,'Satuan',1,0);
             $pdf->Cell(30,7,'Harga',1,0);
@@ -275,8 +280,8 @@ class C_Pembelian extends CI_Controller{
         foreach ($dtlpembelian as $dtl ) {
             
             $pdf->Cell(10,7,$no++,1,0);
-            $pdf->Cell(30,7,$dtl->id_barang,1,0);
             $pdf->Cell(30,7,$dtl->barang,1,0);
+            $pdf->Cell(30,7,$dtl->jenisbarang,1,0);
             $pdf->Cell(20,7,$dtl->qtt,1,0);
             $pdf->Cell(20,7,$dtl->nama_satuan,1,0);
             $pdf->Cell(30,7,number_format($dtl->harga),1,0);
@@ -286,18 +291,22 @@ class C_Pembelian extends CI_Controller{
         } 
         foreach ($pembelian as $key ) {
             
-            $pdf->Cell(30,7,'Diskon',0,0);
-            $pdf->Cell(5,7,':',0,0,'C');
-            $pdf->Cell(40,7,$key->diskon,0,1);
-            $pdf->Cell(30,7,'Biaya Lain ',0,0);
-            $pdf->Cell(5,7,':',0,0,'C');
-            $pdf->Cell(40,7,$key->biayalain,0,1);
-            $pdf->Cell(30,7,'Total Akhir',0,0);
-            $pdf->Cell(5,7,':',0,0,'C');
-            $pdf->Cell(40,7,number_format($key->total),0,1);
-        
+            $pdf->Cell(10,2,'',0,1);
+            $pdf->Cell(120,5,'',0,0);
+            $pdf->SetFont('Arial','B',10,'');
+            $pdf->Cell(30,5,'Diskon',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,'Rp. '.number_format($key->diskon),0,1);
+            $pdf->Cell(120,5,'',0,0);
+            $pdf->Cell(30,5,'Biaya Lain ',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,'Rp. '.number_format($key->biayalain),0,1);
+            $pdf->Cell(120,5,'',0,0);
+            $pdf->Cell(30,5,'Total Akhir',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,'Rp. '.number_format($key->total),0,1);
         }
-
+        // $pdf->AutoPrint(true);
         $pdf->Output();
     }
 
