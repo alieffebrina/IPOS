@@ -26,7 +26,7 @@ class Welcome extends CI_Controller {
         $this->load->model('M_Setting');
         $this->load->model('M_barang');
         $this->load->model('M_pelanggan');
-        $this->load->model('M_penjualan');
+        // $this->load->model('M_penjualan');
     }
 
 	public function index()
@@ -37,7 +37,7 @@ class Welcome extends CI_Controller {
 		$this->load->view('template/sidebar.php', $data);
 		$data['barang'] = $this->M_barang->totalitem();
 		$data['datapelanggan'] = $this->M_pelanggan->datapelanggan();
-		$data['totalpenjualan'] = $this->M_penjualan->datapenjualan();
+		// $data['totalpenjualan'] = $this->M_penjualan->datapenjualan();
 		$this->load->view('template/index.php', $data);
 		$this->load->view('template/footer.php');
 		$this->load->view('template/footerwelcome.php');

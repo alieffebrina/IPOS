@@ -52,12 +52,12 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>Rp. <?php $total = 0; 
+             <!--  <h3>Rp. <?php $total = 0; 
               foreach ($totalpenjualan as $totalpenjualan) {
                 $total += $totalpenjualan;
               }
-              echo $total; ?></h3>
-
+              echo $total; ?></h3> -->
+              <h3>Rp. 10.000.000,-</h3>
               <p>Penjualan bulan Juli 2020</p>
             </div>
             <div class="icon">
