@@ -33,7 +33,7 @@
                     <select class="form-control select2" id="id_barang" name="id_barang" style="width: 100%;">
                       <option value="">--Pilih--</option>
                       <?php foreach ($barang as $value) { ?>
-                      <option value="<?php echo $value->id_barang ?>"><?php echo $value->barang ?></option>
+                      <option value="<?php echo $value->id_barang ?>"><?php echo $value->barang.' / '.$value->jenisbarang.' / satuan '.$value->satuan ?></option>
                       <?php } ?>
                     </select>
                   </div>
@@ -42,7 +42,10 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Harga</label>
                   <div class="col-sm-9">
+                    <!-- <div class="input-group"> -->
                     <input type="text" class="form-control" id="rupiah" name="rupiah" >
+                      <!-- <span class="input-group-addon" id="tampilsatuan"></span>
+                    </div> -->
                   </div>
                 </div>
 

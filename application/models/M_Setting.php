@@ -86,6 +86,8 @@ class M_Setting extends CI_Model {
 
     function gethargabarang(){
         $this->db->select('*');
+        $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
+        $this->db->join('tb_satuan', 'tb_satuan.id_satuan = tb_barang.id_satuan');
         $this->db->from('tb_barang');
         $query = $this->db->get();
         return $query->result();
