@@ -92,6 +92,7 @@
                   <tr>
                     <th>No</th>
                     <th>Barang</th>
+                    <th>Jenis Barang</th>
                     <th>Qtt</th>
                     <th>Satuan</th>
                     <th>Harga</th>
@@ -108,8 +109,9 @@
                       <tr>
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $dtl->barang ?></td>
+                        <td><?php echo $dtl->jenisbarang ?></td>
                         <td><?php echo $dtl->qtt ?></td>
-                        <td><?php echo $dtl->satuan ?></td>
+                        <td><?php echo $dtl->nama_satuan ?></td>
                         <td><?php echo number_format($dtl->harga) ?></td>
                         <td><?php echo number_format($dtl->diskon) ?></td>
                         <td><?php echo number_format($subtotal); ?></td>

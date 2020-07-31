@@ -3,12 +3,12 @@ n<!-- Content Wrapper. Contains page content -->
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Pembelian
+        Data Laporan Hutang
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo site_url('C_Pembelian'); ?>">Data Pembelian</a></li>
+        <li><a href="<?php echo site_url('C_Pembelian'); ?>">Data Laporan Hutang</a></li>
         <li class="active">Lihat Data</li>
       </ol>
     </section>
@@ -33,7 +33,7 @@ n<!-- Content Wrapper. Contains page content -->
             <!-- /.box-header -->
 
             <div class="box-body">
-              <form action='<?= site_url("C_Pembelian/laporan")?>' method='POST'>
+              <form action='<?= site_url("C_Pembelian/lhutang")?>' method='POST'>
                 <div class='row'>
                   <div class="col-lg-12">
                     <label for="inputEmail3" class="col-sm-2 control-label">Tanggal</label>
@@ -64,7 +64,7 @@ n<!-- Content Wrapper. Contains page content -->
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Pembelian</h3>
+              <h3 class="box-title">Data Laporan Hutang</h3>
             </div>
             <!-- /.box-header -->
 

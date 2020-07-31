@@ -21,29 +21,25 @@
 
 <!-- jQuery 3 -->
 <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="<?php echo base_url() ?>assets/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!-- jQuery UI 1.11.4 
+<script src="<?php //echo base_url() ?>assets/bower_components/jquery-ui/jquery-ui.min.js"></script>-->
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
-  $.widget.bridge('uibutton', $.ui.button);
+  // $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="<?php echo base_url() ?>assets/bower_components/raphael/raphael.min.js"></script>
-<script src="<?php echo base_url() ?>assets/bower_components/morris.js/morris.min.js"></script>
-<!-- Sparkline -->
-<script src="<?php echo base_url() ?>assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-<!-- jvectormap -->
-<script src="<?php echo base_url() ?>assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="<?php echo base_url() ?>assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="<?php echo base_url() ?>assets/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="<?php echo base_url() ?>assets/bower_components/moment/min/moment.min.js"></script>
-<script src="<?php echo base_url() ?>assets/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<!-- datepicker -->
-<script src="<?php echo base_url() ?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- Morris.js charts
+<script src="<?php //echo base_url() ?>assets/bower_components/raphael/raphael.min.js"></script>
+<script src="<?php //echo base_url() ?>assets/bower_components/morris.js/morris.min.js"></script> -->
+<!-- Sparkline
+<script src="<?php //echo base_url() ?>assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script> -->
+<!-- jvectormap 
+<script src="<?php //echo base_url() ?>assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="<?php //echo base_url() ?>assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>-->
+<!-- jQuery Knob Chart 
+<script src="<?php //echo base_url() ?>assets/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>-->
+
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<?php echo base_url() ?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
@@ -63,29 +59,84 @@
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="<?php echo base_url() ?>assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- daterangepicker -->
+<script src="<?php echo base_url() ?>assets/bower_components/moment/min/moment.min.js"></script>
+<script src="<?php echo base_url() ?>assets/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- datepicker -->
+<script src="<?php echo base_url() ?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- page script -->
-<!-- InputMask -->
-<script src="<?php echo base_url() ?>assets/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="<?php echo base_url() ?>assets/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="<?php echo base_url() ?>assets/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-<!-- bootstrap color picker -->
-<script src="<?php echo base_url() ?>assets/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
-<!-- bootstrap time picker -->
-<script src="<?php echo base_url() ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
-<!-- Select2 -->
-<script src="<?php echo base_url() ?>assets/bower_components/select2/dist/js/select2.full.min.js"></script>
-<!-- InputMask -->
-<script src="<?php echo base_url() ?>assets/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="<?php echo base_url() ?>assets/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="<?php echo base_url() ?>assets/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-<!-- bootstrap color picker -->
-<script src="<?php echo base_url() ?>assets/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<!-- FLOT CHARTS -->
+<script src="<?php echo base_url() ?>assets/bower_components/Flot/jquery.flot.js"></script>
+<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+<script src="<?php echo base_url() ?>assets/bower_components/Flot/jquery.flot.resize.js"></script>
+<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+<script src="<?php echo base_url() ?>assets/bower_components/Flot/jquery.flot.pie.js"></script>
+<!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
+<script src="<?php echo base_url() ?>assets/bower_components/Flot/jquery.flot.categories.js"></script>
 <!-- Page script -->
-<script>
+<!-- <script>
   $(function () {
-    $('#example1').DataTable()
+    /*
+     * Flot Interactive Chart
+     * -----------------------
+     */
+    // We use an inline data source in the example, usually data would
+  
+    /* END AREA CHART */
+
+    /*
+     * BAR CHART
+     * ---------
+     */
+
+    var bar_data = {
+      data : [['January', 10], ['February', 8], ['March', 4], ['April', 13], ['May', 17], ['June', 9]],
+      color: '#3c8dbc'
+    };
+    $.plot('#bar-chart', [bar_data], {
+      grid  : {
+        borderWidth: 1,
+        borderColor: '#f3f3f3',
+        tickColor  : '#f3f3f3'
+      },
+      series: {
+        bars: {
+          show    : true,
+          barWidth: 0.5,
+          align   : 'center'
+        }
+      },
+      xaxis : {
+        mode      : 'categories',
+        tickLength: 0
+      }
+    });
+    /* END BAR CHART */
+
+    /*
+     * DONUT CHART
+     * -----------
+     */
+    /*
+     * END DONUT CHART
+     */
+
+  });
+
+  /*
+   * Custom Label formatter
+   * ----------------------
+   */
+  function labelFormatter(label, series) {
+    return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+      + label
+      + '<br>'
+      + Math.round(series.percent) + '%</div>'
+  }
+</script> -->
+<script>
+  $(document).ready(function(){ 
+    $('#example1').DataTable();
     $('#example2').DataTable({
       'paging'      : true,
       'lengthChange': false,
@@ -93,7 +144,20 @@
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false
-    })
+    });
+     $('.tanggalan').daterangepicker({
+        timePicker: false,
+        startDate: moment().startOf('hour'),
+        endDate: moment().startOf('hour').add(32, 'hour'),
+        locale: {
+          format: 'DD.MM.YYYY'
+        }
+      });
+     $('.datepicker').datepicker({
+        autoclose: true,
+        format: "dd-mm-yyyy"
+      })
+    //Date range picker with time picker
   })
 </script>
 <script type="text/javascript">

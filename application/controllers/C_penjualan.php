@@ -163,7 +163,7 @@ class C_penjualan extends CI_Controller{
     {   
         // $id = $this->session->userdata('id_user');
         $this->M_penjualan->edit($ida);
-        $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Diperbarui");
         redirect('C_Penjualan');
     }
 

@@ -60,7 +60,7 @@ class M_Pembelian extends CI_Model {
     }
 
     function getdetailpembelian($ida){
-        $this->db->select('ts2.satuan satuan_konversi,ts1.satuan nama_satuan,tb_detailpembelian.harga hargabeli, tb_detailpembelian.*,tb_barang.*, tb_konversi.*');
+        $this->db->select('ts2.satuan satuan_konversi,ts1.satuan nama_satuan,tb_detailpembelian.harga hargabeli, tb_detailpembelian.*,tb_barang.*, tb_konversi.*,tb_jenisbarang.*');
         $this->db->join('tb_barang', 'tb_barang.id_barang = tb_detailpembelian.id_barang');
         $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
         $this->db->join('tb_konversi', 'tb_konversi.id_konversi = tb_barang.id_konversi');
@@ -292,5 +292,82 @@ class M_Pembelian extends CI_Model {
         return $this->db->get_where('tb_barang', $where)->result();
     }
 
+    function search($tgl){
+        if(isset($tgl) && !empty($tgl)){
+            $tgl=explode('-', $tgl);
+            $tgl_mulai=explode('.', $tgl[0]);
+            $tgl_sampai=explode('.', $tgl[1]);
+        } 
+
+        $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
+
+        if(!empty($tgl[0]) && !empty($tgl[1])){
+
+        $this->db->where("tglnotapembelian BETWEEN '".($tgl_mulai[2]."-".$tgl_mulai[1]."-".$tgl_mulai[0])."' and '".($tgl_sampai[2]."-".$tgl_sampai[1]."-".$tgl_sampai[0])."'");
+        }
+
+        return $this->db->get('tb_pembelian')->result();
+      }
+
+      function excel($tgl){
+        if(isset($tgl) && !empty($tgl)){
+            $tgl=explode('-', $tgl);
+            $tgl_mulai=explode('.', $tgl[0]);
+            $tgl_sampai=explode('.', $tgl[1]);
+        } 
+
+        $this->db->join('tb_pembelian', 'tb_pembelian.id_pembelian = tb_detailpembelian.id_pembelian');
+        $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
+        $this->db->join('tb_barang', 'tb_barang.id_barang = tb_detailpembelian.id_barang');
+        $this->db->join('tb_satuan', 'tb_satuan.id_satuan = tb_barang.id_satuan');
+        $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
+
+        if(!empty($tgl[0]) && !empty($tgl[1])){
+
+        $this->db->where("tglnotapembelian BETWEEN '".($tgl_mulai[2]."-".$tgl_mulai[1]."-".$tgl_mulai[0])."' and '".($tgl_sampai[2]."-".$tgl_sampai[1]."-".$tgl_sampai[0])."'");
+        }
+
+        return $this->db->get('tb_detailpembelian')->result();
+      }
+
+      function lhutang($tgl){
+        if(isset($tgl) && !empty($tgl)){
+            $tgl=explode('-', $tgl);
+            $tgl_mulai=explode('.', $tgl[0]);
+            $tgl_sampai=explode('.', $tgl[1]);
+        } 
+
+        $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
+        $this->db->where("status = 'belum'");
+
+        if(!empty($tgl[0]) && !empty($tgl[1])){
+
+        $this->db->where("status = 'belum' and tglnotapembelian BETWEEN '".($tgl_mulai[2]."-".$tgl_mulai[1]."-".$tgl_mulai[0])."' and '".($tgl_sampai[2]."-".$tgl_sampai[1]."-".$tgl_sampai[0])."'");
+        }
+
+        return $this->db->get('tb_pembelian')->result();
+      }
+
+      function excelhutang($tgl){
+        if(isset($tgl) && !empty($tgl)){
+            $tgl=explode('-', $tgl);
+            $tgl_mulai=explode('.', $tgl[0]);
+            $tgl_sampai=explode('.', $tgl[1]);
+        } 
+
+        $this->db->join('tb_pembelian', 'tb_pembelian.id_pembelian = tb_detailpembelian.id_pembelian');
+        $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
+        $this->db->join('tb_barang', 'tb_barang.id_barang = tb_detailpembelian.id_barang');
+        $this->db->join('tb_satuan', 'tb_satuan.id_satuan = tb_barang.id_satuan');
+        $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
+        $this->db->where("status = 'belum'");
+
+        if(!empty($tgl[0]) && !empty($tgl[1])){
+
+        $this->db->where("status = 'belum' and tglnotapembelian BETWEEN '".($tgl_mulai[2]."-".$tgl_mulai[1]."-".$tgl_mulai[0])."' and '".($tgl_sampai[2]."-".$tgl_sampai[1]."-".$tgl_sampai[0])."'");
+        }
+
+        return $this->db->get('tb_detailpembelian')->result();
+      }
 
 }

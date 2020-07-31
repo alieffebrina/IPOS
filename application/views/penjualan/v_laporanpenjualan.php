@@ -42,7 +42,7 @@
                     <label for="inputEmail3" class="col-sm-2 control-label"></label>
                     <div class="col-sm-3">
                       <button type="submit" name="btn_submit" class="btn btn-primary">Tampilkan</button>
-                      <button type="button" id="btn_print" class="btn btn-warning">Cetak</button>
+                      <button type="submit" name="excel" id="btn_print" value="excel" class="btn btn-warning">Cetak Excel</button>
                     </div>
                   </div>
                 </div>

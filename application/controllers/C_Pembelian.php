@@ -35,12 +35,29 @@ class C_Pembelian extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['pembelian'] = $this->M_Pembelian->getlaporan();
+        $data['pembelian'] = $this->M_Pembelian->search($tglb);
         $this->load->view('pembelian/v_laporanpembelian',$data); 
         $this->load->view('template/footer');
         }
     }
 
+     function lhutang()
+    {
+        $tgla = $this->input->post('tgl');
+        $tglb = str_replace(' ', '', $tgla);
+        $excel = $this->input->post('excel');
+        if ($excel == 'excel'){
+            redirect('C_Pembelian/excelhutang/'.$tglb);
+        }
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['pembelian'] = $this->M_Pembelian->lhutang($tglb);
+        $this->load->view('pembelian/v_laporanhutang',$data); 
+        $this->load->view('template/footer');
+        
+    }
 
     function add()
     {
@@ -283,4 +300,24 @@ class C_Pembelian extends CI_Controller{
 
         $pdf->Output();
     }
+
+    public function excel($tglb)
+    {   
+        
+        $pembelian = $this->M_Pembelian->excel($tglb);
+        $data = array('title' => 'Laporan Pembelian',
+                'excel' => $pembelian);
+        $this->load->view('pembelian/excelpembelian', $data);
+    }
+
+    public function excelhutang($tglb)
+    {   
+        
+        $pembelian = $this->M_Pembelian->excelhutang($tglb);
+        $data = array('title' => 'Laporan Hutang',
+                'excel' => $pembelian);
+        $this->load->view('pembelian/excelhutang', $data);
+    }
+
+    
 }

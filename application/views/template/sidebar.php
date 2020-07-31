@@ -11,7 +11,7 @@
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('nama');
           $id = $this->session->userdata('id_user') ?></p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-circle text-success"></i> Online</a>
         </div></p>
       </div>
       <form action="#" method="get" class="sidebar-form">
