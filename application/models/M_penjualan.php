@@ -235,11 +235,53 @@ class M_penjualan extends CI_Model {
 
     function datapenjualan(){
         $vbulan = date("m"); 
-          $this->db->select('total');
-          $this->db->where('month(tglnota)',$vbulan);
+         $this->db->select('total');
+        $this->db->where('month(tglnota)',$vbulan);
         $query = $this->db->get('tb_penjualan');
         return $query->result();
     }
+
+    function penjualan1(){
+        $vbulan = date('m') . '- 1 month'; 
+         $this->db->select('total');
+        $this->db->where('month(tglnota)',$vbulan);
+        $query = $this->db->get('tb_penjualan');
+        return $query->result();
+    }
+
+    function penjualan2(){
+        $vbulanq = date('m') . '- 2 month';
+        // echo $vbulanq;
+         $this->db->select('sum(total) as totaljual');
+        $this->db->where('month(tglnota)',$vbulanq);
+        $query = $this->db->get('tb_penjualan');
+        return $query->result();
+    }
+
+    // function penjualan3(){
+    //     $vbulan = date("m"); 
+    //     $v3 = $vbulan-3;
+    //      $this->db->select('total');
+    //     $this->db->where('month(tglnota)',$v3);
+    //     $query = $this->db->get('tb_penjualan');
+    //     return $query->result();
+    // }
+
+    // function penjualan4(){
+    //     $vbulan = date("m"); 
+    //      $this->db->select('total');
+    //     $this->db->where('month(tglnota)',$vbulan-4);
+    //     $query = $this->db->get('tb_penjualan');
+    //     return $query->result();
+    // }
+
+    // function penjualan5(){
+    //     $vbulan = date("m"); 
+    //      $this->db->select('total');
+    //     $this->db->where('month(tglnota)',$vbulan-5);
+    //     $query = $this->db->get('tb_penjualan');
+    //     return $query->result();
+    // }
 
     function hutangdashboard(){
         $this->db->select('sum(total) as totalhutang, nama');

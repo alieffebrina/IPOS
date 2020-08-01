@@ -39,10 +39,15 @@ class Welcome extends CI_Controller {
 		$data['barang'] = $this->M_barang->totalitem();
 		$data['datapelanggan'] = $this->M_pelanggan->datapelanggan();
 		$data['totalpenjualan'] = $this->M_penjualan->datapenjualan();
+		$data['penjualan1'] = $this->M_penjualan->penjualan1();
+		$data['penjualan2'] = $this->M_penjualan->penjualan2();
+		// $data['penjualan3'] = $this->M_penjualan->penjualan3();
+		// $data['penjualan4'] = $this->M_penjualan->penjualan4();
+		// $data['penjualan5'] = $this->M_penjualan->penjualan5();
 		$data['stokdashboard'] = $this->M_stok->stokdashboard();
 		$data['hutangdashboard'] = $this->M_penjualan->hutangdashboard();
 		$this->load->view('template/index.php', $data);
 		$this->load->view('template/footer.php');
-		$this->load->view('template/footerwelcome.php');
+		$this->load->view('template/footerwelcome.php', $data);
 	}
 }
