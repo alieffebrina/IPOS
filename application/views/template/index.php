@@ -52,18 +52,17 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-             <!--  <h3>Rp. <?php $total = 0; 
+             <h3>Rp. <?php $total = 0; 
               foreach ($totalpenjualan as $totalpenjualan) {
-                $total += $totalpenjualan;
+                $total += $totalpenjualan->total;
               }
-              echo $total; ?></h3> -->
-              <h3>Rp. 10.000.000,-</h3>
-              <p>Penjualan bulan Juli 2020</p>
+              echo number_format($total); ?></h3>
+              <p>Penjualan bulan <?php echo date('F Y')?></p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo site_url('C_penjualan'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -73,7 +72,7 @@
             <div class="inner">
               <h3>25.000.000</h3>
 
-              <p>Laba Bulan Juli 2020</p>
+              <p>Laba Bulan <?php echo date('F Y')?></p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -146,45 +145,21 @@
             <!-- /.box-body -->
             <div class="box-footer text-black">
               <div class="row">
+                <?php foreach ($stokdashboard as $key) { 
+                  $a = 100-(($key->stok/$key->stokmin)*100);?>
+
                 <div class="col-sm-12">
                   <!-- Progress bars -->
                   <div class="clearfix">
-                    <span class="pull-left">Paving 6 cm / Natural K-250 </span>
-                    <small class="pull-right">2 M2</small>
+                    <span class="pull-left"><?php echo $key->barang.' / '.$key->jenisbarang; ?></span>
+                    <small class="pull-right"><?php echo $key->stok.' / '.$key->satuan ?></small>
                   </div>
                   <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 10%;"></div>
+                    <div class="progress-bar progress-bar-green" style="width: <?php echo $a ?>%;"></div>
                   </div>
                 </div>
-                <div class="col-sm-12">
-                  <div class="clearfix">
-                    <span class="pull-left">Paving 6 cm / Natural K-300</span>
-                    <small class="pull-right">1 m2</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 20%;"></div>
-                  </div>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-12">
-                  <div class="clearfix">
-                    <span class="pull-left">Paving 6 cm / Natural K-300</span>
-                    <small class="pull-right">1 m2</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 30%;"></div>
-                  </div>
-                </div>
-                <div class="col-sm-12">
 
-                  <div class="clearfix">
-                    <span class="pull-left">Paving 6 cm / Merah K-350</span>
-                    <small class="pull-right">3 m2</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 20%;"></div>
-                  </div>
-                </div>
+                <?php } ?>
                 <!-- /.col -->
               </div>
               <!-- /.row -->
@@ -211,6 +186,7 @@
             <div class="box-body">
               <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
               <ul class="todo-list">
+                <?php foreach ($hutangdashboard as $hd) { ?>
                 <li>
                   <!-- drag handle -->
                   <span class="handle">
@@ -220,74 +196,16 @@
                   <!-- checkbox -->
                   <input type="checkbox" value="">
                   <!-- todo text -->
-                  <span class="text">Riski</span>
+                  <span class="text"><?php echo $hd->nama ?></span>
                   <!-- Emphasis label -->
-                  <small class="label label-danger"><i class="fa fa-clock-o"></i> Rp. 10.000.000</small>
-                  <!-- General tools such as edit or delete-->
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
+                  <small class="label label-danger"><i class="fa fa-clock-o"></i> Rp. <?php echo number_format($hd->totalhutang) ?></small>
                 </li>
-                <li>
-                  <!-- drag handle -->
-                  <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <!-- checkbox -->
-                  <input type="checkbox" value="">
-                  <!-- todo text -->
-                  <span class="text">Muhammad</span>
-                  <!-- Emphasis label -->
-                  <small class="label label-danger"><i class="fa fa-clock-o"></i> Rp. 14.000.000</small>
-                  <!-- General tools such as edit or delete-->
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                  <!-- drag handle -->
-                  <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <!-- checkbox -->
-                  <input type="checkbox" value="">
-                  <!-- todo text -->
-                  <span class="text">Andi</span>
-                  <!-- Emphasis label -->
-                  <small class="label label-danger"><i class="fa fa-clock-o"></i> Rp. 15.000.000</small>
-                  <!-- General tools such as edit or delete-->
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                  <!-- drag handle -->
-                  <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <!-- checkbox -->
-                  <input type="checkbox" value="">
-                  <!-- todo text -->
-                  <span class="text">Dwi</span>
-                  <!-- Emphasis label -->
-                  <small class="label label-danger"><i class="fa fa-clock-o"></i> Rp. 20.000.000</small>
-                  <!-- General tools such as edit or delete-->
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
+                <?php } ?>
               </ul>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix no-border">
-              <button type="button" class="btn btn-default pull-right">Selengkapnya</button>
+              <a href="<?php echo site_url('C_penjualan/hutang'); ?>"><button type="button" class="btn btn-default pull-right">Selengkapnya</button>
             </div>
           </div>
           <!-- /.box -->

@@ -232,4 +232,22 @@ class M_penjualan extends CI_Model {
         $this->db->where($where);
         $this->db->update('tb_penjualan',$barang);
     }
+
+    function datapenjualan(){
+        $vbulan = date("m"); 
+          $this->db->select('total');
+          $this->db->where('month(tglnota)',$vbulan);
+        $query = $this->db->get('tb_penjualan');
+        return $query->result();
+    }
+
+    function hutangdashboard(){
+        $this->db->select('sum(total) as totalhutang, nama');
+        $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
+        $this->db->where('pembayaran','kredit');
+        $this->db->group_by('tb_penjualan.id_pelanggan');
+        $query = $this->db->get('tb_penjualan');
+        return $query->result();
+    }
+
 }

@@ -120,5 +120,7 @@ class M_barang extends CI_Model {
         $query = $this->db->get('tb_barang');
         return $query->num_rows();
     }
+
+    
     
 }

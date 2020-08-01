@@ -89,4 +89,14 @@ class M_stok extends CI_Model {
         $this->db->where($where);
         $this->db->update('tb_barang',$baranga);
     }
+
+    function stokdashboard(){ 
+        $this->db->select('*');
+        $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
+        $this->db->join('tb_satuan ts1', 'tb_barang.id_satuan = ts1.id_satuan');
+        $this->db->where('stok < stokmin');
+        $query = $this->db->get('tb_barang');
+        return $query->result();
+    }
+
 }
