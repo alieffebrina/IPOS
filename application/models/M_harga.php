@@ -51,7 +51,8 @@ class M_harga extends CI_Model {
     function getspek($iduser){
         $this->db->select('*');
         $this->db->join('tb_barang', 'tb_barang.id_barang = tb_harga.id_barang');
-        $query = $this->db->get('tb_harga');
+        $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
+        // $query = $this->db->get('tb_harga');
         $where = array(
             'id_harga' => $iduser
         );

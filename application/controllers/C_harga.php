@@ -83,7 +83,6 @@ class C_harga extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['barang'] = $this->M_Setting->getprovinsi();
         $data['harga'] = $this->M_harga->getspek($iduser);
         $this->load->view('master/harga/v_eharga',$data); 
         $this->load->view('template/footer');

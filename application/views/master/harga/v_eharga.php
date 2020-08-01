@@ -29,13 +29,19 @@
               <div class="box-body">
                 <?php foreach ($harga as $harga) { ?>
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Barang</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Id Barang</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="id_barang" name="id_barang" value="<?php echo $harga->id_barang ?>" readonly>
                     <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $harga->id_harga ?>">
                   </div>
                 </div>
                 
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Nama Barang</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" value="<?php echo $harga->barang.' / '.$harga->jenisbarang ?>" readonly>
+                  </div>
+                </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Harga</label>
                   <div class="col-sm-9">

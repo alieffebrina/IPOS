@@ -31,7 +31,7 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Barang</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="id_barang" name="id_barang" value="<?php echo $harga->barang ?>" readonly>
+                    <input type="text" class="form-control" id="id_barang" name="id_barang" value="<?php echo $harga->barang.' / '.$harga->jenisbarang ?>" readonly>
                   </div>
                 </div>
                 

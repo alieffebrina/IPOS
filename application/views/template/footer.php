@@ -214,6 +214,7 @@
           $("#tampilharga").html(response.list_harga).show();
           $("#tampilsatuan").html(response.list_satuan).show();
           $("#namashow").html(response.list_namabarang).show();
+          $("#jenisbarang").val(response.jenisbarang);
         },
         error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
           alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
@@ -422,12 +423,15 @@
         $("#tabelku").append('<tr valign="top" id="'+newid+'">\n\
           <td width="100px" ><input type="hidden" name="tr" value="'+newid+'"><input type="hidden" name="no[]" value="'+$("#nonota").val()+'">' + newid + '</td>\n\
           <td width="100px" class="barang'+newid+'"><input type="hidden" name="namabara[]" value="'+$("#nama_barang").val()+'">' + $("#namabarangshow").val() + '</td>\n\
+          <td width="100px" class="jenisbarang'+newid+'">' + $("#jenisbarang").val() + '</td>\n\
           <td width="100px" class="qtt'+newid+'"><input type="hidden" name="qtt[]" value="'+$("#qtt").val()+'">' + $("#qtt").val() + '</td>\n\
           <td width="100px" class="satuan'+newid+'">' + $("#satuan").val() + '</td>\n\
           <td width="100px" class="harga'+newid+'"><input type="hidden" name="harga[]" value="'+$("#harga").val()+'">' + $("#hargashow").val() + '</td>\n\
           <td width="100px" class="diskon'+newid+'"><input type="hidden" name="diskon[]" value="'+$("#diskon").val()+'">' + $("#diskon").val() + '</td>\n\
           <td width="100px" class="subtotal'+newid+'">' + $("#subtotal").val() + '</td>\n\
-          <td width="100px"><a href="javascript:void(0);" class="remCF" data-id="'+st+'" ><input type="hidden" id="suba" value="'+st+'" class="aatd'+newid+'">Remove</a></td>\n\ </tr>');
+          <td width="100px"><a href="javascript:void(0);" class="remCF" data-id="'+st+'" ><input type="hidden" id="suba" value="'+st+'" class="aatd'+newid+'">\n\
+                <button type="button" class="btn btn-info btn-sm">\n\
+                  <i class="fa fa-times"></i></button></a></td>\n\ </tr>');
         // var sumHsl = 0;
         // for (t=0; t<newid; t++){
           sumHsl = (sumHsl*1)+(st*1);

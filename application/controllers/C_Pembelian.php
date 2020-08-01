@@ -72,7 +72,7 @@ class C_Pembelian extends CI_Controller{
             $a = $modul->kodefinal;
             if (strpos($a, 'ggal') != false) {
                 date_default_timezone_set('Asia/Jakarta');
-                $tgl = date('Y-m-d');
+                $tgl = date('d-m-Y');
                 $a = str_replace("tanggal", $tgl, $a);
                 $data = $this->M_Pembelian->cekpembeliantgl();
                 $no = count($data) + 1;
@@ -145,7 +145,7 @@ class C_Pembelian extends CI_Controller{
             $a = $modul->kodefinal;
             if (strpos($a, 'ggal') != false) {
                 date_default_timezone_set('Asia/Jakarta');
-                $tgl = date('Y-m-d');
+                $tgl = date('d-m-Y');
                 $a = str_replace("tanggal", $tgl, $a);
                 $data = $this->M_Pembelian->cekreturtgl();
                 $no = count($data) + 1;

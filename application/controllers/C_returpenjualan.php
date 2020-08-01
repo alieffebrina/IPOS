@@ -44,7 +44,7 @@ class C_returpenjualan extends CI_Controller{
             $a = $modul->kodefinal;
             if (strpos($a, 'ggal') != false) {
                 date_default_timezone_set('Asia/Jakarta');
-                $tgl = date('Y-m-d');
+                $tgl = date('d-m-Y');
                 $a = str_replace("tanggal", $tgl, $a);
                 $data = $this->M_returpenjualan->cekreturpenjualantgl();
                 $no = count($data) + 1;
