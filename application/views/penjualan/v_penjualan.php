@@ -102,7 +102,7 @@
                     <select class="form-control select2" id="nama_barang" style="width: 100%;">
                       <option value="">--Pilih--</option>
                       <?php foreach ($barang as $barang) { ?>
-                      <option value="<?php echo $barang->id_barang ?>"><?php echo $barang->barang ?></option>
+                      <option value="<?php echo $barang->id_barang ?>"><?php echo $barang->barang.' / '.$barang->jenisbarang ?></option>
                       <?php } ?>
                     </select>
                   </div><div id="namashow"></div>
@@ -189,7 +189,7 @@
                 <input type="hidden" name="total" id='total'>
                 <a href="<?= site_url('C_penjualan');?>" class="btn btn-default pull-right">Cancel</a>
                 <input type='submit' class="btn btn-info pull-right" value='Simpan'>
-                <button type="button" class="btn btn-info pull-right">Cetak Nota</button>
+                <!-- <button type="button" class="btn btn-info pull-right">Cetak Nota</button> -->
             </div>
 
             <!-- /.box-body -->

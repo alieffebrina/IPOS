@@ -58,13 +58,17 @@ class C_jenisbarang extends CI_Controller{
     {   
 
         $id = $this->session->userdata('id_user');
-        $this->M_jenisbarang->tambahdata($id);
-        // $data = $this->M_jenisbarang->cekkodejenisbarang();
+        $cek= $this->M_jenisbarang->tambahdata($id);
+        // $data = $this->M_satuan->cekkodesatuan();
         // foreach ($data as $id) {
         //     $id =$id;
-        //     $this->M_jenisbarang->tambahakses($id);
+        //     $this->M_satuan->tambahakses($id);
         // }
-        $this->session->set_flashdata('Sukses', "Data Berhasil Ditambahkan.");
+        if($cek){
+            $this->session->set_flashdata('Sukses', "Data Jenis Barang Berhasil Di Tambahkan.");
+        }else{
+            $this->session->set_flashdata('Sukses', "Data Jenis Barang Tidak Boleh Sama Ataupun Kosong.");
+        }
         redirect('C_jenisbarang/add');
     }
 
@@ -96,14 +100,14 @@ class C_jenisbarang extends CI_Controller{
 
         $id = $this->session->userdata('id_user');
         $this->M_jenisbarang->edit($id);
-        $this->session->set_flashdata('Sukses', "Data Berhasil Diperbarui.");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Di Perbarui.");
         redirect('C_jenisbarang/add');
     }
 
     function hapus($id){
         $where = array('id_jenisbarang' => $id);
         $this->M_Setting->delete($where,'tb_jenisbarang');
-        $this->session->set_flashdata('Sukses', "Data Berhasil Dihapus.");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Di Hapus.");
         redirect('C_jenisbarang/add');
     }
 

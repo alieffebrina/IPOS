@@ -16,14 +16,20 @@ class M_satuan extends CI_Model {
     }
 
     function tambahdata($id){
-
-        $satuan = array(
-            'id_user' => $id,
-            'satuan' => $this->input->post('satuan'),
-            'tgl_update' => date('Y-m-d')
-        );
-        
-        $this->db->insert('tb_satuan', $satuan);
+        $st=$this->input->post('satuan');
+        $query = $this->db->query("SELECT satuan FROM tb_satuan where satuan='".$st."'");
+        if($query->num_rows()>0){
+            return false;
+        }else{
+            $satuan = array(
+                'id_user' => $id,
+                'satuan' => $st,
+                'tgl_update' => date('Y-m-d')
+            );
+            
+            $this->db->insert('tb_satuan', $satuan);
+            return true;
+        }
     }
 
     function getspek($iduser){

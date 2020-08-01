@@ -101,7 +101,7 @@ class C_penjualan extends CI_Controller{
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
         $data['penjualan'] = $this->M_penjualan->getpiutang();
-        $this->load->view('penjualan/v_vpenjualan',$data); 
+        $this->load->view('penjualan/v_accpiutang',$data); 
         $this->load->view('template/footer');
     }
 
@@ -159,12 +159,24 @@ class C_penjualan extends CI_Controller{
 
     }
 
+    function lpiutang()
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['laporanpiutang'] = $this->M_penjualan->getlaporanpiutang();
+        // $data['detaillaporanpenjualan'] = $this->M_penjualan->getdetaillaporan();
+        $this->load->view('penjualan/v_laporanpiutang',$data); 
+        $this->load->view('template/footer');
+    }
+
      function bayar($ida)
     {   
         // $id = $this->session->userdata('id_user');
         $this->M_penjualan->edit($ida);
         $this->session->set_flashdata('Sukses', "Data Berhasil Diperbarui");
-        redirect('C_Penjualan');
+        redirect('C_Penjualan/piutang');
     }
 
 }

@@ -40,6 +40,8 @@ class C_satuan extends CI_Controller{
         $kode = $this->input->post('satuan');
                 # select ke model member Kualifikasiname yang diinput Kualifikasi
         $hasil_kode = $this->M_satuan->cek_satuan($kode);
+         
+                # pengecekan value $hasil_Kualifikasiname
         if(count($hasil_kode)!=0){
           # kalu value $hasil_Kualifikasiname tidak 0
                   # echo 1 untuk pertanda Kualifikasiname sudah ada pada db    
@@ -56,26 +58,18 @@ class C_satuan extends CI_Controller{
     {   
 
         $id = $this->session->userdata('id_user');
-        $this->M_satuan->tambahdata($id);
-
-        $satuan = $this->input->post('satuan');
-        $sql = $this->db->query("Select satuan From tb_satuan where satuan = '$satuan'");
-        $ceklistsatuan = $sql->numrows();
-        if ($ceklistsatuan == '')
-        {
-            $this->session->set_flashdata('sukses', "Data tidak boleh kosong.");
-            redirect('C_satuan/add');
-        }
-        else if ($ceklistsatuan == 'satuan')
-        {
-            $this->session->set_flashdata('sukses', "Data tidak boleh sama.");
-            redirect('C_satuan/add');
-        }
-        else
-        {
+        $cek= $this->M_satuan->tambahdata($id);
+        // $data = $this->M_satuan->cekkodesatuan();
+        // foreach ($data as $id) {
+        //     $id =$id;
+        //     $this->M_satuan->tambahakses($id);
+        // }
+        if($cek){
             $this->session->set_flashdata('Sukses', "Data Berhasil Di Tambahkan.");
-            redirect('C_satuan/add');
+        }else{
+            $this->session->set_flashdata('Sukses', "Data Tidak Boleh Sama Ataupun Kosong.");
         }
+        redirect('C_satuan/add');
     }
 
     function view($ida)

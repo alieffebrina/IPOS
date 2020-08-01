@@ -21,24 +21,24 @@
 
 <!-- jQuery 3 -->
 <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 
-<script src="<?php //echo base_url() ?>assets/bower_components/jquery-ui/jquery-ui.min.js"></script>-->
+<!-- jQuery UI 1.11.4 -->
+<!--<script src="<?php echo base_url() ?>assets/bower_components/jquery-ui/jquery-ui.min.js"></script>-->
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   // $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Morris.js charts
-<script src="<?php //echo base_url() ?>assets/bower_components/raphael/raphael.min.js"></script>
-<script src="<?php //echo base_url() ?>assets/bower_components/morris.js/morris.min.js"></script> -->
-<!-- Sparkline
-<script src="<?php //echo base_url() ?>assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script> -->
-<!-- jvectormap 
-<script src="<?php //echo base_url() ?>assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="<?php //echo base_url() ?>assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>-->
-<!-- jQuery Knob Chart 
-<script src="<?php //echo base_url() ?>assets/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>-->
+<!-- Morris.js charts -->
+<!--<script src="<?php echo base_url() ?>assets/bower_components/raphael/raphael.min.js"></script>
+<script src="<?php echo base_url() ?>assets/bower_components/morris.js/morris.min.js"></script>-->
+<!-- Sparkline -->
+<!--<script src="<?php echo base_url() ?>assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>-->
+<!-- jvectormap -->
+<!--<script src="<?php echo base_url() ?>assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="<?php echo base_url() ?>assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>-->
+<!-- jQuery Knob Chart -->
+<!--<script src="<?php echo base_url() ?>assets/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>-->
 
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<?php echo base_url() ?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
@@ -65,15 +65,6 @@
 <!-- datepicker -->
 <script src="<?php echo base_url() ?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- page script -->
-<!-- FLOT CHARTS -->
-<script src="<?php echo base_url() ?>assets/bower_components/Flot/jquery.flot.js"></script>
-<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
-<script src="<?php echo base_url() ?>assets/bower_components/Flot/jquery.flot.resize.js"></script>
-<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
-<script src="<?php echo base_url() ?>assets/bower_components/Flot/jquery.flot.pie.js"></script>
-<!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
-<script src="<?php echo base_url() ?>assets/bower_components/Flot/jquery.flot.categories.js"></script>
-<!-- Page script -->
 <script>
   $(document).ready(function(){ 
     $('#example1').DataTable();
@@ -90,7 +81,7 @@
         startDate: moment().startOf('hour'),
         endDate: moment().startOf('hour').add(32, 'hour'),
         locale: {
-          format: 'DD.MM.YYYY'
+          format: 'DD/MM/YYYY'
         }
       });
      $('.datepicker').datepicker({
@@ -100,6 +91,139 @@
     //Date range picker with time picker
   })
 </script>
+<script type="text/javascript">
+  $(document).ready(function(){ // Ketika halaman sudah siap (sudah selesai di load)
+   $("#searchkas").click(function() {
+  // function search(){
+    var tglaw =  $("#tglawal").val();
+    var tglak =  $("#tglakhir").val();
+     $.ajax({
+      url: "<?php echo base_url("index.php/C_Kas/search"); ?>", // Isi dengan url/path file php yang 
+      type: 'POST', // Tentukan type nya POST atau GET
+      data: {tglawal: $("#tglawal").val(), tglakhir: $("#tglakhir").val(),}, // Set data yang akan dikirim
+      dataType: "json",
+      beforeSend: function(e) {
+        if(e && e.overrideMimeType) {
+          e.overrideMimeType("application/json;charset=UTF-8");
+        }
+      },
+      success: function(response){ // Ketika proses pengiriman berhasil
+        // Ganti isi dari div view dengan view yang diambil dari controller siswa function search
+        $("#data").html(response.kas);
+      },
+      error: function (xhr, ajaxOptions, thrownError) { // Ketika terjadi error
+        alert(xhr.responseText); // munculkan alert
+      }
+    });
+   // }
+ });
+ });
+
+</script>
+<script type="text/javascript">
+   $("#excelkas").click(function() {
+  // function search(){
+    var tglaw =  $("#tglawal").val();
+    var tglak =  $("#tglakhir").val();
+     $.ajax({
+      url: "<?php echo base_url("index.php/C_Kas/excel"); ?>", // Isi dengan url/path file php yang 
+      type: 'POST', // Tentukan type nya POST atau GET
+      data: {tglawal: $("#tglawal").val(), tglakhir: $("#tglakhir").val(),}, // Set data yang akan dikirim
+      dataType: "json",
+      beforeSend: function(e) {
+        if(e && e.overrideMimeType) {
+          e.overrideMimeType("application/json;charset=UTF-8");
+        }
+      },
+      success: function(response){ // Ketika proses pengiriman berhasil
+       // document.getElementById('tglawal').value= tglaw;
+       // document.getElementById('tglakhir').value= tglak;
+        // Ganti isi dari div view dengan view yang diambil dari controller siswa function search
+        // $("#data").html(response.kas);
+      },
+      error: function (xhr, ajaxOptions, thrownError) { // Ketika terjadi error
+        // alert(xhr.responseText); // munculkan alert
+      }
+    });
+   // }
+ });
+
+</script>
+
+<<!-- script type="text/javascript">
+  function excelkas(){
+     $.ajax({
+      url: "<?php echo base_url("index.php/C_Kas/excel"); ?>", // Isi dengan url/path file php yang 
+      type: 'POST', // Tentukan type nya POST atau GET
+      data: {tglawal: $("#tglawal").val(), tglakhir: $("#tglakhir").val(),}, // Set data yang akan dikirim
+      dataType: "json",
+    });
+   }
+
+</script> -->
+<!-- Page script -->
+<!-- <script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+    })
+
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass   : 'iradio_minimal-red'
+    })
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    //Timepicker
+    $('.timepicker').timepicker({
+      showInputs: false
+    })
+  })
+</script> -->
 <!-- Page script -->
 <script>
   $(document).ready(function(){ // Ketika halaman sudah siap (sudah selesai di load)
@@ -254,7 +378,6 @@
       document.getElementById("terbilang").innerHTML = terbilang(input);
   };
   </script>
-  
 <script type="text/javascript">
   function startCalculate(){
     var interval=setInterval("Calculate()",10);
@@ -454,6 +577,7 @@
         }
       });
 
+  
 
       $("#butsendpenjualan").click(function() {
         if($("#subtotal").val()!=''){
@@ -475,6 +599,7 @@
               sumHsl=0;
             };
 
+            // PERCOBAANKU KO.. TOLONG DIPERIKSA YAA :-D
             $("#tabelku").append('<tr valign="top" id="'+newid+'">\n\
               <td width="100px" >' + newid + '</td>\n\
               <td width="100px" class="barang'+newid+'"><input type="hidden" name="id_barang[]" value="'+$("#nama_barang").val()+'">' + $("#namabarangshow").val() + '</td>\n\
@@ -539,9 +664,40 @@
       document.getElementById('subtotalbawahrupiah').value =sumHasl ;
       Calculate_total();
     });
-  });
-</script>
 
+        
+  });
+
+  $(document).ready(function() {
+    $("#formsatuan").on('submit', function(e){
+        if($("#satuan").val()==''){alert('Nama satuan harus diisi');
+            e.preventDefault();
+            return false;
+        }
+        else if($("#satuan").val()=='satuan'){
+          alert('Nama satuan tidak boleh sama');
+          e.preventDefault();
+          return false;
+        }
+  });
+
+  $(document).ready(function() {
+    $("#formjenisbarang").on('submit', function(e){
+        if($("#jenisbarang").val()==''){alert('Nama jenisbarang harus diisi');
+            e.preventDefault();
+            return false;
+        }
+        else if($("#jenisbarang").val()=='jenisbarang'){
+          alert('Nama jenisbarang tidak boleh sama');
+          e.preventDefault();
+          return false;
+        }
+        else{
+          return true;
+        }
+  });
+
+</script>
   <script type="text/javascript">
   function Angkasaja(evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode
@@ -631,43 +787,6 @@ function toggle(source) {
     }
 }
 </script>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#belikredit").click(function () {
-      if($("#nama_toko").val()!=''){
-        $.ajax({
-          type: "POST", // Method pengiriman data bisa dengan GET atau POST
-          url: "<?php echo base_url("index.php/C_Pembelian/getlimit"); ?>", // Isi dengan url/path file php yang dituju
-          data: {id_suplier : $("#nama_toko").val()}, // data yang akan dikirim ke file yang dituju
-          dataType: "json",
-          beforeSend: function(e) {
-            if(e && e.overrideMimeType) {
-              e.overrideMimeType("application/json;charset=UTF-8");
-            }
-          },
-          success: function(response){ // Ketika proses pengiriman berhasil
-            $('#limit').val(response.limit);
-            $('#tgljatuhtempo').removeAttr('disabled');
-          },
-          error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
-            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
-          }
-        });
-      }else{
-        alert('pilih suplier terlebih dahulu');
-        $(this).prop('checked', false);
-        $('#belicash').prop('checked', true);
-      }
-    });
-    $("#belicash").click(function(){
-
-            $('#limit').val('');
-            document.getElementById("tgljatuhtempo").disabled = true;
-    });
-        });
-</script>
-
 <script type="text/javascript">
   $(document).ready(function() {
     $("#kredit").click(function () {
@@ -703,6 +822,36 @@ function toggle(source) {
   $(document).ready(function() {
     $("#belikredit").click(function () {
       if($("#nama_toko").val()!=''){
+        $.ajax({
+          type: "POST", // Method pengiriman data bisa dengan GET atau POST
+          url: "<?php echo base_url("index.php/C_Pembelian/getlimit"); ?>", // Isi dengan url/path file php yang dituju
+          data: {id_suplier : $("#nama_toko").val()}, // data yang akan dikirim ke file yang dituju
+          dataType: "json",
+          beforeSend: function(e) {
+            if(e && e.overrideMimeType) {
+              e.overrideMimeType("application/json;charset=UTF-8");
+            }
+          },
+          success: function(response){ // Ketika proses pengiriman berhasil
+            $('#limit').val(response.limit);
+            $('#tgljatuhtempo').removeAttr('disabled');
+          },
+          error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
+            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
+          }
+        });
+      }else{
+        alert('pilih suplier terlebih dahulu');
+        $(this).prop('checked', false);
+        $('#cash').prop('checked', true);
+      }
+    });
+  });
+</script>
+<!-- <script type="text/javascript">
+  $(document).ready(function() {
+    $("#belikredit").click(function () {
+      if($("#nama_toko").val()!=''){
             $('#tgljatuhtempo').removeAttr('disabled');
       }else{
         alert('pilih pelanggan terlebih dahulu');
@@ -717,7 +866,7 @@ function toggle(source) {
         }
     });
   });
-</script>
+</script> -->
 <script type="text/javascript">
   function embuh(){
     var embuha = document.getElementById('kodeformat1').value;
@@ -892,7 +1041,6 @@ function toggle(source) {
         }
       });
     }}
-
     $("#id_penjualan").change(function(){ // Ketika user mengganti atau memilih data provinsi
     
       $.ajax({
@@ -934,7 +1082,6 @@ function toggle(source) {
         
     });
   });
-
   function check_retur(row){
     var id=$(row).closest('tr').attr('id');
     var qtt= $("#tabelku > tbody").find('td').find('#qtt_'+id).val();

@@ -18,7 +18,7 @@
        <div class="alert alert-success alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
           <h5><i class="icon fa fa-check"></i> Sukses!</h5>
-          Data Berhasil Ditambahkan.
+          <?=$this->session->flashdata('Sukses')?>.
         </div>                 
       <?php } ?>
     </div>
@@ -34,7 +34,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" method="POST" action="<?php echo site_url('C_satuan/tambah')?>" id='formsatuan'>
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('C_satuan/tambah')?>">
               <div class="box-body">
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Nama</label>

@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class M_penjualan extends CI_Model {
-	function cekpenjualantgl(){
+    function cekpenjualantgl(){
         $now = date('Y-m-d');
         $where = array(
             'tglnota' => $now
@@ -61,8 +61,8 @@ class M_penjualan extends CI_Model {
     function getlaporan(){
         if(isset($_POST) && !empty($_POST)){
             $tgl=explode(' - ', $_POST['tgl']);
-            $tgl_mulai=explode('.', $tgl[0]);
-            $tgl_sampai=explode('.', $tgl[1]);
+            $tgl_mulai=explode('/', $tgl[0]);
+            $tgl_sampai=explode('/', $tgl[1]);
         }
 
         $query = "SELECT tb_suratjalan.id_suratjalan,tb_suratjalan.status status_kirim,tb_penjualan.* from tb_penjualan 
@@ -74,11 +74,58 @@ class M_penjualan extends CI_Model {
 
         return $query->result();
     }
+
+     function getlaporanpiutang(){
+        if(isset($_POST) && !empty($_POST)){
+            $tgl=explode(' - ', $_POST['tgl']);
+            $tgl_mulai=explode('/', $tgl[0]);
+            $tgl_sampai=explode('/', $tgl[1]);
+        }
+
+        $query = "SELECT tb_suratjalan.id_suratjalan,tb_suratjalan.status status_kirim,tb_penjualan.* from tb_penjualan 
+        left join tb_suratjalan on tb_suratjalan.id_penjualan = tb_penjualan.id_penjualan";
+        if(!empty($tgl[0]) && !empty($tgl[1])){
+            $query=$query." where tglnota between '".($tgl_mulai[2]."-".$tgl_mulai[1]."-".$tgl_mulai[0])."' and '".($tgl_sampai[2]."-".$tgl_sampai[1]."-".$tgl_sampai[0])."'";
+        }
+        $query = $this->db->query($query);
+
+        return $query->result();
+    }
+
+    function getlaporanlabarugi(){
+        if(isset($_POST) && !empty($_POST)){
+            $tgl=explode(' - ', $_POST['tgl']);
+            $tgl_mulai=explode('/', $tgl[0]);
+            $tgl_sampai=explode('/', $tgl[1]);
+        }
+
+        $queryjual = "SELECT tb_suratjalan.id_suratjalan,tb_suratjalan.status status_kirim,tb_penjualan.* from tb_penjualan 
+        left join tb_suratjalan on tb_suratjalan.id_penjualan = tb_penjualan.id_penjualan";
+        if(!empty($tgl[0]) && !empty($tgl[1])){
+            $queryjual=$queryjual." where tglnota between '".($tgl_mulai[2]."-".$tgl_mulai[1]."-".$tgl_mulai[0])."' and '".($tgl_sampai[2]."-".$tgl_sampai[1]."-".$tgl_sampai[0])."'";
+        }
+        $queryjual = $this->db->queryjual($queryjual);
+
+        $querybeli = "SELECT tb_pembelian.* from tb_pembelian";
+        if(!empty($tgl[0]) && !empty($tgl[1])){
+            $querybeli=$querybeli." where tglnota between '".($tgl_mulai[2]."-".$tgl_mulai[1]."-".$tgl_mulai[0])."' and '".($tgl_sampai[2]."-".$tgl_sampai[1]."-".$tgl_sampai[0])."'";
+        }
+        $querybeli = $this->db->querybeli($querybeli);
+
+        $querykas = "SELECT tb_kas.* from tb_kas";
+        if(!empty($tgl[0]) && !empty($tgl[1])){
+            $querykas=$querykas." where tglnota between '".($tgl_mulai[2]."-".$tgl_mulai[1]."-".$tgl_mulai[0])."' and '".($tgl_sampai[2]."-".$tgl_sampai[1]."-".$tgl_sampai[0])."'";
+        }
+        $querykas = $this->db->querykas($querykas);
+
+        return $query->result();
+    }
+
      function getdetaillaporan(){
         if(isset($_POST) && !empty($_POST)){
             $tgl=explode(' - ', $_POST['tgl']);
-            $tgl_mulai=explode('.', $tgl[0]);
-            $tgl_sampai=explode('.', $tgl[1]);
+            $tgl_mulai=explode('/', $tgl[0]);
+            $tgl_sampai=explode('/', $tgl[1]);
         }
         $query = "SELECT tb_penjualan.status status_penjualan,tb_penjualan.id_penjualan ,tb_penjualan.tglnota, tb_satuan.*,tb_jenisbarang.*,tb_barang.*,tb_detailpenjualan.* from tb_detailpenjualan
         join tb_penjualan on tb_detailpenjualan.id_penjualan = tb_penjualan.id_penjualan
@@ -185,12 +232,4 @@ class M_penjualan extends CI_Model {
         $this->db->where($where);
         $this->db->update('tb_penjualan',$barang);
     }
-
-    // function datapenjualan(){
-    //     $now = date('m');
-    //     $this->db->select('sum(total) as totalpenjualan from tb_penjualan where tglnota(m, tglnota) = tglnota(m, tglnota(m, -1, getdate())) AND tglnota(yyyy, tglnota) = tglnota(yyyy, tglnota(m, -1, getdate()))');
-    //     // $this->db->where('month(tglnota)',$now);
-    //     return $this->db->get('tb_penjualan')->result();
-    // }
-
 }

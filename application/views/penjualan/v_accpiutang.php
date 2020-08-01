@@ -3,20 +3,20 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Penjualan
+        Data Piutang
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo site_url('C_penjualan'); ?>">Data Penjualan</a></li>
-        <li class="active">Lihat Data</li>
+        <li><a href="<?php echo site_url('C_penjualan/piutang'); ?>">Data Piutang</a></li>
+        <li class="active">Lihat Data Piutang</li>
       </ol>
     </section>
     <div class="box-body">
-    <?php if ($this->session->flashdata('SUCCESS')) { ?>
+    <?php if ($this->session->flashdata('Sukses')) { ?>
        <div class="alert alert-success alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <h5><i class="icon fa fa-check"></i> Success!</h5>
+          <h5><i class="icon fa fa-check"></i> Sukses!</h5>
           Data berhasil di perbarui.
         </div>                 
       <?php } ?>
@@ -27,10 +27,10 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Penjualan</h3>
+              <h3 class="box-title">Data Piutang</h3>
             </div>
             <div class="box-header">
-              <a href="<?php echo site_url('C_penjualan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
+              <!-- <a href="<?php echo site_url('C_penjualan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a> -->
             </div>
             <!-- /.box-header -->
 
@@ -83,13 +83,13 @@
                   <td>
                     <div class="btn-group">
                      <a href="<?php echo site_url('C_penjualan/view/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
-                      <a href="<?php echo site_url('C_penjualan/edit/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
-                      <a href="<?php echo site_url('C_returpenjualan/add/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-danger">Retur</button></a>
+                      <!-- <a href="<?php echo site_url('C_penjualan/edit/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
+                      <a href="<?php echo site_url('C_returpenjualan/add/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-danger">Retur</button></a> -->
 
-                      <!--<?php if ($penjualan->status == '0') { ?>
+                      <?php if ($penjualan->status == '0') { ?>
                         
                       <a href="<?php echo site_url('C_penjualan/bayar/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-primary">Bayar</button></a>
-                      <?php } ?>-->
+                      <?php } ?>
                     </div>
                   </td>
                 </tr>

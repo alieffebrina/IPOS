@@ -18,39 +18,21 @@ class M_jenisbarang extends CI_Model {
     }
 
     function tambahdata($id){
-        //$harga = $this->input->post('rupiah');
-        //$harga_str = preg_replace("/[^0-9]/", "", $harga);
-
-        $jenisbarang = array(
-            'id_user' => $id,
-            'jenisbarang' => $this->input->post('jenisbarang'),
-            //'alamat' => $this->input->post('alamat'),
-            //'id_kota' => $this->input->post('kota'),
-            //'id_provinsi' => $this->input->post('prov'),
-            //'tlp' => $this->input->post('tlp'),
-            //'limit' => $harga_str,
-            'tgl_update' => date('Y-m-d')
-        );
-        
-        $this->db->insert('tb_jenisbarang', $jenisbarang);
+        $st=$this->input->post('jenisbarang');
+        $query = $this->db->query("SELECT jenisbarang FROM tb_jenisbarang where jenisbarang='".$st."'");
+        if($query->num_rows()>0){
+            return false;
+        }else{
+            $jenisbarang = array(
+                'id_user' => $id,
+                'jenisbarang' => $st,
+                'tgl_update' => date('Y-m-d')
+            );
+            
+            $this->db->insert('tb_jenisbarang', $jenisbarang);
+            return true;
+        }
     }
-
-    // function cekkodepelanggan(){
-    //     $this->db->select_max('id_pelanggan');
-    //     $idpelanggan = $this->db->get('tb_pelanggan');
-    //     return $idpelanggan->row();
-    // }
-
-    //function tambahakses($id){
-    //    $total = $this->db->count_all_results('tb_submenu');
-
-    //    for($i=0; $i<$total; $i++){
-    //        $fungsi = array('id_submenu' => $i+1 , 
-    //            'id_user' => $id);
-
-    //        $this->db->insert('tb_akses', $fungsi);            
-    //    }
-    //}
 
     function getspek($iduser){
         $this->db->select('*');
