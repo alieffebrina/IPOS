@@ -474,8 +474,8 @@
             }
 
             var st = parseInt($("#subtotalrupiah").val());
-            if(document.getElementById('subtotalbawah').value!=''){
-              sumHsl=document.getElementById('subtotalbawah').value;
+            if(document.getElementById('subtotalbawahrupiah').value!=''){
+              sumHsl=document.getElementById('subtotalbawahrupiah').value;
             }else{
               sumHsl=0;
             };
@@ -489,7 +489,6 @@
               <td width="100px" class="diskon'+newid+'"><input type="hidden" name="diskon[]" value="'+$("#diskon").val()+'">' + $("#diskon").val() + '</td>\n\
               <td width="100px" class="subtotal'+newid+'"><input type="hidden" name="subtotal[]" value="'+$("#subtotalrupiah").val()+'">' + $("#subtotal").val() + '</td>\n\
               <td width="100px"><a href="javascript:void(0);" class="remCF" data-id="'+st+'" ><input type="hidden" id="suba" value="'+st+'" class="aatd'+newid+'">\n\
-          <td width="100px"><a href="javascript:void(0);" class="remCF" data-id="'+st+'" ><input type="hidden" id="suba" value="'+st+'" class="aatd'+newid+'">\n\
                 <button type="button" class="btn btn-info btn-sm">\n\
                   <i class="fa fa-times"></i></button></a></td>\n\ </tr>');
 
@@ -507,7 +506,7 @@
                 separator = sisa ? '.' : '';
                 rupiah += separator + ribuan.join('.');
               }
-              document.getElementById('subtotalbawah').value = formatRupiah(rupiah);
+              document.getElementById('subtotalbawah').value = 'Rp. '+formatRupiah(rupiah);
               document.getElementById('subtotalbawahrupiah').value =sumHsl;
               
               document.getElementById('subtotal').value = '';

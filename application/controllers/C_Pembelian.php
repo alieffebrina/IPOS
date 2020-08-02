@@ -94,6 +94,10 @@ class C_Pembelian extends CI_Controller{
     }
 
     function tambah(){
+        // echo "total :".$this->input->post('total');
+        // echo "diskon :".preg_replace('/([^0-9]+)/','',$this->input->post('diskonbawah'));
+        // echo "biayalain :".$this->input->post('biayalain');
+         
         $id = $this->session->userdata('id_user');
         $hasil_kode = $this->M_Pembelian->tambah($id);
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");

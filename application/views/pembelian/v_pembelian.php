@@ -192,7 +192,7 @@
             <div class="col-xs-12">
               <p class="lead" style="text-align: center;"><b>Total :</b></p>
                   <div class="bg-maroon disable color-palette" ><h1 style="text-align: center;" id="totalfix"></h1></div></br >
-                  <input type="hidden" id="total" name="total" onchange="ceklimitbeforesubmit();">
+                  <input type="text" id="total" name="total" onchange="ceklimitbeforesubmit();">
                 <!-- <input type="hidden" name="total" id='total'> -->
               <p class="lead">Terbilang :</p>
               <h3 class="text-muted well well-sm no-shadow" id="terbilang" style="text-align: center;"></h3>

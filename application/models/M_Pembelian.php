@@ -95,8 +95,8 @@ class M_Pembelian extends CI_Model {
             'total' => $this->input->post('total'),
             'jenispembayaran' => $this->input->post('pembayaran'),
             'tgljatuhtempo' => date_format(date_create($this->input->post('tgljatuhtempo')), 'Y-m-d'),
-            'biayalain' => $this->input->post('biayalain'),
-            'diskon' => $this->input->post('diskonbawah'),
+            'biayalain' => preg_replace('/([^0-9]+)/','',$this->input->post('biayalain')),
+            'diskon' =>preg_replace('/([^0-9]+)/','',$this->input->post('diskonbawah')),
             'status' => $status
         );
         
