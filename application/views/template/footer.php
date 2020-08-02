@@ -317,8 +317,8 @@
         rupiah += separator + ribuan.join('.');
       }
       document.getElementById('total').value = hitungtotal;
-      document.getElementById('totalfix').innerHTML = formatRupiah(rupiah);
-      var input = document.getElementById('totalfix').innerHTML.replace(/\./g, "");
+      document.getElementById('totalfix').innerHTML = 'Rp. '+formatRupiah(rupiah);
+      var input = document.getElementById('totalfix').innerHTML.replace(/[^0-9]/g,'');
       //terbilang
       document.getElementById("terbilang").innerHTML = terbilang(input);
 

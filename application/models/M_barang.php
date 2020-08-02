@@ -8,6 +8,7 @@ class M_barang extends CI_Model {
         $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
         $this->db->join('tb_konversi', 'tb_konversi.id_konversi = tb_barang.id_konversi');
         $this->db->join('tb_satuan ts2', 'tb_konversi.satuan = ts2.id_satuan');
+        $this->db->order_by('barang','ASC');
         $query = $this->db->get('tb_barang');
         return $query->result();
     }
