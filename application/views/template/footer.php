@@ -294,8 +294,8 @@
       document.getElementById('subtotalrupiah').value = bilangan ;   
   };
   function Calculate_total(){
-      var d = (document.getElementById('diskonbawah').value==''?0:parseInt(document.getElementById('diskonbawah').value));
-      var e = (document.getElementById('biayalain').value==''?0:parseInt(document.getElementById('biayalain').value));
+      var d = (document.getElementById('diskonbawah').value.replace(/[^0-9]/g,'')==''?0:parseInt(document.getElementById('diskonbawah').value.replace(/[^0-9]/g,'')));
+      var e = (document.getElementById('biayalain').value==''.replace(/[^0-9]/g,'')?0:parseInt(document.getElementById('biayalain').value.replace(/[^0-9]/g,'')));
       var f = (document.getElementById('subtotalbawahrupiah').value==''?0:parseInt(document.getElementById('subtotalbawahrupiah').value));
       
       if (d>f){
@@ -851,21 +851,21 @@ function toggle(source) {
       });
     }
 
-    var diskonbelibawah = document.getElementById('diskonbelibawah');
-    if(diskonbelibawah){
-      diskonbelibawah.addEventListener('keyup', function(e){
+    var diskonbawah = document.getElementById('diskonbawah');
+    if(diskonbawah){
+      diskonbawah.addEventListener('keyup', function(e){
       //   // tambahkan 'Rp.' pada saat form di ketik
       //   // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-        diskonbelibawah.value = formatRupiah(this.value, 'Rp. ');
+        diskonbawah.value = formatRupiah(this.value, 'Rp. ');
       });
     }
 
-    var biayalainbeli = document.getElementById('biayalainbeli');
-    if(biayalainbeli){
-      biayalainbeli.addEventListener('keyup', function(e){
+    var biayalain = document.getElementById('biayalain');
+    if(biayalain){
+      biayalain.addEventListener('keyup', function(e){
       //   // tambahkan 'Rp.' pada saat form di ketik
       //   // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-        biayalainbeli.value = formatRupiah(this.value, 'Rp. ');
+        biayalain.value = formatRupiah(this.value, 'Rp. ');
       });
     }
  
