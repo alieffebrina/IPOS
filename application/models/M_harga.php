@@ -5,6 +5,8 @@ class M_harga extends CI_Model {
     function getharga(){
         $this->db->select('*');
         $this->db->join('tb_barang', 'tb_barang.id_barang = tb_harga.id_barang');
+        $this->db->join('tb_satuan', 'tb_satuan.id_satuan = tb_barang.id_satuan');
+        $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
         $query = $this->db->get('tb_harga');
         return $query->result();
     }

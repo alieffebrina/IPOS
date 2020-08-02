@@ -373,15 +373,6 @@
     clearInterval(intervala);
     // clearInterval(intervala);
   };
- // function inputTerbilang() {
- //    //membuat inputan otomatis jadi mata uang
-
- //    //mengambil data uang yang akan dirubah jadi terbilang
- //     var input = document.getElementById("totalfix").innerHTML.replace(/\./g, "");
-
- //     //menampilkan hasil dari terbilang
- //     document.getElementById("terbilang").value = terbilang(hitungtotal).replace(/  +/g, ' ');
- //  } 
   
   $(document).ready(function() {
     $("#formpenjualan").on('submit', function(e){
@@ -415,8 +406,8 @@
         if($("#subtotal").val()!=''){
         var newid = id++; 
         var st = parseInt($("#subtotalrupiah").val());
-        if(document.getElementById('subtotalbawah').value!=''){
-          sumHsl=document.getElementById('subtotalbawah').value;
+        if(document.getElementById('subtotalbawahrupiah').value!=''){
+          sumHsl=document.getElementById('subtotalbawahrupiah').value;
         }else{
           sumHsl=0;
         };
@@ -439,8 +430,18 @@
           barangall = barangall+" "+$("#nama_barang").val()+"/"+$("#qtt").val()+"/"+$("#diskon").val()+"/"+$("#harga").val()+"/"+$("#stokaw").val()+"/"+$("#kodesatuan").val()+"/"+$("#qttkonversi").val();
           document.getElementById('barangall').value = barangall;
         // }
-          document.getElementById('subtotalbawah').value = sumHsl;
-          document.getElementById('subtotalbawahrupiah').value = sumHsl;
+
+        var number_string = sumHsl.toString(),
+              sisa  = number_string.length % 3,
+              rupiah  = number_string.substr(0, sisa),
+              ribuan  = number_string.substr(sisa).match(/\d{3}/g);
+              if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+              }
+              document.getElementById('subtotalbawah').value = 'Rp. '+formatRupiah(rupiah);
+              document.getElementById('subtotalbawahrupiah').value =sumHsl;
+
           document.getElementById('subtotalrupiah').value = '';
           document.getElementById('nama_barang').value = '';
           document.getElementById('qtt').value = '';
@@ -847,6 +848,24 @@ function toggle(source) {
       //   // tambahkan 'Rp.' pada saat form di ketik
       //   // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
         rupiah.value = formatRupiah(this.value, 'Rp. ');
+      });
+    }
+
+    var diskonbelibawah = document.getElementById('diskonbelibawah');
+    if(diskonbelibawah){
+      diskonbelibawah.addEventListener('keyup', function(e){
+      //   // tambahkan 'Rp.' pada saat form di ketik
+      //   // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+        diskonbelibawah.value = formatRupiah(this.value, 'Rp. ');
+      });
+    }
+
+    var biayalainbeli = document.getElementById('biayalainbeli');
+    if(biayalainbeli){
+      biayalainbeli.addEventListener('keyup', function(e){
+      //   // tambahkan 'Rp.' pada saat form di ketik
+      //   // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+        biayalainbeli.value = formatRupiah(this.value, 'Rp. ');
       });
     }
  

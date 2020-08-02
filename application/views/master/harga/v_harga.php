@@ -3,13 +3,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Harga
+        Data Harga Jual
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="<?php echo site_url('C_harga'); ?>">Data Master</a></li>
-        <li class="active">Data Harga</li>
+        <li class="active">Data Harga Jual</li>
       </ol>
     </section>
     <div class="box-body">
@@ -27,7 +27,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Harga</h3>
+              <h3 class="box-title">Data Harga Jual</h3>
             </div>
             <div class="box-header">
               <a href="<?php echo site_url('C_harga/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
@@ -40,8 +40,10 @@
                 <tr>
                   <th>No</th>
                   <th>Nama Barang</th>
-                  <th>Harga</th>
+                  <th>Jenis Barang</th>
+                  <th>Satuan</th>
                   <th>Min. Quantity</th>
+                  <th>Harga Jual</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -52,8 +54,10 @@
                 <tr>
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $harga->barang; ?></td>
-                  <td>Rp. <?php echo number_format($harga->harga,0,",","."); ?></td>
+                  <td><?php echo $harga->jenisbarang; ?></td>
+                  <td><?php echo $harga->satuan; ?></td>
                   <td><?php echo $harga->minqtt;?></td>
+                  <td>Rp. <?php echo number_format($harga->harga,0,",","."); ?></td>
                   
                   <td>
                     <div class="btn-group">

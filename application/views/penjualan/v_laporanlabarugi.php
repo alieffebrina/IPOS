@@ -8,7 +8,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo site_url('C_penjualan/laporan'); ?>">Laporan Laba Rugi</a></li>
+        <li><a href="<?php echo site_url('C_labarugi'); ?>">Laporan Laba Rugi</a></li>
         <li class="active">Laporan Laba Rugi</li>
       </ol>
     </section>
@@ -23,7 +23,7 @@
             <!-- /.box-header -->
 
             <div class="box-body">
-              <form action='<?= site_url("C_penjualan/laporan")?>' method='POST'>
+              <form action='<?= site_url("C_labarugi")?>' method='POST'>
                 <div class='row'>
                   <div class="col-lg-12">
                     <label for="inputEmail3" class="col-sm-2 control-label">Tanggal</label>
@@ -65,17 +65,21 @@
                   <th>Total Penjualan</th>
                   <th>Total Pembelian</th>
                   <th>Total Kas Keluar</th>
+                  <th>Laba/Rugi Kotor<br>(Total Jual-Total Beli)</th>
+                  <th>Laba/Rugi Bersih<br>(Total Jual-Total Beli-Total Kas Keluar)</th>
                 </tr>
                 </thead>
                 <tbody>
                   <?php 
                   $no=1;
-                  foreach ($laporanlabarugi as $value_labarugi) {
+                  foreach ($laporanlabarugi as $value_labarugi) {?>
                     
                   <td><?php echo $no++; ?></td>
-                  <td>Rp. <?php echo number_format($value_labarugi->total,0,",","."); ?></td>
-                  <td>Rp. <?php echo number_format($value_labarugi->total,0,",","."); ?></td>
-                  <td>Rp. <?php echo number_format($value_labarugi->nominal,0,",","."); ?></td>
+                  <td>Rp. <?php echo number_format($value_labarugi->jual,0,",","."); ?></td>
+                  <td>Rp. <?php echo number_format($value_labarugi->beli,0,",","."); ?></td>
+                  <td>Rp. <?php echo number_format($value_labarugi->kas,0,",","."); ?></td>
+                  <td>Rp. <?php echo number_format($value_labarugi->laba_kotor,0,",","."); ?></td>
+                  <td>Rp. <?php echo number_format($value_labarugi->laba_bersih,0,",","."); ?></td>
                 </tr>
                   <?php } ?>
                 </tbody>

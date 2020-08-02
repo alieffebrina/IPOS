@@ -3,13 +3,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Harga
+        Data Harga Jual
         <small>Lihat</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('Welcome'); ?>"><i class="fa fa-dashboard"></i> Data Master</a></li>
-        <li><a href="<?php echo site_url('C_harga'); ?>">Data Harga</a></li>>
-        <li class="active">Lihat Data Harga</li>
+        <li><a href="<?php echo site_url('C_harga'); ?>">Data Harga Jual</a></li>>
+        <li class="active">Lihat Data Harga Jual</li>
       </ol>
     </section>
 
@@ -21,7 +21,7 @@
           <!-- Horizontal Form -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Lihat Data Harga</h3>
+              <h3 class="box-title">Lihat Data Harga Jual</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -36,7 +36,7 @@
                 </div>
                 
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Harga</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Harga Jual</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="rupiah" name="rupiah" value=" Rp. <?php echo number_format($harga->harga,0,",","."); ?>" readonly>
                   </div>

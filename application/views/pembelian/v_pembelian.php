@@ -217,7 +217,7 @@
                     <input type="hidden" class="form-control"  name="barangall" id="barangall" readonly>
                   <div class="col-sm-9">
                     <input type="text" class="form-control"  name="subtotalbawah" id="subtotalbawah" readonly>
-                    <input type="hidden" class="form-control" name="subtotalbawahrupiah" id="subtotalbawahrupiah">
+                    <input type="text" class="form-control" name="subtotalbawahrupiah" id="subtotalbawahrupiah">
                   </div>
                 </div>
                 <div class="form-group">
@@ -232,7 +232,7 @@
                   <label for="inputEmail3" class="col-sm-3 control-label">Biaya Lain Lain</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="biayalain" name="biayalain" value=""  onchange ="startCalculatetotal();" >
+                    <input type="text" class="form-control" id="biayalain" name="biayalain" value="" onfocus="startCalculatetotal();" onblur="stopCalctotal();">
                   </div>
                 </div>
               </div>
