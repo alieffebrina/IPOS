@@ -66,7 +66,7 @@
                   <td>
                     <div class="btn-group">
                       <a href="<?php echo site_url('C_suratjalan/view/'.$suratjalan->id_suratjalan); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
-                      <a href="<?php echo site_url('C_suratjalan/edit/'.$suratjalan->id_suratjalan); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
+                      <a href="<?php echo site_url('C_suratjalan/cetaksuratjalan/'.$suratjalan->id_suratjalan); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
                       <?php if ($suratjalan->status == '0') { ?>
                       <a href="<?php echo site_url('C_suratjalan/kirim/'.$suratjalan->id_suratjalan); ?>"><button type="button" class="btn btn-primary">Kirim</button></a>
                        <?php } ?>

@@ -123,7 +123,7 @@
           <div class="box box-danger">
             <div class="col-xs-12">
               <p class="lead" style="text-align: center;"><b>Total :</b></p>
-                  <div class="bg-maroon disable color-palette" ><h1 style="text-align: center;" id="totalfix"><?php echo number_format($key->total); ?></h1></div></br >
+                  <div class="bg-maroon disable color-palette" ><h1 style="text-align: center;" id="totalfix"><?php echo 'Rp. '. number_format($key->total); ?></h1></div></br >
                   <input type="hidden" id="totalfixruppiah" name="total" value="<?php echo $key->total; ?> ">
               <p class="lead">Terbilang :</p>
               <h3 class="text-muted well well-sm no-shadow" id="terbilang" style="text-align: center;"><?php echo (terbilang($key->total))." rupiah"?></h3>
@@ -145,14 +145,14 @@
 
                     <input type="hidden" class="form-control"  name="barangall" id="barangall" readonly>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control"  name="subtotalbawah" id="subtotalbawah" value="<?php echo number_format($sub) ?>"readonly>
+                    <input type="text" class="form-control"  name="subtotalbawah" id="subtotalbawah" value="<?php echo 'Rp. '.number_format($sub) ?>"readonly>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-3 control-label">Diskon</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="diskonbawah" name="diskonbawah" value="<?php echo number_format($key->diskon) ?>">
+                    <input type="text" class="form-control" id="diskonbawah" name="diskonbawah" value="<?php echo 'Rp. '.number_format($key->diskon) ?>">
                     <span id="nilaidiskonbawah"></span>
                   </div>
                 </div>
@@ -160,7 +160,7 @@
                   <label for="inputEmail3" class="col-sm-3 control-label">Biaya Kirim</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="biayalain" name="biayalain"value="<?php echo number_format($key->ongkir) ?>" >
+                    <input type="text" class="form-control" id="biayalain" name="biayalain"value="<?php echo 'Rp. '.number_format($key->ongkir) ?>" >
                   </div>
                 </div>
               </div>

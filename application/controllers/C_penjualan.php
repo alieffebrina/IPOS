@@ -9,6 +9,7 @@ class C_penjualan extends CI_Controller{
         $this->load->model('M_Setting');
         $this->load->model('M_pelanggan');
         $this->load->model('M_barang');
+        $this->load->library('pdf'); 
         if(!$this->session->userdata('id_user')){
             redirect('C_Login');
         }
@@ -25,7 +26,8 @@ class C_penjualan extends CI_Controller{
         $this->load->view('template/footer');
     }
 
-    function tambah(){
+    function tambah()
+    {
         $id = $this->session->userdata('id_user');
         $hasil_kode = $this->M_penjualan->tambahdata($id);
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
@@ -76,23 +78,9 @@ class C_penjualan extends CI_Controller{
         $data['penjualan'] = $this->M_penjualan->getdetail($ida);
         $data['dtlpenjualan'] = $this->M_penjualan->getdetailpenjualan($ida);
 
-        //$data['penjualan'] = $this->M_penjualan->getretur($ida);
-        //$data['returpenjualan'] = $this->M_penjualan->getreturpenjualan($ida);
-
         $this->load->view('penjualan/v_viewpenjualan',$data); 
         $this->load->view('template/footer');
     }
-
-    // function retur()
-    // {
-    //     $this->load->view('template/header');
-    //     $id = $this->session->userdata('id_user');
-    //     $data['menu'] = $this->M_Setting->getmenu1($id);
-    //     $this->load->view('template/sidebar.php', $data);
-    //     $data['penjualan'] = $this->M_penjualan->getreturpenjualan();
-    //     $this->load->view('penjualan/v_retur',$data); 
-    //     $this->load->view('template/footer');
-    // }
 
     function piutang()
     {
@@ -107,17 +95,42 @@ class C_penjualan extends CI_Controller{
 
     function laporan()
     {
+        $tgla = $this->input->post('tgl');
+        $tglb = str_replace(' ', '', $tgla);
+        $excel = $this->input->post('excel');
+        if ($excel == 'excel'){
+            redirect('C_penjualan/excel/'.$tglb);
+        } else {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['laporanpenjualan'] = $this->M_penjualan->getlaporan();
-        $data['detaillaporanpenjualan'] = $this->M_penjualan->getdetaillaporan();
+        $data['penjualan'] = $this->M_penjualan->search($tglb);
         $this->load->view('penjualan/v_laporanpenjualan',$data); 
         $this->load->view('template/footer');
+        }
     }
 
-    function get_info_penjualan(){// Ambil data ID Provinsi yang dikirim via ajax post
+     function lpiutang()
+    {
+        $tgla = $this->input->post('tgl');
+        $tglb = str_replace(' ', '', $tgla);
+        $excel = $this->input->post('excel');
+        if ($excel == 'excel'){
+            redirect('C_penjualan/excelpiutang/'.$tglb);
+        }
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+        $data['penjualan'] = $this->M_penjualan->lpiutang($tglb);
+        $this->load->view('penjualan/v_laporanpiutang',$data); 
+        $this->load->view('template/footer');
+        
+    }
+
+    function get_info_penjualan()
+    {// Ambil data ID Provinsi yang dikirim via ajax post
             $id_penjualan = $this->input->post('id_penjualan');
             $type = $this->input->post('type');
             if($id_penjualan!=''){
@@ -159,24 +172,108 @@ class C_penjualan extends CI_Controller{
 
     }
 
-    function lpiutang()
-    {
-        $this->load->view('template/header');
-        $id = $this->session->userdata('id_user');
-        $data['menu'] = $this->M_Setting->getmenu1($id);
-        $this->load->view('template/sidebar.php', $data);
-        $data['laporanpiutang'] = $this->M_penjualan->getlaporanpiutang();
-        // $data['detaillaporanpenjualan'] = $this->M_penjualan->getdetaillaporan();
-        $this->load->view('penjualan/v_laporanpiutang',$data); 
-        $this->load->view('template/footer');
-    }
-
      function bayar($ida)
     {   
         // $id = $this->session->userdata('id_user');
         $this->M_penjualan->edit($ida);
         $this->session->set_flashdata('Sukses', "Data Berhasil Diperbarui");
         redirect('C_Penjualan/piutang');
+    }
+
+    function cetak($ida)
+    {
+        $this->load->view('penjualan/cetak'); 
+    }
+
+    function cetakpenjualan($ida){
+        $pdf = new FPDF('L','mm',array('110', '215'));
+        // membuat halaman baru
+        $pdf->AddPage();
+        // setting jenis font yang akan digunakan
+        $pdf->SetFont('Arial','',11,'C');
+        // mencetak string 
+        $pdf->Cell(90,5,'ADP Paving',0,0,'L');        
+
+        $penjualan = $this->M_penjualan->getdetail($ida);
+        $dtlpenjualan = $this->M_penjualan->getdetailpenjualan($ida);
+        foreach ($penjualan as $key ) {
+
+            $pdf->Cell(100,5,'Tanggal : '.$key->tglnota,0,1,'R');
+            $pdf->Line(10,15,200,15);
+        // Memberikan space kebawah agar tidak terlalu rapat
+        // $pdf->Cell(10,8,'',0,1);
+            $pdf->SetFont('Arial','',10,'C');
+            
+            $pdf->Cell(40,5,'Nota Penjualan',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,$key->id_penjualan,0,1);
+            $pdf->Cell(40,5,'Nama Pelanggan',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,$key->nama,0,1);
+            $pdf->Cell(40,5,'Jenis Pembayaran',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,$key->pembayaran,0,1);
+        
+        }
+            $pdf->Cell(10,2,'',0,1);
+            $pdf->Cell(10,7,'No',1,0);
+            $pdf->Cell(30,7,'Nama Barang',1,0);
+            $pdf->Cell(30,7,'Jenis Barang',1,0);
+            $pdf->Cell(20,7,'Jumlah',1,0);
+            $pdf->Cell(20,7,'Satuan',1,0);
+            $pdf->Cell(30,7,'Harga',1,0);
+            $pdf->Cell(20,7,'Diskon',1,0);
+            $pdf->Cell(30,7,'Total',1,1);
+        $no =1;
+        foreach ($dtlpenjualan as $dtl ) {
+            
+            $pdf->Cell(10,7,$no++,1,0);
+            $pdf->Cell(30,7,$dtl->barang,1,0);
+            $pdf->Cell(30,7,$dtl->jenisbarang,1,0);
+            $pdf->Cell(20,7,$dtl->qtt,1,0);
+            $pdf->Cell(20,7,$dtl->satuan,1,0);
+            $pdf->Cell(30,7,number_format($dtl->harga),1,0);
+            $pdf->Cell(20,7,number_format($dtl->diskon),1,0);
+            $pdf->Cell(30,7,number_format(($dtl->harga*$dtl->qtt)-$dtl->diskon),1,1);
+        
+        } 
+        foreach ($penjualan as $key ) {
+            
+            $pdf->Cell(10,2,'',0,1);
+            $pdf->Cell(120,5,'',0,0);
+            $pdf->SetFont('Arial','B',10,'');
+            $pdf->Cell(30,5,'Diskon',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,'Rp. '.number_format($key->diskon),0,1);
+            $pdf->Cell(120,5,'',0,0);
+            $pdf->Cell(30,5,'Biaya Kirim ',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,'Rp. '.number_format($key->ongkir),0,1);
+            $pdf->Cell(120,5,'',0,0);
+            $pdf->Cell(30,5,'Total Akhir',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,'Rp. '.number_format($key->total),0,1);
+        }
+        // $pdf->AutoPrint(true);
+        $pdf->Output();
+    }
+
+    public function excel($tglb)
+    {   
+        
+        $penjualan = $this->M_penjualan->excel($tglb);
+        $data = array('title' => 'Laporan Penjualan',
+                'excel' => $penjualan);
+        $this->load->view('penjualan/excelpenjualan', $data);
+    }
+
+    public function excelpiutang($tglb)
+    {   
+        
+        $penjualan = $this->M_penjualan->excelpiutang($tglb);
+        $data = array('title' => 'Laporan Piutang',
+                'excel' => $penjualan);
+        $this->load->view('penjualan/excelpenjualan', $data);
     }
 
 }

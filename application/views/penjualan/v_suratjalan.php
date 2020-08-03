@@ -128,7 +128,6 @@
             <div class="col-xs-12">
                 <button type="button" class="btn btn-default pull-right">Cancel</button>
                 <input type="submit" class="btn btn-info pull-right" value="Simpan">
-                <button type="button" class="btn btn-info pull-right">Cetak Nota</button>
             </div>
           </div>
         </div>

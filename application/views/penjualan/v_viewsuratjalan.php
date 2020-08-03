@@ -41,13 +41,22 @@
                   </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">Tanggal</label>
 
                   <div class="col-sm-10">
                     <input type="date" class="form-control" id="tgl" name="tgl" value="<?php echo $key->tglnota?>" readonly>
                   </div>
+                </div> -->
+
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-1 control-label">Tanggal Kirim</label>
+
+                  <div class="col-sm-10">
+                    <input type="date" class="form-control" id="tgl" name="tgl" value="<?php echo $key->tglkirim?>" readonly>
+                  </div>
                 </div>
+
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">Nama Pelanggan</label>
                     <div class="col-sm-10">

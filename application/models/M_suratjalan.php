@@ -2,27 +2,27 @@
 
 class M_suratjalan extends CI_Model {
 
-    
-
 	function ceksuratjalantgl(){
         $now = date('Y-m-d');
         $where = array(
-            'tglkirim' => $now
+            'tgl_update' => $now
         );
         return $this->db->get_where('tb_suratjalan',$where)->result();
     }
 
-    //function cekkodepenjualan(){
-        //$this->db->select_max('nourut');
-        //$idbarang = $this->db->get('tb_penjualan');
-        //return $idbarang->row();
-    //}
+    function cekkodesuratjalan()
+    {
+        $this->db->select_max('nourut');
+        $idbarang = $this->db->get('tb_suratjalan');
+        return $idbarang->row();
+    }
 
     function getall(){
         $this->db->join('tb_penjualan', 'tb_penjualan.id_penjualan = tb_suratjalan.id_penjualan');
         $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
         return $this->db->get('tb_suratjalan')->result();
     }
+
     function getsuratjalan($ida){
         $this->db->join('tb_penjualan', 'tb_penjualan.id_penjualan = tb_suratjalan.id_penjualan');
         $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
@@ -31,12 +31,6 @@ class M_suratjalan extends CI_Model {
         );
         return $this->db->get_where('tb_suratjalan', $where)->result();
     }
-    // function cekkodepenjualan(){
-    //     $this->db->select_max('nourut');
-    //     $idbarang = $this->db->get('tb_suratjalan');
-    //     return $idbarang->row();
-    // }
-
 
     function tambahdata($id){
         $pengiriman = $this->input->post('pengiriman');
@@ -59,4 +53,35 @@ class M_suratjalan extends CI_Model {
         
         $this->db->insert('tb_suratjalan', $tb_suratjalan);        
     }
+
+    function edit($ida){
+        $barang = array(
+            'status' => '1'
+        );
+
+        $where = array(
+            'id_suratjalan' =>  $ida,
+        );
+        
+        $this->db->where($where);
+        $this->db->update('tb_suratjalan',$barang);
+    }
+
+    function search($tgl){
+        if(isset($tgl) && !empty($tgl)){
+            $tgl=explode('-', $tgl);
+            $tgl_mulai=explode('.', $tgl[0]);
+            $tgl_sampai=explode('.', $tgl[1]);
+        } 
+
+        $this->db->join('tb_penjualan', 'tb_penjualan.id_penjualan = tb_suratjalan.id_penjualan');
+        $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
+
+        if(!empty($tgl[0]) && !empty($tgl[1])){
+
+        $this->db->where("tglkirim BETWEEN '".($tgl_mulai[2]."-".$tgl_mulai[1]."-".$tgl_mulai[0])."' and '".($tgl_sampai[2]."-".$tgl_sampai[1]."-".$tgl_sampai[0])."'");
+        }
+
+        return $this->db->get('tb_suratjalan')->result();
+      }
 }

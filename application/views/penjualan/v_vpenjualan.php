@@ -83,7 +83,7 @@
                   <td>
                     <div class="btn-group">
                      <a href="<?php echo site_url('C_penjualan/view/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
-                      <a href="<?php echo site_url('C_penjualan/edit/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
+                      <a href="<?php echo site_url('C_penjualan/cetakpenjualan/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
                       <a href="<?php echo site_url('C_returpenjualan/add/'.$penjualan->id_penjualan); ?>"><button type="button" class="btn btn-danger">Retur</button></a>
 
                       <!--<?php if ($penjualan->status == '0') { ?>

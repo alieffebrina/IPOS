@@ -9,6 +9,7 @@ class C_suratjalan extends CI_Controller{
         $this->load->model('M_Setting');
         $this->load->model('M_penjualan');
         $this->load->model('M_barang');
+        $this->load->library('pdf'); 
     }
 
     function index()
@@ -21,20 +22,6 @@ class C_suratjalan extends CI_Controller{
         $this->load->view('penjualan/v_vsuratjalan',$data); 
         $this->load->view('template/footer');
     }
-
-    // public function tambah()
-    // {   
-
-    //     $id = $this->session->userdata('id_user');
-    //     $this->M_penjualan->tambahdata($id);
-    //     // $data = $this->M_pelanggan->cekkodepelanggan();
-    //     // foreach ($data as $id) {
-    //     //     $id =$id;
-    //     //     $this->M_pelanggan->tambahakses($id);
-    //     // }
-    //     $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
-    //     redirect('C_penjualan');
-    // }
 
     function tambah(){
         $id = $this->session->userdata('id_user');
@@ -100,6 +87,50 @@ class C_suratjalan extends CI_Controller{
         $this->M_suratjalan->edit($ida);
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
         redirect('C_suratjalan');
+    }
+
+    function cetak($ida)
+    {
+        $this->load->view('penjualan/cetak'); 
+    }
+
+    function cetaksuratjalan($ida){
+        $pdf = new FPDF('L','mm',array('110', '215'));
+        // membuat halaman baru
+        $pdf->AddPage();
+        // setting jenis font yang akan digunakan
+        $pdf->SetFont('Arial','',11,'C');
+        // mencetak string 
+        $pdf->Cell(90,5,'ADP Paving',0,0,'L');        
+
+        $suratjalan = $this->M_suratjalan->getsuratjalan($ida);
+        foreach ($suratjalan as $key ) {
+
+            $pdf->Cell(100,5,'Tanggal : '.$key->tglkirim,0,1,'R');
+            $pdf->Line(10,15,200,15);
+        // Memberikan space kebawah agar tidak terlalu rapat
+        // $pdf->Cell(10,8,'',0,1);
+            $pdf->SetFont('Arial','',10,'C');
+            
+            $pdf->Cell(40,5,'Nota Surat Jalan',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,$key->id_suratjalan,0,1);
+            $pdf->Cell(40,5,'Nota Penjualan',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,$key->id_penjualan,0,1);
+            $pdf->Cell(40,5,'Nama Pelanggan',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,$key->nama,0,1);
+            $pdf->Cell(40,5,'Alamat',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,$key->alamat,0,1);
+            $pdf->Cell(40,5,'Nama Pengirim',0,0);
+            $pdf->Cell(5,5,':',0,0,'C');
+            $pdf->Cell(40,5,$key->namapengirim,0,1);
+        
+        }
+        // $pdf->AutoPrint(true);
+        $pdf->Output();
     }
 
 }
