@@ -33,22 +33,31 @@ class M_konversi extends CI_Model {
         $this->db->insert('tb_konversi', $konversi);
     }
 
-    // function cekkodepelanggan(){
-    //     $this->db->select_max('id_pelanggan');
-    //     $idpelanggan = $this->db->get('tb_pelanggan');
-    //     return $idpelanggan->row();
+    // function tambahdata($id){
+        
+    //     $st=$this->input->post('konversi');
+    //     $this->db->select('b.satuan satuan_awal,c.satuan satuan_konversi,a.*');
+    //     $this->db->join('tb_satuan b', 'a.id_satuan = b.id_satuan');
+    //     $this->db->join('tb_satuan c', 'a.satuan = c.id_satuan');
+    //     $query = $this->db->get('tb_konversi a');
+
+    //     $query = $this->db->query("SELECT * FROM tb_konversi where konversi='".$st."'");
+    //     if($query->num_rows()>0){
+    //         return false;
+    //     }else{
+    //         $konversi = array(
+    //         'id_user' => $id,
+    //         'id_satuan' => $this->input->post('id_satuan'),
+    //         'qttawal' => $this->input->post('qttawal'),
+    //         'satuan' => $this->input->post('satuan'),
+    //         'qttkonversi' => $this->input->post('qttkonversi'),
+    //         'tgl_update' => date('Y-m-d')
+    //     );
+            
+    //         $this->db->insert('tb_konversi', $konversi);
+    //         return true;
+    //     }
     // }
-
-    //function tambahakses($id){
-    //    $total = $this->db->count_all_results('tb_submenu');
-
-    //    for($i=0; $i<$total; $i++){
-    //        $fungsi = array('id_submenu' => $i+1 , 
-    //            'id_user' => $id);
-
-    //        $this->db->insert('tb_akses', $fungsi);            
-    //    }
-    //}
 
     function getspek($iduser){
         $this->db->select('b.satuan satuan_awal,c.satuan satuan_konversi,a.*');

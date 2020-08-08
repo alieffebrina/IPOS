@@ -15,13 +15,12 @@
 
     <div class="box-body">
     <?php if ($this->session->flashdata('Sukses')) { ?>
-       <div class="alert alert-success alert-dismissible">
+        <div class="alert alert-success alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
           <h5><i class="icon fa fa-check"></i> Sukses!</h5>
-          Data Berhasil Diperbarui.
+          <?=$this->session->flashdata('Sukses')?>.
         </div>                 
       <?php } ?>
-    </div>
 
     <!-- Main content -->
     <section class="content">
@@ -88,5 +87,6 @@
         </div>
       <!-- /.row -->
     </section>
-    <!-- /.content -->
   </div>
+    <!-- /.content -->
+</div>

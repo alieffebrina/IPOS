@@ -30,6 +30,7 @@ class C_konversi extends CI_Controller{
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
         $data['konversi'] = $this->M_Setting->getkonversisatuan();
+        $data['satuan'] = $this->M_Setting->getsatuan();
         $this->load->view('master/konversi/v_addkonversi', $data); 
         $this->load->view('template/footer');
     }
@@ -63,6 +64,24 @@ class C_konversi extends CI_Controller{
         redirect('C_konversi/add');
     }
 
+    // public function tambah()
+    // {   
+
+    //     $id = $this->session->userdata('id_user');
+    //     $cek= $this->M_konversi->tambahdata($id);
+    //     // $data = $this->M_satuan->cekkodesatuan();
+    //     // foreach ($data as $id) {
+    //     //     $id =$id;
+    //     //     $this->M_satuan->tambahakses($id);
+    //     // }
+    //     if($cek){
+    //         $this->session->set_flashdata('Sukses', "Data Konversi Berhasil Di Tambahkan.");
+    //     }else{
+    //         $this->session->set_flashdata('Sukses', "Data Konversi Tidak Boleh Sama Ataupun Kosong.");
+    //     }
+    //     redirect('C_konversi/add');
+    // }
+
     function view($ida)
     {
         $this->load->view('template/header');
@@ -74,14 +93,14 @@ class C_konversi extends CI_Controller{
         $this->load->view('template/footer');
     }
 
-    function edit()
+    function edit($iduser)
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
         $data['satuan'] = $this->M_Setting->getsatuan();
-        $data['konversi'] = $this->M_konversi->getkonversisatuan();
+        $data['konversi'] = $this->M_konversi->getspek($iduser);
         $this->load->view('master/konversi/v_ekonversi',$data); 
         $this->load->view('template/footer');
     }
@@ -91,14 +110,14 @@ class C_konversi extends CI_Controller{
 
         $id = $this->session->userdata('id_user');
         $this->M_konversi->edit($id);
-        $this->session->set_flashdata('Sukses', "Data Berhasil Diperbarui.");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Di Perbarui.");
         redirect('C_konversi/add');
     }
 
     function hapus($id){
         $where = array('id_konversi' => $id);
         $this->M_Setting->delete($where,'tb_konversi');
-        $this->session->set_flashdata('Sukses', "Data Berhasil Dihapus.");
+        $this->session->set_flashdata('Sukses', "Data Berhasil Di Hapus.");
         redirect('C_konversi/add');
     }
 
