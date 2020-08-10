@@ -54,7 +54,7 @@
             <div class="inner">
              <h3>Rp. <?php $total = 0; 
               foreach ($totalpenjualan as $totalpenjualan) {
-                $total += $totalpenjualan->total;
+                $total += $totalpenjualan->totalbulanini;
               }
               echo number_format($total); ?></h3>
               <p>Penjualan bulan <?php echo date('F Y')?></p>
@@ -177,7 +177,7 @@
                   <li><a href="#">&laquo;</a></li>
                   <li><a href="#">1</a></li>
                   <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
+                  <li><a href="#">3</a></li> 
                   <li><a href="#">&raquo;</a></li>
                 </ul>
               </div>
@@ -198,9 +198,8 @@
                   <!-- todo text -->
                   <span class="text"><?php echo $hd->nama ?></span>
                   <!-- Emphasis label -->
-                  <small class="label label-danger"><i class="fa fa-clock-o"></i> Rp. <?php echo number_format($hd->totalhutang) ?></small>
+                  <small class="label label-danger"><i class="fa fa-clock-o"></i> Rp. <?php echo number_format($hd->totalhutang); }?></small>
                 </li>
-                <?php } ?>
               </ul>
             </div>
             <!-- /.box-body -->
@@ -217,7 +216,7 @@
           <!-- Calendar -->
           
           <!-- /.box -->
-
+     
         </section>
         <!-- right col -->
       </div>

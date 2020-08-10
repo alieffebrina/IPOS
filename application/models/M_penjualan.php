@@ -234,15 +234,15 @@ class M_penjualan extends CI_Model {
 
     function datapenjualan(){
         $vbulan = date("m"); 
-         $this->db->select('total');
+         $this->db->select('sum(total) as totalbulanini');
         $this->db->where('month(tglnota)',$vbulan);
         $query = $this->db->get('tb_penjualan');
         return $query->result();
     }
 
     function penjualan1(){
-        $vbulan = date('m') . '- 1 month'; 
-         $this->db->select('total');
+        $vbulan = date('m')-1; 
+         $this->db->select('sum(total) as totalbulansebelumnya');
         $this->db->where('month(tglnota)',$vbulan);
         $query = $this->db->get('tb_penjualan');
         return $query->result();
@@ -250,7 +250,6 @@ class M_penjualan extends CI_Model {
 
     function penjualan2(){
         $vbulanq = date('m') . '- 2 month';
-        // echo $vbulanq;
          $this->db->select('sum(total) as totaljual');
         $this->db->where('month(tglnota)',$vbulanq);
         $query = $this->db->get('tb_penjualan');
