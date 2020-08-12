@@ -57,7 +57,7 @@
             </div>
             <!-- /.box-header -->
 
-            <div class="box-body">
+           <!--  <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -69,22 +69,61 @@
                   <th>Laba/Rugi Bersih<br>(Total Jual-Total Beli-Total Kas Keluar)</th>
                 </tr>
                 </thead>
-                <tbody>
-                  <?php 
-                  $no=1;
-                  foreach ($laporanlabarugi as $value_labarugi) {?>
-                    
-                  <td><?php echo $no++; ?></td>
-                  <td>Rp. <?php echo number_format($value_labarugi->jual,0,",","."); ?></td>
-                  <td>Rp. <?php echo number_format($value_labarugi->beli,0,",","."); ?></td>
-                  <td>Rp. <?php echo number_format($value_labarugi->kas,0,",","."); ?></td>
-                  <td>Rp. <?php echo number_format($value_labarugi->laba_kotor,0,",","."); ?></td>
-                  <td>Rp. <?php echo number_format($value_labarugi->laba_bersih,0,",","."); ?></td>
+                <tbody>-->
+                  <!--<td><?php echo $no++; ?></td>
+                  <td>Rp. <?php echo number_format($jual); ?></td>
+                  <td>Rp. <?php echo number_format($beli); ?></td>
+                  <td>Rp. <?php echo number_format($kas); ?></td>
+                  <td>Rp. <?php echo number_format($jual-$beli); ?></td>
+                  <td>Rp. <?php echo number_format($jual-($beli+$kas)); ?></td>
                 </tr>
-                  <?php } ?>
                 </tbody>
               </table>
-            </div>
+            </div> -->
+          <div class="box-body">
+                  <?php 
+                  $no=1; 
+                  foreach ($laporanpenjualan as $e) { $e->totalbulanini; }
+                  $jual = $e->totalbulanini;
+                  foreach ($laporanpembelian as $d) { $d->totalbulanini; }
+                  $beli = $d->totalbulanini;
+                   $totalkaskeluar = 0;
+                    foreach ($totalkas as $totalkas) {
+                      $totalkaskeluar += $totalkas->totalbulanini;
+                    }
+                    $kas =  $totalkaskeluar;
+                  ?>
+                  
+          <div class="table-responsive">
+            <div class="col-xs-6">
+            <table class="table">
+              <tr>
+                <th style="width:50%">Total Penjualan</th>
+                <td style="text-align: left;">Rp. <?php echo number_format($jual); ?></td>
+              </tr>
+              <tr>
+                <th>Total Pembelian</th>
+                <td style="text-align: left;">Rp. <?php echo number_format($beli); ?></td>
+              </tr>
+              <tr>
+                <th>Total Kas Keluar</th>
+                <td style="text-align: left;">Rp. <?php echo number_format($kas); ?></td>
+              </tr>
+              <tr>
+                <th colspan="2">________________________________________________________________________</th>
+              </tr>
+              <tr>
+                <th><h4>Laba/Rugi Kotor <small>(Total Jual-Total Beli)</small></h4></th>
+                <td style="text-align: left;"><h4>Rp. <?php echo number_format($jual-$beli); ?><h4></td>
+              </tr>
+              <tr>
+                <th><h4>Laba/Rugi Bersih <small>(Total Jual-Total Beli-Total Kas Keluar)</small><h4></th>
+                <td style="text-align: left;"><h4>Rp. <?php echo number_format($jual-($beli+$kas)); ?><h4></td>
+              </tr>
+            </table>
+          </div>
+          </div>
+        </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->

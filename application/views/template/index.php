@@ -56,7 +56,9 @@
               foreach ($totalpenjualan as $totalpenjualan) {
                 $total += $totalpenjualan->totalbulanini;
               }
-              echo number_format($total); ?></h3>
+
+              echo number_format($total); 
+              $totaljual = $total; ?></h3>
               <p>Penjualan bulan <?php echo date('F Y')?></p>
             </div>
             <div class="icon">
@@ -70,7 +72,18 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>25.000.000</h3>
+              <h3>Rp. <?php $totalbeli = 0; 
+              foreach ($totalpembelian as $totalpembelian) {
+                $totalbeli += $totalpembelian->totalbulanini;
+              }
+              $totalkaskeluar = 0;
+              foreach ($totalkas as $totalkas) {
+                $totalkaskeluar += $totalkas->totalbulanini;
+              }
+              $labarugi = $totaljual - ($totalbeli + $totalkaskeluar);
+              echo number_format($labarugi); 
+              ?>
+              </h3>
 
               <p>Laba Bulan <?php echo date('F Y')?></p>
             </div>

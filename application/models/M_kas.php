@@ -9,6 +9,14 @@ class M_kas extends CI_Model {
         return $query->result();
     }
 
+    function datakas(){
+        $vbulan = date("m"); 
+         $this->db->select('sum(nominal) as totalbulanini');
+        $this->db->where('month(tglkas)',$vbulan);
+        $query = $this->db->get('tb_kas');
+        return $query->result();
+    }
+
      function search($tgl){
         if(isset($tgl) && !empty($tgl)){
             $tgl=explode('-', $tgl);

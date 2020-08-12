@@ -9,24 +9,43 @@ header("Expires: 0");
 <table border="1" width="100%">
 <thead>
 <tr>
-	<th colspan="13"> Data Laba Rugi</th>
+	<th colspan="2"> Data Laba Rugi</th>
 </tr>
-<tr>
- <th>NO</th>
- <th>TOTAL PENJUALAN</th>
- <th>TOTAL PEMBELIAN</th>
- <th>TOTAL KAS KELUAR</th>
- </tr>
+<?php 
+  $no=1; 
+  foreach ($laporanpenjualan as $e) { $e->totalbulanini; }
+  $jual = $e->totalbulanini;
+  foreach ($laporanpembelian as $d) { $d->totalbulanini; }
+  $beli = $d->totalbulanini;
+   $totalkaskeluar = 0;
+    foreach ($totalkas as $totalkas) {
+      $totalkaskeluar += $totalkas->totalbulanini;
+    }
+    $kas =  $totalkaskeluar;
+  ?>
 </thead>
 <tbody>
-<?php $i=1; foreach($excel as $excel) { 
-	?>
 <tr>
- <td><?php echo $i ?></td>
- <td><?php echo $excel->total ?></td>
- <td><?php echo $excel->total ?></td>
- <td><?php echo $excel->nominal; ?></td>
+ <th>TOTAL PENJUALAN</th>
+ <td>Rp. <?php echo number_format($jual); ?></td>
+</tr>
+<tr>
+ <th>TOTAL PEMBELIAN</th>
+ <td>Rp. <?php echo number_format($beli); ?></td>
+</tr>
+<tr>
+ <th>TOTAL KAS KELUAR</th>
+ <td>Rp. <?php echo number_format($kas); ?></td>
+</tr>
+<tr>
+ <th>LABA / RUGI KOTOR </th>
+ <td>Rp. <?php echo number_format($jual-$beli); ?></td>
+</tr>
+<tr>
+ <th>LABA / RUGI BERSIH </th>
+ <td>Rp. <?php echo number_format($jual-($beli+$kas)); ?></td>
+</tr>
+<tr>
  </tr>
-<?php $i++; } ?>
 </tbody>
 </table>

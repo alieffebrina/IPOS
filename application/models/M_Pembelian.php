@@ -9,6 +9,14 @@ class M_Pembelian extends CI_Model {
         return $this->db->get_where('tb_pembelian',$where)->result();
     }
 
+     function datapembelian(){
+        $vbulan = date("m"); 
+         $this->db->select('sum(total) as totalbulanini');
+        $this->db->where('month(tglnotapembelian)',$vbulan);
+        $query = $this->db->get('tb_pembelian');
+        return $query->result();
+    }
+
     function cekreturtgl(){
         $now = date('Y-m-d');
         $where = array(
