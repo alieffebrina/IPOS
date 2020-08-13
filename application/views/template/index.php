@@ -1,5 +1,3 @@
-
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -53,8 +51,8 @@
           <div class="small-box bg-yellow">
             <div class="inner">
              <h3>Rp. <?php $total = 0; 
-              foreach ($totalpenjualan as $totalpenjualan) {
-                $total += $totalpenjualan->totalbulanini;
+              foreach ($transaksiperbulan as $transaksiperbulan) {
+                $total += $transaksiperbulan->totalbulanini;
               }
 
               echo number_format($total); 
