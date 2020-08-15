@@ -51,8 +51,8 @@
           <div class="small-box bg-yellow">
             <div class="inner">
              <h3>Rp. <?php $total = 0; 
-              foreach ($transaksiperbulan as $transaksiperbulan) {
-                $total += $transaksiperbulan->totalbulanini;
+              foreach ($totalpenjualan as $totalpenjualan) {
+                $total += $totalpenjualan->totalbulanini;
               }
 
               echo number_format($total); 

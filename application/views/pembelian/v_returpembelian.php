@@ -102,9 +102,9 @@
                     <th>Barang</th>
                     <th>Qtt Beli</th>
                     <th>Satuan Beli</th>
+                    <th>Harga Beli</th>
                     <th>Qtt Retur</th>
                     <th>Satuan Retur</th>
-                    <th>Harga</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -116,14 +116,15 @@
                       $qt = $dtl->qtt*$dtl->qttkonversi; ?>
                       <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><?php echo $dtl->barang ?><input type="hidden" name="barang[]" id="barang" value="<?php echo $dtl->id_barang ?>">
+                        <td><?php echo $dtl->barang.' / '.$dtl->jenisbarang; ?><input type="hidden" name="barang[]" id="barang" value="<?php echo $dtl->id_barang ?>">
                           <input type="hidden" name="hargaretur[]" id="hargaretur" value="<?php echo $dtl->harga ?>">
                           <input type="hidden" name="stokretur[]" id="stokretur" value="<?php echo $dtl->stokretur ?>">
                           <input type="hidden" name="stokkonversi[]" id="stokkonversi" value="<?php echo $dtl->hasil_konversi ?>">
                           <input type="hidden" name="qttkonversi[]" id="qttkonversi" value="<?php echo $dtl->qttkonversi ?>">
                         </td>
                         <td><?php echo $dtl->qtt ?></td>
-                        <td><?php echo $dtl->nama_satuan ?>
+                        <td><?php echo $dtl->nama_satuan ?></td>
+                        <td><?php echo number_format($dtl->hargabeli); ?></td>
                         <td><input type="number" class="form-control" name="qttretur[]" id="qttretur" min="0" max="<?php echo $qt ?>"></td>
                         <td><?php echo $dtl->satuan_konversi ?>
                           <input type="hidden" name="satuan_konversi[]" id="satuan_konversi" value="<?php echo $dtl->satuan_konversi ?>"></td>
@@ -132,7 +133,6 @@
                             <option value="<?php echo $dtl->satuan_konversi ?>"><?php echo $dtl->satuan_konversi ?></option>
                           </select>
                         </td> -->
-                        <td><?php echo number_format($dtl->hargabeli); ?></td>
                       </tr>
                     <?php } ?>
                   </tbody>

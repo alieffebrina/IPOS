@@ -51,7 +51,9 @@
                   <!--<th>No. Urut/th>-->
                   <th>Stok</th>
                   <th>Stok Min.</th>
+                  <?php if($this->session->userdata('id_user') != '8') { ; ?>
                   <th>Harga Beli</th>
+                <?php } ?>
                   <th>Konversi</th>
                   <th>Hasil Konversi</th>
                   <th>Action</th>
@@ -69,7 +71,8 @@
                   <!-- <td><?php echo $barang->nourut;?></td> -->
                   <td><?php echo $barang->stok;?></td>
                   <td><?php echo $barang->stokmin;?></td>
-                  <td>Rp. <?php echo number_format($barang->hargabeli,0,",","."); ?></td>
+                  <?php if($this->session->userdata('id_user') != '8') { ; ?>
+                  <td>Rp. <?php echo number_format($barang->hargabeli,0,",","."); ?></td> <?php } ?>
                   <td><?php echo $barang->satuan_konversi;?></td>
                   <td><?php echo $barang->hasil_konversi;?></td>
                   

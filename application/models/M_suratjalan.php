@@ -9,6 +9,15 @@ class M_suratjalan extends CI_Model {
         );
         return $this->db->get_where('tb_suratjalan',$where)->result();
     }
+     function sjperid($id){
+        $vbulan = date("m"); 
+        $where = array(
+            'month(tglkirim)' => $vbulan,
+            'id_user' => $id
+        );
+        $query = $this->db->get_where('tb_suratjalan', $where);
+        return $query->num_rows();
+    }
 
     function cekkodesuratjalan()
     {

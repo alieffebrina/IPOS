@@ -240,6 +240,17 @@ class M_penjualan extends CI_Model {
         return $query->result();
     }
 
+    function penjualanperid($id){
+        $vbulan = date("m"); 
+         $this->db->select('sum(total) as totalbulanini');
+        $where = array(
+            'month(tglnota)' => $vbulan,
+            'id_user' => $id
+        );
+        $query = $this->db->get_where('tb_penjualan', $where);
+        return $query->result();
+    }
+
     function penjualan1(){
         $vbulan = date('m')-1; 
          $this->db->select('sum(total) as totalbulansebelumnya');

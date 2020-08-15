@@ -30,6 +30,7 @@ class Welcome extends CI_Controller {
         $this->load->model('M_pembelian');
         $this->load->model('M_kas');
         $this->load->model('M_stok');
+        $this->load->model('M_suratjalan');
     }
 
 	public function index()
@@ -40,12 +41,18 @@ class Welcome extends CI_Controller {
 		$this->load->view('template/sidebar.php', $data);
 		$data['barang'] = $this->M_barang->totalitem();
 		$data['datapelanggan'] = $this->M_pelanggan->datapelanggan();
-		$data['totalpenjualan'] = $this->M_penjualan->datapenjualan();
 		$data['stokdashboard'] = $this->M_stok->stokdashboard();
+		$data['totalpenjualan'] = $this->M_penjualan->datapenjualan();
 		$data['hutangdashboard'] = $this->M_penjualan->hutangdashboard();
 		$data['totalpembelian'] = $this->M_pembelian->datapembelian();
+		$data['penjualanperid'] = $this->M_penjualan->penjualanperid($id);
+		$data['sjperid'] = $this->M_suratjalan->sjperid($id);
 		$data['totalkas'] = $this->M_kas->datakas();
-		$this->load->view('template/index.php', $data);
+		if ($id != '8'){ 
+			$this->load->view('template/index2.php', $data);
+		} else {
+			$this->load->view('template/index.php', $data);
+		}
 		$this->load->view('template/footer.php');
 		$this->load->view('template/footerwelcome.php', $data);
 

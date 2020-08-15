@@ -184,7 +184,9 @@ class M_Pembelian extends CI_Model {
                             'stok' => ($hasil_konversi[$key]-$value)/$qttkonversi[$key],
                             );
                         }
-
+                    } else {
+                        $status = 'sudah';
+                    }
                         $data = array(
                         'id_retur' => $this->input->post('noretur'),
                         'id_barang' => $barang[$key],
@@ -195,7 +197,7 @@ class M_Pembelian extends CI_Model {
                         'statusdetail' => $status );
 
                         $this->db->insert('tb_detailreturpembelian', $data);
-                    } 
+                    
                    
                     $where = array(
                         'id_barang' =>  $barang[$key],

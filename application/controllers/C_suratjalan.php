@@ -58,7 +58,9 @@ class C_suratjalan extends CI_Controller{
             }
         }
 
-        $data['kode'] = $kode2;
+        $idnama = $this->session->userdata('nama');
+        $name = str_replace("username", $idnama, $kode2);
+        $data['kode'] = $name;
         $data['penjualan'] = $this->M_penjualan->getpenjualan();
         $data['barang'] = $this->M_barang->getbarang();
         $this->load->view('penjualan/v_suratjalan',$data); 

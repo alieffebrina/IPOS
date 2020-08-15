@@ -65,7 +65,6 @@ class C_Pembelian extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-
         $modul = 'pembelian';
         $kode = $this->M_Setting->cekkode($modul);
         foreach ($kode as $modul) {
@@ -85,8 +84,9 @@ class C_Pembelian extends CI_Controller{
                 }
             }
         }
-
-        $data['kode'] = $kode2;
+        $idnama = $this->session->userdata('nama');
+        $name = str_replace("username", $idnama, $kode2);
+        $data['kode'] = $name;
         $data['suplier'] = $this->M_suplier->getsuplier();
         $data['barang'] = $this->M_barang->getbarang();
         $this->load->view('pembelian/v_pembelian',$data); 
@@ -162,8 +162,10 @@ class C_Pembelian extends CI_Controller{
                 }
             }
         }
-
-        $data['kode'] = $kode2;
+        
+        $idnama = $this->session->userdata('nama');
+        $name = str_replace("username", $idnama, $kode2);
+        $data['kode'] = $name;
         $data['pembelian'] = $this->M_Pembelian->getdetail($ida);
         $data['dtlpembelian'] = $this->M_Pembelian->getdetailpembelian($ida);
         $this->load->view('pembelian/v_returpembelian',$data); 

@@ -145,7 +145,9 @@ class C_barang extends CI_Controller{
                 }
             }
 
-            $kode = $kode2;
+            $idnama = $this->session->userdata('nama');
+            $name = str_replace("username", $idnama, $kode2);
+            $kode = $name;
             $id = $this->session->userdata('id_user');
             $this->M_barang->tambahdata($id,$kode);
             $this->session->set_flashdata('Sukses', "Data Berhasil Ditambahkan.");

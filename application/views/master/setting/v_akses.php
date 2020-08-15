@@ -39,7 +39,6 @@
                 <thead>
                 <tr>
                   <th>No</th>
-                  <th>NIK</th>
                   <th>Nama</th>
                   <th>Username</th>
                   <th>Action</th>
@@ -51,7 +50,6 @@
                   foreach ($user as $user) { ?>
                 <tr>
                   <td><?php echo $no++; ?></td>
-                  <td><?php echo $user->nik; ?></td>
                   <td><?php echo $user->nama; ?></td>
                   <td><?php echo $user->username; ?></td>
                   <td>

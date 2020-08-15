@@ -30,7 +30,7 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Tanggal</label>
                   <div class="col-sm-9">
-                    <input type="date" name="tgl" id="tgl" class="form-control"></textarea>
+                    <input type="text" name="tgl" id="tgl" class="form-control" value="<?php echo date('d-m-Y'); ?>" readonly>
                   </div>
                 </div>
                 <div class="form-group">

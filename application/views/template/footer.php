@@ -773,7 +773,7 @@ function toggle(source) {
       if(c == "huruf"){
         var c = g;
       }
-      document.getElementById('final').value = a+d+b+d+c;
+      document.getElementById('final').value = 'username'+d+a+d+b+d+c;
     // var embuhhuba = document.getElementById('penghubung').value;
   // document.getElementById('final').value= a+b;
   }

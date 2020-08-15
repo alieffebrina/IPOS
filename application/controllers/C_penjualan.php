@@ -61,8 +61,10 @@ class C_penjualan extends CI_Controller{
                 }
             }
         }
-
-        $data['kode'] = $kode2;
+        
+        $idnama = $this->session->userdata('nama');
+        $name = str_replace("username", $idnama, $kode2);
+        $data['kode'] = $name;
         $data['pelanggan'] = $this->M_pelanggan->getpelanggan();
         $data['barang'] = $this->M_barang->getbarang();
         $this->load->view('penjualan/v_penjualan',$data); 
