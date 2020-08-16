@@ -60,9 +60,9 @@ class M_pelanggan extends CI_Model {
     //}
 
     function getspek($iduser){
-        $this->db->select('FORMAT(tb_pelanggan.limit,0) as limit_pelanggan,tb_provinsi.*,tb_kota.*,tb_pelanggan.*',false);
         $this->db->join('tb_provinsi', 'tb_provinsi.id_provinsi = tb_pelanggan.id_provinsi');
         $this->db->join('tb_kota', 'tb_kota.id_kota = tb_pelanggan.id_kota'); 
+        $this->db->join('tb_kecamatan', 'tb_kecamatan.id_kecamatan = tb_pelanggan.id_kecamatan'); 
         $where = array(
             'id_pelanggan' => $iduser
         );

@@ -60,6 +60,11 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Kecamatan</label>
+                  <div class="col-sm-9"><input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" value="<?php echo $suplier->kecamatan ?>" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Telepon</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="tlp" name="tlp" maxlength="12" minlength="12" value="<?php echo $suplier->tlp ?>" readonly>

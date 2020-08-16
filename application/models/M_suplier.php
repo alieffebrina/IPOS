@@ -57,7 +57,8 @@ class M_suplier extends CI_Model {
     function getspek($iduser){
 		$this->db->select('*');
         $this->db->join('tb_provinsi', 'tb_provinsi.id_provinsi = tb_suplier.id_provinsi');
-        $this->db->join('tb_kota', 'tb_kota.id_kota = tb_suplier.id_kota'); 
+        $this->db->join('tb_kota', 'tb_kota.id_kota = tb_suplier.id_kota');
+        $this->db->join('tb_kecamatan', 'tb_kecamatan.id_kecamatan = tb_suplier.id_kecamatan');  
         $where = array(
             'id_suplier' => $iduser
         );

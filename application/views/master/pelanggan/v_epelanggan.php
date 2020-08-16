@@ -61,6 +61,14 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Kecamatan</label>
+                  <div class="col-sm-9">
+                  <select class="form-control select2" id="kecamatan" name="kecamatan" style="width: 100%;">
+                      <option value="<?php echo $pelanggan->id_kecamatan ?>"><?php echo $pelanggan->kecamatan ?></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Telepon</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" id="tlp" name="tlp" placeholder="Telepon"  maxlength="12" minlength="12" value="<?php echo $pelanggan->tlp ?>">

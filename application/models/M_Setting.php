@@ -54,6 +54,15 @@ class M_Setting extends CI_Model {
         return $query->result();
     }
 
+    function getkec($id){
+        $this->db->select('*');
+        $where = array(
+            'id_kota' => $id
+        );
+        $query = $this->db->get_where('tb_kecamatan', $where);
+        return $query->result();
+    }
+
     function getakses($ida){
         $this->db->select('*');
         $this->db->join('tb_submenu', 'tb_submenu.id_submenu = tb_akses.id_submenu');
