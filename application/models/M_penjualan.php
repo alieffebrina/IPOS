@@ -9,9 +9,16 @@ class M_penjualan extends CI_Model {
         return $this->db->get_where('tb_penjualan',$where)->result();
     }
 
-    function getall(){
+    function getall($id){
         $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
-        return $this->db->get('tb_penjualan')->result();
+        if($id!='8'){
+            $where = array(
+            'tb_penjualan.id_user' => $id
+            );
+            return $this->db->get_where('tb_penjualan',$where)->result();
+        } else {
+            return $this->db->get('tb_penjualan')->result();
+        }
     }
     function getdetail($ida){
         $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');

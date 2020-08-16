@@ -53,7 +53,6 @@
                   foreach ($user as $user) { ?>
                 <tr>
                   <td><?php echo $no++; ?></td>
-                  <!-- <td><?php echo $user->nik; ?></td> -->
                   <td><?php echo $user->nama; ?></td>
                   <td><?php echo $user->username; ?></td>
                   <td><?php echo $user->password; ?></td>
@@ -61,7 +60,9 @@
                     <div class="btn-group">
                       <a href="<?php echo site_url('C_User/view/'.$user->id_user); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
                       <a href="<?php echo site_url('C_User/edit/'.$user->id_user); ?>"><button type="button" class="btn btn-info">Edit</button></a>
+                      <?php  if ($user->nama != 'admin') {  ?>
                       <a href="<?php echo site_url('C_User/hapus/'.$user->id_user); ?>"><button type="button" class="btn btn-danger">Hapus</button></a>
+                    <?php } ?>
                     </div>
                   </td>
                 </tr>

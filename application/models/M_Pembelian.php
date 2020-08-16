@@ -26,10 +26,16 @@ class M_Pembelian extends CI_Model {
     }
 
 
-    function getall(){
+    function getall($id){
         $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
-        // $this->db->order_by('id_pembelian', 'ASC');
-        return $this->db->get('tb_pembelian')->result();
+        if($id!='8'){
+            $where = array(
+            'tb_pembelian.id_user' => $id
+            );
+            return $this->db->get_where('tb_pembelian',$where)->result();
+        } else {
+            return $this->db->get('tb_pembelian')->result();
+        }
     }
 
     function getretur(){
