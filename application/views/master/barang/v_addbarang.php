@@ -55,23 +55,6 @@
                     </select>
                   </div>
                 </div>
-                <!--<div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Provinsi</label>
-                  <div class="col-sm-9">
-                    <select class="form-control select2" id="prov" name="prov" style="width: 100%;">
-                      <option value="">--Pilih--</option>
-                      <?//php foreach ($provinsi as $provinsi) { ?>
-                      <option value="<?//php echo $provinsi->id_provinsi ?>"><?//php echo $provinsi->name_prov ?></option>
-                      <?//php } ?>
-                    </select>
-                  </div>
-                </div>-->
-                <!-- <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">No. Urut</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nourut" name="nourut" placeholder="No. Urut">
-                  </div>
-                </div> -->
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Stok</label>
                   <div class="col-sm-9">

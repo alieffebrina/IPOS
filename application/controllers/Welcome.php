@@ -48,7 +48,8 @@ class Welcome extends CI_Controller {
 		$data['penjualanperid'] = $this->M_penjualan->penjualanperid($id);
 		$data['sjperid'] = $this->M_suratjalan->sjperid($id);
 		$data['totalkas'] = $this->M_kas->datakas();
-		if ($id != '8'){ 
+		$username = $this->session->userdata('username');
+		if ($username != 'admin'){ 
 			$this->load->view('template/index2.php', $data);
 		} else {
 			$this->load->view('template/index.php', $data);

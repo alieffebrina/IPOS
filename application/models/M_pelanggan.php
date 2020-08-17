@@ -10,6 +10,24 @@ class M_pelanggan extends CI_Model {
         return $query->result();
     }
 
+    function cek_namapelanggan($kode){
+        $this->db->select('*');
+        $where = array(
+            'nama' => $kode
+        );
+        $query = $this->db->get_where('tb_pelanggan', $where);
+        return $query->result();
+    }
+
+    function cek_tlppelanggan($kode){
+        $this->db->select('*');
+        $where = array(
+            'tlp' => $kode
+        );
+        $query = $this->db->get_where('tb_pelanggan', $where);
+        return $query->result();
+    }
+
     function getnama($ida){
         $where = array(
             'id_pelanggan' => $ida

@@ -21,7 +21,8 @@ class C_penjualan extends CI_Controller{
         $id = $this->session->userdata('id_user');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['penjualan'] = $this->M_penjualan->getall($id);
+        $username = $this->session->userdata('username');
+        $data['penjualan'] = $this->M_penjualan->getall($id,$username);
         $this->load->view('penjualan/v_vpenjualan',$data); 
         $this->load->view('template/footer');
     }

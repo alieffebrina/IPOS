@@ -26,9 +26,9 @@ class M_Pembelian extends CI_Model {
     }
 
 
-    function getall($id){
+    function getall($id, $username){
         $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
-        if($id!='8'){
+        if($username!='admin'){
             $where = array(
             'tb_pembelian.id_user' => $id
             );

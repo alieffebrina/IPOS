@@ -34,24 +34,68 @@ class C_Pelanggan extends CI_Controller{
         $this->load->view('template/footer');
     }
 
-    function cek_pelanggan(){
+     function cek_namapelanggan(){
         # ambil Kualifikasiname dari form
         
-        $kode = $this->input->post('id_pelanggan');
+        $nama_pelanggan = $this->input->post('nama_pelanggan');
                 # select ke model member Kualifikasiname yang diinput Kualifikasi
-        $hasil_kode = $this->M_pelanggan->getspek($kode);
+        $hasil_kode = $this->M_pelanggan->cek_namapelanggan($nama_pelanggan);
          
                 # pengecekan value $hasil_Kualifikasiname
         if(count($hasil_kode)!=0){
           # kalu value $hasil_Kualifikasiname tidak 0
                   # echo 1 untuk pertanda Kualifikasiname sudah ada pada db    
-                       echo json_encode((object) array('list_alamat'=>$hasil_kode[0]->alamat,'limit_pelanggan'=>$hasil_kode[0]->limit_pelanggan));
+                       echo '1';
         }else{
                   # kalu value $hasil_Kualifikasiname = 0
                   # echo 2 untuk pertanda Kualifikasiname belum ada pada db
             echo '2';
         }
          
+    }
+
+    function cek_tlppelanggan(){
+        # ambil Kualifikasiname dari form
+        
+        $tlp_pelanggan = $this->input->post('tlp_pelanggan');
+                # select ke model member Kualifikasiname yang diinput Kualifikasi
+        $hasil_kode = $this->M_pelanggan->cek_tlppelanggan($tlp_pelanggan);
+         
+                # pengecekan value $hasil_Kualifikasiname
+        if(count($hasil_kode)!=0){
+          # kalu value $hasil_Kualifikasiname tidak 0
+                  # echo 1 untuk pertanda Kualifikasiname sudah ada pada db    
+                       echo '1';
+        }else{
+                  # kalu value $hasil_Kualifikasiname = 0
+                  # echo 2 untuk pertanda Kualifikasiname belum ada pada db
+            echo '2';
+        }
+         
+    }
+
+    
+    function cek_pelanggan(){
+            // Ambil data ID Provinsi yang dikirim via ajax post
+            $iduser = $this->input->post('id_pelanggan');
+            
+            $hasil_kode = $this->M_pelanggan->getspek($iduser);
+            
+            // Buat variabel untuk menampung tag-tag option nya
+            // Set defaultnya dengan tag option Pilih
+            // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' readonly>";
+            
+            foreach($hasil_kode as $data){
+              $lists = " <input type='text' class='form-control' id='nama' name='nama' value='".$data->nama."' readonly>"; // Tambahkan tag option ke variabel $lists
+              $ala = $data->alamat;
+              $limit = $data->limit;
+              // $lists = "ok";
+            }
+            
+            // $lists = " <input type='text' class='form-control' id='nama_suplier' name='nama_suplier' value='".$hasil_kode."' readonly>";
+
+            $callback = array('list_pelanggan'=>$lists, 'list_alamat'=>$ala, 'limit_pelanggan'=>$limit); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+            echo json_encode($callback); // konversi varibael $callback menjadi JSON
     }
 
     public function tambah()

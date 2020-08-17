@@ -30,13 +30,8 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Nama Pelanggan</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Pelanggan">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" rows="3" id="alamat" name="alamat"></textarea>
+                    <input type="text" class="form-control" id="nama_pelanggan" name="nama" placeholder="Nama Pelanggan" onkeyup="cek_namapelanggan()">
+                  <span id="pesan_pelanggan"></span>
                   </div>
                 </div>
                 <div class="form-group">
@@ -65,9 +60,16 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
+                  <div class="col-sm-9">
+                    <textarea class="form-control" rows="3" id="alamat" name="alamat"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Telepon</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="tlp" name="tlp" placeholder="Telepon"  maxlength="12" minlength="12" placeholder="Telepons">
+                    <input type="text" class="form-control" id="tlp_pelanggan" name="tlp" placeholder="Telepon"  maxlength="12" minlength="12" placeholder="Telepon" onkeyup="cek_tlppelanggan()">
+                  <span id="pesan_tlppelanggan"></span>
                   </div>
                 </div>
                 <div class="form-group">

@@ -10,15 +10,19 @@ class C_Pembelian extends CI_Controller{
         $this->load->model('M_suplier');
         $this->load->model('M_barang');
         $this->load->library('pdf');     
+        if(!$this->session->userdata('id_user')){
+            redirect('C_Login');
+        }
     }
 
     function index()
     {
         $this->load->view('template/header');
         $id = $this->session->userdata('id_user');
+        $username = $this->session->userdata('username');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $this->load->view('template/sidebar.php', $data);
-        $data['pembelian'] = $this->M_Pembelian->getall($id);
+        $data['pembelian'] = $this->M_Pembelian->getall($id, $username);
         $this->load->view('pembelian/v_vpembelian',$data); 
         $this->load->view('template/footer');
     }

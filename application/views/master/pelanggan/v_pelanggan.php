@@ -30,7 +30,10 @@
               <h3 class="box-title">Data Pelanggan</h3>
             </div>
             <!-- /.box-header -->
-
+            <div class="box-header">
+              <a href="<?php echo site_url('C_Pelanggan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
+            </div>
+            
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -68,7 +71,6 @@
                   <?php } ?>
                 </tbody>
               </table>
-              <a href="<?php echo site_url('C_Pelanggan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
             </div>
             <!-- /.box-body -->
           </div>

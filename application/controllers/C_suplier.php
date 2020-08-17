@@ -54,6 +54,46 @@ class C_suplier extends CI_Controller{
             echo json_encode($callback); // konversi varibael $callback menjadi JSON
     }
 
+    function cek_namasuplier(){
+        # ambil Kualifikasiname dari form
+        
+        $nama_suplier = $this->input->post('nama_suplier');
+                # select ke model member Kualifikasiname yang diinput Kualifikasi
+        $hasil_kode = $this->M_suplier->cek_namasuplier($nama_suplier);
+         
+                # pengecekan value $hasil_Kualifikasiname
+        if(count($hasil_kode)!=0){
+          # kalu value $hasil_Kualifikasiname tidak 0
+                  # echo 1 untuk pertanda Kualifikasiname sudah ada pada db    
+                       echo '1';
+        }else{
+                  # kalu value $hasil_Kualifikasiname = 0
+                  # echo 2 untuk pertanda Kualifikasiname belum ada pada db
+            echo '2';
+        }
+         
+    }
+
+    function cek_tlpsuplier(){
+        # ambil Kualifikasiname dari form
+        
+        $tlp_suplier = $this->input->post('tlp_suplier');
+                # select ke model member Kualifikasiname yang diinput Kualifikasi
+        $hasil_kode = $this->M_suplier->cek_tlpsuplier($tlp_suplier);
+         
+                # pengecekan value $hasil_Kualifikasiname
+        if(count($hasil_kode)!=0){
+          # kalu value $hasil_Kualifikasiname tidak 0
+                  # echo 1 untuk pertanda Kualifikasiname sudah ada pada db    
+                       echo '1';
+        }else{
+                  # kalu value $hasil_Kualifikasiname = 0
+                  # echo 2 untuk pertanda Kualifikasiname belum ada pada db
+            echo '2';
+        }
+         
+    }
+
     public function tambah()
     {   
 

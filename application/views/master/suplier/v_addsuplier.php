@@ -36,13 +36,8 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Nama Suplier</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nama_suplier" name="nama_suplier" placeholder="Nama Suplier">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" rows="3" id="alamat" name="alamat"></textarea>
+                    <input type="text" class="form-control" id="nama_suplier" name="nama_suplier" placeholder="Nama Suplier" onkeyup="cek_namasuplier()">
+                  <span id="pesan_suplier"></span>
                   </div>
                 </div>
                 <div class="form-group">
@@ -71,9 +66,16 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
+                  <div class="col-sm-9">
+                    <textarea class="form-control" rows="3" id="alamat" name="alamat"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Telepon</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="tlp" name="tlp" placeholder="Telepon"  maxlength="12" minlength="12" placeholder="Telepons">
+                    <input type="text" class="form-control" id="tlp_suplier" name="tlp" placeholder="Telepon"  maxlength="12" minlength="12" placeholder="Telepon" onkeyup="cek_tlpsuplier()">
+                  <span id="pesan_tlpsuplier"></span>
                   </div>
                 </div>
                 <div class="form-group">

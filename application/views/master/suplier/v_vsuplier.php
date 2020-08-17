@@ -42,12 +42,6 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" rows="3" id="alamat" name="alamat" readonly><?php echo $suplier->alamat ?></textarea>
-                  </div>
-                </div>
-                <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Provinsi</label>
                   <div class="col-sm-9">
 
@@ -62,6 +56,12 @@
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Kecamatan</label>
                   <div class="col-sm-9"><input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" value="<?php echo $suplier->kecamatan ?>" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
+                  <div class="col-sm-9">
+                    <textarea class="form-control" rows="3" id="alamat" name="alamat" readonly><?php echo $suplier->alamat ?></textarea>
                   </div>
                 </div>
                 <div class="form-group">

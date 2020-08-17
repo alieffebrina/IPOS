@@ -40,6 +40,7 @@ class M_Setting extends CI_Model {
 
 	function getprovinsi(){
 		$this->db->select('*');
+        $this->db->order_by('name_prov', 'ASC');
 		$this->db->from('tb_provinsi');
 		$query = $this->db->get();
     	return $query->result();
@@ -47,6 +48,7 @@ class M_Setting extends CI_Model {
 
     function getkota($id){
         $this->db->select('*');
+        $this->db->order_by('name_kota', 'ASC');
         $where = array(
             'id_provinsi' => $id
         );
@@ -56,6 +58,7 @@ class M_Setting extends CI_Model {
 
     function getkec($id){
         $this->db->select('*');
+        $this->db->order_by('kecamatan', 'ASC');
         $where = array(
             'id_kota' => $id
         );

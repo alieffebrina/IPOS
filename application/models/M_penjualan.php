@@ -9,9 +9,9 @@ class M_penjualan extends CI_Model {
         return $this->db->get_where('tb_penjualan',$where)->result();
     }
 
-    function getall($id){
+    function getall($id, $username){
         $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
-        if($id!='8'){
+        if($username!='admin'){
             $where = array(
             'tb_penjualan.id_user' => $id
             );

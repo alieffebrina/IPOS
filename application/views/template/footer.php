@@ -657,6 +657,146 @@
      
 </script>
 
+<script type='text/javascript'>
+    var error = 1; // nilai default untuk error 1
+ 
+    function cek_namasuplier(){
+        $("#pesan_suplier").hide();
+ 
+        var nama_suplier = $("#nama_suplier").val();
+ 
+        if(nama_suplier != ""){
+            $.ajax({
+                url: "<?php echo site_url() . '/C_suplier/cek_namasuplier'; ?>", //arahkan pada proses_tambah di controller member
+                data: 'nama_suplier='+nama_suplier,
+                type: "POST",
+                success: function(msg){
+                    if(msg==1){
+                        $("#pesan_suplier").css("color","#fc5d32");
+                        $("#nama_suplier").css("border-color","#fc5d32");
+                        $("#pesan_suplier").html("Nama Suplier sudah digunakan !");
+ 
+                        error = 1;
+                    }else{
+                        $("#pesan_suplier").css("color","#59c113");
+                        $("#nama_suplier").css("border-color","#59c113");
+                        $("#pesan_suplier").html("");
+                        error = 0;
+                    }
+ 
+                    $("#pesan_suplier").fadeIn(1000);
+                }
+            });
+        }       
+         
+    }
+     
+</script>
+<script type='text/javascript'>
+    var error = 1; // nilai default untuk error 1
+ 
+    function cek_tlpsuplier(){
+        $("#pesan_tlpsuplier").hide();
+ 
+        var tlp_suplier = $("#tlp_suplier").val();
+ 
+        if(tlp_suplier != ""){
+            $.ajax({
+                url: "<?php echo site_url() . '/C_suplier/cek_tlpsuplier'; ?>", //arahkan pada proses_tambah di controller member
+                data: 'tlp_suplier='+tlp_suplier,
+                type: "POST",
+                success: function(msg){
+                    if(msg==1){
+                        $("#pesan_tlpsuplier").css("color","#fc5d32");
+                        $("#tlp_suplier").css("border-color","#fc5d32");
+                        $("#pesan_tlpsuplier").html("Tlp Suplier sudah digunakan !");
+ 
+                        error = 1;
+                    }else{
+                        $("#pesan_tlpsuplier").css("color","#59c113");
+                        $("#tlp_suplier").css("border-color","#59c113");
+                        $("#pesan_tlpsuplier").html("");
+                        error = 0;
+                    }
+ 
+                    $("#pesan_tlpsuplier").fadeIn(1000);
+                }
+            });
+        }       
+         
+    }
+     
+</script>
+<script type='text/javascript'>
+    var error = 1; // nilai default untuk error 1
+ 
+    function cek_namapelanggan(){
+        $("#pesan_pelanggan").hide();
+ 
+        var nama_pelanggan = $("#nama_pelanggan").val();
+ 
+        if(nama_pelanggan != ""){
+            $.ajax({
+                url: "<?php echo site_url() . '/C_Pelanggan/cek_namapelanggan'; ?>", //arahkan pada proses_tambah di controller member
+                data: 'nama_pelanggan='+nama_pelanggan,
+                type: "POST",
+                success: function(msg){
+                    if(msg==1){
+                        $("#pesan_pelanggan").css("color","#fc5d32");
+                        $("#nama_pelanggan").css("border-color","#fc5d32");
+                        $("#pesan_pelanggan").html("Nama Pelanggan sudah digunakan !");
+ 
+                        error = 1;
+                    }else{
+                        $("#pesan_pelanggan").css("color","#59c113");
+                        $("#nama_pelanggan").css("border-color","#59c113");
+                        $("#pesan_pelanggan").html("");
+                        error = 0;
+                    }
+ 
+                    $("#pesan_pelanggan").fadeIn(1000);
+                }
+            });
+        }       
+         
+    }
+     
+</script>
+<script type='text/javascript'>
+    var error = 1; // nilai default untuk error 1
+ 
+    function cek_tlppelanggan(){
+        $("#pesan_tlppelanggan").hide();
+ 
+        var tlp_pelanggan = $("#tlp_pelanggan").val();
+ 
+        if(tlp_pelanggan != ""){
+            $.ajax({
+                url: "<?php echo site_url() . '/C_Pelanggan/cek_tlppelanggan'; ?>", //arahkan pada proses_tambah di controller member
+                data: 'tlp_pelanggan='+tlp_pelanggan,
+                type: "POST",
+                success: function(msg){
+                    if(msg==1){
+                        $("#pesan_tlppelanggan").css("color","#fc5d32");
+                        $("#tlp_pelanggan").css("border-color","#fc5d32");
+                        $("#pesan_tlppelanggan").html("Tlp Pelanggan sudah digunakan !");
+ 
+                        error = 1;
+                    }else{
+                        $("#pesan_tlppelanggan").css("color","#59c113");
+                        $("#tlp_pelanggan").css("border-color","#59c113");
+                        $("#pesan_tlppelanggan").html("");
+                        error = 0;
+                    }
+ 
+                    $("#pesan_tlppelanggan").fadeIn(1000);
+                }
+            });
+        }       
+         
+    }
+     
+</script>
 <script type="text/javascript">
 function toggle(source) {
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');

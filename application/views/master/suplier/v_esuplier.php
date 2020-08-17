@@ -42,12 +42,6 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" rows="3" id="alamat" name="alamat"><?php echo $suplier->alamat ?></textarea>
-                  </div>
-                </div>
-                <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Provinsi</label>
                   <div class="col-sm-9">
                     <select class="form-control select2" id="prov" name="prov" style="width: 100%;">
@@ -72,6 +66,12 @@
                   <select class="form-control select2" id="kecamatan" name="kecamatan" style="width: 100%;">
                       <option value="<?php echo $suplier->id_kecamatan ?>"><?php echo $suplier->kecamatan ?></option>
                     </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
+                  <div class="col-sm-9">
+                    <textarea class="form-control" rows="3" id="alamat" name="alamat"><?php echo $suplier->alamat ?></textarea>
                   </div>
                 </div>
                 <div class="form-group">
