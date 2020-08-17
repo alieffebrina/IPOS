@@ -285,6 +285,7 @@
   </script>
   
 <script type="text/javascript">
+  
   function startCalculate(){
     var interval=setInterval("Calculate()",10);
 
@@ -295,18 +296,29 @@
     var intervala=setInterval("Calculate_total()",10);
   };
   function Calculate(){
-      var a = document.getElementById('harga').value;
+      var a = document.getElementById('harga').value.replace(/[^0-9]/g,'');
       var b = document.getElementById('qtt').value;
-      var c = document.getElementById('diskon').value;
+      // var c = document.getElementById('diskon').value;
+      // document.getElementById('diskon').value = formatRupiah(rupiah) ;
+      diskon.addEventListener('keyup', function(e){
+      diskon.value = formatRupiah(this.value, 'Rp. ');
+
+      });
+      var diskonc = document.getElementById('diskon').value.replace(/[^0-9]/g,'');
+
       // alert((a*b));
-      if (c>(a*b)){
+      if (diskonc>(a*b)){
         $("#nilaidiskon").css("color","#fc5d32");
         $("#diskon").css("border-color","#fc5d32");
         $("#nilaidiskon").html("diskon melebihi total penjualan");
         $("#diskon").val("");
         var bilangan = (a*b);
       }else{
-        var bilangan = (a*b)-c;
+
+        $("#nilaidiskon").css("color","");
+        $("#diskon").css("border-color","");
+        $("#nilaidiskon").html("");
+        var bilangan = (a*b)-diskonc;
       }
       var number_string = bilangan.toString(),
         sisa  = number_string.length % 3,
@@ -318,7 +330,7 @@
         rupiah += separator + ribuan.join('.');
       }
 
-      document.getElementById('subtotal').value = formatRupiah(rupiah) ;
+      document.getElementById('subtotal').value = 'Rp. '+formatRupiah(rupiah) ;
       document.getElementById('subtotalrupiah').value = bilangan ;   
   };
   function Calculate_total(){
@@ -445,8 +457,8 @@
           <td width="100px" class="jenisbarang'+newid+'">' + $("#jenisbarang").val() + '</td>\n\
           <td width="100px" class="qtt'+newid+'"><input type="hidden" name="qtt[]" value="'+$("#qtt").val()+'">' + $("#qtt").val() + '</td>\n\
           <td width="100px" class="satuan'+newid+'">' + $("#satuan").val() + '</td>\n\
-          <td width="100px" class="harga'+newid+'"><input type="hidden" name="harga[]" value="'+$("#harga").val()+'">Rp. ' + $("#hargashow").val() + '</td>\n\
-          <td width="100px" class="diskon'+newid+'"><input type="hidden" name="diskon[]" value="'+$("#diskon").val()+'">Rp. ' + $("#diskon").val() + '</td>\n\
+          <td width="100px" class="harga'+newid+'"><input type="hidden" name="harga[]" value="'+$("#harga").val()+'">' + $("#hargashow").val() + '</td>\n\
+          <td width="100px" class="diskon'+newid+'"><input type="hidden" name="diskon[]" value="'+$("#diskon").val()+'">' + $("#diskon").val() + '</td>\n\
           <td width="100px" class="subtotal'+newid+'">Rp. ' + $("#subtotal").val() + '</td>\n\
           <td width="100px"><a href="javascript:void(0);" class="remCF" data-id="'+st+'" ><input type="hidden" id="suba" value="'+st+'" class="aatd'+newid+'">\n\
                 <button type="button" class="btn btn-info btn-sm">\n\
