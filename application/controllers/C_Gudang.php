@@ -7,6 +7,9 @@ class C_Gudang extends CI_Controller{
         $this->load->library('session');
         $this->load->model('M_Gudang');
         $this->load->model('M_Setting');
+        if(!$this->session->userdata('id_user')){
+            redirect('C_Login');
+        }
     }
 
     function index()

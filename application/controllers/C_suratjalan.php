@@ -10,6 +10,9 @@ class C_suratjalan extends CI_Controller{
         $this->load->model('M_penjualan');
         $this->load->model('M_barang');
         $this->load->library('pdf'); 
+        if(!$this->session->userdata('id_user')){
+            redirect('C_Login');
+        }
     }
 
     function index()

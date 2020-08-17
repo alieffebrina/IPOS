@@ -7,6 +7,9 @@ class C_Setting extends CI_Controller{
         $this->load->library('session');
         $this->load->model('M_Setting');
         $this->load->model('M_User');
+        if(!$this->session->userdata('id_user')){
+            redirect('C_Login');
+        }
     }
 
     public function get_kota(){

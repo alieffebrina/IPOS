@@ -8,6 +8,9 @@ class C_Stok extends CI_Controller{
         $this->load->model('M_stok');
         $this->load->model('M_Setting');
         $this->load->model('M_barang');
+        if(!$this->session->userdata('id_user')){
+            redirect('C_Login');
+        }
     }
 
     function index()

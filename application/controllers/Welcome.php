@@ -31,6 +31,9 @@ class Welcome extends CI_Controller {
         $this->load->model('M_kas');
         $this->load->model('M_stok');
         $this->load->model('M_suratjalan');
+        if(!$this->session->userdata('id_user')){
+            redirect('C_Login');
+        }
     }
 
 	public function index()
