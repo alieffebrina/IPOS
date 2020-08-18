@@ -1117,6 +1117,7 @@ function toggle(source) {
           $('#id_pelanggan').val(response.id_pelanggan);
           $("#nama").val(response.nama);
           $("#alamat").html(response.alamat).show();
+          $("#alamatkirim").html(response.alamat).show();
           $("#tabelku > tbody").html(response.detail_penjualan).show();
         },
         error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error

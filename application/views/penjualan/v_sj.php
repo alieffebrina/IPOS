@@ -48,14 +48,13 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">Nota Penjualan</label>
                   <div class="col-sm-10">
-                      <input type="text" class="datepicker form-control" id="nonota" name="nonota" value="<?php echo $nota; ?>" readonly>
+                      <input type="text" class="datepicker form-control" id="nonota" name="id_penjualan" value="<?php echo $nota; ?>" readonly>
                   </div>
                 </div>
                 <?php foreach ($penjualan as $key) { ?>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Nama Pelanggan</label>
                   <div class="col-sm-10">
-                    <input type="hidden" name="id_pelanggan" id="id_pelanggan">
                     <input type="text" name="nama" class="form-control" id="nama" readonly value="<?php echo $key->nama ?>">
                   </div>
                 </div>

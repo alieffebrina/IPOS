@@ -36,14 +36,8 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">Tanggal Kirim</label>
                   <div class="col-sm-10">
-                    <div class="input-group date">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="text" class="datepicker form-control" id="tgl" name="tgl" value="<?php echo date('d-m-Y')?>">
+                      <input type="date" class="form-control" id="tgl" name="tgl" value="<?php echo date('d-m-Y')?>">
                     </div>
-                    
-                  </div>
                 </div>
 
                 <div class="form-group">
@@ -72,6 +66,14 @@
                     <textarea name="alamat" class="form-control" id="alamat" readonly></textarea>
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-1 control-label">Alamat Kirim</label>
+                  <div class="col-sm-10">
+                    <textarea name="alamatkirim" class="form-control" id="alamatkirim"></textarea>
+                  </div>
+                </div>
+                
                 
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-1 control-label">Nama Pengirim</label>
