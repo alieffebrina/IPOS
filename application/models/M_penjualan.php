@@ -2,9 +2,9 @@
 
 class M_penjualan extends CI_Model {
     function cekpenjualantgl(){
-        $now = date('Y-m-d');
+        $vbulan = date("m"); 
         $where = array(
-            'tglnota' => $now
+            'month(tglnota)' => $vbulan
         );
         return $this->db->get_where('tb_penjualan',$where)->result();
     }
@@ -183,8 +183,8 @@ class M_penjualan extends CI_Model {
             'id_user' => $id,
             'id_penjualan' => $this->input->post('nonota'),
             'id_pelanggan' => $this->input->post('nama'),
-            'tglnota' => date('Y-m-d'),
-            'tgl_update' => date('Y-m-d'),
+            'tglnota' => date('Y-m-d H:i'),
+            'tgl_update' => date('Y-m-d H:i'),
             'subtotal' => $this->input->post('subtotalbawahrupiah'),
             'total' => $this->input->post('total'),
             'pembayaran' => $this->input->post('pembayaran'),

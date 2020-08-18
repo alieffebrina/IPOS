@@ -1,10 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class M_Pembelian extends CI_Model {
-	function cekpembeliantgl(){
-        $now = date('Y-m-d');
+    function cekpembeliantgl(){
+        $vbulan = date("m"); 
         $where = array(
-            'tglnotapembelian' => $now
+            'month(tglnotapembelian)' => $vbulan
         );
         return $this->db->get_where('tb_pembelian',$where)->result();
     }
@@ -18,9 +18,9 @@ class M_Pembelian extends CI_Model {
     }
 
     function cekreturtgl(){
-        $now = date('Y-m-d');
+        $vbulan = date("m"); 
         $where = array(
-            'tglretur' => $now
+            'month(tglretur)' => $vbulan
         );
         return $this->db->get_where('tb_returpembelian',$where)->result();
     }

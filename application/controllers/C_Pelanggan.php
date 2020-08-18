@@ -87,7 +87,7 @@ class C_Pelanggan extends CI_Controller{
             
             foreach($hasil_kode as $data){
               $lists = " <input type='text' class='form-control' id='nama' name='nama' value='".$data->nama."' readonly>"; // Tambahkan tag option ke variabel $lists
-              $ala = $data->alamat;
+              $ala = $data->alamat.', Kec. '.$data->kecamatan.', Kota '.$data->name_kota.', Prov. '.$data->name_prov;
               $limit = $data->limit;
               // $lists = "ok";
             }

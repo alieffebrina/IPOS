@@ -525,9 +525,9 @@
               <td width="100px" class="barang'+newid+'"><input type="hidden" name="id_barang[]" value="'+$("#nama_barang").val()+'">' + $("#namabarangshow").val() + '</td>\n\
               <td width="100px" class="qtt'+newid+'"><input type="hidden" name="qtt[]" value="'+$("#qtt").val()+'">' + $("#qtt").val() + '</td>\n\
               <td width="100px" class="satuan'+newid+'"><input type="hidden" name="satuan[]" value="'+$("#satuan").val()+'">' + $("#satuan").val() + '</td>\n\
-              <td width="100px" class="harga'+newid+'"><input type="hidden" name="harga[]" value="'+$("#harga").val()+'">Rp. ' + $("#hargashow").val() + '</td>\n\
-              <td width="100px" class="diskon'+newid+'"><input type="hidden" name="diskon[]" value="'+$("#diskon").val()+'">Rp. ' + $("#diskon").val() + '</td>\n\
-              <td width="100px" class="subtotal'+newid+'"><input type="hidden" name="subtotal[]" value="'+$("#subtotalrupiah").val()+'">Rp. ' + $("#subtotal").val() + '</td>\n\
+              <td width="100px" class="harga'+newid+'"><input type="hidden" name="harga[]" value="'+$("#harga").val()+'">' + $("#hargashow").val() + '</td>\n\
+              <td width="100px" class="diskon'+newid+'"><input type="hidden" name="diskon[]" value="'+$("#diskon").val()+'">' + $("#diskon").val() + '</td>\n\
+              <td width="100px" class="subtotal'+newid+'"><input type="hidden" name="subtotal[]" value="'+$("#subtotalrupiah").val()+'">' + $("#subtotal").val() + '</td>\n\
               <td width="100px"><a href="javascript:void(0);" class="remCF" data-id="'+st+'" ><input type="hidden" id="suba" value="'+st+'" class="aatd'+newid+'">\n\
                 <button type="button" class="btn btn-info btn-sm">\n\
                   <i class="fa fa-times"></i></button></a></td>\n\ </tr>');

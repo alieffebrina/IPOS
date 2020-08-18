@@ -1,11 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class M_suratjalan extends CI_Model {
-
-	function ceksuratjalantgl(){
-        $now = date('Y-m-d');
+    function ceksuratjalantgl(){
+        $vbulan = date("m"); 
         $where = array(
-            'tgl_update' => $now
+            'month(tgl_update)' => $vbulan
         );
         return $this->db->get_where('tb_suratjalan',$where)->result();
     }

@@ -30,10 +30,14 @@ class C_penjualan extends CI_Controller{
     function tambah()
     {
         $id = $this->session->userdata('id_user');
+        $nota =  $this->input->post('nonota');
         $hasil_kode = $this->M_penjualan->tambahdata($id);
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
-        redirect('C_penjualan');
-
+        if ($this->input->post('cetak')== true){
+            redirect('C_penjualan/cetakpenjualan/'.$nota);
+        } else {
+            redirect('C_suratjalan/sj/'.$nota);
+        }
     }
 
     function add()
@@ -259,6 +263,7 @@ class C_penjualan extends CI_Controller{
         }
         // $pdf->AutoPrint(true);
         $pdf->Output();
+
     }
 
     public function excel($tglb)

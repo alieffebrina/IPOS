@@ -37,7 +37,7 @@
                   <label for="inputEmail3" class="col-sm-1 control-label">Tanggal</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="tgl" name="tgl" value="<?php echo date('d-m-Y')?>" readonly>
+                    <input type="text" class="form-control" id="tgl" name="tgl" value="<?php echo date('d-m-Y h:i')?>" readonly>
                   </div>
                 </div>
                 <div class="form-group">
@@ -188,7 +188,8 @@
               <h3 class="text-muted well well-sm no-shadow" id="terbilang" style="text-align: center;"></h3>
                 <input type="hidden" name="total" id='total'>
                 <a href="<?= site_url('C_penjualan');?>" class="btn btn-default pull-right">Cancel</a>
-                <input type='submit' class="btn btn-info pull-right" value='Simpan'>
+                <input type='submit' class="btn btn-info pull-right" name="simpan" value='Simpan'> &nbsp;
+                <input type='submit' class="btn btn-primary pull-right" name="cetak" value='Simpan Dan Cetak'>
                 <!-- <button type="button" class="btn btn-info pull-right">Cetak Nota</button> -->
             </div>
 

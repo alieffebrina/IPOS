@@ -2,12 +2,10 @@
 
 class M_returpenjualan extends CI_Model {
 
-    
-
-	function cekreturpenjualantgl(){
-        $now = date('Y-m-d');
+    function cekreturpenjualantgl(){
+        $vbulan = date("m"); 
         $where = array(
-            'tanggalretur' => $now
+            'month(tanggalretur)' => $vbulan
         );
         return $this->db->get_where('tb_returpenjualan',$where)->result();
     }

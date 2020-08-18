@@ -34,6 +34,43 @@ class C_suratjalan extends CI_Controller{
 
     }
 
+    function sj($nota)
+    {
+        $this->load->view('template/header');
+        $id = $this->session->userdata('id_user');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $this->load->view('template/sidebar.php', $data);
+
+        $modul = 'suratjalan';
+        $kode = $this->M_Setting->cekkode($modul);
+        foreach ($kode as $modul) {
+            $a = $modul->kodefinal;
+            if (strpos($a, 'ggal') != false) {
+                date_default_timezone_set('Asia/Jakarta');
+                $tgl = date('d-m-Y');
+                $a = str_replace("tanggal", $tgl, $a);
+                $data = $this->M_suratjalan->ceksuratjalantgl();
+                $no = count($data) + 1;
+                $kode2 = str_replace("no", $no, $a);
+            } else {
+                $data = $this->M_suratjalan->cekkodesuratjalan();
+                foreach ($data as $id) {
+                    $id = $id+1;
+                    $kode2 = str_replace("no", $id, $a);
+                }
+            }
+        }
+
+        $idnama = $this->session->userdata('nama');
+        $name = str_replace("username", $idnama, $kode2);
+        $data['nota'] = $nota;
+        $data['kode'] = $name;
+        $data['penjualan'] = $this->M_penjualan->getpenjualan();
+        $data['barang'] = $this->M_barang->getbarang();
+        $this->load->view('penjualan/v_suratjalan',$data); 
+        $this->load->view('template/footer');
+    }
+
     function add()
     {
         $this->load->view('template/header');
