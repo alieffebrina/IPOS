@@ -72,6 +72,12 @@
                 </div>
                 
                 <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-1 control-label">Alamat Kirim</label>
+                  <div class="col-sm-10">
+                    <textarea name="alamatkirim" class="form-control" id="alamatkirim" readonly><?php echo $key->alamatkirim ?></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label for="inputPassword3" class="col-sm-1 control-label">Nama Pengirim</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" id="namapengirim" name="namapengirim" value="<?php echo $key->namapengirim; ?>" readonly>
