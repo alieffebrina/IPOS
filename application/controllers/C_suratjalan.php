@@ -28,10 +28,14 @@ class C_suratjalan extends CI_Controller{
 
     function tambah(){
         $id = $this->session->userdata('id_user');
+        $nota =  $this->input->post('id_suratjalan');
         $hasil_kode = $this->M_suratjalan->tambahdata($id);
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
-        redirect('C_suratjalan');
-
+        if ($this->input->post('cetak')== true){
+            redirect('C_suratjalan/cetaksuratjalan/'.$nota);
+        } else {
+            redirect('C_suratjalan');
+        }
     }
 
     function sj($nota)
@@ -65,9 +69,9 @@ class C_suratjalan extends CI_Controller{
         $name = str_replace("username", $idnama, $kode2);
         $data['nota'] = $nota;
         $data['kode'] = $name;
-        $data['penjualan'] = $this->M_penjualan->getpenjualan();
-        $data['barang'] = $this->M_barang->getbarang();
-        $this->load->view('penjualan/v_suratjalan',$data); 
+        $data['penjualan'] = $this->M_penjualan->getnota($nota);
+        $data['dtljual'] = $this->M_penjualan->getdetailpenjualan($nota);
+        $this->load->view('penjualan/v_sj',$data); 
         $this->load->view('template/footer');
     }
 

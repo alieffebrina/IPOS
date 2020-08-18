@@ -46,6 +46,14 @@ class M_penjualan extends CI_Model {
         return $this->db->get_where('tb_penjualan', $where)->result();
     }
 
+    function getnota($nota){
+        $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
+        $where = array(
+            'tb_penjualan.id_penjualan' => $nota
+        );
+        return $this->db->get_where('tb_penjualan', $where)->result();
+    }
+
     function getdetailpenjualan($ida){
         $this->db->join('tb_barang', 'tb_barang.id_barang = tb_detailpenjualan.id_barang');
         $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');

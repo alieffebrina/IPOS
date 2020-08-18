@@ -51,10 +51,11 @@ class M_suratjalan extends CI_Model {
         $tb_suratjalan = array(
             'id_user' => $id,
             'id_suratjalan' => $this->input->post('id_suratjalan'),
-            'id_penjualan' => $this->input->post('id_penjualan'),
+            'id_penjualan' => $this->input->post('nonota'),
             'tglkirim' => $this->input->post('tgl'),
             'tgl_update' => date('Y-m-d'),
             'namapengirim' => $this->input->post('namapengirim'),
+            'alamatkirim' => $this->input->post('alamatkirim'),
             
             'status' => $status
         );
