@@ -46,37 +46,6 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                   </div>
                 </div>
-               <!--  <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">NIK</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK"  maxlength="16" minlength="16" onkeypress="return Angkasaja(event)">
-                  </div>
-                </div> -->
-               <!--  <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" rows="3" id="alamat" name="alamat"></textarea>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Provinsi</label>
-                  <div class="col-sm-9">
-                  <select class="form-control select2" id="prov" name="prov" style="width: 100%;">
-                    <option>-Pilih-</option>
-                    <?php foreach ($provinsi as $provinsi) { ?>
-                    <option value="<?php echo $provinsi->id_provinsi ?>"><?php echo $provinsi->name_prov ?></option>
-                    <?php } ?>
-                  </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Kota/Kabupaten</label>
-                  <div class="col-sm-9">
-                    <select class="form-control select2" id="kota" name="kota" style="width: 100%;">
-                      <option value=''>Pilih</option>
-                    </select>
-                  </div>
-                </div> -->
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
