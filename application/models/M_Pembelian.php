@@ -67,6 +67,9 @@ class M_Pembelian extends CI_Model {
 
     function getdetail($ida){
         $this->db->join('tb_suplier', 'tb_suplier.id_suplier = tb_pembelian.id_suplier');
+        $this->db->join('tb_provinsi', 'tb_provinsi.id_provinsi = tb_suplier.id_provinsi');
+        $this->db->join('tb_kota', 'tb_kota.id_kota = tb_suplier.id_kota');
+        $this->db->join('tb_kecamatan', 'tb_kecamatan.id_kecamatan = tb_suplier.id_kecamatan');
         $where = array(
             'tb_pembelian.id_pembelian' => $ida
         );

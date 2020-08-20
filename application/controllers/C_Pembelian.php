@@ -101,11 +101,11 @@ class C_Pembelian extends CI_Controller{
         // echo "total :".$this->input->post('total');
         // echo "diskon :".preg_replace('/([^0-9]+)/','',$this->input->post('diskonbawah'));
         // echo "biayalain :".$this->input->post('biayalain');
-         
+        $nota = $this->input->post('nonota');
         $id = $this->session->userdata('id_user');
         $hasil_kode = $this->M_Pembelian->tambah($id);
         $this->session->set_flashdata('SUCCESS', "Record Added Successfully!!");
-        redirect('C_Pembelian');
+        redirect('C_Pembelian/cetakpembelian/'.$nota);
 
     }
 
@@ -248,74 +248,73 @@ class C_Pembelian extends CI_Controller{
     }
 
     function cetakpembelian($ida){
-        $pdf = new FPDF('L','mm',array('110', '215'));
+
+        $this->load->view('master/setting/terbilang'); 
+        $pdf = new FPDF('L','mm',array('148', '210'));
         // membuat halaman baru
         $pdf->AddPage();
         // setting jenis font yang akan digunakan
-        $pdf->SetFont('Arial','',11,'C');
-        // mencetak string 
-        $pdf->Cell(90,5,'ADP Paving',0,0,'L');        
+        // mencetak string      
 
         $pembelian = $this->M_Pembelian->getdetail($ida);
         $dtlpembelian = $this->M_Pembelian->getdetailpembelian($ida);
         foreach ($pembelian as $key ) {
 
-            $pdf->Cell(100,5,'Tanggal : '.$key->tglnotapembelian,0,1,'R');
-            $pdf->Line(10,15,200,15);
-        // Memberikan space kebawah agar tidak terlalu rapat
-        // $pdf->Cell(10,8,'',0,1);
+            // $terbilang = $this->Lterbilang->terbilang($key->total);
             $pdf->SetFont('Arial','',10,'C');
-            
-            $pdf->Cell(40,5,'Nota Pembelian',0,0);
-            $pdf->Cell(5,5,':',0,0,'C');
-            $pdf->Cell(40,5,$key->id_pembelian,0,1);
-            $pdf->Cell(40,5,'Nama Suplier',0,0);
-            $pdf->Cell(5,5,':',0,0,'C');
-            $pdf->Cell(40,5,$key->nama_toko,0,1);
-            $pdf->Cell(40,5,'Jenis Pembayaran',0,0);
-            $pdf->Cell(5,5,':',0,0,'C');
-            $pdf->Cell(40,5,$key->jenispembayaran,0,1);
-        
+            $pdf->Cell(110,5,'UD. ABDI PERTIWI',0,0,'L');
+            $pdf->Cell(100,5,'Gresik, '.date('d-m-Y', strtotime($key->tglnotapembelian)),0,1,'L');
+            $pdf->Cell(110,5,'JUAL PAVING MULTI',0,0,'L');
+            $pdf->Cell(14,5,'Suplier',0,0,'L');
+            $pdf->Cell(2,5,' : ',0,0,'C');
+            $pdf->Cell(84,5,$key->nama_suplier,0,1,'L');
+            $pdf->Cell(110,5,'Gempol Kurung, RT 07 RW 02',0,0,'L');
+            $pdf->Cell(14,5,'Telp.',0,0,'L');
+            $pdf->Cell(2,5,' : ',0,0,'C');
+            $pdf->Cell(84,5,$key->tlp,0,1,'L');
+            $pdf->Cell(110,5,'Kec. Menganti - Gresik',0,0,'L');
+            $pdf->Cell(14,5,'Alamat',0,0,'L');
+            $pdf->Cell(2,5,' : ',0,0,'C');
+            $pdf->Cell(84,5,$key->alamat,0,1,'L');
+            $pdf->Cell(110,5,'Telp. : 081376767574',0,0,'L');
+            $pdf->Cell(100,5,$key->kecamatan.', '.$key->name_kota,0,1,'L');
+            $pdf->Cell(110,5,'Website : www.Adppaving.com',0,0,'L');
+            $pdf->Cell(14,5,'No. Reg',0,0,'L');
+            $pdf->Cell(2,5,' : ',0,0,'C');
+            $pdf->Cell(84,5,$key->id_pembelian,0,1,'L');        
+            $pdf->Cell(210,5,'',0,1,'C');
+            $pdf->SetFont('Arial','',12,'C');
+            $pdf->Cell(210,5,'Nota Pembelian',0,1,'C');
+            $pdf->SetFont('Arial','',10);       
         }
-            $pdf->Cell(10,2,'',0,1);
-            $pdf->Cell(10,7,'No',1,0);
-            $pdf->Cell(30,7,'Nama Barang',1,0);
-            $pdf->Cell(30,7,'Jenis Barang',1,0);
-            $pdf->Cell(20,7,'Jumlah',1,0);
-            $pdf->Cell(20,7,'Satuan',1,0);
-            $pdf->Cell(30,7,'Harga',1,0);
-            $pdf->Cell(20,7,'Diskon',1,0);
-            $pdf->Cell(30,7,'Total',1,1);
+        $pdf->Cell(10,2,'',0,1);
+        $pdf->Cell(20,14,'Jumlah',1,0,'C');
+        $pdf->Cell(20,14,'Satuan',1,0,'C');
+        $pdf->Cell(70,14,'Nama Barang',1,0,'C');
+        $pdf->Cell(80,7,'Harga',1,1,'C');
+        $pdf->Cell(110,0,'',0,0);
+        $pdf->Cell(35,7,'Harga Satuan',1,0,'C');
+        $pdf->Cell(45,7,'Harga Total',1,1,'C');
         $no =1;
         foreach ($dtlpembelian as $dtl ) {
             
-            $pdf->Cell(10,7,$no++,1,0);
-            $pdf->Cell(30,7,$dtl->barang,1,0);
-            $pdf->Cell(30,7,$dtl->jenisbarang,1,0);
-            $pdf->Cell(20,7,$dtl->qtt,1,0);
-            $pdf->Cell(20,7,$dtl->nama_satuan,1,0);
-            $pdf->Cell(30,7,number_format($dtl->harga),1,0);
-            $pdf->Cell(20,7,number_format($dtl->diskon),1,0);
-            $pdf->Cell(30,7,number_format(($dtl->harga*$dtl->qtt)-$dtl->diskon),1,1);
+            $pdf->Cell(20,7,$dtl->qtt,1,0,'C');
+            $pdf->Cell(20,7,$dtl->nama_satuan,1,0,'C');
+            $pdf->Cell(70,7,$dtl->barang.'/'.$dtl->jenisbarang,1,0);
+            $pdf->Cell(35,7,'Rp. '.number_format($dtl->harga),1,0);
+            $pdf->Cell(45,7,'Rp. '.number_format(($dtl->harga*$dtl->qtt)-$dtl->diskon),1,1);
         
         } 
-        foreach ($pembelian as $key ) {
-            
-            $pdf->Cell(10,2,'',0,1);
-            $pdf->Cell(120,5,'',0,0);
-            $pdf->SetFont('Arial','B',10,'');
-            $pdf->Cell(30,5,'Diskon',0,0);
-            $pdf->Cell(5,5,':',0,0,'C');
-            $pdf->Cell(40,5,'Rp. '.number_format($key->diskon),0,1);
-            $pdf->Cell(120,5,'',0,0);
-            $pdf->Cell(30,5,'Biaya Lain ',0,0);
-            $pdf->Cell(5,5,':',0,0,'C');
-            $pdf->Cell(40,5,'Rp. '.number_format($key->biayalain),0,1);
-            $pdf->Cell(120,5,'',0,0);
-            $pdf->Cell(30,5,'Total Akhir',0,0);
-            $pdf->Cell(5,5,':',0,0,'C');
-            $pdf->Cell(40,5,'Rp. '.number_format($key->total),0,1);
+        foreach ($pembelian as $key ) {           
+            $pdf->Cell(145,7,'Total',1,0,'C');
+            $pdf->Cell(45,7,'Rp. '.number_format($key->total),1,1);
+            $pdf->Cell(190,7,'Terbilang '.terbilang($key->total)." rupiah",1,1);
         }
+
+        $pdf->Cell(50,5,'',0,1,'C');
+        $pdf->Cell(50,5,'Diterima',0,1,'C');
+        $pdf->Cell(50,15,'',0,1,'C');
+        $pdf->Cell(50,5,'(........................)',0,0,'C');
         // $pdf->AutoPrint(true);
         $pdf->Output();
     }
