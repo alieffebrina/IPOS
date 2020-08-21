@@ -298,11 +298,11 @@ class C_Pembelian extends CI_Controller{
         $no =1;
         foreach ($dtlpembelian as $dtl ) {
             
-            $pdf->Cell(20,7,$dtl->qtt,1,0,'C');
-            $pdf->Cell(20,7,$dtl->nama_satuan,1,0,'C');
-            $pdf->Cell(70,7,$dtl->barang.'/'.$dtl->jenisbarang,1,0);
-            $pdf->Cell(35,7,'Rp. '.number_format($dtl->harga),1,0);
-            $pdf->Cell(45,7,'Rp. '.number_format(($dtl->harga*$dtl->qtt)-$dtl->diskon),1,1);
+            $pdf->Cell(20,7,$dtl->qtt,'LR','C');
+            $pdf->Cell(20,7,$dtl->nama_satuan,'LR','C');
+            $pdf->Cell(70,7,$dtl->barang.'/'.$dtl->jenisbarang,'LR');
+            $pdf->Cell(35,7,'Rp. '.number_format($dtl->harga),'LR');
+            $pdf->Cell(45,7,'Rp. '.number_format(($dtl->harga*$dtl->qtt)-$dtl->diskon),'LR',1);
         
         } 
         foreach ($pembelian as $key ) {           
