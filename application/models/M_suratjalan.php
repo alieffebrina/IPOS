@@ -33,8 +33,9 @@ class M_suratjalan extends CI_Model {
 
     function getsj($ida){
         $this->db->join('tb_penjualan', 'tb_penjualan.id_penjualan = tb_suratjalan.id_penjualan');
-        $this->db->join('tb_penjualan', 'tb_penjualan.id_penjualan = tb_detailpenjualan.id_penjualan');
+        $this->db->join('tb_detailpenjualan', 'tb_penjualan.id_penjualan = tb_detailpenjualan.id_penjualan');
         $this->db->join('tb_barang', 'tb_barang.id_barang = tb_detailpenjualan.id_barang');
+        $this->db->join('tb_jenisbarang', 'tb_jenisbarang.id_jenisbarang = tb_barang.id_jenisbarang');
         $where = array(
             'tb_suratjalan.id_suratjalan' => $ida
         );
