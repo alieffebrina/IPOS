@@ -155,6 +155,7 @@ class C_suratjalan extends CI_Controller{
 
         $suratjalan = $this->M_suratjalan->getsuratjalan($ida);
         $sj = $this->M_suratjalan->getsj($ida);
+        //$admin = $this->M_suratjalan->getadmin($ida);
 
         foreach ($suratjalan as $key ) {
 
@@ -172,7 +173,9 @@ class C_suratjalan extends CI_Controller{
             $pdf->Cell(19,4,'Nama Pengirim : '.$key->namapengirim,0,1,'R'); 
             $pdf->Cell(110,4,'Alamat Pengiriman: ... ',0,1,'R');
             $pdf->Cell(143,4,''.$key->alamatkirim,0,1,'R'); 
-            $pdf->Cell(124,4,'No. Reg. : '.$key->id_suratjalan,0,1,'R');
+            $pdf->Cell(28,4,'Admin : '.$key->username,0,0,'L');
+            $pdf->Cell(96,4,'No. Reg. : '.$key->id_suratjalan,0,1,'R');
+            
             
             $pdf->Cell(100,3,'',0,1,'L');
             // $pdf->Line(10,15,200,15);
@@ -190,9 +193,10 @@ class C_suratjalan extends CI_Controller{
         $no =1;
         foreach ($sj as $dtl ) {
             
-            $pdf->Cell(20,6,$dtl->qtt,1,0,'C');
-            $pdf->Cell(20,6,$dtl->satuan,1,0,'C');
-            $pdf->Cell(65,6,$dtl->jenisbarang,1,0);
+            $pdf->Cell(30,6,$dtl->qtt,1,0,'C');
+            $pdf->Cell(30,6,$dtl->satuan,1,0,'C');
+            $pdf->Cell(82,6,$dtl->jenisbarang,1,0);
+            $pdf->Cell(100,6,'',0,1);
         
         } 
         $pdf->Cell(30,5,'',0,1);
@@ -201,6 +205,5 @@ class C_suratjalan extends CI_Controller{
         $pdf->Cell(50,3,'( Sukadi )',0,0,'L');
         // $pdf->AutoPrint(true);
         $pdf->Output();
-
     }
 }
