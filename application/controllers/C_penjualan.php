@@ -195,10 +195,11 @@ class C_penjualan extends CI_Controller{
     function cetakpenjualan($ida){
         $this->load->view('master/setting/terbilang'); 
         $pdf = new FPDF('L','mm',array('148', '210'));
+        // $pdf = new FPDF('L','mm',array('148', '210'));
         // membuat halaman baru
         $pdf->AddPage();
         // setting jenis font yang akan digunakan
-        $pdf->SetFont('Arial','',11,'C');
+        $pdf->SetFont('Arial','',8,'C');
         // mencetak string 
         $pdf->Cell(90,5,'UD. ABDI PERTIWI',0,0,'L');
         // $pdf->Cell(90,5,'JUAL PAVING MULTI',0,0,'L');        
@@ -210,64 +211,59 @@ class C_penjualan extends CI_Controller{
             // $originalDate = "2010-03-21";
             $newDate = date("d-m-Y h:i:s", strtotime($key->tglnota));
 
-            $pdf->Cell(81,5,'Gresik : '.$newDate,0,1,'R');
-            $pdf->Cell(90,5,'JUAL PAVING MULTI',0,0,'L');
-            $pdf->Cell(89,5,'Tuan / Toko : '.$key->nama,0,1,'R');
-            $pdf->Cell(90,5,'Gempol Kurung, RT 07 RW 02',0,0,'L');
-            $pdf->Cell(67,5,'Telp : '.$key->tlp,0,1,'R');
-            $pdf->Cell(90,5,'Kec. Menganti - Gresik',0,0,'L');
-            $pdf->Cell(50,5,'Alamat : ... ',0,1,'R'); 
-            $pdf->Cell(90,5,'Telp : 081376767574',0,0,'L');
-            $pdf->Cell(100,5,$key->alamat,0,1,'R');
-            $pdf->Cell(90,5,'Website : www.adppaving.com',0,0,'L');
-            $pdf->Cell(92,5,'No. Reg. : '.$key->id_penjualan,0,1,'R');
+            $pdf->Cell(79,4,'Gresik : '.$newDate,0,1,'R');
+            $pdf->Cell(90,4,'JUAL PAVING MULTI',0,0,'L');
+            $pdf->Cell(85,4,'Tuan / Toko : '.$key->nama,0,1,'R');
+            $pdf->Cell(90,4,'Gempol Kurung, RT 07 RW 02, Menganti-Gresik',0,0,'L');
+            $pdf->Cell(69,4,'Telp : '.$key->tlp,0,1,'R');
+            $pdf->Cell(90,4,'Telp : 081376767574',0,0,'L');
+            $pdf->Cell(57,4,'Alamat : ... ',0,1,'R'); 
             
-            $pdf->Cell(100,5,'',0,1,'L');
+            $pdf->Cell(183,4,$key->alamat,0,1,'R');
+            $pdf->Cell(90,4,'Website : www.adppaving.com',0,0,'L');
+            $pdf->Cell(89,4,'No. Reg. : '.$key->id_penjualan,0,1,'R');
+            
+            $pdf->Cell(100,3,'',0,1,'L');
             // $pdf->Line(10,15,200,15);
         // Memberikan space kebawah agar tidak terlalu rapat
-        // $pdf->Cell(10,8,'',0,1);
-            $pdf->SetFont('Arial','',10,'C');
+            $pdf->SetFont('Arial','B',8,'C');
             
-            $pdf->Cell(190,5,'NOTA PENJUALAN',0,2,'C');
+            $pdf->Cell(190,4,'NOTA PENJUALAN',0,2,'C');
+            $pdf->Cell(10,2,'',0,1);
+            $pdf->SetFont('Arial','',8,'C');
+            $pdf->Cell(20,12,'Jumlah',1,0,'C');
+            $pdf->Cell(20,12,'Satuan',1,0,'C');
+            $pdf->Cell(65,12,'Keterangan',1,0,'C');
+            $pdf->Cell(83,6,'Harga',1,0,'C');
+            $pdf->Cell(100,6,'',0,1);
+            $pdf->Cell(105,6,'',0,0);
+            $pdf->Cell(30,6,'Satuan',1,0,'C');
+            $pdf->Cell(53,6,'Total',1,0,'C');
+            $pdf->Cell(100,6,'',0,1);
         
         }
-            $pdf->Cell(10,2,'',0,1);
-            $pdf->Cell(20,14,'Jumlah',1,0,'C');
-            $pdf->Cell(20,14,'Satuan',1,0,'C');
-            $pdf->Cell(65,14,'Keterangan',1,0,'C');
-            $pdf->Cell(83,7,'Harga',1,0,'C');
-            $pdf->Cell(100,7,'',0,1);
-            $pdf->Cell(105,7,'',0,0);
-            $pdf->Cell(30,7,'Satuan',1,0,'C');
-            $pdf->Cell(53,7,'Total',1,0,'C');
         $no =1;
         foreach ($dtlpenjualan as $dtl ) {
             
-            $pdf->Cell(100,7,'',0,1);
-            $pdf->Cell(20,7,$dtl->qtt,1,0,'C');
-            $pdf->Cell(20,7,$dtl->satuan,1,0,'C');
-            $pdf->Cell(65,7,$dtl->jenisbarang,1,0);
-            $pdf->Cell(30,7,'Rp. '.number_format($dtl->harga),1,0);
-            $pdf->Cell(53,7,'Rp. '.number_format(($dtl->harga*$dtl->qtt)-$dtl->diskon),1,1);
+            $pdf->Cell(20,6,$dtl->qtt,1,0,'C');
+            $pdf->Cell(20,6,$dtl->satuan,1,0,'C');
+            $pdf->Cell(65,6,$dtl->jenisbarang,1,0);
+            $pdf->Cell(30,6,'Rp. '.number_format($dtl->harga),1,0);
+            $pdf->Cell(53,6,'Rp. '.number_format(($dtl->harga*$dtl->qtt)-$dtl->diskon),1,1);
         
         } 
         foreach ($penjualan as $key ) {
             
-            $pdf->SetFont('Arial','B',10,'');
-            $pdf->Cell(135,7,'Total Tagihan ',1,0,'C');
-            $pdf->Cell(53,7,'Rp. '.number_format($key->total),1,1);
-            $pdf->Cell(190,7,'Terbilang : '.terbilang($key->total)." rupiah",1,1);
-            $pdf->Cell(30,5,'',0,1);
-            $pdf->Cell(30,5,'',0,1);
-            $pdf->Cell(30,5,'',0,1);
-            $pdf->Cell(50,5,'Hormat Kami,',0,0,'L');
-            $pdf->Cell(30,5,'',0,1);
-            $pdf->Cell(30,5,'',0,1);
-            $pdf->Cell(30,5,'',0,1);
-            $pdf->Cell(30,5,'',0,1);
-            $pdf->Cell(50,5,'( Sukadi )',0,0,'L');
+            $pdf->SetFont('Arial','B',8,'');
+            $pdf->Cell(135,6,'Total Tagihan ',1,0,'C');
+            $pdf->Cell(53,6,'Rp. '.number_format($key->total),1,1);
+            $pdf->Cell(188,6,'Terbilang : '.terbilang($key->total)." rupiah",1,1);
             
         }
+        $pdf->Cell(30,5,'',0,1);
+        $pdf->Cell(50,3,'Hormat Kami,',0,0,'L');
+        $pdf->Cell(30,10,'',0,1);
+        $pdf->Cell(50,3,'( Sukadi )',0,0,'L');
         // $pdf->AutoPrint(true);
         $pdf->Output();
 
