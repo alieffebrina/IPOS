@@ -31,6 +31,16 @@ class M_suratjalan extends CI_Model {
         return $this->db->get('tb_suratjalan')->result();
     }
 
+    function getsj($ida){
+        $this->db->join('tb_penjualan', 'tb_penjualan.id_penjualan = tb_suratjalan.id_penjualan');
+        $this->db->join('tb_penjualan', 'tb_penjualan.id_penjualan = tb_detailpenjualan.id_penjualan');
+        $this->db->join('tb_barang', 'tb_barang.id_barang = tb_detailpenjualan.id_barang');
+        $where = array(
+            'tb_suratjalan.id_suratjalan' => $ida
+        );
+        return $this->db->get_where('tb_suratjalan', $where)->result();
+    }
+
     function getsuratjalan($ida){
         $this->db->join('tb_penjualan', 'tb_penjualan.id_penjualan = tb_suratjalan.id_penjualan');
         $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
@@ -41,11 +51,11 @@ class M_suratjalan extends CI_Model {
     }
 
     function tambahdata($id){
-        $pengiriman = $this->input->post('pengiriman');
-        if ($pengiriman == 'Dikirim'){
-            $status = 'Pending';
+       $pengiriman = $this->input->post('pengiriman');
+        if ($pengiriman == 'kirim'){
+            $status = 1;
         } else {
-            $status = 'Terkirim';
+            $status = 0;
         }
 
         $tb_suratjalan = array(
@@ -85,12 +95,13 @@ class M_suratjalan extends CI_Model {
 
         $this->db->join('tb_penjualan', 'tb_penjualan.id_penjualan = tb_suratjalan.id_penjualan');
         $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
+        $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_penjualan');
 
         if(!empty($tgl[0]) && !empty($tgl[1])){
 
         $this->db->where("tglkirim BETWEEN '".($tgl_mulai[2]."-".$tgl_mulai[1]."-".$tgl_mulai[0])."' and '".($tgl_sampai[2]."-".$tgl_sampai[1]."-".$tgl_sampai[0])."'");
-        }
 
+        }
         return $this->db->get('tb_suratjalan')->result();
       }
 }
