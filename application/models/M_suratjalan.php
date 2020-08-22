@@ -43,6 +43,7 @@ class M_suratjalan extends CI_Model {
     }
 
     function getsuratjalan($ida){
+        $this->db->join('tb_user', 'tb_user.id_user = tb_suratjalan.id_user');
         $this->db->join('tb_penjualan', 'tb_penjualan.id_penjualan = tb_suratjalan.id_penjualan');
         $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_penjualan.id_pelanggan');
         $where = array(
