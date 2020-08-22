@@ -6,6 +6,7 @@ class C_suratjalan extends CI_Controller{
         $this->load->helper(array('form','url'));
         $this->load->library('session');
         $this->load->model('M_suratjalan');
+        $this->load->model('M_pelanggan');
         $this->load->model('M_Setting');
         $this->load->model('M_penjualan');
         $this->load->model('M_barang');
@@ -107,7 +108,7 @@ class C_suratjalan extends CI_Controller{
         $data['kode'] = $name;
         $data['penjualan'] = $this->M_penjualan->getpenjualan();
         $data['barang'] = $this->M_barang->getbarang();
-        $this->load->view('penjualan/v_suratjalan',$data); 
+        $this->load->view('penjualan/v_esuratjalan',$data); 
         $this->load->view('template/footer');
     }
 
@@ -141,42 +142,65 @@ class C_suratjalan extends CI_Controller{
     }
 
     function cetaksuratjalan($ida){
-        $pdf = new FPDF('L','mm',array('110', '215'));
+        // $this->load->view('master/setting/terbilang'); 
+        $pdf = new FPDF('L','mm',array('110', '160'));
+        // $pdf = new FPDF('L','mm',array('148', '210'));
         // membuat halaman baru
         $pdf->AddPage();
         // setting jenis font yang akan digunakan
-        $pdf->SetFont('Arial','',11,'C');
+        $pdf->SetFont('Arial','',8,'C');
         // mencetak string 
-        $pdf->Cell(90,5,'ADP Paving',0,0,'L');        
+        $pdf->Cell(90,5,'UD. ABDI PERTIWI',0,0,'L');
+        // $pdf->Cell(90,5,'JUAL PAVING MULTI',0,0,'L');   
 
         $suratjalan = $this->M_suratjalan->getsuratjalan($ida);
+        $sj = $this->M_suratjalan->getsj($ida);
+
         foreach ($suratjalan as $key ) {
 
-            $pdf->Cell(100,5,'Tanggal : '.$key->tglkirim,0,1,'R');
-            $pdf->Line(10,15,200,15);
-        // Memberikan space kebawah agar tidak terlalu rapat
-        // $pdf->Cell(10,8,'',0,1);
-            $pdf->SetFont('Arial','',10,'C');
+            // $originalDate = "2010-03-21";
+            $newDate = date("d-m-Y h:i:s", strtotime($key->tglkirim));
+
+            $pdf->Cell(28,4,'Gresik : '.$newDate,0,1,'R');
+            $pdf->Cell(90,4,'JUAL PAVING MULTI',0,0,'L');
+            $pdf->Cell(34,4,'Tuan / Toko : '.$key->nama,0,1,'R');
+            $pdf->Cell(90,4,'Gempol Kurung, RT 07 RW 02, Menganti-Gresik',0,0,'L');
+            $pdf->Cell(18,4,'Telp : '.$key->tlp,0,1,'R');
+            $pdf->Cell(90,4,'Telp : 081376767574',0,0,'L');
+            $pdf->Cell(53,4,'Alamat : '.$key->alamat,0,1,'R'); 
+            $pdf->Cell(90,4,'Website : www.adppaving.com',0,0,'L');
+            $pdf->Cell(19,4,'Nama Pengirim : '.$key->namapengirim,0,1,'R'); 
+            $pdf->Cell(110,4,'Alamat Pengiriman: ... ',0,1,'R');
+            $pdf->Cell(143,4,''.$key->alamatkirim,0,1,'R'); 
+            $pdf->Cell(124,4,'No. Reg. : '.$key->id_suratjalan,0,1,'R');
             
-            $pdf->Cell(40,5,'Nota Surat Jalan',0,0);
-            $pdf->Cell(5,5,':',0,0,'C');
-            $pdf->Cell(40,5,$key->id_suratjalan,0,1);
-            $pdf->Cell(40,5,'Nota Penjualan',0,0);
-            $pdf->Cell(5,5,':',0,0,'C');
-            $pdf->Cell(40,5,$key->id_penjualan,0,1);
-            $pdf->Cell(40,5,'Nama Pelanggan',0,0);
-            $pdf->Cell(5,5,':',0,0,'C');
-            $pdf->Cell(40,5,$key->nama,0,1);
-            $pdf->Cell(40,5,'Alamat',0,0);
-            $pdf->Cell(5,5,':',0,0,'C');
-            $pdf->Cell(40,5,$key->alamat,0,1);
-            $pdf->Cell(40,5,'Nama Pengirim',0,0);
-            $pdf->Cell(5,5,':',0,0,'C');
-            $pdf->Cell(40,5,$key->namapengirim,0,1);
-        
+            $pdf->Cell(100,3,'',0,1,'L');
+            // $pdf->Line(10,15,200,15);
+        // Memberikan space kebawah agar tidak terlalu rapat
+            $pdf->SetFont('Arial','B',8,'C');
+            $pdf->Cell(100,4,'NOTA SURAT JALAN',0,2,'L');
+            $pdf->SetFont('Arial','',8,'C');
+            $pdf->Cell(10,2,'',0,1);
+            $pdf->SetFont('Arial','',8,'C');
+            $pdf->Cell(30,6,'Jumlah',1,0,'C');
+            $pdf->Cell(30,6,'Satuan',1,0,'C');
+            $pdf->Cell(82,6,'Keterangan',1,0,'C');
+            $pdf->Cell(100,6,'',0,1);
         }
+        $no =1;
+        foreach ($sj as $dtl ) {
+            
+            $pdf->Cell(20,6,$dtl->qtt,1,0,'C');
+            $pdf->Cell(20,6,$dtl->satuan,1,0,'C');
+            $pdf->Cell(65,6,$dtl->jenisbarang,1,0);
+        
+        } 
+        $pdf->Cell(30,5,'',0,1);
+        $pdf->Cell(50,3,'Hormat Kami,',0,0,'L');
+        $pdf->Cell(30,10,'',0,1);
+        $pdf->Cell(50,3,'( Sukadi )',0,0,'L');
         // $pdf->AutoPrint(true);
         $pdf->Output();
-    }
 
+    }
 }
