@@ -29,9 +29,9 @@
             <div class="box-header">
               <h3 class="box-title">Data Surat Jalan</h3>
             </div>
-            <div class="box-header">
+           <!-- <div class="box-header">
               <a href="<?php echo site_url('C_suratjalan/add'); ?>"><button type="button" class="btn btn-warning" >Tambah Data</button></a>
-            </div>
+            </div> -->
             <!-- /.box-header -->
 
             <div class="box-body">
@@ -52,8 +52,16 @@
                 <tbody>
                   <?php 
                   $no=1;
-                  foreach ($suratjalan as $suratjalan) { ?>
-                <tr>
+                  foreach ($suratjalan as $suratjalan) {
+                    if($suratjalan ->status == '0'){ ?>
+
+                <tr style="color: red">
+
+                    <?php } else { ?>
+                      <tr>
+                    <?php }
+                    ?>
+                <!-- <tr> -->
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $suratjalan->id_suratjalan; ?></td>
                   <td><?php echo $suratjalan->id_penjualan;?></td>
@@ -61,15 +69,17 @@
                   <td><?php echo $suratjalan->nama; ?></td>
                   <td><?php echo $suratjalan->alamat;?></td>
                   <td><?php echo $suratjalan->namapengirim; ?></td>
-                  <td><?php if($suratjalan->status == '1'){ echo "Dikirim";} else {echo "Belum Dikirim"; }?></td>
+                  <!-- <td><?php echo $suratjalan->pengiriman; ?></td> -->
+                  <td><?php if($suratjalan->status == '1'){ echo "Terkirim";} else {echo "Belum Dikirim"; }?></td>
                   
                   <td>
                     <div class="btn-group">
                       <a href="<?php echo site_url('C_suratjalan/view/'.$suratjalan->id_suratjalan); ?>"><button type="button" class="btn btn-success">Lihat</button></a>
                       <a href="<?php echo site_url('C_suratjalan/cetaksuratjalan/'.$suratjalan->id_suratjalan); ?>"><button type="button" class="btn btn-info">Cetak</button></a>
-                      <?php if ($suratjalan->status == '0') { ?>
+                      <!-- <a href="<?php echo site_url('C_suratjalan/add'); ?>"><button type="button" class="btn btn-warning" >Edit</button></a> -->
+                      <!--<?php if ($suratjalan->status == '0') { ?>
                       <a href="<?php echo site_url('C_suratjalan/kirim/'.$suratjalan->id_suratjalan); ?>"><button type="button" class="btn btn-primary">Kirim</button></a>
-                       <?php } ?>
+                       <?php } ?> -->
                     </div>
                   </td>
                 </tr>
